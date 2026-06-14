@@ -1,0 +1,53 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=qmowaujqgejxbehccqup"
+    },
+    "Better Auth": {
+      "type": "http",
+      "url": "https://mcp.better-auth.com/mcp",
+      "headers": {}
+    },
+    "next-devtools": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "next-devtools-mcp@latest"
+      ]
+    },
+    "zodinkeepMcp": {
+      "type": "http",
+      "url": "https://mcp.inkeep.com/zod/mcp"
+    },
+    "hono-docs": {
+      "type": "http",
+      "url": "https://hono-docs-mcp.yusukebe.workers.dev/mcp"
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "env": {
+        "MEMORY_FILE_PATH": "C:/Users/admin/Desktop/memory.jsonl"
+      }
+    },
+    "tailwindcss": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "tailwindcss-mcp-server"
+      ]
+    },
+    "drizzle-docs-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://drizzle.mastra.cloud/api/mcp/drizzle-docs-mcp/mcp"
+      ]
+    }
+  }
+}

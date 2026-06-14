@@ -1,0 +1,123 @@
+import { Hono } from "hono"
+import { zValidator } from "@hono/zod-validator"
+import { db } from "@/lib/db"
+import { employees, payslips } from "@/lib/db/schema"
+import { authMiddleware } from "@/server/middleware/auth"
+import { requireRole } from "@/server/middleware/rbac"
+import type { HonoVariables } from "@/server/types"
+import { eq, and } from "drizzle-orm"
+import { z } from "zod"
+
+const router = new Hono<{ Variables: HonoVariables }>()
+  .use(authMiddleware)
+
+  .get("/summary/:periodId", requireRole("admin", "hr"), async (c) => {
+    const periodId = c.req.param("periodId")!
+    const rows = await db.select().from(payslips).where(eq(payslips.periodId, periodId))
+
+    const totalNetPay = rows.reduce((s, r) => s + parseFloat(r.netPay as string), 0)
+    const totalDeductions = rows.reduce(
+      (s, r) =>
+        s +
+        parseFloat(r.sss as string) +
+        parseFloat(r.philhealth as string) +
+        parseFloat(r.pagibig as string) +
+        parseFloat(r.withholdingTax as string),
+      0,
+    )
+    const byStatus = { pending: 0, approved: 0, paid: 0 }
+    for (const r of rows) byStatus[r.status]++
+
+    return c.json({
+      periodId,
+      totalPayslips: rows.length,
+      totalNetPay: Math.round(totalNetPay * 100) / 100,
+      totalDeductions: Math.round(totalDeductions * 100) / 100,
+      averageNetPay: rows.length ? Math.round((totalNetPay / rows.length) * 100) / 100 : 0,
+      paymentStatus: byStatus,
+    })
+  })
+
+  .get("/", async (c) => {
+    const user = c.get("user")
+    const { periodId, employeeId, status, limit = "50", offset = "0" } = c.req.query()
+
+    if (user.role === "employee") {
+      const emp = await db.query.employees.findFirst({
+        where: eq(employees.userId, user.id),
+      })
+      if (!emp) return c.json([])
+
+      const conditions: any[] = [eq(payslips.employeeId, emp.id)]
+      if (status) conditions.push(eq(payslips.status, status as "pending" | "approved" | "paid"))
+      if (periodId) conditions.push(eq(payslips.periodId, periodId))
+
+      const rows = await db.query.payslips.findMany({
+        where: and(...conditions),
+        with: { period: true },
+        orderBy: (t, { desc }) => [desc(t.createdAt)],
+        limit: parseInt(limit),
+        offset: parseInt(offset),
+      })
+      return c.json(rows)
+    }
+
+    const conditions: any[] = []
+    if (periodId) conditions.push(eq(payslips.periodId, periodId))
+    if (employeeId) conditions.push(eq(payslips.employeeId, employeeId))
+    if (status) conditions.push(eq(payslips.status, status as "pending" | "approved" | "paid"))
+
+    const rows = await db.query.payslips.findMany({
+      where: conditions.length ? and(...conditions) : undefined,
+      with: {
+        employee: { with: { user: { columns: { name: true, email: true } } } },
+        period: true,
+      },
+      orderBy: (t, { desc }) => [desc(t.createdAt)],
+      limit: parseInt(limit),
+      offset: parseInt(offset),
+    })
+    return c.json(rows)
+  })
+
+  .get("/:id", async (c) => {
+    const user = c.get("user")
+    const id = c.req.param("id")!
+
+    const slip = await db.query.payslips.findFirst({
+      where: eq(payslips.id, id),
+      with: {
+        employee: { with: { user: { columns: { name: true, email: true } } } },
+        period: true,
+      },
+    })
+    if (!slip) return c.json({ error: "Not found" }, 404)
+
+    if (user.role === "employee") {
+      const emp = await db.query.employees.findFirst({
+        where: eq(employees.userId, user.id),
+      })
+      if (!emp || slip.employeeId !== emp.id) return c.json({ error: "Forbidden" }, 403)
+    }
+
+    return c.json(slip)
+  })
+
+  .patch(
+    "/:id",
+    requireRole("admin", "hr"),
+    zValidator("json", z.object({ status: z.enum(["approved", "paid"]) })),
+    async (c) => {
+      const id = c.req.param("id")!
+      const { status } = c.req.valid("json")
+      const [updated] = await db
+        .update(payslips)
+        .set({ status })
+        .where(eq(payslips.id, id))
+        .returning()
+      if (!updated) return c.json({ error: "Not found" }, 404)
+      return c.json(updated)
+    },
+  )
+
+export { router as payslipsRouter }
