@@ -3,11 +3,25 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { AlertCircle } from "lucide-react"
 import { signUp } from "@/lib/auth/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+
+function mapAuthError(message: string): string {
+  if (/invalid.*email.*password|invalid.*credentials/i.test(message))
+    return "Incorrect email or password. Please try again."
+  if (/user.*already.*exists|email.*already.*in.*use/i.test(message))
+    return "An account with this email already exists."
+  if (/email.*not.*verified/i.test(message))
+    return "Please verify your email before signing in."
+  if (/password.*too.*short|password.*least.*8/i.test(message))
+    return "Password must be at least 8 characters."
+  return message
+}
 
 export default function SignUpPage() {
   const router = useRouter()
@@ -27,7 +41,7 @@ export default function SignUpPage() {
     setError("")
     const res = await signUp.email({ name, email, password })
     if (res.error) {
-      setError(res.error.message ?? "Could not create account")
+      setError(mapAuthError(res.error.message ?? "Could not create account"))
       setLoading(false)
     } else {
       router.push("/dashboard")
@@ -42,9 +56,10 @@ export default function SignUpPage() {
       </CardHeader>
       <CardContent className="space-y-4">
         {error && (
-          <div className="bg-destructive/10 text-destructive text-sm rounded-md px-3 py-2">
-            {error}
-          </div>
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
         )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
