@@ -125,6 +125,9 @@ export const employees = pgTable(
       .notNull()
       .default("full_time"),
     basicSalary: numeric("basic_salary", { precision: 12, scale: 2 }).notNull(),
+    allowance: numeric("allowance", { precision: 12, scale: 2 })
+      .notNull()
+      .default("0"),
     hiredAt: date("hired_at").notNull(),
     createdAt: timestamp("created_at").notNull().defaultNow(),
   },
@@ -266,6 +269,10 @@ export const insertEmployeeSchema = createInsertSchema(employees, {
   basicSalary: z.string().refine((v) => parseFloat(v) > 0, {
     message: "Salary must be positive",
   }),
+  allowance: z
+    .string()
+    .refine((v) => parseFloat(v) >= 0, { message: "Allowance cannot be negative" })
+    .optional(),
 }).omit({ id: true, createdAt: true })
 export const updateEmployeeSchema = insertEmployeeSchema.partial()
 

@@ -31,7 +31,7 @@
         "@modelcontextprotocol/server-memory"
       ],
       "env": {
-        "MEMORY_FILE_PATH": "C:/Users/admin/Desktop/memory.jsonl"
+        "MEMORY_FILE_PATH": "/home/haruhadj/payroll/app/memory.jsonl"
       }
     },
     "tailwindcss": {

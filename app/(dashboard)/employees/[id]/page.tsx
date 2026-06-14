@@ -29,6 +29,7 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
     position: "",
     employmentType: "full_time",
     basicSalary: "",
+    allowance: "",
     hiredAt: "",
   })
 
@@ -39,6 +40,7 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
         position: emp.position,
         employmentType: emp.employmentType,
         basicSalary: emp.basicSalary,
+        allowance: emp.allowance ?? "0",
         hiredAt: emp.hiredAt,
       })
     }
@@ -48,7 +50,8 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    update(form, { onSuccess: () => router.push("/employees") })
+    const payload = { ...form, allowance: form.allowance || "0" }
+    update(payload, { onSuccess: () => router.push("/employees") })
   }
 
   if (isLoading) {
@@ -112,9 +115,21 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label>Hired Date</Label>
-              <Input type="date" value={form.hiredAt} onChange={(e) => set("hiredAt", e.target.value)} required />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Monthly Allowance (PHP)</Label>
+                <Input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={form.allowance}
+                  onChange={(e) => set("allowance", e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Hired Date</Label>
+                <Input type="date" value={form.hiredAt} onChange={(e) => set("hiredAt", e.target.value)} required />
+              </div>
             </div>
 
             <div className="flex gap-3 pt-2">

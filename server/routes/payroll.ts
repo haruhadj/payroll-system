@@ -66,6 +66,7 @@ const router = new Hono<{ Variables: HonoVariables }>()
         for (const emp of allEmployees) {
           const calc = calculatePayroll({
             basicSalary: parseFloat(emp.basicSalary as string),
+            allowances: parseFloat((emp.allowance as string) ?? "0"),
           })
           await db
             .insert(payslips)

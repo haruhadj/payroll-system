@@ -29,6 +29,7 @@ export default function NewEmployeePage() {
     position: "",
     employmentType: "full_time",
     basicSalary: "",
+    allowance: "",
     hiredAt: "",
   })
 
@@ -36,7 +37,8 @@ export default function NewEmployeePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    create(form, { onSuccess: () => router.push("/employees") })
+    const payload = { ...form, allowance: form.allowance || "0" }
+    create(payload, { onSuccess: () => router.push("/employees") })
   }
 
   return (
@@ -139,6 +141,23 @@ export default function NewEmployeePage() {
                   onChange={(e) => set("basicSalary", e.target.value)}
                   required
                 />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Monthly Allowance (PHP)</Label>
+                <Input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="0"
+                  value={form.allowance}
+                  onChange={(e) => set("allowance", e.target.value)}
+                />
+                <p className="text-xs text-muted-foreground">
+                  Transportation, meal, and other non-taxable allowances.
+                </p>
               </div>
             </div>
 

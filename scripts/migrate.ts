@@ -33,7 +33,9 @@ async function runMigrations() {
           error.message?.includes("already exists") ||
           code === "42P07" || // relation already exists
           code === "42710" || // type already exists
-          code === "42P06" // schema already exists
+          code === "42P06" || // schema already exists
+          code === "42701" || // column already exists
+          code === "42P16" // duplicate object
         ) {
           // Already exists is OK
         } else {
@@ -47,4 +49,9 @@ async function runMigrations() {
   console.log("\n✨ Migrations complete!")
 }
 
-runMigrations().catch(console.error)
+runMigrations()
+  .then(() => process.exit(0))
+  .catch((err) => {
+    console.error(err)
+    process.exit(1)
+  })

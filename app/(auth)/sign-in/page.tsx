@@ -29,7 +29,6 @@ export default function SignInPage() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const [googleLoading, setGoogleLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,11 +41,6 @@ export default function SignInPage() {
     } else {
       router.push("/dashboard")
     }
-  }
-
-  const handleGoogle = async () => {
-    setGoogleLoading(true)
-    await signIn.social({ provider: "google", callbackURL: "/dashboard" })
   }
 
   return (
@@ -97,29 +91,9 @@ export default function SignInPage() {
           </Button>
         </form>
 
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
-          </div>
-        </div>
-
-        <Button
-          variant="outline"
-          className="w-full"
-          onClick={handleGoogle}
-          disabled={googleLoading}
-        >
-          {googleLoading ? "Redirecting…" : "Sign in with Google"}
-        </Button>
-
-        <p className="text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{" "}
-          <Link href="/sign-up" className="text-primary hover:underline font-medium">
-            Sign up
-          </Link>
+        <p className="text-center text-xs text-muted-foreground">
+          Accounts are provisioned by your administrator. Contact HR if you need
+          access.
         </p>
       </CardContent>
     </Card>

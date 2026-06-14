@@ -59,7 +59,8 @@ const router = new Hono<{ Variables: HonoVariables }>()
         limit: parseInt(limit),
         offset: parseInt(offset),
       })
-      return c.json(rows)
+      // Employees may only see payslips from released payroll periods.
+      return c.json(rows.filter((r) => r.period?.status === "released"))
     }
 
     const conditions: any[] = []
@@ -98,6 +99,7 @@ const router = new Hono<{ Variables: HonoVariables }>()
         where: eq(employees.userId, user.id),
       })
       if (!emp || slip.employeeId !== emp.id) return c.json({ error: "Forbidden" }, 403)
+      if (slip.period?.status !== "released") return c.json({ error: "Forbidden" }, 403)
     }
 
     return c.json(slip)
