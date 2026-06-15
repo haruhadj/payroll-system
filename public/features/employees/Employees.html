@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://payroll-master.com/demo/users.php -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./Employees_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./Employees_files/datatable-min.css" rel="stylesheet">
+  <link href="./Employees_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./Employees_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Employees_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./Employees_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./Employees_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./Employees_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./Employees_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./Employees_files/custom-style.css">
+ 
+  <link href="./Employees_files/dropzone.css" rel="stylesheet">  <link href="./Employees_files/style.css" rel="stylesheet">
+  <script src="./Employees_files/jquery.min.js.download"></script>
+  <script src="./Employees_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./Employees_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/users.php#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/users.php#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/users.php#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/users.php#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/users.php#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/users.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/users.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/users.php#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./Employees_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a></a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/users.php#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Employees</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div class="row">
+    <div class="col-12 mb-3">
+      <div class="row">
+        <div class="col-md-12 wptf-section">
+          <div class="card mb-3">
+            <div class="card-header">
+              Employee List
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <div class="container-fluid p-0 mb-4">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <a href="https://payroll-master.com/demo/add-user.php">
+                      <button type="button" class="btn btn-primary pm-blue btn-lg">Add Employee</button>
+                    </a>
+                  </div>
+                  <div class="col-sm-4"><form><input id="search-employee" type="text" class="form-control" name="s" placeholder="Search" value=""></form></div>
+                                      <div class="col-sm-12 mt-4">
+                      <form>
+                        <div class="form-row align-items-center">
+                                                    <div class="col-auto">
+                            <label class="sr-only" for="designation">Designation</label>
+                            <select id="designation" name="ds" class="form-control">
+                              <option value="0">Choose Designation</option>
+                                                            <option value="182">Dept. Head</option>
+                                                            <option value="3">Supervisor</option>
+                                                            <option value="177">Rider</option>
+                                                          </select>
+                          </div>
+                                                                              <div class="col-auto">
+                            <label class="sr-only" for="team">Team</label>
+                            <select id="team" name="tm" class="form-control">
+                              <option value="0">Choose Team</option>
+                                                            <option value="9">Field</option>
+                                                            <option value="11">Administrative</option>
+                                                            <option value="170">Accounting </option>
+                                                          </select>
+                          </div>
+                                                                              <div class="col-auto">
+                            <label class="sr-only" for="group">Group</label>
+                            <select id="group" name="gp" class="form-control">
+                              <option value="0">Choose Group</option>
+                                                            <option value="5">Regular</option>
+                                                            <option value="6">Probationary</option>
+                                                            <option value="7">Trainee</option>
+                                                            <option value="172">Irregular</option>
+                                                            <option value="181">On-Call</option>
+                                                          </select>
+                          </div>
+                                                    <div class="col-auto">
+                            <button type="submit" class="btn btn-primary pm-blue btn-lg">Filter</button>
+                          </div>
+                          <div class="col-auto">
+                            <button type="button" class="btn btn-primary btn-lg bulk-update-btn pm-blue">Bulk Update</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                                  </div>
+              </div>
+              <table class="table table-bordered filter-table" id="employeeListTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th class="text-center no-arrow"><a data-n="0" class="" style="cursor: pointer;">
+                        <input class="check_all" type="checkbox">
+                      <div class="sortArrow" style="margin: 0.1em; display: inline-block; width: 0px; height: 0px; border-left: 0.4em solid transparent; border-right: 0.4em solid transparent; border-top: 0.4em solid rgb(0, 0, 0);"></div></a></th>
+                      <th><a data-n="1" class="" style="cursor: pointer;">ID</a></th>
+                      <th><a data-n="2" class="" style="cursor: pointer;">Last Name</a></th>
+                      <th><a data-n="3" class="" style="cursor: pointer;">First Name</a></th>
+                      <th class="text-center"><a data-n="4" class="" style="cursor: pointer;">Avatar</a></th>
+                                              <!-- <th class="text-center">Resume</th>
+                        <th class="text-center">Files</th> -->
+                                            <th><a data-n="5" class="" style="cursor: pointer;">Biometric ID</a></th>
+                      <th><a data-n="6" class="" style="cursor: pointer;">Designation</a></th>
+                      <th><a data-n="7" class="" style="cursor: pointer;">Group</a></th>
+                      <th><a data-n="8" class="" style="cursor: pointer;">Team</a></th>
+                      <th class="text-center"><a data-n="9" class="" style="cursor: pointer;">Action</a></th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody class="users-list-tbody"><tr id="data-185">
+                          <td class="text-center">
+                            <input name="bulk_user_ids" class="bulk_user_ids" type="checkbox" value="185">
+                          </td>
+                          <td>185</td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=185"><span>Admin</span></a></td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=185"><span>Admin</span></a></td>
+                          <td class="text-center"><img id="avatar" src="./Employees_files/185.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="26"></td>             
+                                 
+                          <!-- <td class="text-center"><a href="#" data-id="" class="download-user-resume btn btn-info btn-sm"><i class="fa fa-fw fa-address-card text-white"></i></a></td> 
+                          <td class="text-center"><a href="#" data-id="" data-username="" class="file-manager btn btn-info btn-sm" data-toggle="modal" data-target="#fileManagerModal"><i class="fa fa-fw fa-folder-open text-white"></i></a></td>     -->
+                                          
+                          <td><a href="https://payroll-master.com/demo/report-timecard.php?uid=111111">111111</a></td>
+                          <td>Supervisor</td>
+                          <td>Probationary</td>
+                          <td>Administrative</td> 
+                          <td style="text-align:center;">
+                            <a class="timelog" href="https://payroll-master.com/demo/report-timecard.php?uid=111111"><span class="fa fa-fw fa-clock-o"></span></a>&nbsp;
+                            <a class="update" href="https://payroll-master.com/demo/update-user.php?uid=185"><span class="fa fa-fw fa-edit"></span></a>&nbsp;
+                            <a class="delete" data-id="185" data-toggle="modal" data-target="#deleteUserModal"><span style="color:red;" class="fa fa-fw fa-user-times"></span></a>
+                          </td>  
+                        </tr><tr id="data-187">
+                          <td class="text-center">
+                            <input name="bulk_user_ids" class="bulk_user_ids" type="checkbox" value="187">
+                          </td>
+                          <td>187</td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=187"><span> User</span></a></td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=187"><span>Employee</span></a></td>
+                          <td class="text-center"><img id="avatar" src="./Employees_files/avatar.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="26"></td>             
+                                 
+                          <!-- <td class="text-center"><a href="#" data-id="" class="download-user-resume btn btn-info btn-sm"><i class="fa fa-fw fa-address-card text-white"></i></a></td> 
+                          <td class="text-center"><a href="#" data-id="" data-username="" class="file-manager btn btn-info btn-sm" data-toggle="modal" data-target="#fileManagerModal"><i class="fa fa-fw fa-folder-open text-white"></i></a></td>     -->
+                                          
+                          <td><a href="https://payroll-master.com/demo/report-timecard.php?uid=333333333">333333333</a></td>
+                          <td>Supervisor</td>
+                          <td>Regular</td>
+                          <td>Administrative</td> 
+                          <td style="text-align:center;">
+                            <a class="timelog" href="https://payroll-master.com/demo/report-timecard.php?uid=333333333"><span class="fa fa-fw fa-clock-o"></span></a>&nbsp;
+                            <a class="update" href="https://payroll-master.com/demo/update-user.php?uid=187"><span class="fa fa-fw fa-edit"></span></a>&nbsp;
+                            <a class="delete" data-id="187" data-toggle="modal" data-target="#deleteUserModal"><span style="color:red;" class="fa fa-fw fa-user-times"></span></a>
+                          </td>  
+                        </tr><tr id="data-195">
+                          <td class="text-center">
+                            <input name="bulk_user_ids" class="bulk_user_ids" type="checkbox" value="195">
+                          </td>
+                          <td>195</td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=195"><span>Yap</span></a></td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=195"><span>Lois Anna Keziah</span></a></td>
+                          <td class="text-center"><img id="avatar" src="./Employees_files/avatar.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="26"></td>             
+                                 
+                          <!-- <td class="text-center"><a href="#" data-id="" class="download-user-resume btn btn-info btn-sm"><i class="fa fa-fw fa-address-card text-white"></i></a></td> 
+                          <td class="text-center"><a href="#" data-id="" data-username="" class="file-manager btn btn-info btn-sm" data-toggle="modal" data-target="#fileManagerModal"><i class="fa fa-fw fa-folder-open text-white"></i></a></td>     -->
+                                          
+                          <td><a href="https://payroll-master.com/demo/report-timecard.php?uid=0">0</a></td>
+                          <td></td>
+                          <td>Regular</td>
+                          <td>Accounting </td> 
+                          <td style="text-align:center;">
+                            <a class="timelog" href="https://payroll-master.com/demo/report-timecard.php?uid=0"><span class="fa fa-fw fa-clock-o"></span></a>&nbsp;
+                            <a class="update" href="https://payroll-master.com/demo/update-user.php?uid=195"><span class="fa fa-fw fa-edit"></span></a>&nbsp;
+                            <a class="delete" data-id="195" data-toggle="modal" data-target="#deleteUserModal"><span style="color:red;" class="fa fa-fw fa-user-times"></span></a>
+                          </td>  
+                        </tr><tr id="data-196">
+                          <td class="text-center">
+                            <input name="bulk_user_ids" class="bulk_user_ids" type="checkbox" value="196">
+                          </td>
+                          <td>196</td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=196"><span>BALINGIT</span></a></td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=196"><span>NETTE</span></a></td>
+                          <td class="text-center"><img id="avatar" src="./Employees_files/avatar.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="26"></td>             
+                                 
+                          <!-- <td class="text-center"><a href="#" data-id="" class="download-user-resume btn btn-info btn-sm"><i class="fa fa-fw fa-address-card text-white"></i></a></td> 
+                          <td class="text-center"><a href="#" data-id="" data-username="" class="file-manager btn btn-info btn-sm" data-toggle="modal" data-target="#fileManagerModal"><i class="fa fa-fw fa-folder-open text-white"></i></a></td>     -->
+                                          
+                          <td><a href="https://payroll-master.com/demo/report-timecard.php?uid=15469484">15469484</a></td>
+                          <td></td>
+                          <td>Regular</td>
+                          <td>Administrative</td> 
+                          <td style="text-align:center;">
+                            <a class="timelog" href="https://payroll-master.com/demo/report-timecard.php?uid=15469484"><span class="fa fa-fw fa-clock-o"></span></a>&nbsp;
+                            <a class="update" href="https://payroll-master.com/demo/update-user.php?uid=196"><span class="fa fa-fw fa-edit"></span></a>&nbsp;
+                            <a class="delete" data-id="196" data-toggle="modal" data-target="#deleteUserModal"><span style="color:red;" class="fa fa-fw fa-user-times"></span></a>
+                          </td>  
+                        </tr><tr id="data-197">
+                          <td class="text-center">
+                            <input name="bulk_user_ids" class="bulk_user_ids" type="checkbox" value="197">
+                          </td>
+                          <td>197</td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=197"><span>DE JESUS</span></a></td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=197"><span>DENNIS</span></a></td>
+                          <td class="text-center"><img id="avatar" src="./Employees_files/avatar.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="26"></td>             
+                                 
+                          <!-- <td class="text-center"><a href="#" data-id="" class="download-user-resume btn btn-info btn-sm"><i class="fa fa-fw fa-address-card text-white"></i></a></td> 
+                          <td class="text-center"><a href="#" data-id="" data-username="" class="file-manager btn btn-info btn-sm" data-toggle="modal" data-target="#fileManagerModal"><i class="fa fa-fw fa-folder-open text-white"></i></a></td>     -->
+                                          
+                          <td><a href="https://payroll-master.com/demo/report-timecard.php?uid=1">1</a></td>
+                          <td></td>
+                          <td>Regular</td>
+                          <td>Administrative</td> 
+                          <td style="text-align:center;">
+                            <a class="timelog" href="https://payroll-master.com/demo/report-timecard.php?uid=1"><span class="fa fa-fw fa-clock-o"></span></a>&nbsp;
+                            <a class="update" href="https://payroll-master.com/demo/update-user.php?uid=197"><span class="fa fa-fw fa-edit"></span></a>&nbsp;
+                            <a class="delete" data-id="197" data-toggle="modal" data-target="#deleteUserModal"><span style="color:red;" class="fa fa-fw fa-user-times"></span></a>
+                          </td>  
+                        </tr><tr id="data-198">
+                          <td class="text-center">
+                            <input name="bulk_user_ids" class="bulk_user_ids" type="checkbox" value="198">
+                          </td>
+                          <td>198</td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=198"><span>qweqwe</span></a></td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=198"><span>qweqwe</span></a></td>
+                          <td class="text-center"><img id="avatar" src="./Employees_files/avatar.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="26"></td>             
+                                 
+                          <!-- <td class="text-center"><a href="#" data-id="" class="download-user-resume btn btn-info btn-sm"><i class="fa fa-fw fa-address-card text-white"></i></a></td> 
+                          <td class="text-center"><a href="#" data-id="" data-username="" class="file-manager btn btn-info btn-sm" data-toggle="modal" data-target="#fileManagerModal"><i class="fa fa-fw fa-folder-open text-white"></i></a></td>     -->
+                                          
+                          <td><a href="https://payroll-master.com/demo/report-timecard.php?uid=112121">112121</a></td>
+                          <td>Dept. Head</td>
+                          <td>Regular</td>
+                          <td>Administrative</td> 
+                          <td style="text-align:center;">
+                            <a class="timelog" href="https://payroll-master.com/demo/report-timecard.php?uid=112121"><span class="fa fa-fw fa-clock-o"></span></a>&nbsp;
+                            <a class="update" href="https://payroll-master.com/demo/update-user.php?uid=198"><span class="fa fa-fw fa-edit"></span></a>&nbsp;
+                            <a class="delete" data-id="198" data-toggle="modal" data-target="#deleteUserModal"><span style="color:red;" class="fa fa-fw fa-user-times"></span></a>
+                          </td>  
+                        </tr><tr id="data-199">
+                          <td class="text-center">
+                            <input name="bulk_user_ids" class="bulk_user_ids" type="checkbox" value="199">
+                          </td>
+                          <td>199</td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=199"><span>Cruz</span></a></td>
+                          <td><a class="name" href="https://payroll-master.com/demo/update-user.php?uid=199"><span>Chelsea</span></a></td>
+                          <td class="text-center"><img id="avatar" src="./Employees_files/avatar.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar" width="26"></td>             
+                                 
+                          <!-- <td class="text-center"><a href="#" data-id="" class="download-user-resume btn btn-info btn-sm"><i class="fa fa-fw fa-address-card text-white"></i></a></td> 
+                          <td class="text-center"><a href="#" data-id="" data-username="" class="file-manager btn btn-info btn-sm" data-toggle="modal" data-target="#fileManagerModal"><i class="fa fa-fw fa-folder-open text-white"></i></a></td>     -->
+                                          
+                          <td><a href="https://payroll-master.com/demo/report-timecard.php?uid=0">0</a></td>
+                          <td>Dept. Head</td>
+                          <td>Regular</td>
+                          <td>Field</td> 
+                          <td style="text-align:center;">
+                            <a class="timelog" href="https://payroll-master.com/demo/report-timecard.php?uid=0"><span class="fa fa-fw fa-clock-o"></span></a>&nbsp;
+                            <a class="update" href="https://payroll-master.com/demo/update-user.php?uid=199"><span class="fa fa-fw fa-edit"></span></a>&nbsp;
+                            <a class="delete" data-id="199" data-toggle="modal" data-target="#deleteUserModal"><span style="color:red;" class="fa fa-fw fa-user-times"></span></a>
+                          </td>  
+                        </tr></tbody>
+                <tfoot><tr><td class="pag" colspan="10"><a data-n="1" style="margin: 0.2em; cursor: pointer;" class="btn btn-primary active">1</a></td></tr></tfoot></table>
+            </div>
+          </div>
+        </div> <!-- Content wrapper -->
+      </div> <!-- Row Wrapper -->
+    </div>  
+  </div>
+</div><!-- /.container-fluid-->
+<!-- POP UP MOdal for Delete schedule -->
+<!-- Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUser" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header alert-danger">
+        <h5 class="modal-title text-white" id="deleteUser">Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this user?</p>
+        <p>This will remove user information and cannot revert back.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="deleteUserButton" data-id="">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal File Manager-->
+<div id="fileManagerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fileManagerModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-white" id="fileManagerModalLabel"><i class="fa fa-fw fa-folder-open"></i> File Manager</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body">
+        <section class="row">
+            <div class="col-md-6">
+                <form action="https://payroll-master.com/demo/includes/common/ajax-handler.php" class="dropzone needsclick dz-clickable" id="filemanagerdropzoneform">
+                    <div class="dz-message needsclick">
+                        Drop files here or click to upload.<br>
+                        <span style="font-size:12px;">Accepted file type : image, application/pdf, .doc, .docx, .csv, .xls, .xlsx<br>
+                        Max Filesize: 4MB.</span>
+                    </div>
+                    <input type="hidden" name="action" value="submit_dropzonejs">
+                    <input type="hidden" name="dirname" value="">
+                </form>
+            </div>
+            <div class="col-md-6">
+            <form id="filemanager-form">
+              <div class="form-group">
+                <label class="sr-only" for="filename">Filename<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="filename" aria-describedby="emailHelp" placeholder="Filename" required="">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="description">File Description</label>
+                <textarea class="form-control" id="description" rows="3" placeholder="File Description"></textarea>
+              </div>
+              <input type="hidden" name="file_id" value="">
+              <button type="submit" class="btn btn-primary pm-blue">Save File</button>
+            </form>
+            </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4.0.3 changes bulk update schedule - start -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary d-none show-bulk-update-modal" data-toggle="modal" data-target="#bulk-update-modal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="bulk-update-modal" tabindex="-1" role="dialog" aria-labelledby="bulk-update-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-white" id="bulk-update-modal-label">Bulk Update</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+        <form action="https://payroll-master.com/demo/users.php#" id="bulk-update-form">
+          <div class="modal-body">
+            <div class="row">
+              <div id="bulk-schedule-update-wrapper" class="col-md-12 border-bottom mb-3">
+                <h5 class="text-primary">Schedules</h5>
+                <div class="col-md-12 mb-3">
+                  <p class="text-danger">NOTE:</p>
+                  <p class="text-danger">- To establish a schedule for one day, it is recommended to maintain consistency between the "Start Date" and "End Date" fields.</p>
+                  <p class="text-danger">- Schedules that do not currently exist within a designated time frame will be included.</p>
+                  <p class="text-danger">- Schedules that fall within a designated time frame will undergo updates.</p>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="schedule">Start Date</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Start Date</div>
+                    </div>
+                    <input type="date" class="form-control" name="date_from">
+                  </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="schedule">End Date</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">End Date</div>
+                    </div>
+                    <input type="date" class="form-control" name="date_to">
+                  </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="schedule">Schedule</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Schedule</div>
+                    </div>
+                    <select id="schedule" class="form-control" name="schedule">
+                      <option value="">Select Schedule</option>
+                      <option value="0">Open Schedule</option>
+                      <option value="180">PM SHIFT</option><option value="179">GIN CAPS - MORNING</option><option value="178">REGULAR SCHED</option><option value="183">test</option>                    </select> 
+                  </div>
+                </div>
+              </div>
+              <div id="bulk-dayoff-update-wrapper" class="col-md-12 border-bottom mb-3">
+                <h5 class="text-primary">Dayoffs</h5>
+                <div class="col-md-12 mb-3">
+                  <p class="text-danger">Select Dayoff for selected users.</p>
+                </div>
+                <div class="col-md-12 mb-3">
+                                      <div class="form-check">
+                      <input class="form-check-input" name="user_dayoffs[]" type="checkbox" value="sunday" id="sunday-dayoff">
+                      <label class="form-check-label" for="sunday-dayoff">
+                        Sunday                      </label>
+                    </div>
+                                      <div class="form-check">
+                      <input class="form-check-input" name="user_dayoffs[]" type="checkbox" value="monday" id="monday-dayoff">
+                      <label class="form-check-label" for="monday-dayoff">
+                        Monday                      </label>
+                    </div>
+                                      <div class="form-check">
+                      <input class="form-check-input" name="user_dayoffs[]" type="checkbox" value="tuesday" id="tuesday-dayoff">
+                      <label class="form-check-label" for="tuesday-dayoff">
+                        Tuesday                      </label>
+                    </div>
+                                      <div class="form-check">
+                      <input class="form-check-input" name="user_dayoffs[]" type="checkbox" value="wednesday" id="wednesday-dayoff">
+                      <label class="form-check-label" for="wednesday-dayoff">
+                        Wednesday                      </label>
+                    </div>
+                                      <div class="form-check">
+                      <input class="form-check-input" name="user_dayoffs[]" type="checkbox" value="thursday" id="thursday-dayoff">
+                      <label class="form-check-label" for="thursday-dayoff">
+                        Thursday                      </label>
+                    </div>
+                                      <div class="form-check">
+                      <input class="form-check-input" name="user_dayoffs[]" type="checkbox" value="friday" id="friday-dayoff">
+                      <label class="form-check-label" for="friday-dayoff">
+                        Friday                      </label>
+                    </div>
+                                      <div class="form-check">
+                      <input class="form-check-input" name="user_dayoffs[]" type="checkbox" value="saturday" id="saturday-dayoff">
+                      <label class="form-check-label" for="saturday-dayoff">
+                        Saturday                      </label>
+                    </div>
+                                  </div>
+              </div>
+              <div id="bulk-team-update-wrapper" class="col-md-12 border-bottom mb-3">
+                <h5 class="text-primary">Teams</h5>
+                                <div class="col-md-12 mb-3">
+                  <select id="bulk_teams" name="bulk_teams" class="form-control">
+                    <option value="0">Choose Designation</option>
+                                        <option value="9">Field</option>
+                                        <option value="11">Administrative</option>
+                                        <option value="170">Accounting </option>
+                                      </select>
+                </div>
+                              </div>
+              <div id="bulk-group-update-wrapper" class="col-md-12 border-bottom mb-3">
+                <h5 class="text-primary">Groups</h5>
+                                <div class="col-md-12 mb-3">
+                  <select id="bulk_groups" name="bulk_groups" class="form-control">
+                    <option value="0">Choose Group</option>
+                                        <option value="5">Regular</option>
+                                        <option value="6">Probationary</option>
+                                        <option value="7">Trainee</option>
+                                        <option value="172">Irregular</option>
+                                        <option value="181">On-Call</option>
+                                      </select>
+                </div>
+                              </div>
+              <div id="bulk-designation-update-wrapper" class="col-md-12 border-bottom mb-3">
+                <h5 class="text-primary">Designations</h5>
+                                <div class="col-md-12 mb-3">
+                  <select id="bulk_designations" name="bulk_designations" class="form-control">
+                    <option value="0">Choose Designation</option>
+                                        <option value="182">Dept. Head</option>
+                                        <option value="3">Supervisor</option>
+                                        <option value="177">Rider</option>
+                                      </select>
+                </div>
+                              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div><!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/users.php#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./Employees_files/jquery.min(1).js.download"></script>
+    <script src="./Employees_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./Employees_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./Employees_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./Employees_files/jquery.dataTables.js.download"></script>
+  <script src="./Employees_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./Employees_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./Employees_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./Employees_files/jquery-ui.js.download"></script>
+  <script src="./Employees_files/jquery-select2.js.download"></script>
+  <script src="./Employees_files/jquery.timepicker.js.download"></script>
+  <script src="./Employees_files/datepair.min.js.download"></script>
+  <script src="./Employees_files/fancyTable.js.download"></script>
+  <script src="./Employees_files/scripts.js.download"></script>
+  <script src="./Employees_files/settings-scripts.js.download"></script>
+  <script src="./Employees_files/timecard-scripts.js.download"></script>
+  <script src="./Employees_files/download.js.download"></script>
+    <script src="./Employees_files/dropzone.stln.js.download"></script><script>
+    Dropzone.autoDiscover = false;
+    jQuery(document).ready(function( $ ){        
+        var myDropzone = new Dropzone("#filemanagerdropzoneform",{
+            acceptedFiles: "image/*, application/pdf, .doc, .docx, .csv, .xls, .xlsx",
+            maxFiles: 1,
+            uploadMultiple: false,
+            maxFilesize: 4, // 5 MB
+            addRemoveLinks: true,
+            dictRemoveFile: 'Remove',
+            init: function() {
+                this.on("sending", function(file, xhr, formData) {
+                    formData.append("name", "value"); // Append all the additional input data of your form here!
+                });
+                this.on("success", function(file, xhr, formData) {
+                    var fileData = JSON.parse(xhr);
+                    if( file.status !== 'error' && fileData.status !== 'error' ){
+                        $('#filemanager-form input[name="file_id"]').val( fileData.file_id );
+                    }else{
+                        alert( file.message  );
+                    }
+                });
+                this.on("complete", function(file) {
+                    if( file.status !== 'error'){
+                        // this.removeFile(file);
+                    }
+                });
+                this.on("removedfile", function(file) {            
+                    var fileID = $('#filemanager-form input[name="file_id"]').val();
+                    if( fileID ){
+                        $.ajax({
+                            url: './includes/common/ajax-handler.php',
+                            type: "post",
+                            data: {
+                                action : 'delete-fileupload',
+                                fileID : fileID,
+                            },
+                            beforeSend: function() {
+                                $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+                            },
+                            success: function (response) {
+                                $('body .lds-ellipsis').remove();
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                alert('Error Deleting fiels to server.');
+                            }
+                        });
+                        $('#filemanager-form input[name="file_id"]').val( '' );  
+                    }
+                      
+                });
+            }
+        });
+
+        $('body').on('click', '.file-manager', function(){         
+            $('#filemanagerdropzoneform input[name="dirname"]').val('');
+            $('#filemanager-form input[name="file_id"]').val( '' );
+            $('#filemanager-form #filename').val( '' );
+            $('#filemanager-form #description').val( '' );
+            var dirname = $(this).data('id');
+            setTimeout(() => {
+                $('#filemanagerdropzoneform input[name="dirname"]').val(dirname);
+                myDropzone.removeAllFiles();
+            }, 10 ); 
+        });
+
+        $('#filemanager-form').on('submit', function(e){
+            e.preventDefault();
+            var fileID      = $('#filemanager-form input[name="file_id"]').val();
+            var fileName    = $('#filemanager-form #filename').val();
+            var fileDesc    = $('#filemanager-form #description').val();
+            var assignedTo  = 0;
+            if( $('#filemanager-form #user_id').length ){
+                assignedTo = $('#filemanager-form #user_id').val();
+            }
+            if( !fileID ){
+                alert( 'No file found. Please upload file and try again.' );
+                return
+            }
+
+            $.ajax({
+                url: './includes/common/ajax-handler.php',
+                type: "post",
+                data: {
+                    action : 'update-fileupload',
+                    fileID : fileID,
+                    fileName: fileName,
+                    fileDesc: fileDesc,
+                    assignedTo : assignedTo
+                },
+                beforeSend: function() {
+                    $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+                },
+                success: function (response) {
+                    $('#fileManagerModal').modal('hide')
+                    $('body .lds-ellipsis').remove();
+                    var data = JSON.parse(response);
+                    if( data.status == 'error' ){
+                        $('body').prepend('<div class="payroll notification-message alert alert-danger"><p>'+data.message+'</p></div>');
+                        setTimeout(function(){
+                            $('body .notification-message').remove();
+                        }, 3000);
+                    }else{
+                        $('body').prepend('<div class="payroll notification-message alert alert-success"><p>'+data.message+'</p></div>');
+                        setTimeout(function(){
+                            $('body .notification-message').remove();
+                        }, 3000);
+                        if ($('#user-file-list').length == 1) {
+                            if( assignedTo > 0 ){
+                                $('#user-file-list tbody').prepend( 
+                                    '<tr id="file-'+data.file_info.id+'">'+
+                                        '<td>'+data.file_info.name+' <i class="fa fa-info-circle text-info ml-3" data-toggle="tooltip" data-placement="top" title="'+data.file_info.description+'"></i></td>'+
+                                        '<td>'+data.file_info.upload_date+'</td>'+
+                                        '<td>'+data.file_info.uploaded_name+'</td>'+
+                                        '<td>'+data.file_info.assigned_name+'</td>'+
+                                        '<td>'+data.file_info.type+'</td>'+
+                                        '<td>'+
+                                            '<i class="download-file fa fa-download mr-3 text-primary" data-id="'+data.file_info.id+'" aria-hidden="true"></i> '+
+                                            '<i class="delete-file fa fa-trash mr-3 text-danger" data-id="'+data.file_info.id+'" aria-hidden="true"></i>'+
+                                        '</td>'+
+                                    '</tr>'
+                                );
+                            }else{
+                                $('#user-file-list tbody').prepend( 
+                                    '<tr id="file-'+data.file_info.id+'">'+
+                                        '<td>'+data.file_info.name+' <i class="fa fa-info-circle text-info ml-3" data-toggle="tooltip" data-placement="top" title="'+data.file_info.description+'"></i></td>'+
+                                        '<td>'+data.file_info.upload_date+'</td>'+
+                                        '<td>'+data.file_info.type+'</td>'+
+                                        '<td>'+
+                                            '<i class="download-file fa fa-download mr-3 text-primary" data-id="'+data.file_info.id+'" aria-hidden="true"></i> '+
+                                            '<i class="delete-file fa fa-trash mr-3 text-danger" data-id="'+data.file_info.id+'" aria-hidden="true"></i>'+
+                                        '</td>'+
+                                    '</tr>'
+                                );
+                            }
+                            
+                        }
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error Deleting fiels to server.');
+                }
+            });
+        });
+        // Delete file
+        $('body').on('click', '.delete-file', function(e){    
+            e.preventDefault();
+            var confirmation = confirm('Are you sure you want to delete this file?');
+            var fileID = $(this).data('id');
+            if( fileID && confirmation ){
+                $.ajax({
+                    url: './includes/common/ajax-handler.php',
+                    type: "post",
+                    data: {
+                        action : 'delete-fileupload',
+                        fileID : fileID,
+                    },
+                    beforeSend: function() {
+                        $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+                    },
+                    success: function (response) {
+                        $('body .lds-ellipsis').remove();
+                        if( response >= 1 ){
+                            $('body').prepend('<div class="payroll notification-message alert alert-success"><p>File Successfully Deleted</p></div>');
+                            
+                            $('#user-file-list tr#file-'+fileID).remove();
+                        }else{
+                            $('body').prepend('<div class="payroll notification-message alert alert-danger"><p>Deleting file failed. Something went wrong during process.</p></div>');
+                        }
+                        setTimeout(function(){
+                            $('body .notification-message').remove();
+                        }, 3000);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error Deleting file to server.');
+                    }
+                });
+                $('#filemanager-form input[name="file_id"]').val( '' );  
+            }
+        });
+        $('body').on('click', '.download-file', function(e){    
+            e.preventDefault();
+            var fileID = $(this).data('id');
+            if( fileID ){
+                $.ajax({
+                    url: './includes/common/ajax-handler.php',
+                    type: "post",
+                    data: {
+                        action : 'download-file',
+                        fileID : fileID,
+                    },
+                    beforeSend: function() {
+                        $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+                    },
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        console.log(data);
+                        $('body .lds-ellipsis').remove();
+                        if( data.status == 'error'){
+                            alert( data.message );
+                        }else{
+                            var file_type = data.file_type;
+                            if( file_type.indexOf("image") || file_type.indexOf("pdf") ){
+                                download_file( data.file_url, data.file_name );
+                            }else{
+                                window.location.href = data.file_url;
+                            }
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error Downloading file to server.');
+                    }
+                });
+            }
+        });
+
+        function download_file(fileURL, fileName) {
+          // for non-IE
+          if (!window.ActiveXObject) {
+              var save = document.createElement('a');
+              save.href = fileURL;
+              save.target = '_blank';
+              var filename = fileURL.substring(fileURL.lastIndexOf('/')+1);
+              save.download = fileName || filename;
+              if ( navigator.userAgent.toLowerCase().match(/(ipad|iphone|safari)/) && navigator.userAgent.search("Chrome") < 0) {
+                      document.location = save.href; 
+                  // window event not working here
+                  }else{
+                      var evt = new MouseEvent('click', {
+                          'view': window,
+                          'bubbles': true,
+                          'cancelable': false
+                      });
+                      save.dispatchEvent(evt);
+                      (window.URL || window.webkitURL).revokeObjectURL(save.href);
+                  }	
+          }
+          // for IE < 11
+          else if ( !! window.ActiveXObject && document.execCommand)     {
+              var _window = window.open(fileURL, '_blank');
+              _window.document.close();
+              _window.document.execCommand('SaveAs', true, fileName || fileURL)
+              _window.close();
+          }
+      }
+    });
+</script>
+
+<script src="./Employees_files/user.js.download"></script>    <script src="./Employees_files/required-indicator.js.download"></script>
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><input type="file" class="dz-hidden-input" accept="image/*, application/pdf, .doc, .docx, .csv, .xls, .xlsx" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;"></body></html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)https://payroll-master.com/demo/all-schedules.php -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./All Schedule_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./All Schedule_files/datatable-min.css" rel="stylesheet">
+  <link href="./All Schedule_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./All Schedule_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./All Schedule_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./All Schedule_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./All Schedule_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./All Schedule_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./All Schedule_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./All Schedule_files/custom-style.css">
+ 
+    <link href="./All Schedule_files/style.css" rel="stylesheet">
+  <script src="./All Schedule_files/jquery.min.js.download"></script>
+  <script src="./All Schedule_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./All Schedule_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/all-schedules.php#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/all-schedules.php#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules" style="">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/all-schedules.php#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/all-schedules.php#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/all-schedules.php#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/all-schedules.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/all-schedules.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/all-schedules.php#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./All Schedule_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a></a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/all-schedules.php#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">All  Schedule</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div id="settings-wrapper" class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-8 mb-6 wptf-section">
+          
+          <div class="card mb-3">
+            <div class="card-header">
+              Schedules
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <button type="submit" class="btn btn-primary btn-lg mb-3 pm-blue" data-toggle="modal" data-target="#addScheduleModal">Add Schedule</button>
+              <div id="schedule-list" class="table-responsive">
+                <table class="table table-bordered" id="scheduleListTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Schedule name</th>
+                      <th>Time In</th>
+                      <th>Time Out</th>
+                      <th>Time In</th>
+                      <th>Time Out</th>
+                      <th>Break</th>
+                      <th>Color</th>
+                      <th>Update</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Schedule name</th>
+                      <th>Time In</th>
+                      <th>Time Out</th>
+                      <th>Time In</th>
+                      <th>Time Out</th>
+                      <th>Break</th>
+                      <th>Color</th>
+                      <th>Update</th>
+                      <th>Delete</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                                            <tr id="sched-180">
+                          <td class="name">PM SHIFT</td>
+                          <td class="ftimein">12:00pm</td>
+                          <td class="ftimeout"></td>
+                          <td class="stimein"></td>
+                          <td class="stimeout">5:00pm</td>
+                          <td class="breakTime"></td>
+                          <td class="schedColor text-center"><div style="margin:auto;width:20px;height:20px;border:1px solid #eee;border-radius:50%;background-color:#000000;"></div></td>
+                          <td style="text-align:center;">
+                            <a class="update" data-id="180" data-toggle="modal" data-target="#updatedScheduleModal"><span class="fa fa-fw fa-edit"></span></a>
+                          </td>
+                          
+                          <td style="text-align:center;">
+                            <a class="delete" data-id="180" data-toggle="modal" data-target="#deleteScheduleModal"><span style="color:red;" class="fa fa-fw fa-trash"></span></a>
+                          </td>    
+                        </tr>         
+                                                <tr id="sched-179">
+                          <td class="name">GIN CAPS - MORNING</td>
+                          <td class="ftimein">12:00am</td>
+                          <td class="ftimeout"></td>
+                          <td class="stimein"></td>
+                          <td class="stimeout">12:00am</td>
+                          <td class="breakTime">0</td>
+                          <td class="schedColor text-center"><div style="margin:auto;width:20px;height:20px;border:1px solid #eee;border-radius:50%;background-color:#000000;"></div></td>
+                          <td style="text-align:center;">
+                            <a class="update" data-id="179" data-toggle="modal" data-target="#updatedScheduleModal"><span class="fa fa-fw fa-edit"></span></a>
+                          </td>
+                          
+                          <td style="text-align:center;">
+                            <a class="delete" data-id="179" data-toggle="modal" data-target="#deleteScheduleModal"><span style="color:red;" class="fa fa-fw fa-trash"></span></a>
+                          </td>    
+                        </tr>         
+                                                <tr id="sched-178">
+                          <td class="name">REGULAR SCHED</td>
+                          <td class="ftimein">8:30am</td>
+                          <td class="ftimeout">12:00pm</td>
+                          <td class="stimein">1:00pm</td>
+                          <td class="stimeout">5:30pm</td>
+                          <td class="breakTime">60</td>
+                          <td class="schedColor text-center"><div style="margin:auto;width:20px;height:20px;border:1px solid #eee;border-radius:50%;background-color:#000000;"></div></td>
+                          <td style="text-align:center;">
+                            <a class="update" data-id="178" data-toggle="modal" data-target="#updatedScheduleModal"><span class="fa fa-fw fa-edit"></span></a>
+                          </td>
+                          
+                          <td style="text-align:center;">
+                            <a class="delete" data-id="178" data-toggle="modal" data-target="#deleteScheduleModal"><span style="color:red;" class="fa fa-fw fa-trash"></span></a>
+                          </td>    
+                        </tr>         
+                                                <tr id="sched-183">
+                          <td class="name">test</td>
+                          <td class="ftimein">12:00am</td>
+                          <td class="ftimeout">7:00pm</td>
+                          <td class="stimein">12:00am</td>
+                          <td class="stimeout">7:00pm</td>
+                          <td class="breakTime">1</td>
+                          <td class="schedColor text-center"><div style="margin:auto;width:20px;height:20px;border:1px solid #eee;border-radius:50%;background-color:#000000;"></div></td>
+                          <td style="text-align:center;">
+                            <a class="update" data-id="183" data-toggle="modal" data-target="#updatedScheduleModal"><span class="fa fa-fw fa-edit"></span></a>
+                          </td>
+                          
+                          <td style="text-align:center;">
+                            <a class="delete" data-id="183" data-toggle="modal" data-target="#deleteScheduleModal"><span style="color:red;" class="fa fa-fw fa-trash"></span></a>
+                          </td>    
+                        </tr>         
+                                          </tbody>
+                </table>
+              </div>
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Schedule Form -->
+        </div> <!-- wptf-section -->
+    <!-- POP UP MOdal for Add schedule -->
+<!-- Modal -->
+<div class="modal fade" id="addScheduleModal" tabindex="-1" role="dialog" aria-labelledby="addSchedule" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <form id="schedule-form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="addSchedule">Add Schedule</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                      <label for="schedule_name">Schedule Name<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="schedule_name" placeholder="Schedule Name" name="schedule_name" required="required">
+                    </div>
+                    <div class="form-group col-md-6 d-flex align-items-baseline">
+                      <label for="uncut_sched">Uncut Schedule</label>
+                      <input type="checkbox" class="ml-2" id="uncut_sched" name="uncut_sched">
+                    </div>
+                    <div class="form-group col-md-6"></div>
+                    <div class="form-group col-md-6">
+                      <label for="ftime_in">First Time In<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control timepicker ui-timepicker-input" id="ftime_in" placeholder="0:00 am" name="ftime_in" required="required" autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="ftime_out">First Time Out</label>
+                      <input type="text" class="form-control timepicker ui-timepicker-input" id="ftime_out" placeholder="0:00 am" name="ftime_out" autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="stime_in">Second Time In</label>
+                      <input type="text" class="form-control timepicker ui-timepicker-input" id="stime_in" placeholder="0:00 pm" name="stime_in" autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="stime_out">Second Time Out<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control timepicker ui-timepicker-input" id="stime_out" placeholder="0:00 pm" name="stime_out" required="required" autocomplete="off">
+                    </div>
+                   <div class="form-group col-md-6">
+                      <label for="breakTime">Break Time (minutes)</label>
+                      <input type="text" class="form-control" id="breakTime" placeholder="" name="breakTime">
+                    </div>
+                <div class="form-group col-md-6">
+                  <label for="schedColor">Color</label>
+                  <input type="color" class="form-control " id="schedColor" placeholder="" name="schedColor">
+                </div>
+                    <div class="form-group col-md-12">
+                      <!-- <button type="submit" class="btn btn-primary create-sched-btn">Create Schedule</button> -->
+                    </div>
+                </div>
+        </div>
+        <div class="modal-footer pm-blue">
+          <button type="button" class="btn btn-secondary btn-lg _secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-lg _create-sched-btn">Create Schedule</button>
+        </div>
+      </div>
+      </form> <!-- Schedule Form -->
+  </div>
+</div>
+<!-- POP UP MOdal for Update schedule -->
+<!-- Modal -->
+<div class="modal fade" id="updatedScheduleModal" tabindex="-1" role="dialog" aria-labelledby="updatedSchedule" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="update-schedule-form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="updatedSchedule">Update Schedule</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="schedule_name">Schedule Name<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="_schedule_name" placeholder="Schedule Name" name="schedule_name" required="required">
+                </div>
+                <div class="form-group col-md-6 d-flex align-items-baseline">
+                  <label for="uncut_sched">Uncut Schedule</label>
+                  <input type="checkbox" class="ml-2" id="_uncut_sched" name="uncut_sched">
+                </div>
+                <div class="col-md-6"></div>
+                <div class="form-group col-md-6">
+                  <label for="ftime_in">First Time In<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control timepicker ui-timepicker-input" id="_ftime_in" placeholder="0:00 am" name="ftime_in" required="required" autocomplete="off">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="ftime_out">First Time Out</label>
+                  <input type="text" class="form-control timepicker ui-timepicker-input" id="_ftime_out" placeholder="0:00 am" name="ftime_out" autocomplete="off">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="stime_in">Second Time In</label>
+                  <input type="text" class="form-control timepicker ui-timepicker-input" id="_stime_in" placeholder="0:00 pm" name="stime_in" autocomplete="off">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="stime_out">Second Time Out<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control timepicker ui-timepicker-input" id="_stime_out" placeholder="0:00 pm" name="stime_out" required="required" autocomplete="off">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="breakTime">Break Time (minutes)</label>
+                  <input type="text" class="form-control " id="breakTime" placeholder="" name="breakTime">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="_schedColor">Color</label>
+                  <input type="color" class="form-control " id="_schedColor" placeholder="" name="_schedColor">
+                </div>
+            </div>      
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" id="scheduleID" name="scheduleID" value="">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </div>
+    </form> <!-- Schedule Form -->
+  </div>
+</div>
+<!-- POP UP MOdal for Delete schedule -->
+<!-- Modal -->
+<div class="modal fade" id="deleteScheduleModal" tabindex="-1" role="dialog" aria-labelledby="deleteSchedule" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header alert-danger">
+        <h5 class="modal-title text-white" id="deleteSchedule">Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this schedule</p>
+        <p>This will affect Employee data who is assigned to this schedule.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="deleteScheduleButton" data-id="">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div><!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/all-schedules.php#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./All Schedule_files/jquery.min(1).js.download"></script>
+    <script src="./All Schedule_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./All Schedule_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./All Schedule_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./All Schedule_files/jquery.dataTables.js.download"></script>
+  <script src="./All Schedule_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./All Schedule_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./All Schedule_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./All Schedule_files/jquery-ui.js.download"></script>
+  <script src="./All Schedule_files/jquery-select2.js.download"></script>
+  <script src="./All Schedule_files/jquery.timepicker.js.download"></script>
+  <script src="./All Schedule_files/datepair.min.js.download"></script>
+  <script src="./All Schedule_files/fancyTable.js.download"></script>
+  <script src="./All Schedule_files/scripts.js.download"></script>
+  <script src="./All Schedule_files/settings-scripts.js.download"></script>
+  <script src="./All Schedule_files/timecard-scripts.js.download"></script>
+  <script src="./All Schedule_files/download.js.download"></script>
+        <script src="./All Schedule_files/required-indicator.js.download"></script>
+</div>
+
+</div></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

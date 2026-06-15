@@ -7,6 +7,7 @@ import { authMiddleware } from "@/server/middleware/auth"
 import { requireRole } from "@/server/middleware/rbac"
 import type { HonoVariables } from "@/server/types"
 import { eq, ilike, and } from "drizzle-orm"
+import type { SQL } from "drizzle-orm"
 
 const router = new Hono<{ Variables: HonoVariables }>()
   .use(authMiddleware)
@@ -22,20 +23,25 @@ const router = new Hono<{ Variables: HonoVariables }>()
 
   .get("/", async (c) => {
     const user = c.get("user")
-    const { department, position, limit = "50", offset = "0" } = c.req.query()
+    const { department, position, active, limit = "50", offset = "0" } = c.req.query()
 
     if (user.role === "employee") {
       const [emp] = await db.select().from(employees).where(eq(employees.userId, user.id))
       return c.json(emp ? [emp] : [])
     }
 
-    const conditions: any[] = []
+    const conditions: SQL[] = []
     if (department) conditions.push(ilike(employees.department, `%${department}%`))
     if (position) conditions.push(ilike(employees.position, `%${position}%`))
+    if (active === "true") conditions.push(eq(employees.isActive, true))
+    if (active === "false") conditions.push(eq(employees.isActive, false))
 
     const rows = await db.query.employees.findMany({
       where: conditions.length ? and(...conditions) : undefined,
-      with: { user: { columns: { name: true, email: true } } },
+      with: {
+        user: { columns: { name: true, email: true } },
+        schedule: { columns: { id: true, name: true } },
+      },
       limit: parseInt(limit),
       offset: parseInt(offset),
     })
@@ -47,7 +53,10 @@ const router = new Hono<{ Variables: HonoVariables }>()
     const id = c.req.param("id")!
     const emp = await db.query.employees.findFirst({
       where: eq(employees.id, id),
-      with: { user: { columns: { name: true, email: true, role: true } } },
+      with: {
+        user: { columns: { name: true, email: true, role: true } },
+        schedule: { columns: { id: true, name: true } },
+      },
     })
     if (!emp) return c.json({ error: "Not found" }, 404)
     if (user.role === "employee" && emp.userId !== user.id) {

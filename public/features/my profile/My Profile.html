@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://payroll-master.com/demo/profile.php -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./My Profile_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./My Profile_files/datatable-min.css" rel="stylesheet">
+  <link href="./My Profile_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./My Profile_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./My Profile_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./My Profile_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./My Profile_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./My Profile_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./My Profile_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./My Profile_files/custom-style.css">
+ 
+      <link href="./My Profile_files/fullcalendar.min.css" rel="stylesheet">
+        <link href="./My Profile_files/croppie.css" rel="stylesheet">
+    <link href="./My Profile_files/dropzone.css" rel="stylesheet">  <link href="./My Profile_files/style.css" rel="stylesheet">
+  <script src="./My Profile_files/jquery.min.js.download"></script>
+  <script src="./My Profile_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./My Profile_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/profile.php#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/profile.php#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/profile.php#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/profile.php#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/profile.php#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/profile.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/profile.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/profile.php#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./My Profile_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a><style>
+  table tbody tr.dt-row {
+    display: table-row;
+  }
+</style>
+</a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/profile.php#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">My Profile</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div id="adduser-form" class="row">
+    <div class="container">
+      <div class="row my-2">
+          <div class="col-lg-8 order-lg-2">
+              <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                      <a href="https://payroll-master.com/demo/profile.php" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                  </li>
+                                                          <li class="nav-item">
+                      <a id="user-documents" href="https://payroll-master.com/demo/profile.php#" data-target="#u_documents" data-toggle="tab" class="nav-link"><i class="fa fa-fw fa-folder-open"></i> Files</a>
+                    </li>
+                      <!-- <li class="nav-item">
+                        <a id="user-memo" href="#" data-target="#u_memos" data-toggle="tab" class="nav-link"><i class="fa fa-fw fa-file-text"></i> Documents</a>
+                      </li> -->
+                                                       <!-- <li class="nav-item">
+                      <a id="download-resume" data-id="" href="#"  class="nav-link"><i class="fa fa-fw fa-download"></i> Resume</a>
+                  </li> -->
+                                    <li class="nav-item">
+                      <a href="https://payroll-master.com/demo/update-user.php?uid=185" class="nav-link">Edit</a>
+                  </li>
+                                </ul>
+              <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">User Profile</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>About</h6>
+                            <p class="mb-0">
+                                <strong>Full name:</strong> Admin Admin                            </p>
+                            <p class="mb-0">
+                                <strong>Username:</strong> adminuser                            </p>
+                            <p class="mb-0">
+                                <strong>Contact number 1:</strong> 09055484551                            </p>
+                            <p class="mb-0">
+                                <strong>Contact number 2:</strong> xx                            </p>
+                            <p class="mb-0">
+                                <strong>Email:</strong> cecille03vargas@gmail.com                            </p>
+                            <p class="mb-0">
+                                <strong>Address:</strong> xx, xx, xx                            </p>
+                            <h6>In case of Emergency</h6>
+                            <p class="mb-0">
+                                <strong>Contact person's name:</strong> xx                            </p>
+                            <p class="mb-0">
+                                <strong>Contact number:</strong> xx                            </p>
+                            <p class="mb-0">
+                                <strong>Email:</strong> xx@gmail.com                            </p>
+                            <p class="mb-0">
+                                <strong>Address:</strong> xx                            </p>
+                            <h6>Others</h6>
+                            <p class="mb-0">
+                                <strong>Biometric ID:</strong> 111111                            </p>
+                            <p class="mb-0">
+                                <strong>Position:</strong> Administrator                            </p>
+                            <p>
+                                <strong>Employee Status:</strong> Active                            </p>
+                        </div>
+                        <div class="col-md-12">
+                            <h5 class="my-2"><span class="fa fa-clock-o ion-clock"></span> Time Record <button type="button" id="openAddlogModal" data-id="111111" class="btn btn-outline-success btn-sm float-right _success" data-toggle="modal" data-target="#addLogModal">Add New Log</button></h5>
+                            <p>From: 2026-06-01 To: 2026-06-30</p>
+                            <form action="https://payroll-master.com/demo/profile.php" method="get">
+                              <div class="row">
+                                <div class="col">
+                                  <input type="date" class="form-control" name="_date_from" id="_date_from" value="2026-06-01">
+                                </div>
+                                <div class="col">
+                                  <input type="date" class="form-control" name="_date_to" id="_date_to" value="2026-06-30">
+                                </div>
+                                <div class="col">
+                                  <button type="submit" class="btn btn-primary text-white pm-blue btn-lg">Filter</button>
+                                </div>
+                              </div>
+                            </form>
+                            <table class="table table-sm table-hover table-striped my-4">
+                              <thead>
+                                <tr>
+                                  <th>Date</th>
+                                  <th>Schedule</th>
+                                  <th>Log In(AM)</th>
+                                  <th>Log Out(AM)</th>
+                                  <th>Log In(PM)</th>
+                                  <th>Log Out(PM)</th>
+                                  <th>OT In</th>
+                                  <th>OT Out</th>
+                                </tr>
+                              </thead>
+                              <tfoot>
+                                <tr>
+                                  <th>Date</th>
+                                  <th>Schedule</th>
+                                  <th>Log In(AM)</th>
+                                  <th>Log Out(AM)</th>
+                                  <th>Log In(PM)</th>
+                                  <th>Log Out(PM)</th>
+                                  <th>OT In</th>
+                                  <th>OT Out</th>
+                                </tr>
+                              </tfoot>
+                              <tbody>
+                                                                    <tr>
+                                      <td class="logDate">2026-06-01</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-02</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-03</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-04</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-05</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-06</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-07</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-08</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-09</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-10</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-11</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-12</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-13</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-14</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-15</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-16</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-17</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-18</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-19</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-20</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-21</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-22</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-23</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-24</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-25</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-26</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-27</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-28</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-29</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        <tr>
+                                      <td class="logDate">2026-06-30</td>
+                                      <td>Open Schedule</td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="" class="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                      <td id="">
+                                                                              </td>
+                                    </tr>
+                                                                        
+                              </tbody>
+                            </table>
+                        </div>
+                    </div><!--/row-->
+                </div><!-- profile TAB -->
+                                  <div class="tab-pane" id="u_documents">
+                    <h5 class="mb-3">Documents</h5>
+                    <div class="card mb-3">
+                      <div class="card-header">
+                        Files  <a href="https://payroll-master.com/demo/profile.php#" data-id="185" data-username="adminuser" class="file-manager btn btn-info pm-blue btn-sm float-right" data-toggle="modal" data-target="#fileManagerModal"><i class="fa fa-fw fa-folder-open text-white"></i></a>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <input type="search" name="search_files" class="p-2 mb-2 border rounded" style="outline: none;" placeholder="Search...">
+                          <div class="table-responsive">
+                            <table id="user-file-list" class="table">  
+                              <thead>
+                                <tr>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Date Upload</th>
+                                  <th scope="col">Type</th>
+                                  <th scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody><tr><td colspan="4">No files found.</td></tr></tbody>
+                            <tfoot><tr><td class="pag" colspan="1"><a data-n="1" style="margin: 0.2em; cursor: pointer;" class="btn btn-light active">1</a></td></tr></tfoot></table>
+                          </div>
+                        </div>
+                      </div> <!-- Body Card -->
+                    </div> <!-- Card wrapper -->
+                  </div><!-- Document TAB -->
+                  <div class="tab-pane" id="u_memos">
+                    <div class="card mb-3">
+                      <div class="card-header">
+                      <h5 class="mb-3">Documents</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="table-responsive">
+                            <table id="user-memo-list" class="table">  
+                              <thead>
+                                <tr>
+                                  <th scope="col">Subject</th>
+                                  <th scope="col">Date Created</th>
+                                  <th scope="col">Status</th>
+                                  <th scope="col">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody><tr><td colspan="4">No files found.</td></tr></tbody>
+                            <tfoot><tr><td class="pag" colspan="1"><a data-n="1" style="margin: 0.2em; cursor: pointer;" class="btn btn-light active">1</a></td></tr></tfoot></table>
+                          </div>
+                        </div>
+                      </div> <!-- Body Card -->
+                    </div> <!-- Card wrapper MEMO -->
+                  </div><!-- MEMO TAB -->
+                              </div>
+          </div>
+          <div class="col-lg-4 order-lg-1 text-center">
+              <img id="avatar" src="./My Profile_files/185.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+              <h6 id="upload-avatar" class="mt-2" data-toggle="modal" data-target="#uploadAvatar" data-id="185"><span class="custom-file-control btn btn-outline-secondary btn-sm">Upload a different photo</span></h6>
+          </div>
+      </div>
+    </div>
+    <!-- User Loans and Calendar -->
+    <div class="col-12">
+      <div class="breadcrumb">
+        Loan and Leave Information
+      </div>
+      <div class="row">
+        <!--
+        <div id="loan-deduction-wrapper" class="col-md-6 wptf-section">
+          <div class="card mb-3">
+            <div class="card-header">
+              Loans Deductions ( SSS / HMDF )
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="form-group col-md-8">
+                  <label for="sssLoan">SSS Loan</label>
+                  <input type="text" class="form-control number" id="sssLoan" placeholder="0.00" name="sssLoan" value="">
+                </div>
+                <div class="form-group col-md-4">
+                  <button id="submitSSSLoan" type="submit" class="btn btn-primary text-white pm-blue">Save SSS Loan</button>
+                </div>
+                <div class="form-group col-md-8">
+                  <label for="sssLoan">SSS Loan</label>
+                  <input type="text" class="form-control number" id="sssLoan" placeholder="0.00" name="sssLoan" value="">
+                </div>
+                <div class="form-group col-md-4">
+                  <button id="submitSSSLoan" type="submit" class="btn btn-primary text-white pm-blue">Save SSS Loan</button>
+                </div>
+              </div>
+            </div>  Body Card 
+          </div>  Card wrapper 
+        </div>  loan-deduction-wrapper 
+        -->
+        <div id="leave-calendar-wrapper" class="col-md-6 wptf-section">
+          <div class="card mb-3">
+            <div class="card-header">
+              User Leave Calendar / Requested Schedule
+            </div>
+            <div class="card-body">
+              <div class="alert alert-success" role="alert">
+                Click a specific date on the calendar to apply for Leave or Overtime.
+              </div>
+              <div id="employee-calendar" class="fc fc-unthemed fc-ltr"><div class="fc-toolbar fc-header-toolbar"><div class="fc-left"><div class="fc-button-group"><button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left" aria-label="prev"><span class="fc-icon fc-icon-left-single-arrow"></span></button><button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right" aria-label="next"><span class="fc-icon fc-icon-right-single-arrow"></span></button></div><button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right fc-state-disabled" disabled="">today</button></div><div class="fc-right"><h2>June 2026</h2></div><div class="fc-center"></div><div class="fc-clear"></div></div><div class="fc-view-container" style=""><div class="fc-view fc-month-view fc-basic-view" style=""><table class=""><thead class="fc-head"><tr><td class="fc-head-container fc-widget-header"><div class="fc-row fc-widget-header"><table class=""><thead><tr><th class="fc-day-header fc-widget-header fc-sun"><span>Sun</span></th><th class="fc-day-header fc-widget-header fc-mon"><span>Mon</span></th><th class="fc-day-header fc-widget-header fc-tue"><span>Tue</span></th><th class="fc-day-header fc-widget-header fc-wed"><span>Wed</span></th><th class="fc-day-header fc-widget-header fc-thu"><span>Thu</span></th><th class="fc-day-header fc-widget-header fc-fri"><span>Fri</span></th><th class="fc-day-header fc-widget-header fc-sat"><span>Sat</span></th></tr></thead></table></div></td></tr></thead><tbody class="fc-body"><tr><td class="fc-widget-content"><div class="fc-scroller fc-day-grid-container" style="overflow: hidden; height: 533px;"><div class="fc-day-grid fc-unselectable"><div class="fc-row fc-week fc-widget-content" style="height: 88px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-other-month fc-past" data-date="2026-05-31"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2026-06-01"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2026-06-02"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2026-06-03"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2026-06-04"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2026-06-05"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2026-06-06"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-other-month fc-past" data-date="2026-05-31"><span class="fc-day-number">31</span></td><td class="fc-day-top fc-mon fc-past" data-date="2026-06-01"><span class="fc-day-number">1</span></td><td class="fc-day-top fc-tue fc-past" data-date="2026-06-02"><span class="fc-day-number">2</span></td><td class="fc-day-top fc-wed fc-past" data-date="2026-06-03"><span class="fc-day-number">3</span></td><td class="fc-day-top fc-thu fc-past" data-date="2026-06-04"><span class="fc-day-number">4</span></td><td class="fc-day-top fc-fri fc-past" data-date="2026-06-05"><span class="fc-day-number">5</span></td><td class="fc-day-top fc-sat fc-past" data-date="2026-06-06"><span class="fc-day-number">6</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 88px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2026-06-07"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2026-06-08"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2026-06-09"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2026-06-10"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2026-06-11"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2026-06-12"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2026-06-13"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2026-06-07"><span class="fc-day-number">7</span></td><td class="fc-day-top fc-mon fc-past" data-date="2026-06-08"><span class="fc-day-number">8</span></td><td class="fc-day-top fc-tue fc-past" data-date="2026-06-09"><span class="fc-day-number">9</span></td><td class="fc-day-top fc-wed fc-past" data-date="2026-06-10"><span class="fc-day-number">10</span></td><td class="fc-day-top fc-thu fc-past" data-date="2026-06-11"><span class="fc-day-number">11</span></td><td class="fc-day-top fc-fri fc-past" data-date="2026-06-12"><span class="fc-day-number">12</span></td><td class="fc-day-top fc-sat fc-past" data-date="2026-06-13"><span class="fc-day-number">13</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 88px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2026-06-14"></td><td class="fc-day fc-widget-content fc-mon fc-today " data-date="2026-06-15"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2026-06-16"></td><td class="fc-day fc-widget-content fc-wed fc-future" data-date="2026-06-17"></td><td class="fc-day fc-widget-content fc-thu fc-future" data-date="2026-06-18"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2026-06-19"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2026-06-20"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2026-06-14"><span class="fc-day-number">14</span></td><td class="fc-day-top fc-mon fc-today " data-date="2026-06-15"><span class="fc-day-number">15</span></td><td class="fc-day-top fc-tue fc-future" data-date="2026-06-16"><span class="fc-day-number">16</span></td><td class="fc-day-top fc-wed fc-future" data-date="2026-06-17"><span class="fc-day-number">17</span></td><td class="fc-day-top fc-thu fc-future" data-date="2026-06-18"><span class="fc-day-number">18</span></td><td class="fc-day-top fc-fri fc-future" data-date="2026-06-19"><span class="fc-day-number">19</span></td><td class="fc-day-top fc-sat fc-future" data-date="2026-06-20"><span class="fc-day-number">20</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 88px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-future" data-date="2026-06-21"></td><td class="fc-day fc-widget-content fc-mon fc-future" data-date="2026-06-22"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2026-06-23"></td><td class="fc-day fc-widget-content fc-wed fc-future" data-date="2026-06-24"></td><td class="fc-day fc-widget-content fc-thu fc-future" data-date="2026-06-25"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2026-06-26"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2026-06-27"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-future" data-date="2026-06-21"><span class="fc-day-number">21</span></td><td class="fc-day-top fc-mon fc-future" data-date="2026-06-22"><span class="fc-day-number">22</span></td><td class="fc-day-top fc-tue fc-future" data-date="2026-06-23"><span class="fc-day-number">23</span></td><td class="fc-day-top fc-wed fc-future" data-date="2026-06-24"><span class="fc-day-number">24</span></td><td class="fc-day-top fc-thu fc-future" data-date="2026-06-25"><span class="fc-day-number">25</span></td><td class="fc-day-top fc-fri fc-future" data-date="2026-06-26"><span class="fc-day-number">26</span></td><td class="fc-day-top fc-sat fc-future" data-date="2026-06-27"><span class="fc-day-number">27</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 88px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-future" data-date="2026-06-28"></td><td class="fc-day fc-widget-content fc-mon fc-future" data-date="2026-06-29"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2026-06-30"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-future" data-date="2026-07-01"></td><td class="fc-day fc-widget-content fc-thu fc-other-month fc-future" data-date="2026-07-02"></td><td class="fc-day fc-widget-content fc-fri fc-other-month fc-future" data-date="2026-07-03"></td><td class="fc-day fc-widget-content fc-sat fc-other-month fc-future" data-date="2026-07-04"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-future" data-date="2026-06-28"><span class="fc-day-number">28</span></td><td class="fc-day-top fc-mon fc-future" data-date="2026-06-29"><span class="fc-day-number">29</span></td><td class="fc-day-top fc-tue fc-future" data-date="2026-06-30"><span class="fc-day-number">30</span></td><td class="fc-day-top fc-wed fc-other-month fc-future" data-date="2026-07-01"><span class="fc-day-number">1</span></td><td class="fc-day-top fc-thu fc-other-month fc-future" data-date="2026-07-02"><span class="fc-day-number">2</span></td><td class="fc-day-top fc-fri fc-other-month fc-future" data-date="2026-07-03"><span class="fc-day-number">3</span></td><td class="fc-day-top fc-sat fc-other-month fc-future" data-date="2026-07-04"><span class="fc-day-number">4</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 93px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-other-month fc-future" data-date="2026-07-05"></td><td class="fc-day fc-widget-content fc-mon fc-other-month fc-future" data-date="2026-07-06"></td><td class="fc-day fc-widget-content fc-tue fc-other-month fc-future" data-date="2026-07-07"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-future" data-date="2026-07-08"></td><td class="fc-day fc-widget-content fc-thu fc-other-month fc-future" data-date="2026-07-09"></td><td class="fc-day fc-widget-content fc-fri fc-other-month fc-future" data-date="2026-07-10"></td><td class="fc-day fc-widget-content fc-sat fc-other-month fc-future" data-date="2026-07-11"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-other-month fc-future" data-date="2026-07-05"><span class="fc-day-number">5</span></td><td class="fc-day-top fc-mon fc-other-month fc-future" data-date="2026-07-06"><span class="fc-day-number">6</span></td><td class="fc-day-top fc-tue fc-other-month fc-future" data-date="2026-07-07"><span class="fc-day-number">7</span></td><td class="fc-day-top fc-wed fc-other-month fc-future" data-date="2026-07-08"><span class="fc-day-number">8</span></td><td class="fc-day-top fc-thu fc-other-month fc-future" data-date="2026-07-09"><span class="fc-day-number">9</span></td><td class="fc-day-top fc-fri fc-other-month fc-future" data-date="2026-07-10"><span class="fc-day-number">10</span></td><td class="fc-day-top fc-sat fc-other-month fc-future" data-date="2026-07-11"><span class="fc-day-number">11</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div></div></div></td></tr></tbody></table></div></div></div>             
+            </div> <!-- Body Card -->
+          </div> <!-- Card wrapper -->
+        </div> <!-- leave-calendar-wrapper -->
+        <div id="password-info" class="col-md-6 wptf-section">
+          <div class="card mb-3">
+            <div class="card-header">
+              Login Information
+            </div>
+            <div class="card-body">
+              <div class="col-md-12">
+                <label class="sr-only" for="username">Username</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-fw fa-user"></i></div>
+                  </div>
+                  <input type="text" class="form-control" id="username" name="username" placeholder="Username" value="adminuser" required="required" disabled="">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <label class="sr-only" for="password">Password</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-fw fa-key"></i></div>
+                  </div>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="*************">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="input-group mb-2">
+                  <button id="change-password" class="btn btn-lg btn-primary text-white pm-blue">Change Password</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- #leave-info -->
+        <div id="leave-info" class="col-md-6 wptf-section">
+          <div class="card mb-3">
+            <div class="card-header">
+              Leave Information
+            </div>
+            <div class="card-body">
+              <div class="form-group row">
+                <div class="col-md-4">
+                  <label class="form-label" for="availSil">Total SIL</label>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="availSil" name="availSil" placeholder="0" value="0" readonly="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-4">
+                  <label class="form-label" for="usedSil">Total Availed SIL</label>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="usedSil" name="usedSil" placeholder="0" value="0" readonly="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-4">
+                  <label class="form-label" for="remSil">Available SIL</label>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="remSil" name="remSil" placeholder="0" value="0" readonly="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- #leave-info -->
+        <div id="leave-history-wrapper" class="col-md-6 wptf-section">
+          <div class="card mb-3">
+            <div class="card-header">
+              Leave History
+            </div>
+            <div class="card-body">
+              <table id="leave-histoy-table" class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Whole/Half Day</th>
+                  </tr>
+                </thead>
+                <tbody><tr>
+                        <td colspan="3">No leaves yet.</td>
+                      </tr></tbody>
+              <tfoot><tr><td class="pag" colspan="1"><a data-n="1" style="margin: 0.2em; cursor: pointer;" class="btn btn-light active">1</a></td></tr></tfoot></table>
+            </div> <!-- Body Card -->
+          </div> <!-- Card wrapper -->
+        </div> <!-- leave-history-wrapper -->
+      </div>
+    </div>
+    <!-- END User Loans and Calendar -->
+  </div> <!-- adduser-form -->
+</div><!-- /.container-fluid-->
+<!-- Modal Pop up -->
+<div class="modal fade" id="userApplicationModal" tabindex="-1" role="dialog" aria-labelledby="userApplication" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="userApplication">Apply Leave / Ovetime</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label for="userleave-date">Application Date : <span id="selected-date"></span></label>
+          <div class="tabs ui-tabs ui-corner-all ui-widget ui-widget-content">
+            <ul role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header">
+              <li role="tab" tabindex="0" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active" aria-controls="tabs-1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="https://payroll-master.com/demo/profile.php#tabs-1" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">Leave Application</a></li>
+              <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tabs-2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="https://payroll-master.com/demo/profile.php#tabs-2" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Overtime Application</a></li>
+            </ul>
+            <div id="tabs-1" aria-labelledby="ui-id-1" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="false">
+              <form id="applyUserLeave-form">
+                <div class="form-row">
+                  <div class="col-md-12 mb-6">
+                    <div class="card mb-3">
+                      <div class="card-body">
+                        <div class="col-md-12 mb-3">
+                          <label class="sr-only" for="user_leave">Apply Leave</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">Apply Leave</div>
+                            </div>
+                            <select id="user_leave" class="form-control leave-type-select" name="user_leave">
+                              <option value="">--Select Leave--</option>
+                              <option value="1">Sick Leave</option><option value="2">Vacation Leave</option><option value="4">Maternity Leave</option><option value="5">Paternity Leave</option><option value="8">Parental leave for solo parents</option><option value="9">Special leave for women</option>                            </select>   
+                          </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <label class="sr-only" for="am_pm">AM/PM</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">AM/PM</div>
+                            </div>
+                            <select id="am_pm" class="form-control leave-ampm-select" name="am_pm">
+                              <option value="">Whole Day</option>
+                              <option value="1">AM</option><option value="2">PM</option>                            </select>   
+                          </div>
+                        </div>
+                        <input type="hidden" id="leaveDate" name="leaveDate" value="">
+                        <button type="submit" class="btn btn-primary text-white apply-leave-btn pm-blue">Apply Leave</button>
+                      </div>
+                    </div><!--  card  --> 
+                  </div>     
+                </div>  
+              </form>  <!-- addUserLeave-form  --> 
+            </div>
+            <div id="tabs-2" aria-labelledby="ui-id-2" role="tabpanel" class="ui-tabs-panel ui-corner-bottom ui-widget-content" aria-hidden="true" style="display: none;">
+              <form id="applyUserOvertime-form">
+                <div class="form-row">
+                  <div class="col-md-12 mb-6">
+                    <div class="card mb-3">
+                      <div class="card-body">
+                        <div id="time-range" class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="time-start">Time Start<span class="text-danger">*</span></label>
+                            <input id="time-start" type="text" class="form-control time start ui-timepicker-input" required="required" autocomplete="off">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="time-end">Time End<span class="text-danger">*</span></label>
+                            <input id="time-end" type="text" class="form-control time end ui-timepicker-input" required="required" autocomplete="off">
+                          </div>
+                          <div class="form-group col-md-12">
+                            <label for="notes">Notes</label>
+                            <textarea id="notes" class="form-control" required="required"></textarea>
+                          </div>
+                        </div>
+                        <input type="hidden" id="overtimeDate" name="overtimeDate" value="">
+                        <button type="submit" class="btn btn-primary text-white pm-blue">Apply Overtime</button>
+                      </div>
+                    </div><!--  card  --> 
+                  </div>     
+                </div>  
+              </form>  <!-- addUserSchedule-form  --> 
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer pm-blue">   
+          <button type="button" class="btn btn-secondary pm-blue" data-dismiss="modal">Close</button>          
+        </div>
+      </div>
+     <!-- Schedule Form -->
+  </div>
+</div>
+<!-- Update Leave -->
+<div class="modal fade" id="viewLeaveModal" tabindex="-1" role="dialog" aria-labelledby="viewLeave" aria-hidden="true">
+  <div id="view-user-leave" class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="viewLeave">View Leave Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div id="date-label" class="form-group col-md-12">
+                  <label for="userleave-date">Leave Date : <span id="selected-date"></span></label>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="user_leave">Leave</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Leave</div>
+                    </div>
+                    <select id="user_leave" class="form-control" disabled="">
+                      <option value="">--Select Leave--</option>
+                      <option value="1">Sick Leave</option><option value="2">Vacation Leave</option><option value="4">Maternity Leave</option><option value="5">Paternity Leave</option><option value="8">Parental leave for solo parents</option><option value="9">Special leave for women</option>                    </select>   
+                  </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="user_leave">Status</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Status</div>
+                    </div>
+                    <input class="form-control" type="text" id="status" disabled=""> 
+                  </div>
+                </div>
+            </div>      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  </div>
+</div>
+<!-- Update Schedule -->
+<div class="modal fade" id="viewScheduleModal" tabindex="-1" role="dialog" aria-labelledby="viewSchedule" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div id="view-user-schedule">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="viewSchedule">View Schedule Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div id="date-label" class="form-group col-md-12">
+                  <label for="userleave-date">Schedule Date : <span id="selected-date"></span></label>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="user_leave">Schedule</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Schedule</div>
+                    </div>
+                      <select id="schedule" class="form-control" name="schedule" required="required" disabled="">
+                        <option value="">Select Schedule</option>
+                        <option value="0">Open Schedule</option>
+                        <option value="180">PM SHIFT</option><option value="179">GIN CAPS - MORNING</option><option value="178">REGULAR SCHED</option><option value="183">test</option>                      </select> 
+                  </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="user_leave">Time</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Time</div>
+                    </div>
+                    <input class="form-control" type="text" id="time" disabled=""> 
+                  </div>
+                </div>
+            </div>      
+        </div>
+        <div class="modal-footer pm-blue">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div> <!-- Update Schedule Form -->
+  </div>
+</div>
+<!-- Modal Time Record-->
+<!-- Add new Time Log -->
+<div class="modal fade" id="addLogModal" tabindex="-1" role="dialog" aria-labelledby="addLog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="addlog-form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="addLog">Add New Time Log</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+              <div class="form-group col-md-12">
+                <label for="date">Date</label>
+                <input type="text" class="form-control datepicker hasDatepicker" id="date" placeholder="yyyy-mm-dd" autocomplete="off">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ftimein">Time In (AM)</label>
+                <input type="text" class="form-control timepicker ui-timepicker-input" id="ftimein" placeholder="0:00am" autocomplete="off">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="ftimeout">Time Out (AM)</label>
+                <input type="text" class="form-control timepicker ui-timepicker-input" id="ftimeout" placeholder="0:00am" autocomplete="off">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="stimein">Time In (PM)</label>
+                <input type="text" class="form-control timepicker ui-timepicker-input" id="stimein" placeholder="0:00pm" autocomplete="off">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="stimeout">Time Out (PM)</label>
+                <input type="text" class="form-control timepicker ui-timepicker-input" id="stimeout" placeholder="0:00pm" autocomplete="off">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="stimeout">OT In </label>
+                <input type="text" class="form-control timepicker ui-timepicker-input" id="OTin" placeholder="0:00" autocomplete="off">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="stimeout">OT Out</label>
+                <input type="text" class="form-control timepicker ui-timepicker-input" id="OTout" placeholder="0:00" autocomplete="off">
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer pm-blue">
+          <button type="button" class="btn btn-secondary _secondary" data-dismiss="modal">Close</button>
+          <input type="hidden" id="biometricID" name="biometricID" value="">
+          <input type="submit" class="btn btn-danger _danger" value="Add Log">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- update Time Log -->
+<div class="modal fade" id="updateLogModal" tabindex="-1" role="dialog" aria-labelledby="updateLog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="updatelog-form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="updateLog">Update Log</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+             <div class="col-md-6 mb-3">
+              <label class="sr-only" for="newDateLog">Date</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Date</div>
+                </div>
+                <input type="text" class="form-control datepicker hasDatepicker" id="newDateLog" required="required" autocomplete="off">
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="sr-only" for="newTimeLog">Time</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Time</div>
+                </div>
+                <input type="text" class="form-control timepicker ui-timepicker-input" id="newTimeLog" required="required" autocomplete="off">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="hidden" id="logID" name="logID" value="">
+          <input type="hidden" id="checkinSched" name="checkinSched" value="">
+          <input type="submit" class="btn btn-danger" value="Confirm">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Upload Avatar -->
+<div class="modal fade" id="uploadAvatar" tabindex="-1" role="dialog" aria-labelledby="upload-avatar" aria-hidden="true">
+  <div id="view-user-leave" class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="upload-avatar">Upload new Avatar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+              <div id="change-avatar" class="croppie-container"><div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;"><img src="./My Profile_files/avatar.jpg" class="cr-image" style="opacity: 1;"><div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div><div class="cr-overlay"></div></div><div class="cr-slider-wrap"><input class="cr-slider" type="range" step="0.0001" aria-label="zoom"></div></div>
+              <div id="croppie-actions">
+                  <input type="file" id="upload" class="btn actionUpload btn-primary text-white btn-sm" value="Upload Avatar" accept="image/*">
+                  <a class="button actionSave btn btn-success btn-sm" data-id="185">Save Avatar</a>
+              </div>
+            </div>      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  </div>
+</div>
+<!-- Modal File Manager-->
+<div id="fileManagerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="fileManagerModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-white" id="fileManagerModalLabel"><i class="fa fa-fw fa-folder-open"></i> File Manager</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body">
+        <section class="row">
+            <div class="col-md-6">
+                <form action="https://payroll-master.com/demo/includes/common/ajax-handler.php" class="dropzone needsclick dz-clickable" id="filemanagerdropzoneform">
+                    <div class="dz-message needsclick">
+                        Drop files here or click to upload.<br>
+                        <span style="font-size:12px;">Accepted file type: image, application/pdf, .doc, .docx, .csv, .xls, .xlsx<br>
+                        Max. Filesize: 4MB</span>
+                    </div>
+                    <input type="hidden" name="action" value="submit_dropzonejs">
+                    <input type="hidden" name="dirname" value="">
+                </form>
+            </div>
+            <div class="col-md-6">
+            <form id="filemanager-form">
+              <div class="form-group">
+                <label class="sr-only" for="filename">File name<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="filename" aria-describedby="emailHelp" placeholder="File name" required="">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="description">File Description</label>
+                <textarea class="form-control" id="description" rows="3" placeholder="File Description"></textarea>
+              </div>
+              <input type="hidden" name="file_id" value="">
+              <button type="submit" class="btn btn-primary pm-blue text-white">Save File</button>
+            </form>
+            </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/profile.php#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./My Profile_files/jquery.min(1).js.download"></script>
+    <script src="./My Profile_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./My Profile_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./My Profile_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./My Profile_files/jquery.dataTables.js.download"></script>
+  <script src="./My Profile_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./My Profile_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./My Profile_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./My Profile_files/jquery-ui.js.download"></script>
+  <script src="./My Profile_files/jquery-select2.js.download"></script>
+  <script src="./My Profile_files/jquery.timepicker.js.download"></script>
+  <script src="./My Profile_files/datepair.min.js.download"></script>
+  <script src="./My Profile_files/fancyTable.js.download"></script>
+  <script src="./My Profile_files/scripts.js.download"></script>
+  <script src="./My Profile_files/settings-scripts.js.download"></script>
+  <script src="./My Profile_files/timecard-scripts.js.download"></script>
+  <script src="./My Profile_files/download.js.download"></script>
+    <script src="./My Profile_files/dropzone.stln.js.download"></script><script>
+    Dropzone.autoDiscover = false;
+    jQuery(document).ready(function( $ ){        
+        var myDropzone = new Dropzone("#filemanagerdropzoneform",{
+            acceptedFiles: "image/*, application/pdf, .doc, .docx, .csv, .xls, .xlsx",
+            maxFiles: 1,
+            uploadMultiple: false,
+            maxFilesize: 4, // 5 MB
+            addRemoveLinks: true,
+            dictRemoveFile: 'Remove',
+            init: function() {
+                this.on("sending", function(file, xhr, formData) {
+                    formData.append("name", "value"); // Append all the additional input data of your form here!
+                });
+                this.on("success", function(file, xhr, formData) {
+                    var fileData = JSON.parse(xhr);
+                    if( file.status !== 'error' && fileData.status !== 'error' ){
+                        $('#filemanager-form input[name="file_id"]').val( fileData.file_id );
+                    }else{
+                        alert( file.message  );
+                    }
+                });
+                this.on("complete", function(file) {
+                    if( file.status !== 'error'){
+                        // this.removeFile(file);
+                    }
+                });
+                this.on("removedfile", function(file) {            
+                    var fileID = $('#filemanager-form input[name="file_id"]').val();
+                    if( fileID ){
+                        $.ajax({
+                            url: './includes/common/ajax-handler.php',
+                            type: "post",
+                            data: {
+                                action : 'delete-fileupload',
+                                fileID : fileID,
+                            },
+                            beforeSend: function() {
+                                $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+                            },
+                            success: function (response) {
+                                $('body .lds-ellipsis').remove();
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                alert('Error Deleting fiels to server.');
+                            }
+                        });
+                        $('#filemanager-form input[name="file_id"]').val( '' );  
+                    }
+                      
+                });
+            }
+        });
+
+        $('body').on('click', '.file-manager', function(){         
+            $('#filemanagerdropzoneform input[name="dirname"]').val('');
+            $('#filemanager-form input[name="file_id"]').val( '' );
+            $('#filemanager-form #filename').val( '' );
+            $('#filemanager-form #description').val( '' );
+            var dirname = $(this).data('id');
+            setTimeout(() => {
+                $('#filemanagerdropzoneform input[name="dirname"]').val(dirname);
+                myDropzone.removeAllFiles();
+            }, 10 ); 
+        });
+
+        $('#filemanager-form').on('submit', function(e){
+            e.preventDefault();
+            var fileID      = $('#filemanager-form input[name="file_id"]').val();
+            var fileName    = $('#filemanager-form #filename').val();
+            var fileDesc    = $('#filemanager-form #description').val();
+            var assignedTo  = 0;
+            if( $('#filemanager-form #user_id').length ){
+                assignedTo = $('#filemanager-form #user_id').val();
+            }
+            if( !fileID ){
+                alert( 'No file found. Please upload file and try again.' );
+                return
+            }
+
+            $.ajax({
+                url: './includes/common/ajax-handler.php',
+                type: "post",
+                data: {
+                    action : 'update-fileupload',
+                    fileID : fileID,
+                    fileName: fileName,
+                    fileDesc: fileDesc,
+                    assignedTo : assignedTo
+                },
+                beforeSend: function() {
+                    $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+                },
+                success: function (response) {
+                    $('#fileManagerModal').modal('hide')
+                    $('body .lds-ellipsis').remove();
+                    var data = JSON.parse(response);
+                    if( data.status == 'error' ){
+                        $('body').prepend('<div class="payroll notification-message alert alert-danger"><p>'+data.message+'</p></div>');
+                        setTimeout(function(){
+                            $('body .notification-message').remove();
+                        }, 3000);
+                    }else{
+                        $('body').prepend('<div class="payroll notification-message alert alert-success"><p>'+data.message+'</p></div>');
+                        setTimeout(function(){
+                            $('body .notification-message').remove();
+                        }, 3000);
+                        if ($('#user-file-list').length == 1) {
+                            if( assignedTo > 0 ){
+                                $('#user-file-list tbody').prepend( 
+                                    '<tr id="file-'+data.file_info.id+'">'+
+                                        '<td>'+data.file_info.name+' <i class="fa fa-info-circle text-info ml-3" data-toggle="tooltip" data-placement="top" title="'+data.file_info.description+'"></i></td>'+
+                                        '<td>'+data.file_info.upload_date+'</td>'+
+                                        '<td>'+data.file_info.uploaded_name+'</td>'+
+                                        '<td>'+data.file_info.assigned_name+'</td>'+
+                                        '<td>'+data.file_info.type+'</td>'+
+                                        '<td>'+
+                                            '<i class="download-file fa fa-download mr-3 text-primary" data-id="'+data.file_info.id+'" aria-hidden="true"></i> '+
+                                            '<i class="delete-file fa fa-trash mr-3 text-danger" data-id="'+data.file_info.id+'" aria-hidden="true"></i>'+
+                                        '</td>'+
+                                    '</tr>'
+                                );
+                            }else{
+                                $('#user-file-list tbody').prepend( 
+                                    '<tr id="file-'+data.file_info.id+'">'+
+                                        '<td>'+data.file_info.name+' <i class="fa fa-info-circle text-info ml-3" data-toggle="tooltip" data-placement="top" title="'+data.file_info.description+'"></i></td>'+
+                                        '<td>'+data.file_info.upload_date+'</td>'+
+                                        '<td>'+data.file_info.type+'</td>'+
+                                        '<td>'+
+                                            '<i class="download-file fa fa-download mr-3 text-primary" data-id="'+data.file_info.id+'" aria-hidden="true"></i> '+
+                                            '<i class="delete-file fa fa-trash mr-3 text-danger" data-id="'+data.file_info.id+'" aria-hidden="true"></i>'+
+                                        '</td>'+
+                                    '</tr>'
+                                );
+                            }
+                            
+                        }
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error Deleting fiels to server.');
+                }
+            });
+        });
+        // Delete file
+        $('body').on('click', '.delete-file', function(e){    
+            e.preventDefault();
+            var confirmation = confirm('Are you sure you want to delete this file?');
+            var fileID = $(this).data('id');
+            if( fileID && confirmation ){
+                $.ajax({
+                    url: './includes/common/ajax-handler.php',
+                    type: "post",
+                    data: {
+                        action : 'delete-fileupload',
+                        fileID : fileID,
+                    },
+                    beforeSend: function() {
+                        $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+                    },
+                    success: function (response) {
+                        $('body .lds-ellipsis').remove();
+                        if( response >= 1 ){
+                            $('body').prepend('<div class="payroll notification-message alert alert-success"><p>File Successfully Deleted</p></div>');
+                            
+                            $('#user-file-list tr#file-'+fileID).remove();
+                        }else{
+                            $('body').prepend('<div class="payroll notification-message alert alert-danger"><p>Deleting file failed. Something went wrong during process.</p></div>');
+                        }
+                        setTimeout(function(){
+                            $('body .notification-message').remove();
+                        }, 3000);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error Deleting file to server.');
+                    }
+                });
+                $('#filemanager-form input[name="file_id"]').val( '' );  
+            }
+        });
+        $('body').on('click', '.download-file', function(e){    
+            e.preventDefault();
+            var fileID = $(this).data('id');
+            if( fileID ){
+                $.ajax({
+                    url: './includes/common/ajax-handler.php',
+                    type: "post",
+                    data: {
+                        action : 'download-file',
+                        fileID : fileID,
+                    },
+                    beforeSend: function() {
+                        $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+                    },
+                    success: function (response) {
+                        var data = JSON.parse(response);
+                        console.log(data);
+                        $('body .lds-ellipsis').remove();
+                        if( data.status == 'error'){
+                            alert( data.message );
+                        }else{
+                            var file_type = data.file_type;
+                            if( file_type.indexOf("image") || file_type.indexOf("pdf") ){
+                                download_file( data.file_url, data.file_name );
+                            }else{
+                                window.location.href = data.file_url;
+                            }
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error Downloading file to server.');
+                    }
+                });
+            }
+        });
+
+        function download_file(fileURL, fileName) {
+          // for non-IE
+          if (!window.ActiveXObject) {
+              var save = document.createElement('a');
+              save.href = fileURL;
+              save.target = '_blank';
+              var filename = fileURL.substring(fileURL.lastIndexOf('/')+1);
+              save.download = fileName || filename;
+              if ( navigator.userAgent.toLowerCase().match(/(ipad|iphone|safari)/) && navigator.userAgent.search("Chrome") < 0) {
+                      document.location = save.href; 
+                  // window event not working here
+                  }else{
+                      var evt = new MouseEvent('click', {
+                          'view': window,
+                          'bubbles': true,
+                          'cancelable': false
+                      });
+                      save.dispatchEvent(evt);
+                      (window.URL || window.webkitURL).revokeObjectURL(save.href);
+                  }	
+          }
+          // for IE < 11
+          else if ( !! window.ActiveXObject && document.execCommand)     {
+              var _window = window.open(fileURL, '_blank');
+              _window.document.close();
+              _window.document.execCommand('SaveAs', true, fileName || fileURL)
+              _window.close();
+          }
+      }
+    });
+</script>
+
+    <script src="./My Profile_files/croppie.js.download"></script>
+    <script src="./My Profile_files/profile.js.download"></script>
+        <script src="./My Profile_files/moment.min.js.download"></script>
+    <script src="./My Profile_files/fullcalendar.min.js.download"></script>
+    <script src="./My Profile_files/calendar.js.download"></script>
+    <script type="text/javascript">
+      jQuery(document).ready( function( $ ){
+        // Add - Update Loan amortization
+        $('.loan-amortization').on('submit', function( e ){
+          e.preventDefault();
+          var userID      = $(this).data('id');
+          var loanAmount  = $(this).find('input[type="text"]').val();
+          var loanName  = $(this).find('input[type="text"]').attr('name');
+          if( loanName == 'sssLoan' ){
+            var loanLabel = 'SSS';
+          }else if( loanName == 'hmdfLoan' ){
+            var loanLabel = 'HDMF';
+          }else if( loanName == 'loan_policy' ){
+            var loanLabel = 'Policy';
+          }else if( loanName == 'loan_gsis' ){
+            var loanLabel = 'GSIS Consol';
+          }else if( loanName == 'ela_sos' ){
+            var loanLabel = 'ELA/SOS/EL/CA ';
+          }
+          $.ajax({
+              url: './includes/common/ajax-handler.php',
+              type: "post",
+              data: {
+                  action : 'update-amortization',
+                  userID : userID,
+                  loanAmount : loanAmount, 
+                  loanName : loanName,
+              },
+              beforeSend: function() {
+                  $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+              },  
+              success: function (response) {  
+                  $( "body .lds-ellipsis" ).remove();
+                  if( response >= 1 ){
+                    $('body').prepend('<div class="notification-message alert alert-success">'+loanLabel+' Loan Amortization has been updated!</div>');          
+                        
+                  }else{
+                     $('body').prepend('<div class="notification-message alert alert-danger">Something went wrong, Please reload the page and try again.</div>');
+                  }  
+                  setTimeout( function(){
+                    $( "body .notification-message" ).remove();
+                  }, 3000 );
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                alert('error');       
+              }
+            });
+        });
+        // Schedule Calendar
+        $('#calendar-schedule').fullCalendar({
+          dayClick: function(date, jsEvent, view) {
+                  var workDate = date.format();
+                  $('#userLeaveModal #selected-date').html( workDate );
+                  $('#userLeaveModal #leaveDate').val( workDate );
+                  $('#userLeaveModal #scheduleDate').val( workDate );
+                  $('#userLeaveModal #user_leave').val( '' );
+                  $('#userLeaveModal #schedule').val( 0 );
+                  $( "#userLeaveModal" ).modal('toggle');
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+              var statDate  = calEvent.start._i;
+              var type      = calEvent.type;
+              var userID    = calEvent.uid;
+              var statusID  = calEvent.id;
+              var dataType  = calEvent.dataType;
+              var status    = calEvent.status;
+              var timeSchedule    = calEvent.timeSchedule;
+              var am_pm    = calEvent.am_pm;
+              if( dataType == 'leave' ){
+                $('#updateUserLeave-form #user_leave').val( type );
+                $('#updateUserLeave-form #am_pm').val( am_pm );
+                $('#updateUserLeave-form #leaveID').val( statusID );
+                $('#updateUserLeave-form #deleteLeave').attr( 'data-id', statusID );
+                $('#updateUserLeave-form #selected-date').html( statDate );
+                $('#updateUserLeave-form #leave-status').html( status );
+                $( "#updateLeaveModal" ).modal('toggle');
+              }else{
+                $('#updateSchedule-form #schedule').val( type );
+                $('#updateSchedule-form #scheduleID').val( statusID );
+                $('#updateSchedule-form #deleteSchedule').attr( 'data-id', statusID );
+                $('#updateSchedule-form #selected-date').html( statDate );
+                $( "#updateScheduleModal" ).modal('toggle');
+              }       
+          },
+          events : [{"id":"6371","uid":"185","start":"2024-01-01","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6372","uid":"185","start":"2024-01-02","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6373","uid":"185","start":"2024-01-03","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6374","uid":"185","start":"2024-01-04","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6375","uid":"185","start":"2024-01-05","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6376","uid":"185","start":"2024-01-06","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6377","uid":"185","start":"2024-01-07","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6378","uid":"185","start":"2024-01-08","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6379","uid":"185","start":"2024-01-09","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6380","uid":"185","start":"2024-01-10","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6381","uid":"185","start":"2024-01-11","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6382","uid":"185","start":"2024-01-12","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6383","uid":"185","start":"2024-01-13","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6384","uid":"185","start":"2024-01-14","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6385","uid":"185","start":"2024-01-15","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6386","uid":"185","start":"2024-01-16","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6387","uid":"185","start":"2024-01-17","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6388","uid":"185","start":"2024-01-18","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6389","uid":"185","start":"2024-01-19","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6390","uid":"185","start":"2024-01-20","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6391","uid":"185","start":"2024-01-21","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6392","uid":"185","start":"2024-01-22","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6393","uid":"185","start":"2024-01-23","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6394","uid":"185","start":"2024-01-24","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6395","uid":"185","start":"2024-01-25","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6396","uid":"185","start":"2024-01-26","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6397","uid":"185","start":"2024-01-27","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6398","uid":"185","start":"2024-01-28","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6399","uid":"185","start":"2024-01-29","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6400","uid":"185","start":"2024-01-30","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6401","uid":"185","start":"2024-01-31","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"}],
+          eventRender: function(event, element) {
+              element.find('.fc-title'); 
+          },
+        });
+        // HOliday Calendar
+        $('#calendar-holiday').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+          },
+          dayClick: function(date, jsEvent, view ) {
+            var workDate = date.format();
+            $('#addHolidayModal #selected-date').html( workDate );
+            $('#addHolidayModal #holidayDate').val( workDate );
+            $('#addHolidayModal #holiday_type').val( '' );
+            $( "#addHolidayModal" ).modal('toggle');
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+              var statDate    = calEvent.start._i;
+              var holidayType = calEvent.type;
+              var holidayID    = calEvent.id;
+              if( holidayType == 'leave'){
+                $('#leaveInfoModal .leave-information').text( calEvent.title+ ' this ' +statDate );
+                $( "#leaveInfoModal" ).modal('toggle');
+              }else{
+                var holiday_title    = calEvent._title;
+                $('#updateHoliday-form #holiday_type').val( holidayType );
+                $('#updateHoliday-form #holidayID').val( holidayID );
+                $('#updateHoliday-form #holiday_title').val( holiday_title );
+                $('#updateHoliday-form #deleteHoliday').attr( 'data-id', holidayID );
+                $('#updateHoliday-form #selected-date').html( statDate );
+                $( "#updateHolidayModal" ).modal('toggle');
+              }     
+          },
+          events : null,
+          eventRender: function(event, element) {
+              element.find('.fc-title');
+          },
+        });
+        let userDayOff = ["sunday","saturday"];
+        let daysOfTheWeek = {
+          0: 'sunday',
+          1: 'monday',
+          2: 'tuesday',
+          3: 'wednesday',
+          4: 'thursday',
+          5: 'friday',
+          6: 'saturday',
+        };
+        // Employee Calendar
+        $('#employee-calendar').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            right: 'title',
+          },
+          dayClick: function(date, jsEvent, view) {
+            let textDate = date._d;
+            let day = daysOfTheWeek[textDate.getDay()];
+            if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
+              var workDate = date.format();
+              $('#userApplicationModal #selected-date').html( workDate );
+              $('#userApplicationModal #leaveDate').val( workDate );
+              $('#userApplicationModal #overtimeDate').val( workDate );
+              $('#userApplicationModal #time-start').val( '' );
+              $('#userApplicationModal #time-end').val( '' );
+              $('#userApplicationModal #notes').val( '' );
+              $( "#userApplicationModal" ).modal('toggle');
+            }
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+              var statDate  = calEvent.start._i;
+              var type      = calEvent.type;
+              var userID    = calEvent.uid;
+              var statusID  = calEvent.id;
+              var dataType  = calEvent.dataType;
+              var status    = calEvent.status;
+              var timeSchedule    = calEvent.timeSchedule;
+
+              if( dataType == 'leave' ){
+                $('#view-user-leave #user_leave').val( type );
+                $('#view-user-leave #selected-date').html( statDate );
+                $('#view-user-leave #status').val( status );                
+                $( "#viewLeaveModal" ).modal('toggle');
+              }else{
+                $('#view-user-schedule #schedule').val( type );
+                $('#view-user-schedule #time').val( timeSchedule );
+                $('#view-user-schedule #selected-date').html( statDate );
+                $( "#viewScheduleModal" ).modal('toggle');
+              }       
+          },
+          events : [{"id":"6371","uid":"185","start":"2024-01-01","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6372","uid":"185","start":"2024-01-02","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6373","uid":"185","start":"2024-01-03","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6374","uid":"185","start":"2024-01-04","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6375","uid":"185","start":"2024-01-05","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6376","uid":"185","start":"2024-01-06","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6377","uid":"185","start":"2024-01-07","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6378","uid":"185","start":"2024-01-08","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6379","uid":"185","start":"2024-01-09","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6380","uid":"185","start":"2024-01-10","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6381","uid":"185","start":"2024-01-11","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6382","uid":"185","start":"2024-01-12","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6383","uid":"185","start":"2024-01-13","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6384","uid":"185","start":"2024-01-14","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6385","uid":"185","start":"2024-01-15","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6386","uid":"185","start":"2024-01-16","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6387","uid":"185","start":"2024-01-17","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6388","uid":"185","start":"2024-01-18","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6389","uid":"185","start":"2024-01-19","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6390","uid":"185","start":"2024-01-20","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6391","uid":"185","start":"2024-01-21","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6392","uid":"185","start":"2024-01-22","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6393","uid":"185","start":"2024-01-23","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6394","uid":"185","start":"2024-01-24","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6395","uid":"185","start":"2024-01-25","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6396","uid":"185","start":"2024-01-26","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6397","uid":"185","start":"2024-01-27","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6398","uid":"185","start":"2024-01-28","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6399","uid":"185","start":"2024-01-29","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6400","uid":"185","start":"2024-01-30","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"},{"id":"6401","uid":"185","start":"2024-01-31","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"","timeSchedule":"Open"}],
+          eventRender: function(event, element) {
+              element.find('.fc-title'); 
+          },
+        });
+        $('#user-memo-list, #user-file-list, #leave-histoy-table').fancyTable({
+          sortColumn:0,
+          pagination: true,
+          perPage:6,
+          searchable:false,
+          globalSearch:false
+        });
+      });
+    </script>
+          <script type="text/javascript" id="select-twos">
+        $(document).ready(function() {
+          // select 2
+          setTimeout(() => {
+            $('.custom-select-2').select2();
+          }, 300)
+        });
+      </script>
+      <script src="./My Profile_files/custom-ajax.js.download"></script>
+        <script src="./My Profile_files/required-indicator.js.download"></script>
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><input type="file" class="dz-hidden-input" accept="image/*, application/pdf, .doc, .docx, .csv, .xls, .xlsx" style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;"></body></html>

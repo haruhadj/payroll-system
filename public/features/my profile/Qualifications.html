@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<!-- saved from url=(0058)https://payroll-master.com/demo/qualifications.php?uid=185 -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./Qualifications_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./Qualifications_files/datatable-min.css" rel="stylesheet">
+  <link href="./Qualifications_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./Qualifications_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Qualifications_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./Qualifications_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./Qualifications_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./Qualifications_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./Qualifications_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./Qualifications_files/custom-style.css">
+ 
+    <link href="./Qualifications_files/style.css" rel="stylesheet">
+  <script src="./Qualifications_files/jquery.min.js.download"></script>
+  <script src="./Qualifications_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./Qualifications_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" style="">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/qualifications.php?uid=185#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/qualifications.php?uid=185#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/qualifications.php?uid=185#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/qualifications.php?uid=185#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/qualifications.php?uid=185#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/qualifications.php?uid=185#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/qualifications.php?uid=185#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/qualifications.php?uid=185#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./Qualifications_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a></a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/qualifications.php?uid=185#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Update Employee</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div id="adduser-form" class="row">
+      <div class="container-fluid">
+   <!-- Icon Cards-->
+   <!-- <div id="adduser-form" class="row"> -->
+    <div class="">
+      <div>
+  <div class="tabs-main">
+    <!-- Main Menu List -->
+    <ul>
+      <li class=""><a id="personal-info" href="https://payroll-master.com/demo/personal-info.php?uid=185" class="header tabs-ui">Personal Info</a></li>
+      <li class="active"><a id="qualifications" href="https://payroll-master.com/demo/qualifications.php?uid=185" class="header tabs-ui">Qualifications</a></li>
+      <li class=""><a id="emp-history" href="https://payroll-master.com/demo/employee-history.php?uid=185" class="header tabs-ui">Employment History</a></li>
+      <li class=""><a id="contract-terms" href="https://payroll-master.com/demo/contract-terms.php?uid=185" class="header tabs-ui">Employment Contract</a></li>
+      <li class=""><a id="salary" href="https://payroll-master.com/demo/salary-benefits.php?uid=185" class="header tabs-ui">Salary/Benefits Information</a></li>
+      <li class=""><a id="loans-leaves" href="https://payroll-master.com/demo/loans-leave.php?uid=185" class="header tabs-ui">Loans, Leave &amp; Schedule</a></li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .tabs-main ul {
+    display: inline-flex !important;
+    list-style: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+    flex-wrap: wrap !important;
+  }
+
+  .tabs-main ul li {
+      padding: 5px 10px !important;
+      border: 1px solid #f0f0f0 !important;
+      text-align: center !important;
+  }
+
+  .tabs-main ul li a {
+      font-size: 12px !important;
+      text-align: center !important;
+      line-height: 14px !important;
+  }
+  .tabs-main ul li a:hover {
+    text-decoration: none;
+  }
+  .tabs-main ul li:hover, .tabs-main ul li:active, .tabs-main ul li.active {
+      background-color: #254a87 !important;
+  }
+  .tabs-main ul li:hover a, .tabs-main ul li:active a, .tabs-main ul li.active a {
+    color: #ffffff;
+  }
+  /* .breadcrumb.bg-info.text-white {
+    background-color: #254a87 !important;
+  } */
+</style>
+            <div class="breadcrumb bg-info text-white">
+          Qualifications
+        </div>
+        <div class="row">
+          <div id="personal-info" class="col-md-12 wptf-section">
+              <div class="sub-header">
+  <!-- Tabs navs -->
+  <div class="tabs ui-tabs ui-corner-all ui-widget ui-widget-content">
+  <ul id="tabs-nav" role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header">
+    <li class="active ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="quali1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="https://payroll-master.com/demo/qualifications.php?uid=185#quali1" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">Education</a></li>
+    <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="quali2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="https://payroll-master.com/demo/qualifications.php?uid=185#quali2" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Technical Skills</a></li>
+    <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="quali3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="https://payroll-master.com/demo/qualifications.php?uid=185#quali3" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Other Skills</a></li>
+  </ul> <!-- END tabs-nav -->
+  <div id="tabs-content">
+    <div id="quali1" class="tab-content ui-tabs-panel ui-corner-bottom ui-widget-content" style="display: block;" aria-labelledby="ui-id-1" role="tabpanel" aria-hidden="false">
+      <div id="education" class="card mb-3 inner-card">
+    <div class="card-header inner-card">
+        <div class="form-row">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2 button-right">
+                <input type="hidden" id="employeeID" value="185">
+                <button type="button" class="btn btn-primary pm-blue btn-lg d-none" id="euModalBtn" data-toggle="modal" data-target="#educationUpdate">Update</button>
+                <button type="button" class="btn btn-primary pm-blue btn-lg" data-toggle="modal" data-target="#educationAddNew"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Add New</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body inner-card">
+        <!-- Table -->
+        <section>
+            <div id="ed-info_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length bs-select" id="ed-info_length"><label>Show <select name="ed-info_length" aria-controls="ed-info" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="ed-info_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="ed-info"></label></div><table id="ed-info" class="table table-striped table-bordered table-sm dataTable no-footer" cellspacing="0" width="100%" aria-describedby="ed-info_info" style="width: 100%;">
+                <thead>
+                    <tr><th class="th-sm dark-blue sorting sorting_asc" tabindex="0" aria-controls="ed-info" rowspan="1" colspan="1" style="width: 166px;" aria-sort="ascending" aria-label="Degree: activate to sort column descending">Degree</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="ed-info" rowspan="1" colspan="1" style="width: 368px;" aria-label="Name of University: activate to sort column ascending">Name of University</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="ed-info" rowspan="1" colspan="1" style="width: 145px;" aria-label="Major: activate to sort column ascending">Major</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="ed-info" rowspan="1" colspan="1" style="width: 183px;" aria-label="Ranking: activate to sort column ascending">Ranking</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="ed-info" rowspan="1" colspan="1" style="width: 217px;" aria-label="Issue Date: activate to sort column ascending">Issue Date</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="ed-info" rowspan="1" colspan="1" style="width: 173px;" aria-label="Remark: activate to sort column ascending">Remark</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="ed-info" rowspan="1" colspan="1" style="width: 169px;" aria-label="Actions: activate to sort column ascending">Actions</th></tr>
+                </thead>
+                <tbody>
+                                    <tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr></tbody>
+                <tfoot>
+
+                </tfoot>
+            </table><div class="dataTables_info" id="ed-info_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="ed-info_paginate"><a class="paginate_button previous disabled" aria-controls="ed-info" data-dt-idx="0" tabindex="-1" id="ed-info_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="ed-info" data-dt-idx="1" tabindex="-1" id="ed-info_next">Next</a></div></div>
+        </section>
+    </div>
+</div>
+
+<!-- Add new contacts modal starts here... -->
+<div class="modal fade" id="educationAddNew" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white">Add New Education</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="educationAddForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="degree">Degree</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <select name="degree" id="degree" class="custom-select-2 select2-hidden-accessible" data-select2-id="degree" tabindex="-1" aria-hidden="true">
+                                        <option value="" data-select2-id="2">Select Degree</option>
+                                                                                    <option value="Undergraduate">Undergraduate</option>
+                                                                                    <option value="Associate&#39;s">Associate's</option>
+                                                                                    <option value="Bachelor&#39;s">Bachelor's</option>
+                                                                                    <option value="Master&#39;s">Master's</option>
+                                                                                    <option value="Doctorate">Doctorate</option>
+                                                                                    <option value="Non-Degree Courses">Non-Degree Courses</option>
+                                                                                    <option value="Certificate/Diploma">Certificate/Diploma</option>
+                                                                                    <option value="Graduate Certificates">Graduate Certificates</option>
+                                                                                    <option value="Bootcamps">Bootcamps</option>
+                                                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-degree-container"><span class="select2-selection__rendered" id="select2-degree-container" role="textbox" aria-readonly="true" title="Select Degree">Select Degree</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </div>    
+                            </div>                    
+                        </div>
+
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="uni_name">Name of University</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="uni_name" placeholder="Name of University" name="uni_name" value="" required="">
+                                </div> 
+                            </div>                       
+                        </div>
+
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="major">Major</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <select class="form-control custom-select-2 select2-hidden-accessible" name="major" id="major" data-select2-id="major" tabindex="-1" aria-hidden="true">
+                                        <option data-select2-id="4">Select Major</option>
+                                                                                    <option>Agriculture, General</option>
+                                                                                    <option>Agribusiness Operations</option>
+                                                                                    <option>Agricultural Business &amp; Management</option>
+                                                                                    <option>Agricultural Economics</option>
+                                                                                    <option>Agricultural Mechanization</option>
+                                                                                    <option>Agricultural Production</option>
+                                                                                    <option>Agronomy &amp; Crop Science</option>
+                                                                                    <option>Animal Sciences</option>
+                                                                                    <option>Food Sciences &amp; Technology</option>
+                                                                                    <option>Horticulture Operations &amp; Management</option>
+                                                                                    <option>Horticulture Science</option>
+                                                                                    <option>Natural Resources Conservation, General</option>
+                                                                                    <option>Environmental Science</option>
+                                                                                    <option>Forestry</option>
+                                                                                    <option>Natural Resources Management</option>
+                                                                                    <option>Wildlife &amp; Wildlands Management</option>
+                                                                                    <option>Architecture, General</option>
+                                                                                    <option>Architectural Environmental Design</option>
+                                                                                    <option>City/Urban/Regional Planning</option>
+                                                                                    <option>Interior Architecture</option>
+                                                                                    <option>Landscape Architecture</option>
+                                                                                    <option>Area Studies, General (e.g., African, Middle Eastern)</option>
+                                                                                    <option>Asian Area Studies</option>
+                                                                                    <option>European Area Studies</option>
+                                                                                    <option>Latin American Area Studies</option>
+                                                                                    <option>North American Area Studies</option>
+                                                                                    <option>Ethnic &amp; Minority Studies, General</option>
+                                                                                    <option>African American Studies</option>
+                                                                                    <option>American Indian/Native American Studies</option>
+                                                                                    <option>Latino/Chicano Studies</option>
+                                                                                    <option>Women's Studies</option>
+                                                                                    <option>Liberal Arts &amp; General Studies</option>
+                                                                                    <option>Library Science</option>
+                                                                                    <option>Multi/Interdisciplinary Studies</option>
+                                                                                    <option>Art, General</option>
+                                                                                    <option>Art History, Criticism &amp; Conservation</option>
+                                                                                    <option>Fine/Studio Arts</option>
+                                                                                    <option>Cinema/Film</option>
+                                                                                    <option>Cinematography/Film/Vide Production</option>
+                                                                                    <option>Dance</option>
+                                                                                    <option>Design &amp; Visual Communications, General</option>
+                                                                                    <option>Fashion/Apparel Design</option>
+                                                                                    <option>Graphic Design</option>
+                                                                                    <option>Industrial Design</option>
+                                                                                    <option>Interior Design</option>
+                                                                                    <option>Music, General</option>
+                                                                                    <option>Music, Performance</option>
+                                                                                    <option>Music, Theory &amp; Composition</option>
+                                                                                    <option>Photography</option>
+                                                                                    <option>Theatre Arts/Drama</option>
+                                                                                    <option>Accounting</option>
+                                                                                    <option>Accounting Technician</option>
+                                                                                    <option>Business Administration &amp; Management, General</option>
+                                                                                    <option>Hotel/Motel Management</option>
+                                                                                    <option>Human Resources Development/Training</option>
+                                                                                    <option>Human Resources Management</option>
+                                                                                    <option>International Business Management</option>
+                                                                                    <option>Labor/Industrial Relations</option>
+                                                                                    <option>Logistics &amp; Materials Management</option>
+                                                                                    <option>Marketing Management &amp; Research</option>
+                                                                                    <option>Office Supervision &amp; Management</option>
+                                                                                    <option>Operations Management &amp; Supervision</option>
+                                                                                    <option>Organizational Behavior</option>
+                                                                                    <option>Purchasing/Procurement/Contracts Management</option>
+                                                                                    <option>Restaurant/Food Services Management</option>
+                                                                                    <option>Small Business Management/Operations</option>
+                                                                                    <option>Travel/Tourism Management</option>
+                                                                                    <option>Business/Management Quantitative Methods, General</option>
+                                                                                    <option>Actuarial Science</option>
+                                                                                    <option>Business/Managerial Economics</option>
+                                                                                    <option>Finance, General</option>
+                                                                                    <option>Banking &amp; Financial Support Services</option>
+                                                                                    <option>Financial Planning &amp; Services</option>
+                                                                                    <option>Insurance &amp; Risk Management</option>
+                                                                                    <option>Investments &amp; Securities</option>
+                                                                                    <option>Management Information Systems</option>
+                                                                                    <option>Real Estate</option>
+                                                                                    <option>Sales, Merchandising, &amp; Marketing, General</option>
+                                                                                    <option>Fashion Merchandising</option>
+                                                                                    <option>Tourism &amp; Travel Marketing</option>
+                                                                                    <option>Secretarial Studies &amp; Office Administration</option>
+                                                                                    <option>Communications, General</option>
+                                                                                    <option>Advertising</option>
+                                                                                    <option>Digital Communications/Media</option>
+                                                                                    <option>Journalism, Broadcast</option>
+                                                                                    <option>Journalism, Print</option>
+                                                                                    <option>Mass Communications</option>
+                                                                                    <option>Public Relations &amp; Organizational Communication</option>
+                                                                                    <option>Radio &amp; Television Broadcasting</option>
+                                                                                    <option>Communications Technology, General</option>
+                                                                                    <option>Graphic &amp; Printing Equipment Operation</option>
+                                                                                    <option>Multimedia/Animation/Special Effects</option>
+                                                                                    <option>Radio &amp; Television Broadcasting Technology</option>
+                                                                                    <option>Family &amp; Consumer Sciences, General</option>
+                                                                                    <option>Adult Development &amp; Aging/Gerontology</option>
+                                                                                    <option>Child Care Services Management</option>
+                                                                                    <option>Child Development</option>
+                                                                                    <option>Consumer &amp; Family Economics</option>
+                                                                                    <option>Food &amp; Nutrition</option>
+                                                                                    <option>Textile &amp; Apparel</option>
+                                                                                    <option>Parks, Recreation, &amp; Leisure, General</option>
+                                                                                    <option>Exercise Science/Physiology/Kinesiology</option>
+                                                                                    <option>Health &amp; Physical Education/Fitness</option>
+                                                                                    <option>Parks/Rec/Leisure Facilities Management</option>
+                                                                                    <option>Sport &amp; Fitness Administration/Management</option>
+                                                                                    <option>Personal Services, General</option>
+                                                                                    <option>Cosmetology/Hairstyling</option>
+                                                                                    <option>Culinary Arts/Chef Training</option>
+                                                                                    <option>Funeral Services &amp; Mortuary Science</option>
+                                                                                    <option>Protective Services, General</option>
+                                                                                    <option>Corrections</option>
+                                                                                    <option>Criminal Justice</option>
+                                                                                    <option>Fire Protection &amp; Safety Technology</option>
+                                                                                    <option>Law Enforcement</option>
+                                                                                    <option>Military Technologies</option>
+                                                                                    <option>Public Administration &amp; Services, General</option>
+                                                                                    <option>Community Organization &amp; Advocacy</option>
+                                                                                    <option>Public Administration</option>
+                                                                                    <option>Public Affairs &amp; Public Policy Analysis</option>
+                                                                                    <option>Social Work</option>
+                                                                                    <option>Computer &amp; Information Sciences, General</option>
+                                                                                    <option>Computer Networking/Telecommunications</option>
+                                                                                    <option>Computer Science &amp; Programming</option>
+                                                                                    <option>Computer Software &amp; Media Applications</option>
+                                                                                    <option>Computer System Administration</option>
+                                                                                    <option>Data Management Technology</option>
+                                                                                    <option>Information Science</option>
+                                                                                    <option>Webpage Design</option>
+                                                                                    <option>Mathematics, General</option>
+                                                                                    <option>Applied Mathematics</option>
+                                                                                    <option>Statistics</option>
+                                                                                    <option>Counseling &amp; Student Services</option>
+                                                                                    <option>Educational Administration</option>
+                                                                                    <option>Special Education</option>
+                                                                                    <option>Teacher Education, General</option>
+                                                                                    <option>Curriculum &amp; Instruction</option>
+                                                                                    <option>Early Childhood Education</option>
+                                                                                    <option>Elementary Education</option>
+                                                                                    <option>Junior High/Middle School Education</option>
+                                                                                    <option>Postsecondary Education</option>
+                                                                                    <option>Secondary Education</option>
+                                                                                    <option>Teacher Assisting/Aide Education</option>
+                                                                                    <option>Teacher Education, Subject-Specific</option>
+                                                                                    <option>Agricultural Education</option>
+                                                                                    <option>Art Education</option>
+                                                                                    <option>Business Education</option>
+                                                                                    <option>Career &amp; Technical Education</option>
+                                                                                    <option>English-as-a-Second-Language Education</option>
+                                                                                    <option>English/Language Arts Education</option>
+                                                                                    <option>Foreign Languages Education</option>
+                                                                                    <option>Health Education</option>
+                                                                                    <option>Mathematics Education</option>
+                                                                                    <option>Music Education</option>
+                                                                                    <option>Physical Education &amp; Coaching</option>
+                                                                                    <option>Science Education</option>
+                                                                                    <option>Social Studies/Sciences Education</option>
+                                                                                    <option>Engineering (Pre-Engineering), General</option>
+                                                                                    <option>Aerospace/Aeronautical Engineering</option>
+                                                                                    <option>Agricultural/Bioengineering</option>
+                                                                                    <option>Architectural Engineering</option>
+                                                                                    <option>Biomedical Engineering</option>
+                                                                                    <option>Chemical Engineering</option>
+                                                                                    <option>Civil Engineering</option>
+                                                                                    <option>Computer Engineering</option>
+                                                                                    <option>Construction Engineering/Management</option>
+                                                                                    <option>Electrical, Electronics &amp; Communications Engineering</option>
+                                                                                    <option>Environmental Health Engineering</option>
+                                                                                    <option>Industrial Engineering</option>
+                                                                                    <option>Mechanical Engineering</option>
+                                                                                    <option>Nuclear Engineering</option>
+                                                                                    <option>Drafting/CAD Technology, General</option>
+                                                                                    <option>Architectural Drafting/CAD Technology</option>
+                                                                                    <option>Mechanical Drafting/CAD Technology</option>
+                                                                                    <option>Engineering Technology, General</option>
+                                                                                    <option>Aeronautical/Aerospace Engineering Technologies</option>
+                                                                                    <option>Architectural Engineering Technology</option>
+                                                                                    <option>Automotive Engineering Technology</option>
+                                                                                    <option>Civil Engineering Technology</option>
+                                                                                    <option>Computer Engineering Technology</option>
+                                                                                    <option>Construction/Building Technology</option>
+                                                                                    <option>Electrical, Electronics Engineering Technologies</option>
+                                                                                    <option>Electromechanical/Biomedical Engineering Technologies</option>
+                                                                                    <option>Environmental Control Technologies</option>
+                                                                                    <option>Industrial Production Technologies</option>
+                                                                                    <option>Mechanical Engineering Technology</option>
+                                                                                    <option>Quality Control &amp; Safety Technologies</option>
+                                                                                    <option>Surveying Technology</option>
+                                                                                    <option>English Language &amp; Literature, General</option>
+                                                                                    <option>American/English Literature</option>
+                                                                                    <option>Creative Writing</option>
+                                                                                    <option>Public Speaking</option>
+                                                                                    <option>Foreign Languages/Literatures, General</option>
+                                                                                    <option>Asian Languages &amp; Literatures</option>
+                                                                                    <option>Classical/Ancient Languages &amp; Literatures</option>
+                                                                                    <option>Comparative Literature</option>
+                                                                                    <option>French Language &amp; Literature</option>
+                                                                                    <option>German Language &amp; Literature</option>
+                                                                                    <option>Linguistics</option>
+                                                                                    <option>Middle Eastern Languages &amp; Literatures</option>
+                                                                                    <option>Spanish Language &amp; Literature</option>
+                                                                                    <option>Health Services Administration,General</option>
+                                                                                    <option>Hospital/Facilities Administration</option>
+                                                                                    <option>Medical Office/Secretarial</option>
+                                                                                    <option>Medical Records</option>
+                                                                                    <option>Medical/Clinical Assisting, General</option>
+                                                                                    <option>Dental Assisting</option>
+                                                                                    <option>Medical Assisting</option>
+                                                                                    <option>Occupational Therapy Assisting</option>
+                                                                                    <option>Physical Therapy Assisting</option>
+                                                                                    <option>Veterinarian Assisting/Technology</option>
+                                                                                    <option>Chiropractic (Pre-Chiropractic)</option>
+                                                                                    <option>Dental Hygiene</option>
+                                                                                    <option>Dentistry (Pre-Dentistry)</option>
+                                                                                    <option>Emergency Medical Technology</option>
+                                                                                    <option>Health-Related Professions &amp; Services, General</option>
+                                                                                    <option>Athletic Training</option>
+                                                                                    <option>Communication Disorder Services (e.g., Speech Pathology)</option>
+                                                                                    <option>Public Health</option>
+                                                                                    <option>Health/Medical Technology, General</option>
+                                                                                    <option>Medical Laboratory Technology</option>
+                                                                                    <option>Medical Radiologic Technology</option>
+                                                                                    <option>Nuclear Medicine Technology</option>
+                                                                                    <option>Respiratory Therapy Technology</option>
+                                                                                    <option>Surgical Technology</option>
+                                                                                    <option>Medicine (Pre-Medicine)</option>
+                                                                                    <option>Nursing, Practical/Vocational (LPN)</option>
+                                                                                    <option>Nursing, Registered (BS/RN)</option>
+                                                                                    <option>Optometry (Pre-Optometry)</option>
+                                                                                    <option>Osteopathic Medicine</option>
+                                                                                    <option>Pharmacy (Pre-Pharmacy)</option>
+                                                                                    <option>Physician Assisting</option>
+                                                                                    <option>Therapy &amp; Rehabilitation, General</option>
+                                                                                    <option>Alcohol/Drug Abuse Counseling</option>
+                                                                                    <option>Massage Therapy</option>
+                                                                                    <option>Mental Health Counseling</option>
+                                                                                    <option>Occupational Therapy</option>
+                                                                                    <option>Physical Therapy (Pre-Physical Therapy)</option>
+                                                                                    <option>Psychiatric/Mental Health Technician</option>
+                                                                                    <option>Rehabilitation Therapy</option>
+                                                                                    <option>Vocational Rehabilitation Counseling</option>
+                                                                                    <option>Veterinary Medicine (Pre-Veterinarian)</option>
+                                                                                    <option>Philosophy</option>
+                                                                                    <option>Religion</option>
+                                                                                    <option>Theology, General</option>
+                                                                                    <option>Bible/Biblical Studies</option>
+                                                                                    <option>Divinity/Ministry</option>
+                                                                                    <option>Religious Education</option>
+                                                                                    <option>Aviation &amp; Airway Science, General</option>
+                                                                                    <option>Aircraft Piloting &amp; Navigation</option>
+                                                                                    <option>Aviation Management &amp; Operations</option>
+                                                                                    <option>Construction Trades (e.g., carpentry, plumbing, electrical)</option>
+                                                                                    <option>Mechanics &amp; Repairers, General</option>
+                                                                                    <option>Aircraft Mechanics/Technology</option>
+                                                                                    <option>Autobody Repair/Technology</option>
+                                                                                    <option>Automotive Mechanics/Technology</option>
+                                                                                    <option>Avionics Technology</option>
+                                                                                    <option>Diesel Mechanics/Technology</option>
+                                                                                    <option>Electrical/Electronics Equip Installation &amp; Repair</option>
+                                                                                    <option>Heating/Air Cond/Refrig Install/Repair</option>
+                                                                                    <option>Precision Production Trades, General</option>
+                                                                                    <option>Machine Tool Technology</option>
+                                                                                    <option>Welding Technology</option>
+                                                                                    <option>Transportation &amp; Materials Moving (e.g., air, ground, &amp; marine)</option>
+                                                                                    <option>Biology, General</option>
+                                                                                    <option>Biochemistry &amp; Biophysics</option>
+                                                                                    <option>Cell/Cellular Biology</option>
+                                                                                    <option>Ecology</option>
+                                                                                    <option>Genetics</option>
+                                                                                    <option>Marine/Aquatic Biology</option>
+                                                                                    <option>Microbiology &amp; Immunology</option>
+                                                                                    <option>Zoology</option>
+                                                                                    <option>Physical Sciences, General</option>
+                                                                                    <option>Astronomy</option>
+                                                                                    <option>Atmospheric Sciences &amp; Meteorology</option>
+                                                                                    <option>Chemistry</option>
+                                                                                    <option>Geological &amp; Earth Sciences</option>
+                                                                                    <option>Physics</option>
+                                                                                    <option>Legal Studies, General</option>
+                                                                                    <option>Court Reporting</option>
+                                                                                    <option>Law (Pre-Law)</option>
+                                                                                    <option>Legal Administrative Assisting/Secretarial</option>
+                                                                                    <option>Paralegal/Legal Assistant</option>
+                                                                                    <option>Social Sciences, General</option>
+                                                                                    <option>Anthropology</option>
+                                                                                    <option>Criminology</option>
+                                                                                    <option>Economics</option>
+                                                                                    <option>Geography</option>
+                                                                                    <option>History</option>
+                                                                                    <option>International Relations &amp; Affairs</option>
+                                                                                    <option>Political Science &amp; Government</option>
+                                                                                    <option>Psychology, Clinical &amp; Counseling</option>
+                                                                                    <option>Psychology, General</option>
+                                                                                    <option>Sociology</option>
+                                                                                    <option>Urban Studies/Urban Affairs</option>
+                                                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="3" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-major-container"><span class="select2-selection__rendered" id="select2-major-container" role="textbox" aria-readonly="true" title="Select Major">Select Major</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </div> 
+                            </div>                       
+                        </div>
+
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="rank">Ranking</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <select class="form-control custom-select-2 select2-hidden-accessible" name="rank" id="rank" data-select2-id="rank" tabindex="-1" aria-hidden="true">
+                                        <option data-select2-id="6">Select Levels</option>
+                                                                                    <option>NA - Not Applicable</option>
+                                                                                    <option>1 - Fundamental Awareness (basic knowledge)</option>
+                                                                                    <option>2 - Novice (limited experience)</option>
+                                                                                    <option>3 - Intermediate (practical application)</option>
+                                                                                    <option>4 - Advanced (applied theory)</option>
+                                                                                    <option>5 - Expert (recognized authority)</option>
+                                                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-rank-container"><span class="select2-selection__rendered" id="select2-rank-container" role="textbox" aria-readonly="true" title="Select Levels">Select Levels</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </div>
+                            </div>                      
+                        </div>
+
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="educ_issue_date">Issue Date</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="date" class="form-control" id="educ_issue_date" placeholder="Issue Date" name="issue_date" value="" required="">
+                                </div>
+                            </div>                      
+                        </div>
+
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="educ_remarks">Remark</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="educ_remarks" placeholder="Remark" name="remark" value="">
+                                </div>
+                            </div>                      
+                        </div>
+                        <input type="hidden" id="employeeID" name="uid" value="185">
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close_education_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                <button type="submit" id="add_education" class="btn btn-primary pm-blue">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add new contacts modal starts here... -->
+<div class="modal fade" id="educationUpdate" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white">Update Education</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="educationUpdateForm">
+                    
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close_ue_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary pm-blue">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function ($) {
+        let educationTable = $('#ed-info').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>    </div>
+    <div id="quali2" class="tab-content ui-tabs-panel ui-corner-bottom ui-widget-content" style="display: none;" aria-labelledby="ui-id-2" role="tabpanel" aria-hidden="true">
+      <div id="technical-skills" class="card mb-3 inner-card"> 
+    <div class="card-header inner-card">
+        <div class="form-row">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2 button-right">
+                <input type="hidden" id="employeeID" value="185">
+                <button type="submit" class="btn btn-primary pm-blue btn-lg d-none" id="tsuModalBtn" data-toggle="modal" data-target="#technicalSkillUpdate">Update</button>
+                <button type="submit" class="btn btn-primary pm-blue btn-lg" data-toggle="modal" data-target="#technicalSkillAddNew"><i class="fa-solid fa-gears"></i> Add New</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body inner-card">
+        <!-- Table -->
+        <section>
+            <div id="technical_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length bs-select" id="technical_length"><label>Show <select name="technical_length" aria-controls="technical" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="technical_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="technical"></label></div><table id="technical" class="table table-striped table-bordered table-sm dataTable no-footer" cellspacing="0" width="100%" aria-describedby="technical_info" style="width: 100%;">
+                <thead>
+                    <tr><th class="th-sm dark-blue sorting sorting_asc" tabindex="0" aria-controls="technical" rowspan="1" colspan="1" style="width: 492px;" aria-sort="ascending" aria-label="Description: activate to sort column descending">Description</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="technical" rowspan="1" colspan="1" style="width: 285px;" aria-label="Level: activate to sort column ascending">Level</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="technical" rowspan="1" colspan="1" style="width: 366px;" aria-label="Remark: activate to sort column ascending">Remark</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="technical" rowspan="1" colspan="1" style="width: 358px;" aria-label="Actions: activate to sort column ascending">Actions</th></tr>
+                </thead>
+                <tbody>
+                                    <tr class="odd"><td valign="top" colspan="4" class="dataTables_empty">No data available in table</td></tr></tbody>
+                <tfoot>
+
+                </tfoot>
+            </table><div class="dataTables_info" id="technical_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="technical_paginate"><a class="paginate_button previous disabled" aria-controls="technical" data-dt-idx="0" tabindex="-1" id="technical_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="technical" data-dt-idx="1" tabindex="-1" id="technical_next">Next</a></div></div>
+        </section>
+    </div>
+</div>
+
+<!-- Add new technical skill modal starts here... -->
+
+<div class="modal fade" id="technicalSkillAddNew" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white">Add New Technical Skill</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="technicalSkillAddForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="description">Description</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="" required="required">
+                                </div>    
+                            </div>                    
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="level">Levels</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <select class="form-control custom-select-2" id="level" name="level" data-select2-id="level" tabindex="0" aria-hidden="false">
+                                        <option value="" data-select2-id="8">Select Level</option>
+                                                                                    <option value="Junior" data-select2-id="9">Junior</option>
+                                                                                    <option value="Mid Level" data-select2-id="10">Mid Level</option>
+                                                                                    <option value="Senior" data-select2-id="11">Senior</option>
+                                                                            </select>
+                                </div>
+                            </div>                      
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="remark">Remark</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="remark" placeholder="Remark" name="remark" value="" required="required">
+                                </div>
+                            </div>                      
+                        </div>
+                    </div>
+                    <input type="hidden" id="employeeID" name="uid" value="185">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close_ts_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                <button type="submit" id="add_ts" class="btn btn-primary pm-blue">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="technicalSkillUpdate" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white">Update Technical Skill</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="technicalSkillUpdateForm">
+                    
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close_uts_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary pm-blue">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('#technical').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+        });
+</script>    </div>
+    <div id="quali3" class="tab-content ui-tabs-panel ui-corner-bottom ui-widget-content" style="display: none;" aria-labelledby="ui-id-3" role="tabpanel" aria-hidden="true">
+      <div id="otherskills-template" class="card mb-3 inner-card"> 
+    <div class="card-header inner-card">
+        <div class="form-row">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2 button-right">
+                <input type="hidden" id="employeeID" value="185">
+                <button type="submit" class="btn btn-primary pm-blue btn-lg d-none" id="osuModalBtn" data-toggle="modal" data-target="#otherSkillUpdate">Update</button>
+                <button type="submit" class="btn btn-primary pm-blue btn-lg" data-toggle="modal" data-target="#otherSkillAddNew"><i class="fa-solid fa-gears"></i> Add New</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body inner-card">
+        <!-- Table -->
+        <section>
+            <div id="other-skills_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length bs-select" id="other-skills_length"><label>Show <select name="other-skills_length" aria-controls="other-skills" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="other-skills_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="other-skills"></label></div><table id="other-skills" class="table table-striped table-bordered table-sm dataTable no-footer" cellspacing="0" width="100%" aria-describedby="other-skills_info" style="width: 100%;">
+                <thead>
+                    <tr><th class="th-sm dark-blue sorting sorting_asc" tabindex="0" aria-controls="other-skills" rowspan="1" colspan="1" style="width: 492px;" aria-sort="ascending" aria-label="Description: activate to sort column descending">Description</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="other-skills" rowspan="1" colspan="1" style="width: 285px;" aria-label="Level: activate to sort column ascending">Level</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="other-skills" rowspan="1" colspan="1" style="width: 366px;" aria-label="Remark: activate to sort column ascending">Remark</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="other-skills" rowspan="1" colspan="1" style="width: 358px;" aria-label="Actions: activate to sort column ascending">Actions</th></tr>
+                </thead>
+                <tbody>
+                                    <tr class="odd"><td valign="top" colspan="4" class="dataTables_empty">No data available in table</td></tr></tbody>
+                <tfoot>
+
+                </tfoot>
+            </table><div class="dataTables_info" id="other-skills_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="other-skills_paginate"><a class="paginate_button previous disabled" aria-controls="other-skills" data-dt-idx="0" tabindex="-1" id="other-skills_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="other-skills" data-dt-idx="1" tabindex="-1" id="other-skills_next">Next</a></div></div>
+        </section>
+    </div>
+</div>
+
+<!-- Add new other skill modal starts here... -->
+
+<div class="modal fade" id="otherSkillAddNew" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white">Add New Other Skills</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="otherSkillAddForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="description">Description</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="" required="required">
+                                </div>    
+                            </div>                    
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="level">Levels</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <select class="form-control custom-select-2" id="level" name="level" data-select2-id="level" tabindex="0" aria-hidden="false">
+                                        <option value="" data-select2-id="13">Select Level</option>
+                                                                                    <option value="Junior" data-select2-id="14">Junior</option>
+                                                                                    <option value="Mid Level" data-select2-id="15">Mid Level</option>
+                                                                                    <option value="Senior" data-select2-id="16">Senior</option>
+                                                                            </select>
+                                </div>
+                            </div>                      
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="remark">Remark</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="remark" placeholder="Remark" name="remark" value="" required="required">
+                                </div>
+                            </div>                      
+                        </div>
+                    </div>
+                    <input type="hidden" id="employeeID" name="uid" value="185">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="os_close_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                <button type="submit" id="add_os" class="btn btn-primary pm-blue">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Update other skill modal starts here... -->
+
+<div class="modal fade" id="otherSkillUpdate" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white"> Update Other Skills</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="otherSkillUpdateForm">
+                    
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="uos_close_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary pm-blue">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('#other-skills').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+        });
+</script>    </div>
+    <div id="quali4" class="tab-content" style="display: none;">
+      <div id="training-template" class="card mb-3 inner-card"> 
+    <div class="card-header inner-card">
+        <div class="form-row">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2 button-right">
+                <input type="hidden" id="employeeID" value="185">
+                <button type="submit" class="btn btn-primary btn-sm d-none" id="openUpdateTrainingBtn" data-toggle="modal" data-target="#trainingUpdate">Update</button>
+                <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#trainingAddNew"><i class="fa-solid fa-dumbbell"></i> Add New</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body inner-card">
+        <!-- Table -->
+        <section>
+            <div id="training_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length bs-select" id="training_length"><label>Show <select name="training_length" aria-controls="training" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="training_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="training"></label></div><table id="training" class="table table-striped table-bordered table-sm dataTable no-footer" cellspacing="0" width="100%" aria-describedby="training_info" style="width: 100%;">
+                <thead>
+                    <tr><th class="th-sm dark-blue sorting sorting_asc" tabindex="0" aria-controls="training" rowspan="1" colspan="1" style="width: 179px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="training" rowspan="1" colspan="1" style="width: 289px;" aria-label="Description: activate to sort column ascending">Description</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="training" rowspan="1" colspan="1" style="width: 202px;" aria-label="Trainor: activate to sort column ascending">Trainor</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="training" rowspan="1" colspan="1" style="width: 163px;" aria-label="Level: activate to sort column ascending">Level</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="training" rowspan="1" colspan="1" style="width: 154px;" aria-label="Date: activate to sort column ascending">Date</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="training" rowspan="1" colspan="1" style="width: 212px;" aria-label="Remark: activate to sort column ascending">Remark</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="training" rowspan="1" colspan="1" style="width: 208px;" aria-label="Actions: activate to sort column ascending">Actions</th></tr>
+                </thead>
+                <tbody>
+                                    <tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">No data available in table</td></tr></tbody>
+                <tfoot>
+
+                </tfoot>
+            </table><div class="dataTables_info" id="training_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="training_paginate"><a class="paginate_button previous disabled" aria-controls="training" data-dt-idx="0" tabindex="-1" id="training_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="training" data-dt-idx="1" tabindex="-1" id="training_next">Next</a></div></div>
+        </section>
+    </div>
+</div>
+
+<!-- Add new other skill modal starts here... -->
+
+<div class="modal fade" id="trainingAddNew" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white">Add New Training</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="trainingAddForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="name">Training Name</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="" required="">
+                                </div>    
+                            </div>                    
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="description">Description</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="" required="">
+                                </div>    
+                            </div>                    
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="trainor">Trainor</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="trainor" placeholder="Trainor&#39;s name" name="trainor" value="" required=""> 
+                                </div> 
+                            </div>                       
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="level">Levels</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <select class="form-control custom-select-2 select2-hidden-accessible" id="level" name="level" data-select2-id="level" tabindex="-1" aria-hidden="true">
+                                        <option value="" data-select2-id="18">Select Level</option>
+                                                                                    <option value="Beginner">Beginner</option>
+                                                                                    <option value="Intermediate">Intermediate</option>
+                                                                                    <option value="Advanced">Advanced</option>
+                                                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="17" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-level-container"><span class="select2-selection__rendered" id="select2-level-container" role="textbox" aria-readonly="true" title="Select Level">Select Level</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </div>
+                            </div>                      
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="date">Date</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="date" class="form-control" id="date" name="date" required="">
+                                </div>    
+                            </div>
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="remark">Remark</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="remark" placeholder="Remark" name="remark" value="" required="">
+                                </div>
+                            </div>                      
+                        </div>
+                    </div>
+                    <input type="hidden" id="employeeID" name="uid" value="185">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close_training_modal" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="submit" id="add_training" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update other skill modal starts here... -->
+
+<div class="modal fade" id="trainingUpdate" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white"> Update Training</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="trainingUpdateForm">
+                    
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="closeUpdateTrainingBtn" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('#training').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+        });
+</script>    </div>
+  </div> <!-- END tabs-content -->
+</div> <!-- END tabs -->
+
+</div>
+
+<script>
+  jQuery(document).ready(function($){
+    $('#tabs-nav li:first-child').addClass('active');
+    $('.tab-content').hide();
+    $('.tab-content:first').show();
+
+    // Click function
+    $('#tabs-nav li').click(function(){
+      $('#tabs-nav li').removeClass('active');
+      $(this).addClass('active');
+      $('.tab-content').hide();
+      
+      var activeTab = $(this).find('a').attr('href');
+      $(activeTab).fadeIn();
+      return false;
+    });
+  });
+</script>          </div>          
+        </div>
+    </div>
+  </div>  </div>
+</div>
+
+
+</div><!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/qualifications.php?uid=185#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./Qualifications_files/jquery.min(1).js.download"></script>
+    <script src="./Qualifications_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./Qualifications_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./Qualifications_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./Qualifications_files/jquery.dataTables.js.download"></script>
+  <script src="./Qualifications_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./Qualifications_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./Qualifications_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./Qualifications_files/jquery-ui.js.download"></script>
+  <script src="./Qualifications_files/jquery-select2.js.download"></script>
+  <script src="./Qualifications_files/jquery.timepicker.js.download"></script>
+  <script src="./Qualifications_files/datepair.min.js.download"></script>
+  <script src="./Qualifications_files/fancyTable.js.download"></script>
+  <script src="./Qualifications_files/scripts.js.download"></script>
+  <script src="./Qualifications_files/settings-scripts.js.download"></script>
+  <script src="./Qualifications_files/timecard-scripts.js.download"></script>
+  <script src="./Qualifications_files/download.js.download"></script>
+          <script type="text/javascript" id="select-twos">
+        $(document).ready(function() {
+          // select 2
+          setTimeout(() => {
+            $('.custom-select-2').select2();
+          }, 300)
+        });
+      </script>
+      <script src="./Qualifications_files/custom-ajax.js.download"></script>
+        <script src="./Qualifications_files/required-indicator.js.download"></script>
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

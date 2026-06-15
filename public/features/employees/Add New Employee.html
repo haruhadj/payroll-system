@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://payroll-master.com/demo/add-user.php -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./Add New Employee_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./Add New Employee_files/datatable-min.css" rel="stylesheet">
+  <link href="./Add New Employee_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./Add New Employee_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Add New Employee_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./Add New Employee_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./Add New Employee_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./Add New Employee_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./Add New Employee_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./Add New Employee_files/custom-style.css">
+ 
+    <link href="./Add New Employee_files/style.css" rel="stylesheet">
+  <script src="./Add New Employee_files/jquery.min.js.download"></script>
+  <script src="./Add New Employee_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./Add New Employee_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/add-user.php#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/add-user.php#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/add-user.php#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/add-user.php#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/add-user.php#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/add-user.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/add-user.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/add-user.php#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./Add New Employee_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a></a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/add-user.php#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Add New Employee</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div id="adduser-form" class="row">
+    <div class="form-group col-12">
+      <div class="card">
+        <div class="card-header" style="color: #FF0000;">
+          Note: Please put N/A if the field is not applicable to you.
+        </div>
+      </div>
+    </div>
+    <div class="col-12">
+      <form id="add-employee" autocomplete="off">
+        <div class="row">
+          <div id="personal-info" class="col-md-6 wptf-section">
+            <div class="card mb-3">
+    <div class="card-header">
+    Personal Information
+    </div>
+    <div class="card-body">
+    <div class="form-row">
+        <div class="form-group col-md-4">
+        <label for="fname">First Name<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="fname" placeholder="First Name" name="fname" required="required">
+        </div>
+        <div class="form-group col-md-4">
+        <label for="mname">Middle Name<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="mname" placeholder="Middle Name" name="mname" required="required">
+        </div>
+        <div class="form-group col-md-4">
+        <label for="lname">Last Name<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lname" required="required">
+        </div>
+        <div class="form-group col-md-6 d-none">
+            <label for="title">Title</label>
+            <select name="title" id="title" class="form-control custom-select-2">
+                <option value="">Select Title</option>
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="gender">Sex</label>
+            <select name="gender" id="gender" class="form-control custom-select-2">
+                <option value="">Select Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="email">Email<span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="email" placeholder="Email Address" name="email" required="required">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="birthdate">Birth Date<span class="text-danger">*</span></label>
+            <input type="date" class="form-control" id="birthdate" name="birthdate" required="required">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="placeob">Place of Birth<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="placeob" name="placeob" placeholder="Place of birth" required="required">
+        </div>
+        <div class="form-group col-md-6">
+        <label for="phone">Phone 1<span class="text-danger">*</span></label>
+        <input type="phone" class="form-control" id="phone" placeholder="Phone 1" name="phone" required="required">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="phone2">Phone 2<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="phone2" name="phone2" placeholder="Phone 2" value="" required="required">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="nationality">Nationality<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="nationality" name="nationality" placeholder="Nationality" value="" required="required">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="status">Civil Status</label>
+            <select name="status" id="status" class="form-control custom-select-2">
+                <option value="">Select Status</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Separated">Separated</option>
+                <option value="Widowed">Widowed</option>
+                <option value="Divorced">Divorced</option>
+            </select>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="religion">Religion<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="religion" placeholder="Religion" name="religion" required="required">
+        </div>
+        <div class="form-group col-md-12">
+        <label for="deviceID">Biometric ID<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="deviceID" placeholder="000000" name="deviceID" required="required">
+        </div>
+        <div class="form-group col-md-12">
+        <label for="bnkAcct">Bank Account Number<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="bnkAcct" placeholder="1111-2222-33" name="bnkAcct" required="required">
+        </div>
+    </div>
+    <h6>Login Information</h6>
+    <div class="form-row">
+        <div class="col-md-12">
+        <label class="sr-only" for="username">Username</label>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fa fa-fw fa-user"></i></div>
+            </div>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required">
+        </div>
+        </div>
+        <div class="col-md-12">
+        <label class="sr-only" for="password">Password</label>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+            <div class="input-group-text"><i class="fa fa-fw fa-key"></i></div>
+            </div>
+            <input type="password" class="form-control" id="password" name="password" placeholder="password" required="required">
+        </div>
+        </div>
+    </div>
+    </div> <!-- Tax Information Wrapper -->
+</div>            <div id="assignment-schedule" class="card mb-3"> 
+    <div class="card-header">
+    In case of Emergency Information
+    </div>
+    <div class="card-body">
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="cname">Full name<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="cname" placeholder="Full name" name="cname" required="required">
+        </div>
+        <div class="form-group col-md-12">
+            <label for="cphone">Phone<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="cphone" placeholder="Phone number" name="cphone" required="required">
+        </div>
+        <div class="form-group col-md-12">
+        <label for="cemail">Email<span class="text-danger">*</span></label>
+        <input type="email" class="form-control" id="cemail" placeholder="Email Address" name="cemail" required="required">
+        </div>
+        <div class="form-group col-md-12">
+        <label for="caddress">Address</label>
+        <textarea class="form-control" id="caddress" placeholder="Address" name="caddress" required="required" rows="4"></textarea>
+        </div>
+    </div>
+    </div>
+</div>            <div class="card mb-3">
+  <div class="card-header">
+    Government Issued Numbers
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="sss_no">SSS No.<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="sss_no" name="sss_no" placeholder="SSS" value="" required="required">
+        </div>
+        <div class="form-group col-md-12">
+          <label for="ph_no">PhilHealth No.<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="ph_no" name="ph_no" placeholder="Philhealth" value="" required="required">
+        </div>
+        <div class="form-group col-md-12">
+          <label for="hdmf_no">HMDF No.<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="hdmf_no" name="hdmf_no" placeholder="HMDF" value="" required="required">
+        </div>
+        <div class="form-group col-md-12">
+          <label for="bir_no">BIR TIN<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="bir_no" name="bir_no" placeholder="BIR" value="" required="required">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>            <div id="assignment-schedule" class="card mb-3"> 
+    <div class="card-header">
+    Assignment/Schedule Information
+    </div>
+    <div class="card-body">
+    <h6>Other Information</h6>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+        <label for="whours">Working Hours<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="whours" placeholder="8" name="whours" required="required">
+        </div>
+        <div class="form-group col-md-4">
+        <label for="empStatus">Employee Status</label>
+        <select id="empStatus" name="empStatus" class="form-control" required="required">
+            <option value="">Choose...</option>
+            <option value="1">Active</option>
+            <option value="0">Inactive</option>
+        </select>
+        </div>
+        <div class="form-group col-md-4">
+        <label for="empLevel">Employee Level</label>
+        <select id="empLevel" name="empLevel" class="form-control" required="required">
+            <option value="">Choose...</option>
+            <option value="1">Administrator</option>                     
+            <option value="2">Supervisor</option>
+            <option value="3">Encoder</option>
+            <option value="4">Rank and File</option>
+        </select>
+        </div>
+    </div>
+    <h6>Assignment</h6>
+    <div class="form-row assignments">
+        <div class="form-group col-md-4">
+        <label for="designation">Designation</label>
+        <select id="designation" class="form-control" name="designation" required="required">
+            <option value="0">Choose...</option>
+            <option value="182">Dept. Head</option><option value="3">Supervisor</option><option value="177">Rider</option>        </select>
+        </div>
+        <div class="form-group col-md-4">
+        <label for="group">Group</label>
+        <select id="group" class="form-control" name="group">
+            <option value="0">Choose...</option>
+            <option value="5">Regular</option><option value="6">Probationary</option><option value="7">Trainee</option><option value="172">Irregular</option><option value="181">On-Call</option>        </select>
+        </div>
+        <div class="form-group col-md-4">
+        <label for="team">Team</label>
+        <select id="team" class="form-control" name="team">
+            <option value="0">Choose...</option>
+            <option value="9">Field</option><option value="11">Administrative</option><option value="170">Accounting </option>        </select>
+        </div>
+    </div> <!-- assignments --> 
+    <h6>Schedule</h6>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="schedule">Work Schedule</label>
+        <select id="schedule" class="form-control" name="schedule" required="required">
+            <option value="">Choose...</option>
+            <option value="180">PM SHIFT</option><option value="179">GIN CAPS - MORNING</option><option value="178">REGULAR SCHED</option><option value="183">test</option>        </select>
+        </div>
+        <fieldset class="form-group">
+        <div class="row">
+            <legend class="col-form-label col-sm-6 pt-0">Day Off(s)</legend>
+            <div class="col-sm-6">
+            <div class="form-check">
+                <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="sunday" value="sunday">
+                <label class="form-check-label" for="sunday">Sunday</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="monday" value="monday">
+                <label class="form-check-label" for="monday">Monday</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="tuesday" value="tuesday">
+                <label class="form-check-label" for="tuesday">Tuesday</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="wednesday" value="wednesday">
+                <label class="form-check-label" for="wednesday">Wednesday</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="thursday" value="thursday">
+                <label class="form-check-label" for="thursday">Thursday</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="friday" value="friday">
+                <label class="form-check-label" for="friday">Friday</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="saturday" value="saturday">
+                <label class="form-check-label" for="saturday">Saturday</label>
+            </div>
+            </div>
+        </div>
+        </fieldset>
+    </div> <!-- Adjustment wrapper -->
+    </div>
+</div><!-- #assignment-schedule -->          </div> <!-- personal-info -->
+          <div id="additional-info" class="col-md-6 wptf-section">
+            <div class="card mb-3">
+    <div class="card-header">
+    Salary/Benefits Information
+    </div>
+    <div class="card-body">
+    <h6>Salary</h6>
+    <fieldset class="form-group">
+        <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+            <legend class="col-form-label col-md-6 pt-0">Basic Salary</legend>
+            <div class="col-md-8">
+                <input type="text" class="form-control number" id="basic_pay" placeholder="0.00" name="basic_pay" required="required">
+            </div>
+            </div>
+        </div> <!-- Basic Pay Wrapper -->
+        <div class="col-md-6">
+            <div class="row">
+            <legend class="col-form-label col-md-6 pt-0">Salary Type</legend>
+            <div class="col-md-6">
+                <div class="form-check">
+                <input class="form-check-input cutoff" type="radio" name="cutoff" id="daily" value="0" checked="">
+                <label class="form-check-label" for="daily">
+                    Daily
+                </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input cutoff" type="radio" name="cutoff" id="monthly" value="1">
+                <label class="form-check-label" for="monthly">
+                    Monthly
+                </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input cutoff" type="radio" name="cutoff" id="semi-fixed" value="2">
+                <label class="form-check-label" for="semi-fixed">
+                    Semi Monthly
+                </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input cutoff" type="radio" name="cutoff" id="monthly-fixed" value="3">
+                <label class="form-check-label" for="monthly-fixed">
+                    Monthly Fixed
+                </label>
+                </div>
+            </div>
+            </div>
+        </div> <!-- Cutoff Type Wrapper-->
+        </div>
+    </fieldset>
+    <h6>ALLOWANCE</h6>
+    <fieldset class="form-group">
+        <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+            <legend class="col-form-label col-md-6 pt-0">Allowance Amount</legend>
+            <div class="col-md-8">
+                <input type="text" class="form-control number" id="cola" placeholder="0.00" name="cola" required="required">
+            </div>
+            </div>
+        </div> <!-- Cutoff Type Wrapper-->
+        <div class="col-md-6">
+            <div class="row">
+            <legend class="col-form-label col-md-6 pt-0">Allowance Type</legend>
+            <div class="col-md-6">
+                <div class="form-check">
+                <input class="form-check-input cola_type" type="radio" name="cola_type" id="cola-daily" value="0" checked="">
+                <label class="form-check-label" for="cola-daily">
+                    Per Day
+                </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input cola_type" type="radio" name="cola_type" id="cola-fixed" value="1">
+                <label class="form-check-label" for="cola-fixed">
+                    Fixed
+                </label>
+                </div>
+            </div>
+            </div>
+        </div> <!-- Cola Type Wrapper -->
+        </div>
+    </fieldset>
+            <fieldset class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <legend class="col-form-label col-md-6 pt-0">Allowance Limit</legend>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control number" id="cola_limit" placeholder="0.00" name="cola_limit" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+    <h6 class="d-none">Allowances</h6>
+    <fieldset class="form-group d-none">
+        <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="allow_pera">PERA &amp; ACA</label>
+            <input type="text" class="form-control number" id="allow_pera" placeholder="0.00" name="allow_pera" value="0">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="allow_rice">RICE ALLOW.</label>
+            <input type="text" class="form-control number" id="allow_rice" placeholder="0.00" name="allow_rice" value="0">
+        </div>
+        </div>
+    </fieldset>
+    </div>
+</div>            <div class="card mb-3">
+  <div class="card-header">
+      Present Address
+  </div>
+  <div class="card-body">
+    <div class="form-row" style="flex-direction: column;">
+      <div class="form-group col-md-12">
+        <label for="bldg">Building Number/Name<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="bldg" placeholder="Building" name="bldg" required="">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="street">Street<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="street" placeholder="Street" name="street" required="">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="barangay">Barangay<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="barangay" placeholder="Barangay" name="barangay" required="">
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-md-6">
+          <label for="city">City<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="city" placeholder="City" name="city" required="">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="zipcode">Zip Code<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="zipcode" placeholder="Zip Code" name="zipcode" required="">
+        </div>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="province">Province<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="province" placeholder="Province" name="province" required="">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="region">Region<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="region" placeholder="region" name="region" required="">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="country">Country<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="country" placeholder="Country" name="country" required="">
+      </div>
+    </div>
+  </div>
+</div>            <div class="card mb-3">
+  <div class="card-header" style="position: relative;">
+    Permanent Address
+    <div class="autofill-wrapper">
+      <input type="checkbox" name="autofill" id="autofill" style="margin-right: 5px;">
+      <label for="autofill" style="line-height: 30px;">Same with present address</label>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="form-row" style="flex-direction: column;">
+      <div class="form-group col-md-12">
+        <label for="bldg1">Building Number/Name<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="bldg1" placeholder="Building" name="bldg1" required="required">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="street1">Street<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="street1" placeholder="Street" name="street1" required="required">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="barangay1">Barangay<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="barangay1" placeholder="Barangay" name="barangay1" required="">
+      </div>
+      <div class="row col-12">
+        <div class="form-group col-md-6">
+          <label for="city1">City<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="city1" placeholder="City" name="city1" required="">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="zipcode1">Zip Code<span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="zipcode1" placeholder="Zip code" name="zipcode1" required="">
+        </div>
+      </div>
+      <div class="form-group col-md-12">
+        <label for="province1">Province<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="province1" placeholder="Province" name="province1" required="">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="region1">Region<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="region1" placeholder="Region" name="region1" required="">
+      </div>
+      <div class="form-group col-md-12">
+        <label for="country1">Country<span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="country1" placeholder="Country" name="country1" required="required">
+      </div>
+    </div>
+  </div>
+</div>            <div class="card mb-3">
+    <div class="card-header">
+    Deduction/Contribution Information
+    </div>
+    <div class="card-body">
+    <h6>Employee Contributions / Deductions</h6>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="sss">SSS Contribution<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="sss" placeholder="0.00" name="sss" required="required">
+        </div>
+        <div class="form-group col-md-6">
+        <label for="philhealth">PhilHealth Contribution<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="philhealth" placeholder="0.00" name="philhealth" required="required">
+        </div>
+        <div class="form-group col-md-6">
+        <label for="hmdf">HMDF Contribution<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="hmdf" placeholder="0.00" name="hmdf" required="required">
+        </div>
+        <div class="form-group col-md-6">
+        <label for="gsis">Insurance<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="gsis" placeholder="0.00" name="gsis" required="required">
+        </div>
+        <div class="form-group col-md-4">
+        <label for="deduction">Other Deductions<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="deduction" placeholder="0.00" name="deduction" required="required">
+        </div>
+    </div> <!-- Deductions wrapper -->
+    <h6>Company Contribution for Employee Benefits</h6>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="sss_comcont">SSS Contribution<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="sss_comcont" placeholder="0.00" name="sss_comcont" required="required">
+        </div>
+        <div class="form-group col-md-6">
+        <label for="philhealth_comcont">PhilHealth Contribution<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="philhealth_comcont" placeholder="0.00" name="philhealth_comcont" required="required">
+        </div>
+        <div class="form-group col-md-6">
+        <label for="hmdf_comcont">HMDF Contribution<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="hmdf_comcont" placeholder="0.00" name="hmdf_comcont" required="required">
+        </div>
+        <div class="form-group col-md-6 d-none">
+        <label for="contri_gsis">GSIS Contribution<span class="text-danger">*</span></label>
+        <input type="text" class="form-control number" id="contri_gsis" placeholder="0.00" name="contri_gsis" required="required" value="0">
+        </div>
+    </div> <!-- Contributions wrapper -->
+    <h6>Adjustment</h6>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="adjustment">Other Adjustment<span class="text-danger">*</span></label>
+            <input type="text" class="form-control number" id="adjustment" placeholder="0.00" name="adjustment" required="required">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="late">Late amount per minute<span class="text-danger">*</span></label>
+            <input type="text" class="form-control number" id="late" placeholder="0.00" name="late" required="required">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="overtime_amount">Overtime Amount</label>
+          <input type="text" class="form-control number" id="overtime_amount" placeholder="0.00" name="overtime_amount">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="holiday_amount">Holiday Amount</label>
+          <input type="text" class="form-control number" id="holiday_amount" placeholder="0.00" name="holiday_amount">
+        </div>
+    </div> <!-- Adjustment wrapper -->
+    <h6>Tax Information</h6>
+    <div class="form-row assignments">
+        <div class="form-group col-md-6">
+        <div class="form-group row">
+            <div class="col-sm-6">TAX exempted?</div>
+            <div class="col-sm-6">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="tax-exemption" value="1" name="tax_exemption">
+                <label class="form-check-label" for="tax-exemption">
+                Yes
+                </label>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="form-group col-md-6">
+        <label for="tax_status">TAX Status</label>
+        <select id="tax_status" class="form-control" name="tax_status" required="required">
+            <option selected="">Choose...</option>
+            <option value="Z">Z</option>
+            <option value="S/ME">S/ME</option>
+            <option value="ME1/S1">ME1/S1</option>
+            <option value="ME2/S2">ME2/S2</option>
+            <option value="ME3/S3">ME3/S3</option>
+            <option value="ME4/S4">ME4/S4</option>
+        </select>
+        </div>
+    </div>
+    </div> <!-- Card -->
+</div>    
+</div> <!-- Additional Information Wrapper -->          </div>
+        </form></div>
+        <div class="form-row">
+          <div class="form-group col-md-12 mb-3">
+            <button type="submit" class="btn btn-primary btn-lg ml-3 pm-blue">Add New Employee</button>
+          </div>
+        </div>    
+      
+    </div>
+  </div> <!-- adduser-form -->
+</div><!-- /.container-fluid-->
+<script>
+  jQuery(document).ready(function() {
+    $('#autofill').on('click', function() {
+        let This = $(this);
+        let bldg = $('#bldg');
+        let bldg1 = $('#bldg1');
+        let street = $('#street');
+        let street1 = $('#street1');
+        let barangay = $('#barangay');
+        let barangay1 = $('#barangay1');
+        let city = $('#city');
+        let city1 = $('#city1');
+        let zipcode = $('#zipcode');
+        let zipcode1 = $('#zipcode1');
+        let province = $('#province');
+        let province1 = $('#province1');
+        let region = $('#region');
+        let region1 = $('#region1');
+        let country = $('#country');
+        let country1 = $('#country1');
+        // let address = $('#full_address');
+        // let address1 = $('#full_address1');
+        if (This.is(':checked')) {
+            if (bldg.val() === '' || street.val() === '' || barangay.val() === '' || city.val() === '' || zipcode.val() === '' || province.val() === '' || region.val() === '' || country.val() === '') {
+                alert('Please fill in the fields in Present address section first.');
+                This.prop('checked', false);
+            } else {
+                bldg1.val(bldg.val());
+                street1.val(street.val());
+                barangay1.val(barangay.val());
+                city1.val(city.val());
+                zipcode1.val(zipcode.val());
+                province1.val(province.val());
+                region1.val(region.val());
+                country1.val(country.val());
+                // address1.val(address.val());
+                This.prop('checked', true);
+            }
+        } else {
+            bldg1.val('');
+            street1.val('');
+            barangay1.val('');
+            city1.val('');
+            zipcode1.val('');
+            province1.val('');
+            region1.val('');
+            country1.val('');
+            // address1.val('');
+        }
+    });
+  });
+</script>
+<!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/add-user.php#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./Add New Employee_files/jquery.min(1).js.download"></script>
+    <script src="./Add New Employee_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./Add New Employee_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./Add New Employee_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./Add New Employee_files/jquery.dataTables.js.download"></script>
+  <script src="./Add New Employee_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./Add New Employee_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./Add New Employee_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./Add New Employee_files/jquery-ui.js.download"></script>
+  <script src="./Add New Employee_files/jquery-select2.js.download"></script>
+  <script src="./Add New Employee_files/jquery.timepicker.js.download"></script>
+  <script src="./Add New Employee_files/datepair.min.js.download"></script>
+  <script src="./Add New Employee_files/fancyTable.js.download"></script>
+  <script src="./Add New Employee_files/scripts.js.download"></script>
+  <script src="./Add New Employee_files/settings-scripts.js.download"></script>
+  <script src="./Add New Employee_files/timecard-scripts.js.download"></script>
+  <script src="./Add New Employee_files/download.js.download"></script>
+        <script src="./Add New Employee_files/required-indicator.js.download"></script>
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

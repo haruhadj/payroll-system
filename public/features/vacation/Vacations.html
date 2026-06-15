@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)https://payroll-master.com/demo/leaves.php?act=add -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./Vacations_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./Vacations_files/datatable-min.css" rel="stylesheet">
+  <link href="./Vacations_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./Vacations_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Vacations_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./Vacations_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./Vacations_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./Vacations_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./Vacations_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./Vacations_files/custom-style.css">
+ 
+    <link href="./Vacations_files/style.css" rel="stylesheet">
+  <script src="./Vacations_files/jquery.min.js.download"></script>
+  <script src="./Vacations_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./Vacations_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/leaves.php?act=add#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/leaves.php?act=add#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/leaves.php?act=add#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation" aria-describedby="tooltip13195">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/leaves.php?act=add#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees" aria-describedby="tooltip910380">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/leaves.php?act=add#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/leaves.php?act=add#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/leaves.php?act=add#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/leaves.php?act=add#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./Vacations_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a></a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/leaves.php?act=add#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Vacations</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div id="payroll-timecard-wrapper" class="row">
+    <div class="col-12 mb-3">
+        <div class="card mb-3">
+          <div class="card-header">
+            Search Vacations
+          </div> <!-- card Header -->
+          <div class="card-body">
+            <form id="search-vacations-form" method="POST" action="https://payroll-master.com/demo/leaves.php">
+              <div class="form-row align-items-center">
+                <div class="form-group col-md-3 mb-3">
+                  <label class="sr-only" for="dateFrom">From</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">From</div>
+                    </div>
+                    <input type="text" class="form-control datepicker hasDatepicker" id="dateFrom" name="dateFrom" placeholder="yyyy-mm-dd" value="2026-06-01" required="required" autocomplete="off">
+                  </div>
+                </div>
+                <div class="form-group col-md-3 mb-3">
+                  <label class="sr-only" for="dateTo">To</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">To</div>
+                    </div>
+                    <input type="text" class="form-control datepicker hasDatepicker" id="dateTo" name="dateTo" placeholder="yyyy-mm-dd" value="2026-06-30" required="required" autocomplete="off">
+                  </div>
+                </div>
+                <div class="form-group col-md-4 mb-3">
+                  <label class="sr-only" for="employeeList">Employee</label>
+                  <select class="form-control select2 select2-hidden-accessible" id="employeeList" name="employee" data-select2-id="employeeList" tabindex="-1" aria-hidden="true">
+                    <option value="" data-select2-id="2">All Employee</option>
+                    <option value="187"> User, Employee</option><option value="199">Cruz, Chelsea</option><option value="195">Yap, Lois Anna Keziah</option>                  </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: 525.984px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-employeeList-container"><span class="select2-selection__rendered" id="select2-employeeList-container" role="textbox" aria-readonly="true" title="All Employee">All Employee</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                </div>
+                <div class="form-group col-auto mb-3">
+                  <button type="submit" name="generate-vacations" class="btn btn-primary btn-lg pm-blue">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div> <!--  card-body -->
+      </div> <!-- Card wrapper -->
+    </div> <!-- Content Wrapper -->
+    <div class="col-12 mb-3">
+      <div class="card mb-3">
+        <div class="card-header">
+          <strong>Vacations List</strong> From: <strong>2026-06-01</strong> To: <strong>2026-06-30</strong>
+          <button id="add-log" style="float: right;width: initial;" class="btn btn-sm btn-outline-success _success" data-toggle="modal" data-target="#userLeaveApplicationModal">Add Leave</button>
+        </div> <!-- card Header -->
+        <div class="card-body">
+            <table class="table table-bordered" id="leaveList" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Employee Name</th>
+                        <th>Leave Type</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                        <td colspan="5">No Leave applied</td>
+                    </tr>                </tbody>
+            </table>
+        </div> <!-- card body -->
+      </div> <!-- .card -->
+    </div> <!-- Card Wrapper -->
+  </div> <!-- payroll-Timecard-wrapper -->
+</div><!-- /.container-fluid-->
+<!-- Modal -->
+<!-- Modal Pop up -->
+<div class="modal fade" id="userLeaveApplicationModal" role="dialog" aria-labelledby="userApplication" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="userApplication">Leave Application Form</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          	<form id="addLeave-form">
+                <div class="form-row">
+                  <div class="col-md-12 mb-6">
+                    <div class="card mb-3">
+                      <div class="card-body">
+                        <div class="col-md-12 mb-3 select2-full">
+                        <select id="employee" class="form-control select2 select2-hidden-accessible" name="employee" required="" data-select2-id="employee" tabindex="-1" aria-hidden="true">
+                          <option value="" data-select2-id="4">--Select Employee--</option>
+                          <option value="187"> User, Employee</option><option value="199">Cruz, Chelsea</option><option value="195">Yap, Lois Anna Keziah</option>                        </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="3" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-employee-container"><span class="select2-selection__rendered" id="select2-employee-container" role="textbox" aria-readonly="true" title="--Select Employee--">--Select Employee--</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>   
+                        </div>
+					  	<div class="col-md-12 mb-3">
+							<label class="sr-only" for="leaveDate">Date</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+								<div class="input-group-text">Date</div>
+								</div>
+								<input type="text" class="form-control datepicker hasDatepicker" id="leaveDate" name="leaveDate" placeholder="yyyy-mm-dd" value="" required="required" autocomplete="off">
+							</div>
+						</div>
+                        <div class="col-md-12 mb-3">
+                          <label class="sr-only" for="leave_type">Apply Leave</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">Apply Leave</div>
+                            </div>
+                            <select id="leave_type" class="form-control" name="leave_type" required="">
+                              <option value="">--Select Leave--</option>
+                              <option value="1">Sick Leave</option><option value="2">Vacation Leave</option><option value="4">Maternity Leave</option><option value="5">Paternity Leave</option><option value="8">Parental leave for solo parents</option><option value="9">Special leave for women</option>                            </select>   
+                          </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                          <label class="sr-only" for="am_pm">AM/PM</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">AM/PM</div>
+                            </div>
+                            <select id="am_pm" class="form-control" name="am_pm">
+                              <option value="">Whole Day</option>
+                              <option value="1">AM</option><option value="2">PM</option>                            </select>   
+                          </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg pm-blue">Apply Leave</button>
+                      </div>
+                    </div><!--  card  --> 
+                  </div>     
+                </div>  
+            </form>  <!-- addUserLeave-form  --> 
+        </div>
+      </div>
+     <!-- Schedule Form -->
+  </div>
+</div>
+</div><!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/leaves.php?act=add#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./Vacations_files/jquery.min(1).js.download"></script>
+    <script src="./Vacations_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./Vacations_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./Vacations_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./Vacations_files/jquery.dataTables.js.download"></script>
+  <script src="./Vacations_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./Vacations_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./Vacations_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./Vacations_files/jquery-ui.js.download"></script>
+  <script src="./Vacations_files/jquery-select2.js.download"></script>
+  <script src="./Vacations_files/jquery.timepicker.js.download"></script>
+  <script src="./Vacations_files/datepair.min.js.download"></script>
+  <script src="./Vacations_files/fancyTable.js.download"></script>
+  <script src="./Vacations_files/scripts.js.download"></script>
+  <script src="./Vacations_files/settings-scripts.js.download"></script>
+  <script src="./Vacations_files/timecard-scripts.js.download"></script>
+  <script src="./Vacations_files/download.js.download"></script>
+    <script>
+	  jQuery(document).ready(function($){        
+		  $('#addLogModal, #userLeaveApplicationModal').modal('show');
+    }); 
+  </script>
+        <script src="./Vacations_files/required-indicator.js.download"></script>
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"><div style="display: none;">--Select Employee--</div><div style="display: none;">--Select Employee--</div><div>--Select Employee--</div></div><div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><div class="tooltip navbar-sidenav-tooltip fade bs-tooltip-right" role="tooltip" style="pointer-events: none; position: absolute; transform: translate3d(250px, 316px, 0px); top: 0px; left: 0px; will-change: transform;" id="tooltip910380" x-placement="right"><div class="arrow" style="top: 0px;"></div><div class="tooltip-inner">Employees</div></div><div class="tooltip navbar-sidenav-tooltip fade bs-tooltip-right show" role="tooltip" style="pointer-events: none; position: absolute; transform: translate3d(250px, 276px, 0px); top: 0px; left: 0px; will-change: transform;" id="tooltip13195" x-placement="right"><div class="arrow" style="top: 0px;"></div><div class="tooltip-inner">Vacation</div></div></body></html>

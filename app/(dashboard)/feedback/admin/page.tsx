@@ -107,15 +107,15 @@ export default function FeedbackAdminPage() {
       </div>
 
       {/* All feedback entries */}
-      <div className="rounded-md border bg-background">
+      <div className="rounded-md border bg-background overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Employee</TableHead>
-              <TableHead>Period</TableHead>
+              <TableHead className="hidden sm:table-cell">Period</TableHead>
               <TableHead>Rating</TableHead>
-              <TableHead>Comment</TableHead>
-              <TableHead>Date</TableHead>
+              <TableHead className="hidden md:table-cell">Comment</TableHead>
+              <TableHead className="hidden sm:table-cell">Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -132,18 +132,19 @@ export default function FeedbackAdminPage() {
                     <TableCell>
                       <p className="font-medium">{f.employee?.user?.name ?? "—"}</p>
                       <p className="text-xs text-muted-foreground">{f.employee?.user?.email}</p>
+                      <p className="text-xs text-muted-foreground sm:hidden">{f.period?.label}</p>
                     </TableCell>
-                    <TableCell>{f.period?.label}</TableCell>
+                    <TableCell className="hidden sm:table-cell">{f.period?.label}</TableCell>
                     <TableCell>
                       <span className="text-yellow-500">{"★".repeat(f.rating)}</span>
                       <span className="text-muted-foreground">{"★".repeat(5 - f.rating)}</span>
                     </TableCell>
-                    <TableCell className="max-w-xs">
+                    <TableCell className="max-w-xs hidden md:table-cell">
                       <p className="text-sm text-muted-foreground truncate">
                         {f.comment ?? "—"}
                       </p>
                     </TableCell>
-                    <TableCell className="text-sm text-muted-foreground">
+                    <TableCell className="text-sm text-muted-foreground hidden sm:table-cell">
                       {new Date(f.createdAt).toLocaleDateString("en-PH")}
                     </TableCell>
                   </TableRow>

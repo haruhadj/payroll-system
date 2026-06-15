@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://payroll-master.com/demo/salary-benefits.php?uid=185 -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./Salary Benefits Information_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./Salary Benefits Information_files/datatable-min.css" rel="stylesheet">
+  <link href="./Salary Benefits Information_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./Salary Benefits Information_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Salary Benefits Information_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./Salary Benefits Information_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./Salary Benefits Information_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./Salary Benefits Information_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./Salary Benefits Information_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./Salary Benefits Information_files/custom-style.css">
+ 
+    <link href="./Salary Benefits Information_files/style.css" rel="stylesheet">
+  <script src="./Salary Benefits Information_files/jquery.min.js.download"></script>
+  <script src="./Salary Benefits Information_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./Salary Benefits Information_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/salary-benefits.php?uid=185#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/salary-benefits.php?uid=185#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/salary-benefits.php?uid=185#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/salary-benefits.php?uid=185#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/salary-benefits.php?uid=185#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/salary-benefits.php?uid=185#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/salary-benefits.php?uid=185#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/salary-benefits.php?uid=185#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./Salary Benefits Information_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a>
+</a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/salary-benefits.php?uid=185#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Update Employee</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div class="row">
+    <div class="col-12">
+      <div>
+  <div class="tabs-main">
+    <!-- Main Menu List -->
+    <ul>
+      <li class=""><a id="personal-info" href="https://payroll-master.com/demo/personal-info.php?uid=185" class="header tabs-ui">Personal Info</a></li>
+      <li class=""><a id="qualifications" href="https://payroll-master.com/demo/qualifications.php?uid=185" class="header tabs-ui">Qualifications</a></li>
+      <li class=""><a id="emp-history" href="https://payroll-master.com/demo/employee-history.php?uid=185" class="header tabs-ui">Employment History</a></li>
+      <li class=""><a id="contract-terms" href="https://payroll-master.com/demo/contract-terms.php?uid=185" class="header tabs-ui">Employment Contract</a></li>
+      <li class="active"><a id="salary" href="https://payroll-master.com/demo/salary-benefits.php?uid=185" class="header tabs-ui">Salary/Benefits Information</a></li>
+      <li class=""><a id="loans-leaves" href="https://payroll-master.com/demo/loans-leave.php?uid=185" class="header tabs-ui">Loans, Leave &amp; Schedule</a></li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .tabs-main ul {
+    display: inline-flex !important;
+    list-style: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+    flex-wrap: wrap !important;
+  }
+
+  .tabs-main ul li {
+      padding: 5px 10px !important;
+      border: 1px solid #f0f0f0 !important;
+      text-align: center !important;
+  }
+
+  .tabs-main ul li a {
+      font-size: 12px !important;
+      text-align: center !important;
+      line-height: 14px !important;
+  }
+  .tabs-main ul li a:hover {
+    text-decoration: none;
+  }
+  .tabs-main ul li:hover, .tabs-main ul li:active, .tabs-main ul li.active {
+      background-color: #254a87 !important;
+  }
+  .tabs-main ul li:hover a, .tabs-main ul li:active a, .tabs-main ul li.active a {
+    color: #ffffff;
+  }
+  /* .breadcrumb.bg-info.text-white {
+    background-color: #254a87 !important;
+  } */
+</style>
+            <div class="breadcrumb bg-info text-white">
+          Salary/Benefits Information
+        </div>
+      <div class="row">
+        <div class="col-md-12 wptf-section">
+          <div class="card mb-3">
+    <div class="card-header">
+    Salary/Benefits Information
+    </div>
+    <div class="card-body">
+        <form action="https://payroll-master.com/demo/salary-benefits.php?uid=185#" id="salaryBenefitsForm" method="POST">
+            <h6>Salary</h6>
+            <fieldset class="form-group">
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                    <legend class="col-form-label col-md-6 pt-0">Basic Salary</legend>
+                    <div class="col-md-8">
+                    <input type="text" class="form-control number" id="basic_pay" placeholder="0.00" name="basic_pay" value="500" required="required">
+                    </div>
+                    </div>
+                </div> <!-- Basic Pay Wrapper -->
+                <div class="col-md-6">
+                    <div class="row">
+                        <legend class="col-form-label col-md-4 pt-0">Salary Type</legend>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                            <input class="form-check-input cutoff" type="radio" name="cutoff" checked="" id="daily" value="0">
+                            <label class="form-check-label" for="daily">
+                                Daily
+                            </label>
+                            </div>
+                            <div class="form-check">
+                            <input class="form-check-input cutoff" type="radio" name="cutoff" id="monthly" value="1">
+                            <label class="form-check-label" for="monthly">
+                                Monthly
+                            </label>
+                            </div>
+                            <div class="form-check">
+                            <input class="form-check-input cutoff" type="radio" name="cutoff" id="semi-monthly" value="2">
+                            <label class="form-check-label" for="semi-monthly">
+                                Semi Monthly
+                            </label>
+                            </div>
+                            <div class="form-check">
+                            <input class="form-check-input cutoff" type="radio" name="cutoff" id="monthly-fixed" value="3">
+                            <label class="form-check-label" for="monthly-fixed">
+                                Monthly Fixed
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Cutoff Type Wrapper-->
+                </div>
+            </fieldset>
+            <h6>ALLOWANCE</h6>
+            <fieldset class="form-group">
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <legend class="col-form-label col-md-6 pt-0">Allowance Amount</legend>
+                        <div class="col-md-8">
+                        <input type="text" class="form-control number" id="cola" placeholder="0.00" name="cola" value="40" required="required">
+                        </div>
+                    </div>
+                </div> <!-- Cutoff Type Wrapper-->
+                <div class="col-md-6">
+                    <div class="row">
+                        <legend class="col-form-label col-md-4 pt-0">Allowance Type</legend>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                            <input class="form-check-input cola_type" type="radio" name="cola_type" checked="" id="cola-daily" value="0">
+                            <label class="form-check-label" for="cola-daily">
+                                Per Day
+                            </label>
+                            </div>
+                            <div class="form-check">
+                            <input class="form-check-input cola_type" type="radio" name="cola_type" id="cola-fixed" value="1">
+                            <label class="form-check-label" for="cola-fixed">
+                                Fixed
+                            </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d-none">
+                        <legend class="col-form-label col-md-4 pt-0">Night Differential</legend>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="is_nightdiff_enabled" id="is_nightdiff_enabled" checked="" value="1">
+                                <label class="form-check-label" for="is_nightdiff_enabled">
+                                   Enable
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Cola Type Wrapper -->
+                </div>
+            </fieldset>
+            <fieldset class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <legend class="col-form-label col-md-6 pt-0">Allowance Limit</legend>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control number" id="cola_limit" placeholder="0.00" name="cola_limit" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <h6 class="d-none">Allowances</h6>
+            <fieldset class="form-group d-none">
+                <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="allow_pera">PERA &amp; ACA<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="allow_pera" placeholder="0.00" value="0" name="allow_pera" required="required">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="allow_rice">RICE ALLOW.<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="allow_rice" placeholder="0.00" value="0" name="allow_rice" required="required">
+                </div>
+                </div>
+            </fieldset>
+            <div class="card-header inner-card">
+                <div class="form-row">
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2 button-right">
+                        <button type="submit" class="btn btn-primary btn-lg">Update Records</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="id" value="185">
+        </form>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+    Deduction/Contribution Information
+    </div>
+    <div class="card-body">
+        <h6>Employee Contributions / Deductions</h6>
+        <form action="https://payroll-master.com/demo/salary-benefits.php?uid=185#" id="deductionsForm">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="sss">SSS Contribution<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="sss" placeholder="0.00" name="sss" value="100" required="required">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="philhealth">PhilHealth Contribution<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="philhealth" placeholder="0.00" value="100" name="philhealth" required="required">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="hmdf">HMDF Contribution<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="hmdf" placeholder="0.00" value="100" name="hmdf" required="required">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="gsis">Insurance<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="gsis" placeholder="0.00" name="gsis" required="required" value="100">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="deduction">Other Deductions<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="deduction" placeholder="0.00" name="deduction" value="0" required="required">
+                </div>
+            </div> <!-- Deductions wrapper -->
+            <h6>Company Contribution for Employee Benefits</h6>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="sss_comcont">SSS Contribution<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="sss_comcont" placeholder="0.00" name="sss_comcont" value="0" required="required">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="philhealth_comcont">PhilHealth Contribution<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="philhealth_comcont" placeholder="0.00" name="philhealth_comcont" value="0" required="required">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="hmdf_comcont">HMDF Contribution<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="hmdf_comcont" placeholder="0.00" name="hmdf_comcont" value="0" required="required">
+                </div>
+                <div class="form-group col-md-6 d-none">
+                    <label for="gsis_comcont">GSIS Contribution<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="gsis_comcont" placeholder="0.00" name="gsis_comcont" required="required" value="0">
+                </div>
+            </div> <!-- Contributions wrapper -->
+            <h6>Adjustment</h6>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="adjustment">Other Adjustment<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="adjustment" placeholder="0.00" name="adjustment" value="0" required="required">
+                </div>
+            </div> <!-- Adjustment wrapper -->
+            <h6>Individual Amounts</h6>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="late">Late amount per minute</label>
+                    <input type="text" class="form-control number" id="late" placeholder="0.00" name="late" value="0">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="overtime">Overtime Amount</label>
+                    <input type="text" class="form-control number" id="overtime" placeholder="0.00" name="overtime" value="0">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="holiday">Holiday Amount</label>
+                    <input type="text" class="form-control number" id="holiday" placeholder="0.00" name="holiday" value="0">
+                </div>
+            </div>
+            <h6>Tax Information</h6>
+            <div class="form-row assignments">
+                <div class="form-group col-md-6">
+                <div class="form-group row">
+                    <div class="col-sm-6">TAX exempted?</div>
+                    <div class="col-sm-6">
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="tax-exemption" value="1" checked="" name="tax_exemption">
+                        <label class="form-check-label" for="tax-exemption">
+                            Yes
+                        </label>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="tax_status">TAX Status</label>
+                    <select id="tax_status" class="form-control" name="tax_status" required="required">
+                        <option>Choose...</option>
+                        <option value="Z">Z</option>
+                        <option value="S/ME">S/ME</option>
+                        <option value="ME1/S1" selected="">ME1/S1</option>
+                        <option value="ME2/S2">ME2/S2</option>
+                        <option value="ME3/S3">ME3/S3</option>
+                        <option value="ME4/S4">ME4/S4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-header inner-card">
+                <div class="form-row">
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2 button-right">
+                        <button type="submit" class="btn btn-primary btn-lg">Update Records</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="id" value="185">
+        </form>
+    </div> <!-- Card -->
+</div>        </div>          
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/salary-benefits.php?uid=185#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./Salary Benefits Information_files/jquery.min(1).js.download"></script>
+    <script src="./Salary Benefits Information_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./Salary Benefits Information_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./Salary Benefits Information_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./Salary Benefits Information_files/jquery.dataTables.js.download"></script>
+  <script src="./Salary Benefits Information_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./Salary Benefits Information_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./Salary Benefits Information_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./Salary Benefits Information_files/jquery-ui.js.download"></script>
+  <script src="./Salary Benefits Information_files/jquery-select2.js.download"></script>
+  <script src="./Salary Benefits Information_files/jquery.timepicker.js.download"></script>
+  <script src="./Salary Benefits Information_files/datepair.min.js.download"></script>
+  <script src="./Salary Benefits Information_files/fancyTable.js.download"></script>
+  <script src="./Salary Benefits Information_files/scripts.js.download"></script>
+  <script src="./Salary Benefits Information_files/settings-scripts.js.download"></script>
+  <script src="./Salary Benefits Information_files/timecard-scripts.js.download"></script>
+  <script src="./Salary Benefits Information_files/download.js.download"></script>
+          <script type="text/javascript" id="select-twos">
+        $(document).ready(function() {
+          // select 2
+          setTimeout(() => {
+            $('.custom-select-2').select2();
+          }, 300)
+        });
+      </script>
+      <script src="./Salary Benefits Information_files/custom-ajax.js.download"></script>
+        <script src="./Salary Benefits Information_files/required-indicator.js.download"></script>
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

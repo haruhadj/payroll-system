@@ -4,11 +4,15 @@ import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
 import { useSession } from "@/lib/auth/client"
 import { usePayslips } from "@/lib/hooks/usePayslips"
+import { useTimeLogs } from "@/lib/hooks/useTimeLogs"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
-import { formatCurrency } from "@/lib/utils"
+import { formatCurrency, cn } from "@/lib/utils"
+import { TimeCard } from "@/components/time-card"
+import { MonthlyLeavesCard } from "@/components/monthly-leaves-card"
+import { OvertimeRequestsCard } from "@/components/overtime-requests-card"
 import { Users, FileText, Star, CalendarRange, MessageSquare } from "lucide-react"
 
 export default function DashboardPage() {
@@ -48,7 +52,7 @@ function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Dashboard</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">Payroll system overview</p>
       </div>
 
@@ -58,26 +62,44 @@ function AdminDashboard() {
           value={data?.totalEmployees}
           icon={Users}
           loading={isLoading}
+          tone="indigo"
         />
         <StatCard
           title="Pending Payslips"
           value={data?.pendingPayslips}
           icon={FileText}
           loading={isLoading}
+          tone="amber"
         />
         <StatCard
           title="Active Periods"
           value={data?.activePayrollPeriods}
           icon={CalendarRange}
           loading={isLoading}
+          tone="sky"
         />
         <StatCard
           title="Avg. Feedback Rating"
           value={data?.averageFeedbackRating != null ? `${data.averageFeedbackRating} / 5` : "—"}
           icon={Star}
           loading={isLoading}
+          tone="emerald"
         />
       </div>
+
+      {/* Daily time card */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Time Card</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <TimeCard />
+        </CardContent>
+      </Card>
+
+      {/* Monthly leaves & overtime */}
+      <MonthlyLeavesCard />
+      <OvertimeRequestsCard month />
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Latest period */}
@@ -152,46 +174,27 @@ function EmployeeDashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-2xl font-bold tracking-tight">
           Welcome{session?.user?.name ? `, ${session.user.name.split(" ")[0]}` : ""}
         </h1>
         <p className="text-muted-foreground">Your payroll at a glance</p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Latest Net Pay
-            </CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            {isLoading ? (
-              <Skeleton className="h-8 w-24" />
-            ) : latest ? (
-              <p className="text-2xl font-bold">{formatCurrency(parseFloat(latest.netPay))}</p>
-            ) : (
-              <p className="text-muted-foreground text-sm">No payslips yet</p>
-            )}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">
-              Total Payslips
-            </CardTitle>
-            <CalendarRange className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            {isLoading ? (
-              <Skeleton className="h-8 w-12" />
-            ) : (
-              <p className="text-2xl font-bold">{payslips?.length ?? 0}</p>
-            )}
-          </CardContent>
-        </Card>
+        <StatCard
+          title="Latest Net Pay"
+          value={latest ? formatCurrency(parseFloat(latest.netPay)) : "No payslips yet"}
+          icon={FileText}
+          loading={isLoading}
+          tone="emerald"
+        />
+        <StatCard
+          title="Total Payslips"
+          value={payslips?.length ?? 0}
+          icon={CalendarRange}
+          loading={isLoading}
+          tone="indigo"
+        />
       </div>
 
       <Card>
@@ -223,6 +226,11 @@ function EmployeeDashboard() {
         </CardContent>
       </Card>
 
+      {/* Today's attendance + apply leave / overtime */}
+      <EmployeeTodayCard />
+      <MonthlyLeavesCard />
+      <OvertimeRequestsCard month />
+
       <div className="flex gap-3">
         <Link href="/payslips">
           <Button variant="outline" className="gap-2">
@@ -241,29 +249,108 @@ function EmployeeDashboard() {
   )
 }
 
+function todayStr() {
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
+    d.getDate(),
+  ).padStart(2, "0")}`
+}
+
+function punchTime(iso: string | null) {
+  if (!iso) return "—"
+  return new Date(iso).toLocaleTimeString("en-PH", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  })
+}
+
+function EmployeeTodayCard() {
+  const today = todayStr()
+  const { data: logs, isLoading } = useTimeLogs({ from: today, to: today })
+  const log = logs?.[0]
+
+  const seg = (a: string | null, b: string | null) =>
+    a && b ? Math.max(0, (new Date(b).getTime() - new Date(a).getTime()) / 3_600_000) : 0
+  const workHours = log ? seg(log.amIn, log.amOut) + seg(log.pmIn, log.pmOut) : 0
+
+  const cells: { label: string; value: string }[] = [
+    { label: "Log In (AM)", value: punchTime(log?.amIn ?? null) },
+    { label: "Log Out (AM)", value: punchTime(log?.amOut ?? null) },
+    { label: "Log In (PM)", value: punchTime(log?.pmIn ?? null) },
+    { label: "Log Out (PM)", value: punchTime(log?.pmOut ?? null) },
+    { label: "OT In", value: punchTime(log?.otIn ?? null) },
+    { label: "OT Out", value: punchTime(log?.otOut ?? null) },
+  ]
+
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between gap-3">
+        <CardTitle className="text-base">My Time Card — {today}</CardTitle>
+        {!isLoading && (
+          <span className="text-sm text-muted-foreground">
+            Work hours: <span className="font-mono font-medium">{workHours.toFixed(2)}</span>
+          </span>
+        )}
+      </CardHeader>
+      <CardContent>
+        {isLoading ? (
+          <Skeleton className="h-16 w-full" />
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {cells.map((c) => (
+              <div key={c.label} className="rounded-md border p-2 text-center">
+                <p className="text-[11px] text-muted-foreground">{c.label}</p>
+                <p className="font-mono text-sm">{c.value}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  )
+}
+
+const STAT_TONES: Record<string, string> = {
+  indigo: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+  violet: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
+  sky: "bg-sky-500/10 text-sky-600 dark:text-sky-400",
+  emerald: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+  amber: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
+}
+
 function StatCard({
   title,
   value,
   icon: Icon,
   loading,
+  tone = "indigo",
 }: {
   title: string
   value: any
   icon: any
   loading: boolean
+  tone?: keyof typeof STAT_TONES
 }) {
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
-        <Icon className="h-4 w-4 text-muted-foreground" />
-      </CardHeader>
-      <CardContent>
-        {loading ? (
-          <Skeleton className="h-8 w-20" />
-        ) : (
-          <p className="text-2xl font-bold">{value ?? "—"}</p>
-        )}
+    <Card className="transition-shadow hover:shadow-md">
+      <CardContent className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-sm font-medium text-muted-foreground">{title}</p>
+          {loading ? (
+            <Skeleton className="mt-2 h-8 w-20" />
+          ) : (
+            <p className="mt-1 text-2xl font-bold tracking-tight">{value ?? "—"}</p>
+          )}
+        </div>
+        <div
+          className={cn(
+            "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl",
+            STAT_TONES[tone],
+          )}
+        >
+          <Icon className="h-5 w-5" />
+        </div>
       </CardContent>
     </Card>
   )

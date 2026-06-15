@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)https://payroll-master.com/demo/update-user.php?uid=185 -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./Personal Information_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./Personal Information_files/datatable-min.css" rel="stylesheet">
+  <link href="./Personal Information_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./Personal Information_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Personal Information_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./Personal Information_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./Personal Information_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./Personal Information_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./Personal Information_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./Personal Information_files/custom-style.css">
+ 
+      <link href="./Personal Information_files/fullcalendar.min.css" rel="stylesheet">
+        <link href="./Personal Information_files/croppie.css" rel="stylesheet">
+    <link href="./Personal Information_files/dropzone.css" rel="stylesheet">  <link href="./Personal Information_files/style.css" rel="stylesheet">
+  <script src="./Personal Information_files/jquery.min.js.download"></script>
+  <script src="./Personal Information_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./Personal Information_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top" style="">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/update-user.php?uid=185#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/update-user.php?uid=185#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/update-user.php?uid=185#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/update-user.php?uid=185#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/update-user.php?uid=185#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/update-user.php?uid=185#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/update-user.php?uid=185#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/update-user.php?uid=185#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./Personal Information_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a></a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/update-user.php?uid=185#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Update Employee</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div class="container-fluid">
+   <!-- Icon Cards-->
+   <!-- <div id="adduser-form" class="row"> -->
+    <div class="">
+      <div>
+  <div class="tabs-main">
+    <!-- Main Menu List -->
+    <ul>
+      <li class="active"><a id="personal-info" href="https://payroll-master.com/demo/personal-info.php?uid=185" class="header tabs-ui">Personal Info</a></li>
+      <li class=""><a id="qualifications" href="https://payroll-master.com/demo/qualifications.php?uid=185" class="header tabs-ui">Qualifications</a></li>
+      <li class=""><a id="emp-history" href="https://payroll-master.com/demo/employee-history.php?uid=185" class="header tabs-ui">Employment History</a></li>
+      <li class=""><a id="contract-terms" href="https://payroll-master.com/demo/contract-terms.php?uid=185" class="header tabs-ui">Employment Contract</a></li>
+      <li class=""><a id="salary" href="https://payroll-master.com/demo/salary-benefits.php?uid=185" class="header tabs-ui">Salary/Benefits Information</a></li>
+      <li class=""><a id="loans-leaves" href="https://payroll-master.com/demo/loans-leave.php?uid=185" class="header tabs-ui">Loans, Leave &amp; Schedule</a></li>
+    </ul>
+  </div>
+</div>
+
+<style>
+  .tabs-main ul {
+    display: inline-flex !important;
+    list-style: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+    flex-wrap: wrap !important;
+  }
+
+  .tabs-main ul li {
+      padding: 5px 10px !important;
+      border: 1px solid #f0f0f0 !important;
+      text-align: center !important;
+  }
+
+  .tabs-main ul li a {
+      font-size: 12px !important;
+      text-align: center !important;
+      line-height: 14px !important;
+  }
+  .tabs-main ul li a:hover {
+    text-decoration: none;
+  }
+  .tabs-main ul li:hover, .tabs-main ul li:active, .tabs-main ul li.active {
+      background-color: #254a87 !important;
+  }
+  .tabs-main ul li:hover a, .tabs-main ul li:active a, .tabs-main ul li.active a {
+    color: #ffffff;
+  }
+  /* .breadcrumb.bg-info.text-white {
+    background-color: #254a87 !important;
+  } */
+</style>
+            <div class="breadcrumb bg-info text-white">
+          Personal Information
+        </div>
+        <div class="row">
+          <div id="personal-info" class="col-md-12 wptf-section">
+              <div class="sub-header">
+  <!-- Tabs navs -->
+  <div class="tabs ui-tabs ui-corner-all ui-widget ui-widget-content">
+  <ul id="tabs-nav" role="tablist" class="ui-tabs-nav ui-corner-all ui-helper-reset ui-helper-clearfix ui-widget-header">
+    <li class="active ui-tabs-tab ui-corner-top ui-state-default ui-tab ui-tabs-active ui-state-active" role="tab" tabindex="0" aria-controls="tab1" aria-labelledby="ui-id-1" aria-selected="true" aria-expanded="true"><a href="https://payroll-master.com/demo/update-user.php?uid=185#tab1" tabindex="-1" class="ui-tabs-anchor" id="ui-id-1">Personal Info 1</a></li>
+    <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tab2" aria-labelledby="ui-id-2" aria-selected="false" aria-expanded="false"><a href="https://payroll-master.com/demo/update-user.php?uid=185#tab2" tabindex="-1" class="ui-tabs-anchor" id="ui-id-2">Personal Info 2</a></li>
+    <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tab3" aria-labelledby="ui-id-3" aria-selected="false" aria-expanded="false"><a href="https://payroll-master.com/demo/update-user.php?uid=185#tab3" tabindex="-1" class="ui-tabs-anchor" id="ui-id-3">Legal Documents</a></li>
+    <li role="tab" tabindex="-1" class="ui-tabs-tab ui-corner-top ui-state-default ui-tab" aria-controls="tab4" aria-labelledby="ui-id-4" aria-selected="false" aria-expanded="false"><a href="https://payroll-master.com/demo/update-user.php?uid=185#tab4" tabindex="-1" class="ui-tabs-anchor" id="ui-id-4">Emergency Contact</a></li>
+  </ul> <!-- END tabs-nav -->
+  <div id="tabs-content">
+    <div id="tab1" class="tab-content ui-tabs-panel ui-corner-bottom ui-widget-content" style="display: block;" aria-labelledby="ui-id-1" role="tabpanel" aria-hidden="false">
+      <form id="personal_info_1" enctype="multipart/form-data" autocomplete="off">
+        <section>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="form-group col-md-12">
+                                    <div id="img-wrapper" style="border-radius: 50%;">
+                                        <img src="./Personal Information_files/185.jpg" id="emp_profile_pic" style="object-fit: cover; width: 100%; height: 100%; border-radius: 50%;">
+                                    </div>
+                                </div>
+                                <label class="d-block">
+                                    <button type="button" data-target="#uploadAvatar" data-toggle="modal" class="btn btn-primary pm-blue btn-lg d-block">Change Avatar</button>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <div class="card">
+                        <div class="card-header" style="color: #FF0000;">
+                            Note: Please put N/A if the field does not apply to you.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Personal Information
+                        </div>
+                        <div class="card-body">
+                                <div class="form-group">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12 d-none">
+                                            <label for="fullname">Full Name<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="fullname" name="fullname" value="Admin Admin Admin" required="required">
+                                        </div>
+                                        <div class="form-group col-md-12 d-none">
+                                            <label for="title">Title</label>
+                                            <select name="title" id="title" class="form-select custom-select-2 select2-hidden-accessible" data-select2-id="title" tabindex="-1" aria-hidden="true">
+                                                <option value="" data-select2-id="2">Select Title</option>
+                                                                                                                                                        <option value="Mr">Mr</option>
+                                                                                                                                                        <option value="Mrs">Mrs</option>
+                                                                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-title-container"><span class="select2-selection__rendered" id="select2-title-container" role="textbox" aria-readonly="true" title="Select Title">Select Title</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="fname">First Name<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="fname" name="fname" value="Admin" required="required">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="mname">Middle Name<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="mname" name="mname" value="Admin" required="required">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="lname">Last Name<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="lname" name="lname" value="Admin" required="required">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="gender">Sex</label>
+                                            <select name="gender" id="gender" class="form-select custom-select-2 select2-hidden-accessible" data-select2-id="gender" tabindex="-1" aria-hidden="true">
+                                                <option value="">Select Sex</option>
+                                                                                                                                                        <option value="Male">Male</option>
+                                                                                                                                                        <option value="Female" selected="" data-select2-id="4">Female</option>
+                                                                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="3" style="width: 368.656px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-gender-container"><span class="select2-selection__rendered" id="select2-gender-container" role="textbox" aria-readonly="true" title="Female">Female</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="email">Email<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="email" name="email" value="cecille03vargas@gmail.com" required="required">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="birthdate">Birth Date<span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control" id="birthdate" name="birthdate" value="2024-01-27" required="required">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="placeob">Place of Birth<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="placeob" name="placeob" value="Cebu" required="required">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="phone">Phone 1<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="phone" name="phone" value="09055484551" required="required">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="phone2">Phone 2<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="phone2" name="phone2" value="xx" required="required">
+                                        </div>    
+                                        <div class="form-group col-md-6">
+                                            <label for="nationality">Nationality<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="nationality" name="nationality" value="Filipino" required="required">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="status">Civil Status</label>
+                                            <select name="status" id="status" class="form-select custom-select-2 select2-hidden-accessible" data-select2-id="status" tabindex="-1" aria-hidden="true">
+                                                <option value="">Select Status</option>
+                                                                                                                                                        <option value="Single" selected="" data-select2-id="6">Single</option>
+                                                                                                                                                        <option value="Married">Married</option>
+                                                                                                                                                        <option value="Separated">Separated</option>
+                                                                                                                                                        <option value="Widowed">Widowed</option>
+                                                                                                                                                        <option value="Divorced">Divorced</option>
+                                                                                            </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 368.656px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-status-container"><span class="select2-selection__rendered" id="select2-status-container" role="textbox" aria-readonly="true" title="Single">Single</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="religion">Religion<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="religion" name="religion" value="Roman Catholic" required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Government Issued Numbers
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="sss">SSS No.<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="sss" name="sss" value="111" required="required">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="phno">PhilHealth No.<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="phno" name="phno" value="111" required="required">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="hdmf">HDMF No.<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="hdmf" name="hdmf" value="111" required="required">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="bir_no">BIR TIN<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="bir_no" name="bir_no" value="111" required="required">
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The addresses section starts here..... -->
+        <section>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            Present Address
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row" style="flex-direction: column;">
+                                <div class="form-group col-md-12">
+                                    <label for="bldg">Building Number/Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="bldg" name="bldg" value="xx" required="required">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="street">Street<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="street" name="street" value="b3 l22 santorini estates subdivision calumpang binangonan rizal" required="required">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="barangay">Barangay<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="barangay" name="barangay" value="xx" required="">
+                                </div>
+                                <div class="row col-12">
+                                    <div class="form-group col-md-6">
+                                        <label for="city">City<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="city" name="city" value="BINANGONAN" required="">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="zipcode">Zip Code<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="zipcode" name="zipcode" value="xx" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="province">Province<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="province" name="province" value="rizal" required="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="region">Region<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="region" name="region" value="xx" required="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="country">Country<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="country" name="country" value="Philippines" required="required">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="card">
+                        <div class="card-header" style="position: relative;">
+                            Permanent Address
+                            <div class="autofill-wrapper">
+                                <input type="checkbox" name="autofill" id="autofill" style="margin-right: 5px;" checked="">
+                                <label for="autofill" style="line-height: 30px;">Same with present address</label>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row" style="flex-direction: column;">
+                                <div class="form-group col-md-12">
+                                    <label for="bldg1">Building Number/Name<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="bldg1" name="bldg1" value="xx" required="required">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="street1">Street<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="street1" name="street1" value="xx" required="required">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="barangay1">Barangay<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="barangay1" name="barangay1" value="xx" required="">
+                                </div>
+                                <div class="row col-12">
+                                    <div class="form-group col-md-6">
+                                        <label for="city1">City<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="city1" name="city1" value="xx" required="">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="zipcode1">Zip Code<span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="zipcode1" name="zipcode1" value="xx" required="">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="province1">Province<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="province1" name="province1" value="xx" required="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="region1">Region<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="region1" name="region1" value="xx" required="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="country1">Country<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="country1" name="country1" value="xx" required="required">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- This is the section for login Information -->
+        <section>
+            <div class="form-row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Login and Account Information
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="username">Username</label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-fw fa-user"></i></div>
+                                        </div>
+                                        <input type="text" class="form-control" id="username" name="username" value="adminuser" required="required">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="password">Password</label>
+                                    <div class="input-group eye-holder mb-2">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="fa fa-fw fa-key"></i></div>
+                                        </div>
+                                        <i class="fa-solid eye fa-eye-slash"></i>
+                                        <input type="password" class="form-control" id="password" name="password" value="25e4ee4e9229397b6b17776bfceaf8e7" required="">
+                                    </div>
+                                </div>
+                            <div class="form-group col-md-6">
+                                <label for="deviceID">Employee ID<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control number" id="deviceID" name="deviceID" value="111111" required="required">
+                            </div>
+                            </div>               
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="card-header inner-card">
+            <div class="form-row">
+                <div class="form-group col-md-2"></div>
+                <div class="form-group col-md-2"></div>
+                <div class="form-group col-md-2"></div>
+                <div class="form-group col-md-2"></div>
+                <div class="form-group col-md-2">
+                </div>
+                <div class="form-group col-md-2 mt-4 button-right">
+                    <input type="hidden" id="employeeID" value="185">
+                    <button type="submit" class="btn btn-primary pm-blue btn-lg">Update Records</button>
+                </div>
+            </div>
+        </div>
+    <input type="hidden" name="uid" value="185">
+</form>
+
+<!-- Upload Avatar Modal -->
+<div class="modal fade" id="uploadAvatar" tabindex="-1" role="dialog" aria-labelledby="upload-avatar" aria-hidden="true">
+  <div id="view-user-leave" class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="upload-avatar">Upload new Avatar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+              <div id="change-avatar" class="croppie-container"><div class="cr-boundary" aria-dropeffect="none" style="width: 150px; height: 150px;"><img src="./Personal Information_files/avatar.jpg" class="cr-image" style="opacity: 1;"><div class="cr-viewport cr-vp-square" tabindex="0" style="width: 150px; height: 150px;"></div><div class="cr-overlay"></div></div><div class="cr-slider-wrap"><input class="cr-slider" type="range" step="0.0001" aria-label="zoom"></div></div>
+              <div id="croppie-actions">
+                  <input type="file" id="upload" class="btn actionUpload btn-primary pm-blue btn-sm" value="Upload Avatar" accept="image/*">
+                  <a class="button actionSave btn btn-success btn-sm" data-id="185">Save Avatar</a>
+              </div>
+            </div>      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+
+    console.log('Loading.......');
+
+    // helper functions
+
+    (function( $ ){
+        $.fn.swapClass = function(oldClass, newClass) {
+            let This = $(this);
+            if (This.hasClass(oldClass)) {
+                This.removeClass(oldClass).addClass(newClass);
+            } else {
+                This.removeClass(newClass).addClass(oldClass);
+            }
+        }; 
+    })( $ );
+
+    $('.eye').click(function() {
+        let This = $(this);
+        let Next = This.next();
+        This.swapClass('fa-eye-slash', 'fa-eye');
+        Next.attr('type') === 'password' ? Next.attr('type', 'text') : Next.attr('type', 'password');
+    });
+
+    $('#autofill').on('click', function() {
+        let This = $(this);
+        let bldg = $('#bldg');
+        let bldg1 = $('#bldg1');
+        let street = $('#street');
+        let street1 = $('#street1');
+        let barangay = $('#barangay');
+        let barangay1 = $('#barangay1');
+        let city = $('#city');
+        let city1 = $('#city1');
+        let zipcode = $('#zipcode');
+        let zipcode1 = $('#zipcode1');
+        let province = $('#province');
+        let province1 = $('#province1');
+        let region = $('#region');
+        let region1 = $('#region1');
+        let country = $('#country');
+        let country1 = $('#country1');
+        let address = $('#full_address');
+        // let address1 = $('#full_address1');
+        if (This.is(':checked')) {
+            if (bldg.val() === '' || street.val() === '' || barangay.val() === '' || city.val() === '' || zipcode.val() === '' || province.val() === '' || region.val() === '' || country.val() === '' || address.val() === '') {
+                alert('Please fill in the fields in Permanent Address section!');
+                This.prop('checked', false);
+            } else {
+                bldg1.val(bldg.val());
+                street1.val(street.val());
+                barangay1.val(barangay.val());
+                city1.val(city.val());
+                zipcode1.val(zipcode.val());
+                province1.val(province.val());
+                region1.val(region.val());
+                country1.val(country.val());
+                // address1.val(address.val());
+                This.prop('checked', true);
+            }
+        } else {
+            bldg1.val('');
+            street1.val('');
+            barangay1.val('');
+            city1.val('');
+            zipcode1.val('');
+            province1.val('');
+            region1.val('');
+            country1.val('');
+            // address1.val('');
+        }
+    });
+
+    // /* SPECIAL THANKS TO PH LOCATIONS JQUERY PLUGIN BY DARWIN BILER */
+
+    // // initialize the plugin first, these dropdowns are for the current address section
+
+    // $('#region').ph_locations({'location_type': 'regions'});
+    // $('#province').ph_locations({'location_type': 'provinces'});
+    // $('#city').ph_locations({'location_type': 'cities'});
+    // $('#barangay').ph_locations({'location_type': 'barangays'});
+    // $('#region1').ph_locations({'location_type': 'regions'});
+    // $('#province1').ph_locations({'location_type': 'provinces'});
+    // $('#city1').ph_locations({'location_type': 'cities'});
+    // $('#barangay1').ph_locations({'location_type': 'barangays'});
+
+    // // fill the dropdowns by passing the fetch_list parameter
+
+    // $('#region').ph_locations('fetch_list');
+    // $('#province').ph_locations('fetch_list');
+    // $('#city').ph_locations('fetch_list');
+    // $('#barangay').ph_locations('fetch_list');
+    // $('#region1').ph_locations('fetch_list');
+    // $('#province1').ph_locations('fetch_list');
+    // $('#city1').ph_locations('fetch_list');
+    // $('#barangay1').ph_locations('fetch_list');
+
+    // // this is where the magic happens, the next dropdown value changes depending on the value of the previous dropdown
+
+    // $('#region').on('change', function(){ 
+    //     $('#province').ph_locations('fetch_list', [{"region_code": $(this).val()}]);
+    //  });
+    // $('#province').on('change', function(){
+    //     $('#city').ph_locations('fetch_list', [{"province_code": $(this).val()}]);
+    // });
+    // $('#city').on('change', function(){ 
+    //     $('#barangay').ph_locations('fetch_list', [{"city_code": $(this).val()}]);
+    // });
+    // $('#region1').on('change', function(){ 
+    //     $('#province1').ph_locations('fetch_list', [{"region_code": $(this).val()}]);
+    //  });
+    // $('#province1').on('change', function(){
+    //     $('#city1').ph_locations('fetch_list', [{"province_code": $(this).val()}]);
+    // });
+    // $('#city1').on('change', function(){ 
+    //     $('#barangay1').ph_locations('fetch_list', [{"city_code": $(this).val()}]);
+    // });
+});
+</script>    </div>
+    <div id="tab2" class="tab-content ui-tabs-panel ui-corner-bottom ui-widget-content" style="display: none;" aria-labelledby="ui-id-2" role="tabpanel" aria-hidden="true">
+      <form id="personal_info_2">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Employment Details
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row" style="flex-direction: column;">
+                                <div class="form-group col-md-12">
+                                    <label for="position">Designation<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="position" name="position" value="" required="required">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="service_start_date">Service Start Date<span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control" id="service_start_date" name="service_start_date" value="" required="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="service_end_date">Service End Date</label>
+                                    <input type="date" class="form-control" id="service_end_date" name="service_end_date" value="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    Status
+                                    <div class="col-md-6" style="flex-direction: row; align-items:center">
+                                        <div class="form-check">
+                                            <input type="radio" id="active" class="form-check-input" value="active" name="emp_status">
+                                            <label for="active" class="form-check-label">Active</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" id="inactive" class="form-check-input" value="inactive" name="emp_status">
+                                            <label for="inactive" class="form-check-label">Inactive</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Transition Record
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row" style="flex-direction: column;">
+                                <div class="form-group col-md-12">
+                                    <!-- <label for="scope1">Scope 1</label> -->
+                                    <input type="text" class="transrec-labels" id="position1" name="position1" placeholder="Scope 1" value="">
+                                    <input type="date" class="form-control" id="scope1" name="scope1" value="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <!-- <label for="scope2">Scope 2</label> -->
+                                    <input type="text" class="transrec-labels" id="position2" name="position2" placeholder="Scope 2" value="">
+                                    <input type="date" class="form-control" id="scope2" name="scope2" value="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <!-- <label for="scope3">Scope 3</label> -->
+                                    <input type="text" class="transrec-labels" id="position3" name="position3" placeholder="Scope 3" value="">
+                                    <input type="date" class="form-control" id="scope3" name="scope3" value="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <!-- <label for="scope4">Scope 4</label> -->
+                                            <input type="text" class="transrec-labels" id="position4" name="position4" placeholder="Scope 4" value="">
+                                            <input type="date" class="form-control" id="scope4" name="scope4" value="">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <!-- <label for="scope5">Scope 5</label> -->
+                                            <input type="text" class="transrec-labels" id="position5" name="position5" placeholder="Scope 5" value="">
+                                            <input type="date" class="form-control" id="scope5" name="scope5" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            PC Set Information
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row" style="flex-direction: column;">
+                                <div class="form-group col-md-12">
+                                    <label for="monitor">Monitor Serial Number</label>
+                                    <input type="text" class="form-control" id="monitor" name="monitor" value="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="mouse">Mouse Serial Number</label>
+                                    <input type="text" class="form-control" id="mouse" name="mouse" value="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="keyboard">Keyboard Serial Number</label>
+                                    <input type="text" class="form-control" id="keyboard" name="keyboard" value="">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="headset">Headset Serial Number</label>
+                                    <input type="text" class="form-control" id="headset" name="headset" value="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Bank Details
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Main Account
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-row" style="flex-direction: column;">
+                                                <div class="form-group col-md-12">
+                                                    <label for="acc_name">Account Name<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="acc_name" name="acc_name" value="" required="required">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="acc_no">Account Number<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="acc_no" name="acc_no" value="" required="required">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="bank_branch">Bank Branch<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="bank_branch" name="bank_branch" value="" required="required">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="bank_name">Bank Name<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="bank_name" name="bank_name" value="" required="required">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="swift_code">Swift Code<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="swift_code" name="swift_code" value="" required="required">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Secondary Account
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-row" style="flex-direction: column;">
+                                                <div class="form-group col-md-12">
+                                                    <label for="acc_name1">Account Name</label>
+                                                    <input type="text" class="form-control" id="acc_name1" name="acc_name1" value="">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="acc_no1">Account Number</label>
+                                                    <input type="text" class="form-control" id="acc_no1" name="acc_no1" value="">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="bank_branch1">Bank Branch</label>
+                                                    <input type="text" class="form-control" id="bank_branch1" name="bank_branch1" value="">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="bank_name1">Bank Name</label>
+                                                    <input type="text" class="form-control" id="bank_name1" name="bank_name1" value="">
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label for="swift_code1">Swift Code</label>
+                                                    <input type="text" class="form-control" id="swift_code1" name="swift_code1" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-header inner-card">
+                <div class="form-row">
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2 button-right">
+                        <button type="submit" class="btn btn-primary pm-blue btn-lg">Update Records</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="uid" value="185">
+</form>
+<div id="assignment-schedule" class="card mb-3">
+    <form action="https://payroll-master.com/demo/update-user.php?uid=185#" id="assignment-info-form" method="POST">
+        <div class="card-header">
+            Assignment Information
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="whours">Working Hours<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control number" id="whours" placeholder="8" name="whours" value="8" required="required">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="empStatus">Employee Status</label>
+                    <select id="empStatus" name="empStatus" class="form-control" required="required">
+                        <option value="">Choose...</option>
+                        <option value="1" selected="">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="empLevel">Employee Level</label>
+                    <select id="empLevel" name="empLevel" class="form-control" required="required">
+                        <option value="">Choose...</option>
+                        <option value="1" selected="">Administrator</option>                    
+                        <option value="2">Supervisor</option>
+                        <option value="3">Encoder</option>
+                        <option value="4">Rank and File</option>
+                    </select>
+                </div>
+            </div>
+            <h6>Assignment</h6>
+            <div class="form-row assignments">
+                <div class="form-group col-md-4">
+                    <label for="designation">Designation</label>
+                    <select id="designation" class="form-control" name="designation" required="required">
+                        <option value="0">Choose...</option>
+                        <option value="182">Dept. Head</option><option value="3" selected="">Supervisor</option><option value="177">Rider</option>                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="group">Group</label>
+                    <select id="group" class="form-control" name="group">
+                        <option value="0">Choose...</option>
+                        <option value="5">Regular</option><option value="6" selected="">Probationary</option><option value="7">Trainee</option><option value="172">Irregular</option><option value="181">On-Call</option>                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="team">Team</label>
+                    <select id="team" class="form-control" name="team">
+                        <option value="0">Choose...</option>
+                        <option value="9">Field</option><option value="11" selected="">Administrative</option><option value="170">Accounting </option>                    </select>
+                </div>
+            </div>
+            <h6>Schedule</h6>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="schedule">Work Schedule</label>
+                    <select id="schedule" class="form-control" name="schedule" required="required">
+                        <option value="0">Open Schedule</option>
+                        <option value="180">PM SHIFT</option><option value="179">GIN CAPS - MORNING</option><option value="178">REGULAR SCHED</option><option value="183">test</option>                    </select>
+                </div>
+                <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-6 pt-0">Day Off(s)</legend>
+                                        <div class="col-sm-6">
+                        <div class="form-check">
+                            <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="sunday" value="sunday" checked="">
+                            <label class="form-check-label" for="sunday">Sunday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="monday" value="monday">
+                            <label class="form-check-label" for="monday">Monday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="tuesday" value="tuesday">
+                            <label class="form-check-label" for="tuesday">Tuesday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="wednesday" value="wednesday">
+                            <label class="form-check-label" for="wednesday">Wednesday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="thursday" value="thursday">
+                            <label class="form-check-label" for="thursday">Thursday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="friday" value="friday">
+                            <label class="form-check-label" for="friday">Friday</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input day_off" type="checkbox" name="day_off[]" id="saturday" value="saturday" checked="">
+                            <label class="form-check-label" for="saturday">Saturday</label>
+                        </div>
+                    </div>
+                </div>
+                </fieldset>
+            </div>
+            <div class="card-header inner-card">
+                <div class="form-row">
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2"></div>
+                    <div class="form-group col-md-2 button-right">
+                        <button type="submit" class="btn btn-primary pm-blue btn-lg">Update Records</button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="id" value="185">
+        </div>
+    </form>
+</div><!-- #assignment-schedule -->    </div>
+    <div id="tab3" class="tab-content ui-tabs-panel ui-corner-bottom ui-widget-content" style="display: none;" aria-labelledby="ui-id-3" role="tabpanel" aria-hidden="true">
+      <style>
+    #custom-dropzone,
+    #custom-dropzone-2,
+    #custom-dropzone-3,
+    #custom-dropzone-4 {
+        transition: all 0.3s ease;
+    }
+    #custom-dropzone.active,
+    #custom-dropzone-2.active,
+    #custom-dropzone-3.active,
+    #custom-dropzone-4.active {
+        transform: scale(1.2);
+    }
+</style>
+<div id="assignment-schedule" class="card mb-3 inner-card">
+    <div class="card-header inner-card">
+        <div class="form-row">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2 button-right">
+                <input type="hidden" value="185">
+                <button type="button" class="btn btn-primary pm-blue btn-lg d-none" id="documentUpdateModalBtn" data-toggle="modal" data-target="#documentUpdateModal">Update Document</button>
+                <button type="button" class="btn btn-primary pm-blue btn-lg" data-toggle="modal" data-target="#documentUploadModal"><i class="fa fa-file" aria-hidden="true"></i> Add New</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body inner-card">
+        <!-- Table -->
+        <section>
+            <div id="legal-info_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length bs-select" id="legal-info_length"><label>Show <select name="legal-info_length" aria-controls="legal-info" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="legal-info_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="legal-info"></label></div><table id="legal-info" class="table table-striped table-bordered table-sm dataTable no-footer" cellspacing="0" width="100%" aria-describedby="legal-info_info" style="width: 100%;">
+                <thead>
+                    <tr><th class="th-sm dark-blue sorting sorting_asc" tabindex="0" aria-controls="legal-info" rowspan="1" colspan="1" style="width: 325px;" aria-sort="ascending" aria-label="Document Type: activate to sort column descending">Document Type</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info" rowspan="1" colspan="1" style="width: 275px;" aria-label="Date of Issue: activate to sort column ascending">Date of Issue</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info" rowspan="1" colspan="1" style="width: 321px;" aria-label="Expiration Date: activate to sort column ascending">Expiration Date</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info" rowspan="1" colspan="1" style="width: 110px;" aria-label="File: activate to sort column ascending">File</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info" rowspan="1" colspan="1" style="width: 199px;" aria-label="Remarks: activate to sort column ascending">Remarks</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info" rowspan="1" colspan="1" style="width: 178px;" aria-label="Actions: activate to sort column ascending">Actions</th></tr>
+                </thead>
+                <tbody>
+                                    <tr class="odd"><td valign="top" colspan="6" class="dataTables_empty">No data available in table</td></tr></tbody>
+                <tfoot>
+                </tfoot>
+            </table><div class="dataTables_info" id="legal-info_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="legal-info_paginate"><a class="paginate_button previous disabled" aria-controls="legal-info" data-dt-idx="0" tabindex="-1" id="legal-info_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="legal-info" data-dt-idx="1" tabindex="-1" id="legal-info_next">Next</a></div></div>
+        </section>
+    </div>
+
+    <!-- Add new documents modal starts here... -->
+    <div class="modal fade" id="documentUploadModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="inner-header">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                        <h5 class="modal-title text-white"> Add New Document</h5>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <form id="document_uploadModal" enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div class="form-group col-md-12 modal-inner-row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="document_type">Document Type </label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <select name="document_type" id="document_type" class="custom-select-2 select2-hidden-accessible" data-select2-id="document_type" tabindex="-1" aria-hidden="true">
+                                            <option value="" data-select2-id="8">Select Document Type</option>
+                                                                                            <option value="SSS">SSS</option>
+                                                                                            <option value="PhilHealth">PhilHealth</option>
+                                                                                            <option value="HDMF">HDMF</option>
+                                                                                            <option value="BIR TIN">BIR TIN</option>
+                                                                                            <option value="NBI Clearance">NBI Clearance</option>
+                                                                                    </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="7" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-document_type-container"><span class="select2-selection__rendered" id="select2-document_type-container" role="textbox" aria-readonly="true" title="Select Document Type">Select Document Type</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 modal-inner-row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="date_of_issue">Date of Issue</label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="date" class="form-control" id="date_of_issue" placeholder="Contact Phone" name="date_of_issue" value="" required="required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 modal-inner-row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="expiration_date">Expiration Date</label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="date" class="form-control" id="expiration_date" placeholder="Expiration Date" name="expiration_date" value="" required="required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 modal-inner-row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="remark">Remarks</label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text" class="form-control" id="remark" placeholder="Remarks" name="remark" value="" required="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 file_upload">
+                                <label for="inputTagdoc" id="custom-dropzone" class="d-block p-5">
+                                    <p id="fileNameHolder">Drop or browse files.</p><p> <br>
+                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <br>
+                                    <span id="imageNamedoc"></span>
+                                    <span style="font-size:11px;">Accepted file type: .jpeg, pdf, .png, .jpg<br>
+                                        Max. Filesize: 4MB</span>
+                                
+                                <input id="inputTagdoc" type="file" name="document_file[]" accept="image/*, application/pdf" multiple="">
+                            </p></label></div>
+                        </div>
+                        <input type="hidden" name="uid" value="185">
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="close_document_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                    <button type="submit" id="save_document_modal" class="btn btn-primary pm-blue">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update documents modal starts here... -->
+    <div class="modal fade" id="documentUpdateModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="inner-header">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                        <h5 class="modal-title text-white"> Update Document</h5>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <form id="documentUpdateForm" enctype="multipart/form-data">
+                        
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="close_update_document_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary pm-blue">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+
+    <!-- Additional Legal Document -->
+    <div class="card-header inner-card">
+        <div class="form-row">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-1"></div>
+            <div class="form-group col-md-3 button-right">
+                <input type="hidden" value="185">
+                <button type="button" class="btn btn-primary pm-blue btn-lg d-none" id="additionalDocumentUpdateModalBtn" data-toggle="modal" data-target="#additionalDocumentUpdateModal">Update Additional Document</button>
+                <button type="button" class="btn btn-primary pm-blue btn-lg" data-toggle="modal" data-target="#additional-document"><i class="fa fa-file" aria-hidden="true"></i> Add New</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body inner-card">
+        <!-- Table -->
+        <section>
+            <div id="legal-info-add_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length bs-select" id="legal-info-add_length"><label>Show <select name="legal-info-add_length" aria-controls="legal-info-add" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="legal-info-add_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="legal-info-add"></label></div><table id="legal-info-add" class="table table-striped table-bordered table-sm dataTable no-footer" cellspacing="0" width="100%" aria-describedby="legal-info-add_info" style="width: 100%;">
+                <thead>
+                    <tr><th class="th-sm dark-blue sorting sorting_asc" tabindex="0" aria-controls="legal-info-add" rowspan="1" colspan="1" style="width: 405px;" aria-sort="ascending" aria-label="Other Document Type: activate to sort column descending">Other Document Type</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info-add" rowspan="1" colspan="1" style="width: 256px;" aria-label="Date of Issue: activate to sort column ascending">Date of Issue</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info-add" rowspan="1" colspan="1" style="width: 298px;" aria-label="Expiration Date: activate to sort column ascending">Expiration Date</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info-add" rowspan="1" colspan="1" style="width: 101px;" aria-label="File: activate to sort column ascending">File</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info-add" rowspan="1" colspan="1" style="width: 184px;" aria-label="Remarks: activate to sort column ascending">Remarks</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="legal-info-add" rowspan="1" colspan="1" style="width: 165px;" aria-label="Actions: activate to sort column ascending">Actions</th></tr>
+                </thead>
+                <tbody>
+                                    <tr class="odd"><td valign="top" colspan="6" class="dataTables_empty">No data available in table</td></tr></tbody>
+                <tfoot>
+
+                </tfoot>
+            </table><div class="dataTables_info" id="legal-info-add_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="legal-info-add_paginate"><a class="paginate_button previous disabled" aria-controls="legal-info-add" data-dt-idx="0" tabindex="-1" id="legal-info-add_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="legal-info-add" data-dt-idx="1" tabindex="-1" id="legal-info-add_next">Next</a></div></div>
+        </section>
+    </div>
+
+    <!-- Add new documents modal starts here... -->
+    <div class="modal fade" id="additional-document" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="inner-header">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                        <h5 class="modal-title text-white"> Add New Other Document</h5>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <form id="add-additional-doc">
+                        <div class="form-row">
+                            <div class="form-group col-md-12 modal-inner-row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="document_type1">Other Document Type </label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text" class="form-control" id="document_type1" placeholder="Document Type" name="document_type1" value="" required="required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 modal-inner-row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="date_of_issue1">Date of Issue</label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="date" class="form-control" id="date_of_issue1" placeholder="Contact Phone" name="date_of_issue1" value="" required="required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 modal-inner-row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="expiration_date1">Expiration Date</label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="date" class="form-control" id="expiration_date1" placeholder="Expiration Date" name="expiration_date1" value="" required="required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 modal-inner-row">
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label for="remark1">Remarks</label>
+                                    </div>
+                                    <div class="form-group col-md-8">
+                                        <input type="text" class="form-control" id="remark1" placeholder="Remarks" name="remark1" value="" required="required">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 file_upload">
+                                <label for="inputTag" id="custom-dropzone-3" class="d-block p-5">
+                                     <p id="addFileNameHolder">Drop or browse files.</p> <br>
+                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                    <input id="inputTag" type="file" name="document_file1[]" accept="image/*, application/pdf" multiple="">
+                                    <br>
+                                    <span id="imageName"></span>
+                                    <span style="font-size:11px;">Accepted file type: .jpeg, pdf, .png, .jpg<br>
+                                        Max. Filesize: 4MB</span>
+                                </label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="uid1" value="185">
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="close_additional_doc_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                    <button type="submit" id="save_additional_doc_modal" class="btn btn-primary pm-blue">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update additional documents modal starts here... -->
+    <div class="modal fade" id="additionalDocumentUpdateModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="inner-header">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                        <h5 class="modal-title text-white"> Update Additional Document</h5>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <form id="additionalDocumentUpdateForm" enctype="multipart/form-data">
+                        
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="close_update_additional_document_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary pm-blue">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('#legal-info').DataTable();
+        $('#legal-info-add').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>    </div>
+    <div id="tab4" class="tab-content ui-tabs-panel ui-corner-bottom ui-widget-content" style="display: none;" aria-labelledby="ui-id-4" role="tabpanel" aria-hidden="true">
+      <div id="assignment-schedule" class="card mb-3 inner-card"> 
+    <div class="card-header inner-card">
+        <div class="form-row">
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2"></div>
+            <div class="form-group col-md-2 button-right">
+                <input type="hidden" value="185">
+                <button type="button" class="btn btn-primary pm-blue btn-lg d-none" id="updateModalBtn" data-toggle="modal" data-target="#updateContact">Update</button>
+                <button type="button" class="btn btn-primary pm-blue btn-lg" data-toggle="modal" data-target="#uploadContact"> <i class="fa fa-address-book" aria-hidden="true"></i> Add New</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body inner-card">
+        <!-- Table -->
+        <section>
+            <div id="contacts-list_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length bs-select" id="contacts-list_length"><label>Show <select name="contacts-list_length" aria-controls="contacts-list" class=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="contacts-list_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="contacts-list"></label></div><table id="contacts-list" class="table table-striped table-bordered table-sm dataTable no-footer" cellspacing="0" width="100%" aria-describedby="contacts-list_info" style="width: 100%;">
+                <thead>
+                    <tr><th class="th-sm dark-blue sorting sorting_asc" tabindex="0" aria-controls="contacts-list" rowspan="1" colspan="1" style="width: 243px;" aria-sort="ascending" aria-label="Contact Name: activate to sort column descending">Contact Name</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="contacts-list" rowspan="1" colspan="1" style="width: 249px;" aria-label="Contact Phone: activate to sort column ascending">Contact Phone</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="contacts-list" rowspan="1" colspan="1" style="width: 115px;" aria-label="Email: activate to sort column ascending">Email</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="contacts-list" rowspan="1" colspan="1" style="width: 319px;" aria-label="Permanent Address: activate to sort column ascending">Permanent Address</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="contacts-list" rowspan="1" colspan="1" style="width: 338px;" aria-label="Contact Relationship: activate to sort column ascending">Contact Relationship</th><th class="th-sm dark-blue sorting" tabindex="0" aria-controls="contacts-list" rowspan="1" colspan="1" style="width: 144px;" aria-label="Actions: activate to sort column ascending">Actions</th></tr>
+                </thead>
+                <tbody>
+                                    <tr class="odd"><td valign="top" colspan="6" class="dataTables_empty">No data available in table</td></tr></tbody>
+                <tfoot>
+                </tfoot>
+            </table><div class="dataTables_info" id="contacts-list_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div><div class="dataTables_paginate paging_simple_numbers" id="contacts-list_paginate"><a class="paginate_button previous disabled" aria-controls="contacts-list" data-dt-idx="0" tabindex="-1" id="contacts-list_previous">Previous</a><span></span><a class="paginate_button next disabled" aria-controls="contacts-list" data-dt-idx="1" tabindex="-1" id="contacts-list_next">Next</a></div></div>
+        </section>
+    </div>
+</div>
+
+
+<!-- Add new contacts modal starts here... -->
+<div class="modal fade" id="uploadContact" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white">Add New Employee Contact</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="add-contact-form">
+                    <div class="form-row">
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="cname">Contact Name</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="cname" placeholder="Contact Name" name="cname" value="" required="required">
+                                </div>    
+                            </div>                    
+                        </div>
+
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="cphone">Contact Phone</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="cphone" placeholder="Contact Phone" name="cphone" value="" required="required">
+                                </div> 
+                            </div>                       
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="caddress">Email</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="address" class="form-control" id="email" placeholder="Email" name="email" value="" required="required">
+                                </div> 
+                            </div>                       
+                        </div>
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="caddress">Permanent Address</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="address" class="form-control" id="caddress" placeholder="Permanent Address" name="caddress" value="" required="required">
+                                </div> 
+                            </div>                       
+                        </div>
+
+                        <div class="form-group col-md-12 modal-inner-row">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="crelationship">Contact Relationship</label>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <input type="text" class="form-control" id="crelationship" placeholder="Contact Relationship" name="crelationship" value="" required="required">
+                                </div>
+                            </div>                      
+                        </div>
+                    </div>
+                    <input type="hidden" name="uid" value="185">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close_emergency_contact_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                <button type="submit" id="save_emergency_contact_modal" class="btn btn-primary pm-blue">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- update contact modal starts here -->
+
+<div class="modal fade" id="updateContact" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="inner-header">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
+                    <h5 class="modal-title text-white">Update Contact</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="update-contact-form">
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="close_uc_modal" class="btn btn-primary pm-blue" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary pm-blue">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    jQuery(document).ready(function ($) {
+        $('#contacts-list').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+        });
+</script>    </div>
+    <div id="tab5" class="tab-content" style="display: none;">
+    </div>
+  </div> <!-- END tabs-content -->
+</div> <!-- END tabs -->
+
+</div>
+
+<script>
+  jQuery(document).ready(function($){
+    $('#tabs-nav li:first-child').addClass('active');
+    $('.tab-content').hide();
+    $('.tab-content:first').show();
+
+    // Click function
+    $('#tabs-nav li').click(function(){
+      $('#tabs-nav li').removeClass('active');
+      $(this).addClass('active');
+      $('.tab-content').hide();
+      
+      var activeTab = $(this).find('a').attr('href');
+      $(activeTab).fadeIn();
+      //return false;
+    });
+  });
+</script>          </div>          
+        </div>
+    </div>
+  </div>
+    <!-- User Loans and Calendar -->
+</div>
+
+
+</div><!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/update-user.php?uid=185#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./Personal Information_files/jquery.min(1).js.download"></script>
+    <script src="./Personal Information_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./Personal Information_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./Personal Information_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./Personal Information_files/jquery.dataTables.js.download"></script>
+  <script src="./Personal Information_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./Personal Information_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./Personal Information_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./Personal Information_files/jquery-ui.js.download"></script>
+  <script src="./Personal Information_files/jquery-select2.js.download"></script>
+  <script src="./Personal Information_files/jquery.timepicker.js.download"></script>
+  <script src="./Personal Information_files/datepair.min.js.download"></script>
+  <script src="./Personal Information_files/fancyTable.js.download"></script>
+  <script src="./Personal Information_files/scripts.js.download"></script>
+  <script src="./Personal Information_files/settings-scripts.js.download"></script>
+  <script src="./Personal Information_files/timecard-scripts.js.download"></script>
+  <script src="./Personal Information_files/download.js.download"></script>
+        <script src="./Personal Information_files/croppie.js.download"></script>
+    <script src="./Personal Information_files/profile.js.download"></script>
+        <script src="./Personal Information_files/moment.min.js.download"></script>
+    <script src="./Personal Information_files/fullcalendar.min.js.download"></script>
+    <script src="./Personal Information_files/calendar.js.download"></script>
+    <script type="text/javascript">
+      jQuery(document).ready( function( $ ){
+        // Add - Update Loan amortization
+        $('.loan-amortization').on('submit', function( e ){
+          e.preventDefault();
+          var userID      = $(this).data('id');
+          var loanAmount  = $(this).find('input[type="text"]').val();
+          var loanName  = $(this).find('input[type="text"]').attr('name');
+          if( loanName == 'sssLoan' ){
+            var loanLabel = 'SSS';
+          }else if( loanName == 'hmdfLoan' ){
+            var loanLabel = 'HDMF';
+          }else if( loanName == 'loan_policy' ){
+            var loanLabel = 'Policy';
+          }else if( loanName == 'loan_gsis' ){
+            var loanLabel = 'GSIS Consol';
+          }else if( loanName == 'ela_sos' ){
+            var loanLabel = 'ELA/SOS/EL/CA ';
+          }
+          $.ajax({
+              url: './includes/common/ajax-handler.php',
+              type: "post",
+              data: {
+                  action : 'update-amortization',
+                  userID : userID,
+                  loanAmount : loanAmount, 
+                  loanName : loanName,
+              },
+              beforeSend: function() {
+                  $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+              },  
+              success: function (response) {  
+                  $( "body .lds-ellipsis" ).remove();
+                  if( response >= 1 ){
+                    $('body').prepend('<div class="notification-message alert alert-success">'+loanLabel+' Loan Amortization has been updated!</div>');          
+                        
+                  }else{
+                     $('body').prepend('<div class="notification-message alert alert-danger">Something went wrong, Please reload the page and try again.</div>');
+                  }  
+                  setTimeout( function(){
+                    $( "body .notification-message" ).remove();
+                  }, 3000 );
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                alert('error');       
+              }
+            });
+        });
+        // Schedule Calendar
+        $('#calendar-schedule').fullCalendar({
+          dayClick: function(date, jsEvent, view) {
+                  var workDate = date.format();
+                  $('#userLeaveModal #selected-date').html( workDate );
+                  $('#userLeaveModal #leaveDate').val( workDate );
+                  $('#userLeaveModal #scheduleDate').val( workDate );
+                  $('#userLeaveModal #user_leave').val( '' );
+                  $('#userLeaveModal #schedule').val( 0 );
+                  $( "#userLeaveModal" ).modal('toggle');
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+              var statDate  = calEvent.start._i;
+              var type      = calEvent.type;
+              var userID    = calEvent.uid;
+              var statusID  = calEvent.id;
+              var dataType  = calEvent.dataType;
+              var status    = calEvent.status;
+              var timeSchedule    = calEvent.timeSchedule;
+              var am_pm    = calEvent.am_pm;
+              if( dataType == 'leave' ){
+                $('#updateUserLeave-form #user_leave').val( type );
+                $('#updateUserLeave-form #am_pm').val( am_pm );
+                $('#updateUserLeave-form #leaveID').val( statusID );
+                $('#updateUserLeave-form #deleteLeave').attr( 'data-id', statusID );
+                $('#updateUserLeave-form #selected-date').html( statDate );
+                $('#updateUserLeave-form #leave-status').html( status );
+                $( "#updateLeaveModal" ).modal('toggle');
+              }else{
+                $('#updateSchedule-form #schedule').val( type );
+                $('#updateSchedule-form #scheduleID').val( statusID );
+                $('#updateSchedule-form #deleteSchedule').attr( 'data-id', statusID );
+                $('#updateSchedule-form #selected-date').html( statDate );
+                $( "#updateScheduleModal" ).modal('toggle');
+              }       
+          },
+          events : [{"id":"6371","uid":"185","start":"2024-01-01","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6372","uid":"185","start":"2024-01-02","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6373","uid":"185","start":"2024-01-03","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6374","uid":"185","start":"2024-01-04","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6375","uid":"185","start":"2024-01-05","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6376","uid":"185","start":"2024-01-06","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6377","uid":"185","start":"2024-01-07","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6378","uid":"185","start":"2024-01-08","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6379","uid":"185","start":"2024-01-09","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6380","uid":"185","start":"2024-01-10","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6381","uid":"185","start":"2024-01-11","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6382","uid":"185","start":"2024-01-12","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6383","uid":"185","start":"2024-01-13","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6384","uid":"185","start":"2024-01-14","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6385","uid":"185","start":"2024-01-15","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6386","uid":"185","start":"2024-01-16","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6387","uid":"185","start":"2024-01-17","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6388","uid":"185","start":"2024-01-18","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6389","uid":"185","start":"2024-01-19","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6390","uid":"185","start":"2024-01-20","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6391","uid":"185","start":"2024-01-21","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6392","uid":"185","start":"2024-01-22","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6393","uid":"185","start":"2024-01-23","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6394","uid":"185","start":"2024-01-24","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6395","uid":"185","start":"2024-01-25","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6396","uid":"185","start":"2024-01-26","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6397","uid":"185","start":"2024-01-27","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6398","uid":"185","start":"2024-01-28","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6399","uid":"185","start":"2024-01-29","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6400","uid":"185","start":"2024-01-30","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6401","uid":"185","start":"2024-01-31","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"}],
+          eventRender: function(event, element) {
+              element.find('.fc-title'); 
+          },
+        });
+        // HOliday Calendar
+        $('#calendar-holiday').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+          },
+          dayClick: function(date, jsEvent, view ) {
+            var workDate = date.format();
+            $('#addHolidayModal #selected-date').html( workDate );
+            $('#addHolidayModal #holidayDate').val( workDate );
+            $('#addHolidayModal #holiday_type').val( '' );
+            $( "#addHolidayModal" ).modal('toggle');
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+              var statDate    = calEvent.start._i;
+              var holidayType = calEvent.type;
+              var holidayID    = calEvent.id;
+              if( holidayType == 'leave'){
+                $('#leaveInfoModal .leave-information').text( calEvent.title+ ' this ' +statDate );
+                $( "#leaveInfoModal" ).modal('toggle');
+              }else{
+                var holiday_title    = calEvent._title;
+                $('#updateHoliday-form #holiday_type').val( holidayType );
+                $('#updateHoliday-form #holidayID').val( holidayID );
+                $('#updateHoliday-form #holiday_title').val( holiday_title );
+                $('#updateHoliday-form #deleteHoliday').attr( 'data-id', holidayID );
+                $('#updateHoliday-form #selected-date').html( statDate );
+                $( "#updateHolidayModal" ).modal('toggle');
+              }     
+          },
+          events : null,
+          eventRender: function(event, element) {
+              element.find('.fc-title');
+          },
+        });
+        let userDayOff = ["sunday","saturday"];
+        let daysOfTheWeek = {
+          0: 'sunday',
+          1: 'monday',
+          2: 'tuesday',
+          3: 'wednesday',
+          4: 'thursday',
+          5: 'friday',
+          6: 'saturday',
+        };
+        // Employee Calendar
+        $('#employee-calendar').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            right: 'title',
+          },
+          dayClick: function(date, jsEvent, view) {
+            let textDate = date._d;
+            let day = daysOfTheWeek[textDate.getDay()];
+            if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
+              var workDate = date.format();
+              $('#userApplicationModal #selected-date').html( workDate );
+              $('#userApplicationModal #leaveDate').val( workDate );
+              $('#userApplicationModal #overtimeDate').val( workDate );
+              $('#userApplicationModal #time-start').val( '' );
+              $('#userApplicationModal #time-end').val( '' );
+              $('#userApplicationModal #notes').val( '' );
+              $( "#userApplicationModal" ).modal('toggle');
+            }
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+              var statDate  = calEvent.start._i;
+              var type      = calEvent.type;
+              var userID    = calEvent.uid;
+              var statusID  = calEvent.id;
+              var dataType  = calEvent.dataType;
+              var status    = calEvent.status;
+              var timeSchedule    = calEvent.timeSchedule;
+
+              if( dataType == 'leave' ){
+                $('#view-user-leave #user_leave').val( type );
+                $('#view-user-leave #selected-date').html( statDate );
+                $('#view-user-leave #status').val( status );                
+                $( "#viewLeaveModal" ).modal('toggle');
+              }else{
+                $('#view-user-schedule #schedule').val( type );
+                $('#view-user-schedule #time').val( timeSchedule );
+                $('#view-user-schedule #selected-date').html( statDate );
+                $( "#viewScheduleModal" ).modal('toggle');
+              }       
+          },
+          events : [{"id":"6371","uid":"185","start":"2024-01-01","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6372","uid":"185","start":"2024-01-02","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6373","uid":"185","start":"2024-01-03","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6374","uid":"185","start":"2024-01-04","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6375","uid":"185","start":"2024-01-05","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6376","uid":"185","start":"2024-01-06","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6377","uid":"185","start":"2024-01-07","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6378","uid":"185","start":"2024-01-08","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6379","uid":"185","start":"2024-01-09","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6380","uid":"185","start":"2024-01-10","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6381","uid":"185","start":"2024-01-11","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6382","uid":"185","start":"2024-01-12","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6383","uid":"185","start":"2024-01-13","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6384","uid":"185","start":"2024-01-14","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6385","uid":"185","start":"2024-01-15","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6386","uid":"185","start":"2024-01-16","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6387","uid":"185","start":"2024-01-17","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6388","uid":"185","start":"2024-01-18","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6389","uid":"185","start":"2024-01-19","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6390","uid":"185","start":"2024-01-20","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6391","uid":"185","start":"2024-01-21","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6392","uid":"185","start":"2024-01-22","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6393","uid":"185","start":"2024-01-23","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6394","uid":"185","start":"2024-01-24","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6395","uid":"185","start":"2024-01-25","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6396","uid":"185","start":"2024-01-26","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6397","uid":"185","start":"2024-01-27","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6398","uid":"185","start":"2024-01-28","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6399","uid":"185","start":"2024-01-29","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6400","uid":"185","start":"2024-01-30","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"},{"id":"6401","uid":"185","start":"2024-01-31","type":"1","title":"","status":"Pending Approval","dataType":"schedule","color":"#c0eb3c","timeSchedule":"Open"}],
+          eventRender: function(event, element) {
+              element.find('.fc-title'); 
+          },
+        });
+        $('#user-memo-list, #user-file-list, #leave-histoy-table').fancyTable({
+          sortColumn:0,
+          pagination: true,
+          perPage:6,
+          searchable:false,
+          globalSearch:false
+        });
+      });
+    </script>
+          <script type="text/javascript" id="select-twos">
+        $(document).ready(function() {
+          // select 2
+          setTimeout(() => {
+            $('.custom-select-2').select2();
+          }, 300)
+        });
+      </script>
+      <script src="./Personal Information_files/custom-ajax.js.download"></script>
+        <script src="./Personal Information_files/required-indicator.js.download"></script>
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

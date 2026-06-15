@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://payroll-master.com/demo/holiday.php -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./Holiday_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./Holiday_files/datatable-min.css" rel="stylesheet">
+  <link href="./Holiday_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./Holiday_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Holiday_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./Holiday_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./Holiday_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./Holiday_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./Holiday_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./Holiday_files/custom-style.css">
+ 
+      <link href="./Holiday_files/fullcalendar.min.css" rel="stylesheet">
+      <link href="./Holiday_files/style.css" rel="stylesheet">
+  <script src="./Holiday_files/jquery.min.js.download"></script>
+  <script src="./Holiday_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./Holiday_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/holiday.php#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/holiday.php#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/holiday.php#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/holiday.php#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/holiday.php#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/holiday.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/holiday.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/holiday.php#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./Holiday_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a></a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/holiday.php#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Holiday</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div id="holiday-wrapper" class="row">
+    <div class="col-12 mb-3">
+        <div class="card mb-3">
+          <div class="card-header">
+            Holiday Calendar
+          </div> <!-- card Header -->
+          <div class="card-body">
+            <div id="calendar-holiday" class="fc fc-unthemed fc-ltr"><div class="fc-toolbar fc-header-toolbar"><div class="fc-left"><div class="fc-button-group"><button type="button" class="fc-prev-button fc-button fc-state-default fc-corner-left" aria-label="prev"><span class="fc-icon fc-icon-left-single-arrow"></span></button><button type="button" class="fc-next-button fc-button fc-state-default fc-corner-right" aria-label="next"><span class="fc-icon fc-icon-right-single-arrow"></span></button></div><button type="button" class="fc-today-button fc-button fc-state-default fc-corner-left fc-corner-right fc-state-disabled" disabled="">today</button></div><div class="fc-right"><div class="fc-button-group"><button type="button" class="fc-month-button fc-button fc-state-default fc-corner-left fc-state-active">month</button><button type="button" class="fc-basicWeek-button fc-button fc-state-default">week</button><button type="button" class="fc-basicDay-button fc-button fc-state-default fc-corner-right">day</button></div></div><div class="fc-center"><h2>June 2026</h2></div><div class="fc-clear"></div></div><div class="fc-view-container" style=""><div class="fc-view fc-month-view fc-basic-view" style=""><table class=""><thead class="fc-head"><tr><td class="fc-head-container fc-widget-header"><div class="fc-row fc-widget-header"><table class=""><thead><tr><th class="fc-day-header fc-widget-header fc-sun"><span>Sun</span></th><th class="fc-day-header fc-widget-header fc-mon"><span>Mon</span></th><th class="fc-day-header fc-widget-header fc-tue"><span>Tue</span></th><th class="fc-day-header fc-widget-header fc-wed"><span>Wed</span></th><th class="fc-day-header fc-widget-header fc-thu"><span>Thu</span></th><th class="fc-day-header fc-widget-header fc-fri"><span>Fri</span></th><th class="fc-day-header fc-widget-header fc-sat"><span>Sat</span></th></tr></thead></table></div></td></tr></thead><tbody class="fc-body"><tr><td class="fc-widget-content"><div class="fc-scroller fc-day-grid-container" style="overflow: hidden; height: 1157px;"><div class="fc-day-grid fc-unselectable"><div class="fc-row fc-week fc-widget-content" style="height: 192px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-other-month fc-past" data-date="2026-05-31"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2026-06-01"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2026-06-02"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2026-06-03"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2026-06-04"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2026-06-05"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2026-06-06"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-other-month fc-past" data-date="2026-05-31"><span class="fc-day-number">31</span></td><td class="fc-day-top fc-mon fc-past" data-date="2026-06-01"><span class="fc-day-number">1</span></td><td class="fc-day-top fc-tue fc-past" data-date="2026-06-02"><span class="fc-day-number">2</span></td><td class="fc-day-top fc-wed fc-past" data-date="2026-06-03"><span class="fc-day-number">3</span></td><td class="fc-day-top fc-thu fc-past" data-date="2026-06-04"><span class="fc-day-number">4</span></td><td class="fc-day-top fc-fri fc-past" data-date="2026-06-05"><span class="fc-day-number">5</span></td><td class="fc-day-top fc-sat fc-past" data-date="2026-06-06"><span class="fc-day-number">6</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 192px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2026-06-07"></td><td class="fc-day fc-widget-content fc-mon fc-past" data-date="2026-06-08"></td><td class="fc-day fc-widget-content fc-tue fc-past" data-date="2026-06-09"></td><td class="fc-day fc-widget-content fc-wed fc-past" data-date="2026-06-10"></td><td class="fc-day fc-widget-content fc-thu fc-past" data-date="2026-06-11"></td><td class="fc-day fc-widget-content fc-fri fc-past" data-date="2026-06-12"></td><td class="fc-day fc-widget-content fc-sat fc-past" data-date="2026-06-13"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2026-06-07"><span class="fc-day-number">7</span></td><td class="fc-day-top fc-mon fc-past" data-date="2026-06-08"><span class="fc-day-number">8</span></td><td class="fc-day-top fc-tue fc-past" data-date="2026-06-09"><span class="fc-day-number">9</span></td><td class="fc-day-top fc-wed fc-past" data-date="2026-06-10"><span class="fc-day-number">10</span></td><td class="fc-day-top fc-thu fc-past" data-date="2026-06-11"><span class="fc-day-number">11</span></td><td class="fc-day-top fc-fri fc-past" data-date="2026-06-12"><span class="fc-day-number">12</span></td><td class="fc-day-top fc-sat fc-past" data-date="2026-06-13"><span class="fc-day-number">13</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 192px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-past" data-date="2026-06-14"></td><td class="fc-day fc-widget-content fc-mon fc-today " data-date="2026-06-15"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2026-06-16"></td><td class="fc-day fc-widget-content fc-wed fc-future" data-date="2026-06-17"></td><td class="fc-day fc-widget-content fc-thu fc-future" data-date="2026-06-18"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2026-06-19"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2026-06-20"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-past" data-date="2026-06-14"><span class="fc-day-number">14</span></td><td class="fc-day-top fc-mon fc-today " data-date="2026-06-15"><span class="fc-day-number">15</span></td><td class="fc-day-top fc-tue fc-future" data-date="2026-06-16"><span class="fc-day-number">16</span></td><td class="fc-day-top fc-wed fc-future" data-date="2026-06-17"><span class="fc-day-number">17</span></td><td class="fc-day-top fc-thu fc-future" data-date="2026-06-18"><span class="fc-day-number">18</span></td><td class="fc-day-top fc-fri fc-future" data-date="2026-06-19"><span class="fc-day-number">19</span></td><td class="fc-day-top fc-sat fc-future" data-date="2026-06-20"><span class="fc-day-number">20</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 192px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-future" data-date="2026-06-21"></td><td class="fc-day fc-widget-content fc-mon fc-future" data-date="2026-06-22"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2026-06-23"></td><td class="fc-day fc-widget-content fc-wed fc-future" data-date="2026-06-24"></td><td class="fc-day fc-widget-content fc-thu fc-future" data-date="2026-06-25"></td><td class="fc-day fc-widget-content fc-fri fc-future" data-date="2026-06-26"></td><td class="fc-day fc-widget-content fc-sat fc-future" data-date="2026-06-27"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-future" data-date="2026-06-21"><span class="fc-day-number">21</span></td><td class="fc-day-top fc-mon fc-future" data-date="2026-06-22"><span class="fc-day-number">22</span></td><td class="fc-day-top fc-tue fc-future" data-date="2026-06-23"><span class="fc-day-number">23</span></td><td class="fc-day-top fc-wed fc-future" data-date="2026-06-24"><span class="fc-day-number">24</span></td><td class="fc-day-top fc-thu fc-future" data-date="2026-06-25"><span class="fc-day-number">25</span></td><td class="fc-day-top fc-fri fc-future" data-date="2026-06-26"><span class="fc-day-number">26</span></td><td class="fc-day-top fc-sat fc-future" data-date="2026-06-27"><span class="fc-day-number">27</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 192px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-future" data-date="2026-06-28"></td><td class="fc-day fc-widget-content fc-mon fc-future" data-date="2026-06-29"></td><td class="fc-day fc-widget-content fc-tue fc-future" data-date="2026-06-30"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-future" data-date="2026-07-01"></td><td class="fc-day fc-widget-content fc-thu fc-other-month fc-future" data-date="2026-07-02"></td><td class="fc-day fc-widget-content fc-fri fc-other-month fc-future" data-date="2026-07-03"></td><td class="fc-day fc-widget-content fc-sat fc-other-month fc-future" data-date="2026-07-04"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-future" data-date="2026-06-28"><span class="fc-day-number">28</span></td><td class="fc-day-top fc-mon fc-future" data-date="2026-06-29"><span class="fc-day-number">29</span></td><td class="fc-day-top fc-tue fc-future" data-date="2026-06-30"><span class="fc-day-number">30</span></td><td class="fc-day-top fc-wed fc-other-month fc-future" data-date="2026-07-01"><span class="fc-day-number">1</span></td><td class="fc-day-top fc-thu fc-other-month fc-future" data-date="2026-07-02"><span class="fc-day-number">2</span></td><td class="fc-day-top fc-fri fc-other-month fc-future" data-date="2026-07-03"><span class="fc-day-number">3</span></td><td class="fc-day-top fc-sat fc-other-month fc-future" data-date="2026-07-04"><span class="fc-day-number">4</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div><div class="fc-row fc-week fc-widget-content" style="height: 197px;"><div class="fc-bg"><table class=""><tbody><tr><td class="fc-day fc-widget-content fc-sun fc-other-month fc-future" data-date="2026-07-05"></td><td class="fc-day fc-widget-content fc-mon fc-other-month fc-future" data-date="2026-07-06"></td><td class="fc-day fc-widget-content fc-tue fc-other-month fc-future" data-date="2026-07-07"></td><td class="fc-day fc-widget-content fc-wed fc-other-month fc-future" data-date="2026-07-08"></td><td class="fc-day fc-widget-content fc-thu fc-other-month fc-future" data-date="2026-07-09"></td><td class="fc-day fc-widget-content fc-fri fc-other-month fc-future" data-date="2026-07-10"></td><td class="fc-day fc-widget-content fc-sat fc-other-month fc-future" data-date="2026-07-11"></td></tr></tbody></table></div><div class="fc-content-skeleton"><table><thead><tr><td class="fc-day-top fc-sun fc-other-month fc-future" data-date="2026-07-05"><span class="fc-day-number">5</span></td><td class="fc-day-top fc-mon fc-other-month fc-future" data-date="2026-07-06"><span class="fc-day-number">6</span></td><td class="fc-day-top fc-tue fc-other-month fc-future" data-date="2026-07-07"><span class="fc-day-number">7</span></td><td class="fc-day-top fc-wed fc-other-month fc-future" data-date="2026-07-08"><span class="fc-day-number">8</span></td><td class="fc-day-top fc-thu fc-other-month fc-future" data-date="2026-07-09"><span class="fc-day-number">9</span></td><td class="fc-day-top fc-fri fc-other-month fc-future" data-date="2026-07-10"><span class="fc-day-number">10</span></td><td class="fc-day-top fc-sat fc-other-month fc-future" data-date="2026-07-11"><span class="fc-day-number">11</span></td></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table></div></div></div></div></td></tr></tbody></table></div></div></div>
+          </div> <!--  card-body -->
+        </div> <!-- Card wrapper -->
+      </div> <!-- Content Wrapper -->
+    </div> <!-- Column Wrapper -->
+  </div> <!-- holiday-wrapper -->
+</div><!-- /.container-fluid-->
+<!-- Modal Pop up -->
+<div class="modal fade" id="leaveInfoModal" tabindex="-1" role="dialog" aria-labelledby="leaveInfo" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="leaveInfo-form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="leaveInfo">Leave Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <p class="leave-information"></p>
+            </div>      
+        </div>
+      </div>
+    </form> <!-- Schedule Form -->
+  </div>
+</div>
+<div class="modal fade" id="addHolidayModal" tabindex="-1" role="dialog" aria-labelledby="addHoliday" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="addHoliday-form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="addHoliday">Add Holiday</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div id="date-label" class="form-group col-md-12">
+                  Date : <span id="selected-date"></span>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="holiday_type">Holiday</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Holiday</div>
+                    </div>
+                    <select id="holiday_type" class="form-control" name="holiday_type" required="required">
+                      <option value="">--Select Holiday--</option>
+                      <option value="0">Regular</option><option value="1">Special Non-Working</option><option value="4">Double Regular</option>                    </select>   
+                  </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="holiday_title">Title</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Title</div>
+                    </div>
+                    <input type="text" id="holiday_title" class="form-control">
+                  </div>
+                </div>
+            </div>      
+        </div>
+        <div class="modal-footer pm-blue">
+          <input type="hidden" id="holidayDate" name="holidayDate" value="">
+          <button type="button" class="btn btn-secondary btn-lg _secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-lg">Save Holiday</button>
+        </div>
+      </div>
+    </form> <!-- Schedule Form -->
+  </div>
+</div>
+<div class="modal fade" id="updateHolidayModal" tabindex="-1" role="dialog" aria-labelledby="updateHoliday" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="updateHoliday-form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="updateHoliday">Update Holiday</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div id="date-label" class="form-group col-md-12">
+                  Date : <span id="selected-date"></span>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="holiday_type">Holiday</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Holiday</div>
+                    </div>
+                    <select id="holiday_type" class="form-control" name="holiday_type" required="required">
+                      <option value="">--Select Holiday--</option>
+                      <option value="0">Regular</option><option value="1">Special Non-Working</option><option value="4">Double Regular</option>                    </select>   
+                  </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label class="sr-only" for="holiday_title">Title</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Title</div>
+                    </div>
+                    <input type="text" id="holiday_title" class="form-control">
+                  </div>
+                </div>
+            </div>      
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" id="holidayID" name="holidayID" value="">
+          <button type="button" class="btn btn-danger" data-id="" id="deleteHoliday">Delete Holiday</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Update Holiday</button>
+        </div>
+      </div>
+    </form> <!-- Schedule Form -->
+  </div>
+</div>
+<!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/holiday.php#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./Holiday_files/jquery.min(1).js.download"></script>
+    <script src="./Holiday_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./Holiday_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./Holiday_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./Holiday_files/jquery.dataTables.js.download"></script>
+  <script src="./Holiday_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./Holiday_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./Holiday_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./Holiday_files/jquery-ui.js.download"></script>
+  <script src="./Holiday_files/jquery-select2.js.download"></script>
+  <script src="./Holiday_files/jquery.timepicker.js.download"></script>
+  <script src="./Holiday_files/datepair.min.js.download"></script>
+  <script src="./Holiday_files/fancyTable.js.download"></script>
+  <script src="./Holiday_files/scripts.js.download"></script>
+  <script src="./Holiday_files/settings-scripts.js.download"></script>
+  <script src="./Holiday_files/timecard-scripts.js.download"></script>
+  <script src="./Holiday_files/download.js.download"></script>
+        <script src="./Holiday_files/moment.min.js.download"></script>
+    <script src="./Holiday_files/fullcalendar.min.js.download"></script>
+    <script src="./Holiday_files/calendar.js.download"></script>
+    <script type="text/javascript">
+      jQuery(document).ready( function( $ ){
+        // Add - Update Loan amortization
+        $('.loan-amortization').on('submit', function( e ){
+          e.preventDefault();
+          var userID      = $(this).data('id');
+          var loanAmount  = $(this).find('input[type="text"]').val();
+          var loanName  = $(this).find('input[type="text"]').attr('name');
+          if( loanName == 'sssLoan' ){
+            var loanLabel = 'SSS';
+          }else if( loanName == 'hmdfLoan' ){
+            var loanLabel = 'HDMF';
+          }else if( loanName == 'loan_policy' ){
+            var loanLabel = 'Policy';
+          }else if( loanName == 'loan_gsis' ){
+            var loanLabel = 'GSIS Consol';
+          }else if( loanName == 'ela_sos' ){
+            var loanLabel = 'ELA/SOS/EL/CA ';
+          }
+          $.ajax({
+              url: './includes/common/ajax-handler.php',
+              type: "post",
+              data: {
+                  action : 'update-amortization',
+                  userID : userID,
+                  loanAmount : loanAmount, 
+                  loanName : loanName,
+              },
+              beforeSend: function() {
+                  $('body').append('<div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>');
+              },  
+              success: function (response) {  
+                  $( "body .lds-ellipsis" ).remove();
+                  if( response >= 1 ){
+                    $('body').prepend('<div class="notification-message alert alert-success">'+loanLabel+' Loan Amortization has been updated!</div>');          
+                        
+                  }else{
+                     $('body').prepend('<div class="notification-message alert alert-danger">Something went wrong, Please reload the page and try again.</div>');
+                  }  
+                  setTimeout( function(){
+                    $( "body .notification-message" ).remove();
+                  }, 3000 );
+              },
+              error: function(jqXHR, textStatus, errorThrown) {
+                alert('error');       
+              }
+            });
+        });
+        // Schedule Calendar
+        $('#calendar-schedule').fullCalendar({
+          dayClick: function(date, jsEvent, view) {
+                  var workDate = date.format();
+                  $('#userLeaveModal #selected-date').html( workDate );
+                  $('#userLeaveModal #leaveDate').val( workDate );
+                  $('#userLeaveModal #scheduleDate').val( workDate );
+                  $('#userLeaveModal #user_leave').val( '' );
+                  $('#userLeaveModal #schedule').val( 0 );
+                  $( "#userLeaveModal" ).modal('toggle');
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+              var statDate  = calEvent.start._i;
+              var type      = calEvent.type;
+              var userID    = calEvent.uid;
+              var statusID  = calEvent.id;
+              var dataType  = calEvent.dataType;
+              var status    = calEvent.status;
+              var timeSchedule    = calEvent.timeSchedule;
+              var am_pm    = calEvent.am_pm;
+              if( dataType == 'leave' ){
+                $('#updateUserLeave-form #user_leave').val( type );
+                $('#updateUserLeave-form #am_pm').val( am_pm );
+                $('#updateUserLeave-form #leaveID').val( statusID );
+                $('#updateUserLeave-form #deleteLeave').attr( 'data-id', statusID );
+                $('#updateUserLeave-form #selected-date').html( statDate );
+                $('#updateUserLeave-form #leave-status').html( status );
+                $( "#updateLeaveModal" ).modal('toggle');
+              }else{
+                $('#updateSchedule-form #schedule').val( type );
+                $('#updateSchedule-form #scheduleID').val( statusID );
+                $('#updateSchedule-form #deleteSchedule').attr( 'data-id', statusID );
+                $('#updateSchedule-form #selected-date').html( statDate );
+                $( "#updateScheduleModal" ).modal('toggle');
+              }       
+          },
+          events : null,
+          eventRender: function(event, element) {
+              element.find('.fc-title'); 
+          },
+        });
+        // HOliday Calendar
+        $('#calendar-holiday').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,basicWeek,basicDay'
+          },
+          dayClick: function(date, jsEvent, view ) {
+            var workDate = date.format();
+            $('#addHolidayModal #selected-date').html( workDate );
+            $('#addHolidayModal #holidayDate').val( workDate );
+            $('#addHolidayModal #holiday_type').val( '' );
+            $( "#addHolidayModal" ).modal('toggle');
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+              var statDate    = calEvent.start._i;
+              var holidayType = calEvent.type;
+              var holidayID    = calEvent.id;
+              if( holidayType == 'leave'){
+                $('#leaveInfoModal .leave-information').text( calEvent.title+ ' this ' +statDate );
+                $( "#leaveInfoModal" ).modal('toggle');
+              }else{
+                var holiday_title    = calEvent._title;
+                $('#updateHoliday-form #holiday_type').val( holidayType );
+                $('#updateHoliday-form #holidayID').val( holidayID );
+                $('#updateHoliday-form #holiday_title').val( holiday_title );
+                $('#updateHoliday-form #deleteHoliday').attr( 'data-id', holidayID );
+                $('#updateHoliday-form #selected-date').html( statDate );
+                $( "#updateHolidayModal" ).modal('toggle');
+              }     
+          },
+          events : [{"id":"91","type":"0","date":"2025-08-06","title":"Regular","_title":"","backgroundColor":"#343a40","textColor":"#FFF","borderColor":"#343a40"},{"id":"l-81","type":"leave","date":"2026-04-10","title":" User, Employee on Sick Leave","backgroundColor":"#17a2b8","textColor":"#FFF","borderColor":"#17a2b8"},{"id":"l-82","type":"leave","date":"2026-04-06","title":" User, Employee on Sick Leave","backgroundColor":"#17a2b8","textColor":"#FFF","borderColor":"#17a2b8"},{"id":"l-83","type":"leave","date":"2026-04-07","title":" User, Employee on Vacation Leave","backgroundColor":"#17a2b8","textColor":"#FFF","borderColor":"#17a2b8"}],
+          eventRender: function(event, element) {
+              element.find('.fc-title');
+          },
+        });
+        let userDayOff = null;
+        let daysOfTheWeek = {
+          0: 'sunday',
+          1: 'monday',
+          2: 'tuesday',
+          3: 'wednesday',
+          4: 'thursday',
+          5: 'friday',
+          6: 'saturday',
+        };
+        // Employee Calendar
+        $('#employee-calendar').fullCalendar({
+          header: {
+            left: 'prev,next today',
+            right: 'title',
+          },
+          dayClick: function(date, jsEvent, view) {
+            let textDate = date._d;
+            let day = daysOfTheWeek[textDate.getDay()];
+            if (moment().format('YYYY-MM-DD') === date.format('YYYY-MM-DD') || date.isAfter(moment())) {
+              var workDate = date.format();
+              $('#userApplicationModal #selected-date').html( workDate );
+              $('#userApplicationModal #leaveDate').val( workDate );
+              $('#userApplicationModal #overtimeDate').val( workDate );
+              $('#userApplicationModal #time-start').val( '' );
+              $('#userApplicationModal #time-end').val( '' );
+              $('#userApplicationModal #notes').val( '' );
+              $( "#userApplicationModal" ).modal('toggle');
+            }
+          },
+          eventClick: function(calEvent, jsEvent, view) {
+              var statDate  = calEvent.start._i;
+              var type      = calEvent.type;
+              var userID    = calEvent.uid;
+              var statusID  = calEvent.id;
+              var dataType  = calEvent.dataType;
+              var status    = calEvent.status;
+              var timeSchedule    = calEvent.timeSchedule;
+
+              if( dataType == 'leave' ){
+                $('#view-user-leave #user_leave').val( type );
+                $('#view-user-leave #selected-date').html( statDate );
+                $('#view-user-leave #status').val( status );                
+                $( "#viewLeaveModal" ).modal('toggle');
+              }else{
+                $('#view-user-schedule #schedule').val( type );
+                $('#view-user-schedule #time').val( timeSchedule );
+                $('#view-user-schedule #selected-date').html( statDate );
+                $( "#viewScheduleModal" ).modal('toggle');
+              }       
+          },
+          events : null,
+          eventRender: function(event, element) {
+              element.find('.fc-title'); 
+          },
+        });
+        $('#user-memo-list, #user-file-list, #leave-histoy-table').fancyTable({
+          sortColumn:0,
+          pagination: true,
+          perPage:6,
+          searchable:false,
+          globalSearch:false
+        });
+      });
+    </script>
+      <script src="./Holiday_files/holiday-scripts.js.download"></script>  <script src="./Holiday_files/required-indicator.js.download"></script>
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

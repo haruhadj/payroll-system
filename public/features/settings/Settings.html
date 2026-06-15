@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)https://payroll-master.com/demo/settings.php -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./Settings_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./Settings_files/datatable-min.css" rel="stylesheet">
+  <link href="./Settings_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./Settings_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Settings_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./Settings_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./Settings_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./Settings_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./Settings_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./Settings_files/custom-style.css">
+ 
+      <link href="./Settings_files/croppie.css" rel="stylesheet">
+      <link href="./Settings_files/style.css" rel="stylesheet">
+  <script src="./Settings_files/jquery.min.js.download"></script>
+  <script src="./Settings_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./Settings_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/settings.php#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/settings.php#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/settings.php#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/settings.php#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/settings.php#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown show">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/settings.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu show" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/settings.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./Settings_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a></a><div class="container-fluid"><a>
+  <!-- Breadcrumbs-->
+  </a><ol class="breadcrumb"><a>
+    </a><li class="breadcrumb-item"><a>
+      </a><a href="https://payroll-master.com/demo/settings.php#">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">Settings</li>
+  </ol>
+  <!-- Icon Cards-->
+  <div id="settings-wrapper" class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-6 mb-6 wptf-section">
+          <div id="administrative-emails" class="card mb-3">
+            <div class="card-header">
+              Administrative Emails
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <div class="form-row">
+                <label class="sr-only" for="admin-email">Admin Email</label>
+                <div class="input-group mb-2 col-md-8">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-fw fa-envelope"></span></div>
+                  </div>
+                  <input type="email" class="form-control" id="admin-email" placeholder="Admin Email" value="cafedetourkitchenaroma@gmail.com">
+                </div>
+                <button id="save-admin-email" class="btn btn-primary btn-lg mb-2 pm-blue">Save</button>
+              </div>
+              <div class="form-row">
+                <label class="sr-only" for="hr-email">HR Email</label>
+                <div class="input-group mb-2 col-md-8">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="fa fa-fw fa-envelope"></span></div>
+                  </div>
+                  <input type="email" class="form-control" id="hr-email" placeholder="HR Email" value="cafedetourkitchenaroma@gmail.com">
+                </div>
+                <button id="save-hr-email" class="btn btn-primary btn-lg mb-2 pm-blue">Save</button>
+              </div>
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Late Allowance Form -->
+          <div class="card mb-3">
+            <div class="card-header">
+              Withholding Tax
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <div class="form-row">
+                  <div class="form-check">
+                    <label for="tax_salary_period">Withholding Tax Salary Deduction</label>
+                    <select id="tax_salary_period" class="form-control" name="tax_salary_period">
+                      <option value="">--Select One--</option>
+                      <option value="1">Daily</option>
+                      <option value="2">Weekly</option>
+                      <option value="3">Semi-Monthly</option>
+                      <option value="4" selected="">Monthly</option>  
+                    </select>                                  
+                  </div>
+              </div>
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Withholding Tax  Form -->
+          <div class="card mb-3">
+            <div class="card-header">
+              Holiday Amount 
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <form id="holiday-amount-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="holiday_amount">Set Holiday Amount<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control number" id="holiday_amount" placeholder="0" name="holiday_amount" value="0" required="required">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <button type="submit" class="btn btn-primary btn-lg pm-blue">Set Amount</button>
+                    </div>
+                </div>
+              </form> <!-- Holiday Amount  Form -->
+
+              <!-- 4.0.3 changes - USE ACTUAL RATE - start -->
+                            <label for="holiday_amt_rate">Actual Rate</label>
+              <input type="checkbox" id="holiday_amt_rate" name="holiday_amt_rate" checked="">
+              <small class="text-danger">If checked, holiday amount will be based on daily rate.</small>
+              <!-- 4.0.3 changes - end -->
+
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Holiday Amount Form -->
+          <div class="card mb-3">
+            <div class="card-header">
+              Night Diff 
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <form id="nightdiff-amount-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="nightdiff_amount">Set Night Diff Amount<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control number" id="nightdiff_amount" placeholder="0" name="nightdiff_amount" value="50" required="required">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <button type="submit" class="btn btn-primary btn-lg pm-blue">Set Amount</button>
+                    </div>
+                </div>
+              </form> <!-- Night Diff Amount  Form -->
+
+              <!-- 4.1.xxx changes - USE ACTUAL RATE - start -->
+                            <label for="nightdiff_amt_rate">Actual Rate</label>
+              <input type="checkbox" id="nightdiff_amt_rate" name="nightdiff_amt_rate" checked="">
+              <small class="text-danger">If checked, night diff amount will be based on hourly rate.</small>
+              <!-- 4.1.xxx changes - end -->
+
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Night Diff Amount Form -->
+          <div class="card mb-3">
+            <div class="card-header">
+              Holiday
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <div class="form-row">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="holiday_pay" id="holiday_pay" value="1" checked="">
+                    <label class="form-check-label" for="holiday_pay">
+                       Enable Regular Holiday (Sunday) no work with pay?
+                    </label>
+                  </div>
+              </div>
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Holiday Setting  Form -->
+        </div> <!-- wptf-section -->
+        <div class="col-md-6 mb-6 wptf-section">
+          <div class="card mb-3">
+            <div class="card-header">
+              Late Allowance
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <form id="late-allowance-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="late_allowance">Set Late Allowance (in minutes)<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control number" id="late_allowance" placeholder="0" name="late_allowance" value="0" required="required">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <button type="submit" class="btn btn-primary btn-lg pm-blue">Set Allowance</button>
+                    </div>
+                </div>
+              </form> <!-- Late Allowance Form -->
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Late Allowance Form -->
+          <div class="card mb-3">
+            <div class="card-header">
+              Late Amount 
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <form id="late-amount-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="late_amount">Set Late Amount (per minute)<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control number" id="late_amount" placeholder="0" name="late_amount" value="1" required="required">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <button type="submit" class="btn btn-primary btn-lg pm-blue">Set Amount</button>
+                    </div>
+                </div>
+              </form> <!-- Late Late Amount  Form -->
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Late Amount Form -->
+          <div class="card mb-3">
+            <div class="card-header">
+              Leave Amount 
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <form id="leave-amount-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="leave_amount">Set Leave Amount<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control number" id="leave_amount" placeholder="0" name="leave_amount" value="0" required="required">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <button type="submit" class="btn btn-primary btn-lg pm-blue">Set Amount</button>
+                    </div>
+                </div>
+              </form> <!-- Leave Amount  Form -->
+
+              <!-- 4.0.3 changes - USE ACTUAL RATE - start -->
+                            <label for="leave_amt_rate">Actual Rate</label>
+              <input type="checkbox" id="leave_amt_rate" name="leave_amt_rate" checked="">
+              <small class="text-danger">If checked, leave amount will be based on daily rate.</small>
+              <!-- 4.0.3 changes - end -->
+
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Leave Amount Form -->
+          <div class="card mb-3 d-none">
+            <div class="card-header">
+              13th Month 
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <form id="thirteenth-month-form">
+                <div class="form-row">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="thirteenth_month" id="thirteenth_month" value="1" checked="">
+                      <label class="form-check-label" for="thirteenth_month">
+                         Enable 13th month pay every cut-off?
+                      </label>
+                    </div>
+                </div>
+              </form> <!-- Late 13th Month Setting   Form -->
+            </div> <!-- Card Body -->
+          </div> <!-- card @ 13th Month Setting  Form -->
+          <div class="card mb-3">
+            <div class="card-header">
+              Overtime 
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <form id="overtime-amount-form">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="overtime_amount">Set Overtime Amount<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control number" id="overtime_amount" placeholder="0" name="overtime_amount" value="52" required="required">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <button type="submit" class="btn btn-primary btn-lg pm-blue">Set Amount</button>
+                    </div>
+                </div>
+              </form> <!-- Overtime Amount  Form -->
+
+              <!-- 4.1.xxx changes - USE ACTUAL RATE - start -->
+                            <label for="overtime_amt_rate">Actual Rate</label>
+              <input type="checkbox" id="overtime_amt_rate" name="overtime_amt_rate" checked="">
+              <small class="text-danger">If checked, overtime amount will be based on hourly rate.</small>
+              <!-- 4.1.xxx changes - end -->
+
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Overtime Diff Amount Form -->
+          <div class="card mb-3">
+            <div class="card-header">
+              Clock In/Out
+            </div> <!-- card Header -->
+            <div class="card-body">
+              <div class="form-row">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="clock_in_out" id="clock_in_out" value="1" checked="">
+                    <label class="form-check-label" for="clock_in_out">
+                       Enable Clock In/Out for Employees?
+                    </label>
+                  </div>
+              </div>
+            </div> <!-- Card Body -->
+          </div> <!-- card @ Clock In/Out Setting  Form -->
+        </div> <!-- wptf-section -->
+      </div>
+    </div>
+    <div class="col-12 mb-6 Site-details">
+      <div class="card mb-3">
+        <div class="card-header">
+          Company Information
+        </div> <!-- card Header -->
+        <div class="card-body">
+          <div class="col-md-6 offset-md-3 text-center">
+            <img id="company-logo" src="./Settings_files/company-logo.jpg" class="mx-auto img-fluid d-block" alt="avatar">
+            <h6 id="upload-company-logo" class="mt-2" data-toggle="modal" data-target="#uploadCompanyLogo">
+              <button type="button" class="custom-file-control btn btn-outline-secondary btn-lg">Upload a Company Logo</button>
+            </h6>
+            <small class="text-danger">Preferred image size: 190 x 60</small>
+          </div>
+          <form id="company-information" class="col-md-12">
+            <div class="form-group">
+              <label for="company-name">Company name:</label>
+              <input type="text" class="form-control" id="company-name" value="Terrazza de sto. Tomas Homeowners&#39; Association Inc.">
+            </div>
+            <div class="form-group">
+              <label for="company-address">Address:</label>
+              <textarea class="form-control" id="company-address" rows="3">2nd Floor, Executive Room Terrazza Clubhouse de Sto. Tomas, Brgy. San Roque , Sto. Tomas, Batangas</textarea>
+            </div>
+            <div class="form-group">
+              <label for="company-email">Email:</label>
+              <input type="email" class="form-control" id="company-email" placeholder="myemail@example.com" value="tdsthoabilling@gmail.com">
+            </div>
+            <div class="form-group">
+              <label for="company-phone">Phone Number:</label>
+              <input type="text" class="form-control" id="company-phone" value="09151047950">
+            </div>
+            <div class="form-group">
+              <label for="company-website">Website:</label>
+              <input type="text" class="form-control" id="company-website" value="">
+            </div> 
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary btn-lg pm-blue" id="submit-company-info">Save</button>
+            </div>            
+          </form>
+        </div> <!-- Card Body -->
+      </div> <!-- card @ Withholding Tax  Form -->
+    </div>
+  </div> <!-- settings-wrapper -->
+</div><!-- /.container-fluid-->
+<!-- POP UP MOdal for Add schedule -->
+<!-- Modal -->
+<div class="modal fade" id="addScheduleModal" tabindex="-1" role="dialog" aria-labelledby="addSchedule" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <form id="schedule-form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addSchedule">Add Schedule</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                      <label for="schedule_name">Schedule Name<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="schedule_name" placeholder="Schedule Name" name="schedule_name" required="required">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="ftime_in">First Time In<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control timepicker ui-timepicker-input" id="ftime_in" placeholder="0:00 am" name="ftime_in" required="required" autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="ftime_out">First Time Out</label>
+                      <input type="text" class="form-control timepicker ui-timepicker-input" id="ftime_out" placeholder="0:00 am" name="ftime_out" autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="stime_in">Second Time In</label>
+                      <input type="text" class="form-control timepicker ui-timepicker-input" id="stime_in" placeholder="0:00 pm" name="stime_in" autocomplete="off">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="stime_out">Second Time Out<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control timepicker ui-timepicker-input" id="stime_out" placeholder="0:00 pm" name="stime_out" required="required" autocomplete="off">
+                    </div>
+                   <div class="form-group col-md-6">
+                      <label for="breakTime">Break Time (minutes)</label>
+                      <input type="text" class="form-control" id="breakTime" placeholder="" name="breakTime">
+                    </div>
+                    <div class="form-group col-md-12">
+                      <!-- <button type="submit" class="btn btn-primary btn-lg create-sched-btn">Create Schedule</button> -->
+                    </div>
+                </div>
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" id="scheduleID" name="scheduleID" value="">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-lg _create-sched-btn pm-blue">Create Schedule</button>
+        </div>
+      </div>
+      </form> <!-- Schedule Form -->
+  </div>
+</div>
+<!-- POP UP MOdal for Update schedule -->
+<!-- Modal -->
+<div class="modal fade" id="updatedScheduleModal" tabindex="-1" role="dialog" aria-labelledby="updatedSchedule" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="update-schedule-form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updatedSchedule">Update Schedule</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="schedule_name">Schedule Name<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="_schedule_name" placeholder="Schedule Name" name="schedule_name" required="required">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="ftime_in">First Time In<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control timepicker ui-timepicker-input" id="_ftime_in" placeholder="0:00 am" name="ftime_in" required="required" autocomplete="off">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="ftime_out">First Time Out</label>
+                  <input type="text" class="form-control timepicker ui-timepicker-input" id="_ftime_out" placeholder="0:00 am" name="ftime_out" autocomplete="off">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="stime_in">Second Time In</label>
+                  <input type="text" class="form-control timepicker ui-timepicker-input" id="_stime_in" placeholder="0:00 pm" name="stime_in" autocomplete="off">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="stime_out">Second Time Out<span class="text-danger">*</span></label>
+                  <input type="text" class="form-control timepicker ui-timepicker-input" id="_stime_out" placeholder="0:00 pm" name="stime_out" required="required" autocomplete="off">
+                </div>
+                 <div class="form-group col-md-6">
+                  <label for="breakTime">Break Time (minutes)</label>
+                  <input type="text" class="form-control " id="breakTime" placeholder="" name="breakTime">
+                </div>
+            </div>      
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" id="scheduleID" name="scheduleID" value="">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary btn-lg pm-blue">Save Changes</button>
+        </div>
+      </div>
+    </form> <!-- Schedule Form -->
+  </div>
+</div>
+<!-- POP UP MOdal for Delete schedule -->
+<!-- Modal -->
+<div class="modal fade" id="deleteScheduleModal" tabindex="-1" role="dialog" aria-labelledby="deleteSchedule" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header alert-danger">
+        <h5 class="modal-title" id="deleteSchedule">Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this schedule</p>
+        <p>This will affect Employee data who is assigned to this schedule.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="deleteScheduleButton" data-id="">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Upload Avatar -->
+<div class="modal fade" id="uploadCompanyLogo" tabindex="-1" role="dialog" aria-labelledby="upload-companyLogo" aria-hidden="true">
+  <div id="view-user-leave" class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="upload-companyLogo">Upload Company Logo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-row">
+              <div id="change-companyLogo" class="croppie-container"><div class="cr-boundary" aria-dropeffect="none" style="width: 210px; height: 60px;"><img src="./Settings_files/company-logo-default.png" class="cr-image" style="opacity: 1;"><div class="cr-viewport cr-vp-square" tabindex="0" style="width: 210px; height: 60px;"></div><div class="cr-overlay"></div></div><div class="cr-slider-wrap"><input class="cr-slider" type="range" step="0.0001" aria-label="zoom"></div></div>
+              <div id="croppie-actions">
+                  <input type="file" id="upload" class="btn actionUpload btn-primary btn-sm pm-blue" value="Upload Company Logo" accept="image/*">
+                  <a class="button actionSave btn btn-success btn-sm" data-id="">Save Logo</a>
+              </div>
+            </div>      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  </div>
+</div>
+</div><!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/settings.php#page-top" style="display: none;">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./Settings_files/jquery.min(1).js.download"></script>
+    <script src="./Settings_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./Settings_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./Settings_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./Settings_files/jquery.dataTables.js.download"></script>
+  <script src="./Settings_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./Settings_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./Settings_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./Settings_files/jquery-ui.js.download"></script>
+  <script src="./Settings_files/jquery-select2.js.download"></script>
+  <script src="./Settings_files/jquery.timepicker.js.download"></script>
+  <script src="./Settings_files/datepair.min.js.download"></script>
+  <script src="./Settings_files/fancyTable.js.download"></script>
+  <script src="./Settings_files/scripts.js.download"></script>
+  <script src="./Settings_files/settings-scripts.js.download"></script>
+  <script src="./Settings_files/timecard-scripts.js.download"></script>
+  <script src="./Settings_files/download.js.download"></script>
+        <script src="./Settings_files/croppie.js.download"></script>
+    <script src="./Settings_files/setting-uploader.js.download"></script>
+        <script src="./Settings_files/required-indicator.js.download"></script>
+
+
+<div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

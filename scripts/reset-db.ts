@@ -1,23 +1,60 @@
 import { db } from "@/lib/db"
 import { sql } from "drizzle-orm"
 
+// Drop order respects foreign keys (children before parents).
+const TABLES = [
+  "company_profile",
+  "user_document",
+  "user_profile",
+  "team",
+  '"group"',
+  "designation",
+  "overtime_request",
+  "loan",
+  "leave_request",
+  "leave_credit",
+  "payroll_settings",
+  "holiday",
+  "time_log",
+  "schedule",
+  "feedback",
+  "payslip",
+  "payroll_period",
+  "employee",
+  "verification",
+  "session",
+  "account",
+  '"user"',
+]
+
+const ENUMS = [
+  "tax_frequency",
+  "loan_status",
+  "loan_type",
+  "leave_status",
+  "leave_type",
+  "holiday_type",
+  "time_log_source",
+  "payslip_status",
+  "payroll_status",
+  "employment_type",
+  "user_role",
+]
+
 async function resetDatabase() {
   console.log("🔄 Resetting database...")
 
   try {
-    // Drop all tables in cascade (order matters due to foreign keys)
-    await db.execute(sql`DROP TABLE IF EXISTS verification CASCADE;`)
-    await db.execute(sql`DROP TABLE IF EXISTS session CASCADE;`)
-    await db.execute(sql`DROP TABLE IF EXISTS account CASCADE;`)
-    await db.execute(sql`DROP TABLE IF EXISTS employee CASCADE;`)
-    await db.execute(sql`DROP TABLE IF EXISTS "user" CASCADE;`)
-
-    // Drop enum type
-    await db.execute(sql`DROP TYPE IF EXISTS user_role CASCADE;`)
+    for (const t of TABLES) {
+      await db.execute(sql.raw(`DROP TABLE IF EXISTS ${t} CASCADE;`))
+    }
+    for (const e of ENUMS) {
+      await db.execute(sql.raw(`DROP TYPE IF EXISTS ${e} CASCADE;`))
+    }
 
     console.log("✅ All tables and enums dropped")
     console.log("✨ Database reset complete!")
-    console.log("\nNext step: Run 'npm run db:seed' to repopulate with test data")
+    console.log("\nNext step: Run 'npm run db:migrate' then 'npm run db:seed'")
   } catch (error) {
     console.error("❌ Error resetting database:", error)
     process.exit(1)

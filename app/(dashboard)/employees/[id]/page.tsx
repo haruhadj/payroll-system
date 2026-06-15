@@ -3,6 +3,8 @@
 import { useState, useEffect, use } from "react"
 import { useRouter } from "next/navigation"
 import { useEmployee, useUpdateEmployee } from "@/lib/hooks/useEmployees"
+import { useSchedules } from "@/lib/hooks/useSchedules"
+import { useOptions } from "@/lib/hooks/useOptions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -18,19 +20,36 @@ import {
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
+const DEDUCTION_TOGGLES = [
+  { key: "deductSss", label: "SSS" },
+  { key: "deductPhilhealth", label: "PhilHealth" },
+  { key: "deductPagibig", label: "Pag-IBIG" },
+  { key: "deductTax", label: "Withholding Tax" },
+] as const
+
 export default function EditEmployeePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params) as { id: string }
   const router = useRouter()
   const { data: emp, isLoading } = useEmployee(id)
   const { mutate: update, isPending } = useUpdateEmployee(id)
+  const { data: schedules } = useSchedules()
+  const { data: options } = useOptions()
 
   const [form, setForm] = useState({
     department: "",
     position: "",
+    groupName: "",
     employmentType: "full_time",
     basicSalary: "",
     allowance: "",
     hiredAt: "",
+    scheduleId: "none",
+    isActive: true,
+    deductSss: true,
+    deductPhilhealth: true,
+    deductPagibig: true,
+    deductTax: true,
+    latePerMinuteOverride: "",
   })
 
   useEffect(() => {
@@ -38,19 +57,33 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
       setForm({
         department: emp.department,
         position: emp.position,
+        groupName: emp.groupName ?? "",
         employmentType: emp.employmentType,
         basicSalary: emp.basicSalary,
         allowance: emp.allowance ?? "0",
         hiredAt: emp.hiredAt,
+        scheduleId: emp.scheduleId ?? "none",
+        isActive: emp.isActive ?? true,
+        deductSss: emp.deductSss ?? true,
+        deductPhilhealth: emp.deductPhilhealth ?? true,
+        deductPagibig: emp.deductPagibig ?? true,
+        deductTax: emp.deductTax ?? true,
+        latePerMinuteOverride: emp.latePerMinuteOverride ?? "",
       })
     }
   }, [emp])
 
-  const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }))
+  const set = (k: string, v: any) => setForm((f) => ({ ...f, [k]: v }))
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const payload = { ...form, allowance: form.allowance || "0" }
+    const payload = {
+      ...form,
+      allowance: form.allowance || "0",
+      groupName: form.groupName || null,
+      scheduleId: form.scheduleId === "none" ? null : form.scheduleId,
+      latePerMinuteOverride: form.latePerMinuteOverride || null,
+    }
     update(payload, { onSuccess: () => router.push("/employees") })
   }
 
@@ -79,18 +112,43 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
         <CardHeader><CardTitle>Employee Details</CardTitle></CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Department</Label>
-                <Input value={form.department} onChange={(e) => set("department", e.target.value)} required />
+                <Label>Team (Department)</Label>
+                <Select value={form.department} onValueChange={(v) => set("department", v ?? "")}>
+                  <SelectTrigger><SelectValue placeholder="Select team…" /></SelectTrigger>
+                  <SelectContent>
+                    {options?.teams?.map((t) => (
+                      <SelectItem key={t.id} value={t.name}>{t.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
-                <Label>Position</Label>
-                <Input value={form.position} onChange={(e) => set("position", e.target.value)} required />
+                <Label>Designation (Position)</Label>
+                <Select value={form.position} onValueChange={(v) => set("position", v ?? "")}>
+                  <SelectTrigger><SelectValue placeholder="Select designation…" /></SelectTrigger>
+                  <SelectContent>
+                    {options?.designations?.map((d) => (
+                      <SelectItem key={d.id} value={d.name}>{d.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Group (Status)</Label>
+                <Select value={form.groupName} onValueChange={(v) => set("groupName", v ?? "")}>
+                  <SelectTrigger><SelectValue placeholder="Select group…" /></SelectTrigger>
+                  <SelectContent>
+                    {options?.groups?.map((g) => (
+                      <SelectItem key={g.id} value={g.name}>{g.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="space-y-2">
                 <Label>Employment Type</Label>
                 <Select value={form.employmentType} onValueChange={(v) => set("employmentType", v ?? "full_time")}>
@@ -102,6 +160,9 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Basic Salary (PHP)</Label>
                 <Input
@@ -115,7 +176,7 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Monthly Allowance (PHP)</Label>
                 <Input
@@ -129,6 +190,62 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
               <div className="space-y-2">
                 <Label>Hired Date</Label>
                 <Input type="date" value={form.hiredAt} onChange={(e) => set("hiredAt", e.target.value)} required />
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Schedule</Label>
+                <Select value={form.scheduleId} onValueChange={(v) => set("scheduleId", v ?? "none")}>
+                  <SelectTrigger><SelectValue placeholder="No schedule" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">No schedule</SelectItem>
+                    {schedules?.map((s: any) => (
+                      <SelectItem key={s.id} value={s.id}>
+                        {s.name} ({s.timeIn}–{s.timeOut})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label>Late Deduction Override (PHP/min)</Label>
+                <Input
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="Auto (hourly rate ÷ 60)"
+                  value={form.latePerMinuteOverride}
+                  onChange={(e) => set("latePerMinuteOverride", e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="space-y-3 rounded-lg border p-4">
+              <label className="flex items-center gap-2 text-sm font-medium">
+                <input
+                  type="checkbox"
+                  className="h-4 w-4"
+                  checked={form.isActive}
+                  onChange={(e) => set("isActive", e.target.checked)}
+                />
+                Active employee (inactive staff are excluded from payroll)
+              </label>
+              <div>
+                <p className="text-sm font-medium mb-2">Government Contributions</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {DEDUCTION_TOGGLES.map((t) => (
+                    <label key={t.key} className="flex items-center gap-2 text-sm">
+                      <input
+                        type="checkbox"
+                        className="h-4 w-4"
+                        checked={form[t.key]}
+                        onChange={(e) => set(t.key, e.target.checked)}
+                      />
+                      {t.label}
+                    </label>
+                  ))}
+                </div>
               </div>
             </div>
 

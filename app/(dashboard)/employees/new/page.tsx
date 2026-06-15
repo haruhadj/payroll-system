@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useCreateEmployee, useUnlinkedUsers } from "@/lib/hooks/useEmployees"
+import { useSchedules } from "@/lib/hooks/useSchedules"
+import { useOptions } from "@/lib/hooks/useOptions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -21,23 +23,32 @@ export default function NewEmployeePage() {
   const router = useRouter()
   const { mutate: create, isPending } = useCreateEmployee()
   const { data: users } = useUnlinkedUsers()
+  const { data: schedules } = useSchedules()
+  const { data: options } = useOptions()
 
   const [form, setForm] = useState({
     userId: "",
     employeeNo: "",
     department: "",
     position: "",
+    groupName: "",
     employmentType: "full_time",
     basicSalary: "",
     allowance: "",
     hiredAt: "",
+    scheduleId: "none",
   })
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }))
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const payload = { ...form, allowance: form.allowance || "0" }
+    const payload = {
+      ...form,
+      allowance: form.allowance || "0",
+      groupName: form.groupName || null,
+      scheduleId: form.scheduleId === "none" ? null : form.scheduleId,
+    }
     create(payload, { onSuccess: () => router.push("/employees") })
   }
 
@@ -73,7 +84,7 @@ export default function NewEmployeePage() {
               </Select>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Employee No.</Label>
                 <Input
@@ -94,28 +105,49 @@ export default function NewEmployeePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Department</Label>
-                <Input
-                  placeholder="Finance"
-                  value={form.department}
-                  onChange={(e) => set("department", e.target.value)}
-                  required
-                />
+                <Label>Team (Department)</Label>
+                <Select value={form.department} onValueChange={(v) => set("department", v ?? "")}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select team…" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {options?.teams?.map((t) => (
+                      <SelectItem key={t.id} value={t.name}>{t.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
-                <Label>Position</Label>
-                <Input
-                  placeholder="Accountant"
-                  value={form.position}
-                  onChange={(e) => set("position", e.target.value)}
-                  required
-                />
+                <Label>Designation (Position)</Label>
+                <Select value={form.position} onValueChange={(v) => set("position", v ?? "")}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select designation…" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {options?.designations?.map((d) => (
+                      <SelectItem key={d.id} value={d.name}>{d.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Group (Status)</Label>
+                <Select value={form.groupName} onValueChange={(v) => set("groupName", v ?? "")}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select group…" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {options?.groups?.map((g) => (
+                      <SelectItem key={g.id} value={g.name}>{g.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               <div className="space-y-2">
                 <Label>Employment Type</Label>
                 <Select
@@ -130,6 +162,9 @@ export default function NewEmployeePage() {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Basic Salary (PHP)</Label>
                 <Input
@@ -142,9 +177,6 @@ export default function NewEmployeePage() {
                   required
                 />
               </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>Monthly Allowance (PHP)</Label>
                 <Input
@@ -159,6 +191,26 @@ export default function NewEmployeePage() {
                   Transportation, meal, and other non-taxable allowances.
                 </p>
               </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Work Schedule</Label>
+              <Select
+                value={form.scheduleId}
+                onValueChange={(v) => set("scheduleId", v ?? "none")}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="No schedule" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">No schedule</SelectItem>
+                  {schedules?.map((s: any) => (
+                    <SelectItem key={s.id} value={s.id}>
+                      {s.name} ({s.timeIn}–{s.timeOut})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             <div className="flex gap-3 pt-2">

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://payroll-master.com/demo/attendance.php -->
+<html lang="en" style="--oip-dim-overlay-bg: rgba(0, 0, 0, 0.4);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Payroll Master - Payroll Version 4.3.5</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="https://payroll-master.com/demo/images/favicon.ico">
+  <!-- Bootstrap core CSS-->
+  <link href="./Attendance_files/bootstrap.min.css" rel="stylesheet">
+   <!-- Table styles -->
+   <link href="./Attendance_files/datatable-min.css" rel="stylesheet">
+  <link href="./Attendance_files/select2-min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="./Attendance_files/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Attendance_files/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <!-- Page level plugin CSS-->
+  <link href="./Attendance_files/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="./Attendance_files/sb-admin.css" rel="stylesheet">
+  <!-- styles for this template-->
+  <link href="./Attendance_files/jquery.timepicker.css" rel="stylesheet">
+  <!-- jQuery UI styles-->
+  <link rel="stylesheet" href="./Attendance_files/jquery-ui.min.css">
+  <!-- custom styles added by jaypee -->
+  <link rel="stylesheet" href="./Attendance_files/custom-style.css">
+ 
+    <link href="./Attendance_files/style.css" rel="stylesheet">
+  <script src="./Attendance_files/jquery.min.js.download"></script>
+  <script src="./Attendance_files/jquery.ph-locations-v1.0.0.js.download"></script>
+  <script src="./Attendance_files/jquery.dataTables.min.js.download"></script>
+<style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="https://payroll-master.com/demo/index.php">Welcome! Admin Admin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+  <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Dashboard">
+    <a class="nav-link" href="https://payroll-master.com/demo/index.php">
+      <i class="fa fa-fw fa-dashboard"></i>
+      <span class="nav-link-text">Dashboard</span>
+    </a>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="My Profile">
+    <a class="nav-link" href="https://payroll-master.com/demo/profile.php">
+      <i class="fa fa-fw fa-address-card-o"></i>
+      <span class="nav-link-text">My Profile</span>
+    </a>
+  </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/attendance.php#navAttendance" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-calendar"></i>
+      <span class="nav-link-text">Attendance</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navAttendance">
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php?act=add">Add Log</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/attendance.php">All Logs</a>
+      </li>
+      <li>
+        <a href="https://payroll-master.com/demo/overtime.php">Overtime</a>
+      </li>
+              <li>
+          <a href="https://payroll-master.com/demo/report-timecard.php">Time Card</a>
+        </li>
+          </ul>
+  </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+      <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/attendance.php#navSchedules" data-parent="#exampleAccordion" aria-expanded="false">
+        <i class="fa-regular fa-fw fa-calendar-days"></i>
+        <span class="nav-link-text">Schedules</span>
+      </a>
+      <ul class="sidenav-second-level collapse" id="navSchedules">
+
+                <li>
+          <a href="https://payroll-master.com/demo/all-schedules.php">All Schedule</a>
+        </li>
+                        <li>
+          <a href="https://payroll-master.com/demo/employee-schedules.php">Employee Schedules</a>
+        </li>
+              
+      </ul>
+    </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Reports">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/attendance.php#navReports" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-file-text"></i>
+      <span class="nav-link-text">Payroll</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navReports">
+              <li>
+          <a href="https://payroll-master.com/demo/report-payroll.php">Generate Payroll</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/report-thirteenth-month.php">Generate 13th Month</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-payrolls.php">View Payroll/Payslip</a>
+        </li>
+                    <li>
+          <a href="https://payroll-master.com/demo/view-thirteenths.php">View 13th Month</a>
+        </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vacation">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/attendance.php#navVacation" data-parent="#vacationAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-plane"></i>
+      <span class="nav-link-text">Vacation</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navVacation">
+      <li>
+        <a href="https://payroll-master.com/demo/leaves.php?act=add">Add Vacation</a>
+      </li>
+            <li>
+        <a href="https://payroll-master.com/demo/leaves.php">All Vacations</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/holiday.php">Holiday Calendar</a>
+      </li>
+          </ul>
+  </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="" data-original-title="Employees">
+    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="https://payroll-master.com/demo/attendance.php#navUsers" data-parent="#exampleAccordion" aria-expanded="false">
+      <i class="fa fa-fw fa-users"></i>
+      <span class="nav-link-text">Employees</span>
+    </a>
+    <ul class="sidenav-second-level collapse" id="navUsers">
+            <li>
+        <a href="https://payroll-master.com/demo/add-user.php">Add Employee</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/users.php">All Employees</a>
+      </li>
+                  <li>
+        <a href="https://payroll-master.com/demo/inactive-users.php">Inactive Employees</a>
+      </li>
+                </ul>
+  </li>
+  </ul>
+<ul class="navbar-nav sidenav-toggler">
+  <li class="nav-item">
+    <a class="nav-link text-center" id="sidenavToggler">
+      <i class="fa fa-fw fa-angle-left"></i>
+    </a>
+  </li>
+</ul>      <ul class="navbar-nav navbar-topnav ml-auto">
+      <li class="nav-item">
+      <a href="https://join.skype.com/ybFopz6m3QXo" target="_blank" class="nav-link mr-lg-2">
+        <i class="fa-sharp fa-solid fa-comment"></i>
+        Chat
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="https://payrollmaster.ph/demo/licensehelper.php" class="nav-link mr-lg-2">
+        <i class="fa fa-credit-card"></i>
+        License Helper
+      </a>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="settingsDropdown" href="https://payroll-master.com/demo/attendance.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-gears"></i>
+        Settings
+      </a>
+      <div class="dropdown-menu" aria-labelledby="settingsDropdown">
+                  <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/settings.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> General Settings</strong>
+            </span>
+          </a>
+                          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="https://payroll-master.com/demo/options.php">
+            <span class="text-info">
+              <strong>
+                <i class="fa fa-gears fa-fw"></i> Manage Options</strong>
+            </span>
+          </a>
+              </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle mr-lg-2" id="toolsDropdown" href="https://payroll-master.com/demo/attendance.php#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-fw fa-wrench"></i>
+        Tools
+      </a>
+      <div class="dropdown-menu" aria-labelledby="toolsDropdown">
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-timesheet.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Timesheets</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Time Record (A6)</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/import-user-2.php">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-upload fa-fw"></i> Import Employee</strong>
+          </span>
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="https://payroll-master.com/demo/attendance.php#" id="download-employee">
+          <span class="text-success">
+            <strong>
+              <i class="fa fa-download fa-fw"></i> Export All Employee</strong>
+          </span>
+        </a>
+      </div>
+    </li>
+        <li class="nav-item dropdown">
+      <a href="https://www.payrollmaster.ph/knowledgebase/" class="nav-link" target="_blank">
+        <i class="fa fa-fw fa-lightbulb-o"></i>
+        Helps
+      </a>
+    </li>
+    <li class="nav-item">
+    <a style="display: inline-block;" class="nav-link" href="https://payroll-master.com/demo/?logout=1"><i class="fa fa-fw fa-sign-out"></i>Logout</a><a href="https://payroll-master.com/demo/profile.php"><img style="display: inline-block;" src="./Attendance_files/185.jpg" class="rounded-circle" alt="avatar" width="26"></a><a>
+  </a></li><a>
+</a></ul><a>    </a></div><a> <!-- navbarResponsive -->
+  </a></nav><a>
+</a><div class="content-wrapper"><a></a><div class="container-fluid"><a>
+	<!-- Breadcrumbs-->
+	</a><ol class="breadcrumb"><a>
+		</a><li class="breadcrumb-item"><a>
+			</a><a href="https://payroll-master.com/demo/attendance.php#">Dashboard</a>
+		</li>
+		<li class="breadcrumb-item active">Attendance</li>
+	</ol>
+	<div class="row">
+		<div id="attendance" class="col-md-12">
+			<div class="card mb-3 bg-light">
+				<div class="card-header text-center">
+					<input type="text" class="search-date form-control hasDatepicker" style="float: left;width: initial;" placeholder="Search Date" value="2026-06-15" id="dp1781496544806">
+					<span class="date-page active before" data-date="2026-06-14" title="2026-06-14"><span class="fa fa-fw fa-chevron-circle-left"></span></span>
+					<span class="date-page current">2026-06-15 - <span class="day-name">Monday</span></span>
+					<span class="date-page disabled after" data-date="2026-06-16" title="2026-06-16"><span class="fa fa-fw fa-chevron-circle-right"></span></span>
+					<button id="add-log" style="float: right;width: initial;" class="btn btn-outline-success _success" data-toggle="modal" data-target="#addLogModal">Add Log</button>
+				</div>
+				<div class="card-body">
+					<table class="table table-bordered" id="timecardTable" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th class="fullname">Employee Name</th>
+								<th>Schedule</th>
+								<th>Log In (AM)</th>
+								<th>Log Out (AM)</th>
+								<th>Log In (PM)</th>
+								<th>Log Out (PM)</th>
+								<th>OT In</th>
+								<th>OT Out</th>
+								<th>OT Hours</th>
+								<th>Late Hours</th>
+								<th>Work Hours</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+																<tr>
+										<td class="fullname"> User, Employee</td>
+										<td>Open Schedule</td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="ftimeIn" data-id="333333333"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="ftimeOut" data-id="333333333"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="stimeIn" data-id="333333333"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="stimeOut" data-id="333333333"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="">
+																							<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="OTin" data-id="333333333"><i class="fa fas fa-calendar"></i>
+																						</a></td>
+										<td id="">
+																							<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="OTout" data-id="333333333"><i class="fa fas fa-calendar"></i>
+																						</a></td>
+										<td>
+											0 Hr(s) 0 min(s)										</td>
+										<td class="">
+											0 Hr(s) 0 min(s)										</td>
+										<td>
+											0 Hr(s) 0 min(s)										</td>
+										
+									</tr>
+																	<tr>
+										<td class="fullname">Cruz, Chelsea</td>
+										<td>REGULAR SCHED</td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="ftimeIn" data-id="0"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="ftimeOut" data-id="0"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="stimeIn" data-id="0"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="stimeOut" data-id="0"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="">
+																							<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="OTin" data-id="0"><i class="fa fas fa-calendar"></i>
+																						</a></td>
+										<td id="">
+																							<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="OTout" data-id="0"><i class="fa fas fa-calendar"></i>
+																						</a></td>
+										<td>
+											0 Hr(s) 0 min(s)										</td>
+										<td class="">
+											0 Hr(s) 0 min(s)										</td>
+										<td>
+											0 Hr(s) 0 min(s)										</td>
+										
+									</tr>
+																	<tr>
+										<td class="fullname">Yap, Lois Anna Keziah</td>
+										<td>REGULAR SCHED</td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="ftimeIn" data-id="0"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="ftimeOut" data-id="0"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="stimeIn" data-id="0"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="" class="">
+																									<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="stimeOut" data-id="0"><i class="fa fas fa-calendar"></i>
+																								</a></td>
+										<td id="">
+																							<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="OTin" data-id="0"><i class="fa fas fa-calendar"></i>
+																						</a></td>
+										<td id="">
+																							<a href="https://payroll-master.com/demo/attendance.php#" class="add-sched-log text-center text-success" data-toggle="modal" data-target="#addDateLogModal" data-date="2026-06-15" data-sched="OTout" data-id="0"><i class="fa fas fa-calendar"></i>
+																						</a></td>
+										<td>
+											0 Hr(s) 0 min(s)										</td>
+										<td class="">
+											0 Hr(s) 0 min(s)										</td>
+										<td>
+											0 Hr(s) 0 min(s)										</td>
+										
+									</tr>
+																<tr style="color: #28a745;">
+									<th colspan="8" style="text-align: right;">Accumulated Records</th>
+									<th>0 Hr(s) 0 min(s)</th>
+									<th>0 Hr(s) 0 min(s)</th>
+									<th>0 Hr(s) 0 min(s) </th>
+								</tr>
+													</tbody>
+					</table>
+				</div>
+			</div>
+		</div> <!-- User Leave -->
+	</div>
+</div>
+<!-- Modal Pop up -->
+<!-- Add new Time Log -->
+<div class="modal fade" id="addLogModal" tabindex="-1" role="dialog" aria-labelledby="addLog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<form id="addlog-form">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-white" id="addLog">Add New Time Log</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<select class="form-control select2 select2-full select2-hidden-accessible" id="biometricID" name="biometricID" required="required" data-select2-id="biometricID" tabindex="-1" aria-hidden="true">
+								<option value="" data-select2-id="2">Select Employee</option>
+								<option value="333333333"> User, Employee</option><option value="0">Cruz, Chelsea</option><option value="0">Yap, Lois Anna Keziah</option>							</select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-biometricID-container"><span class="select2-selection__rendered" id="select2-biometricID-container" role="textbox" aria-readonly="true" title="Select Employee">Select Employee</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+						</div>
+						<div class="form-group col-md-12">
+							<label for="date">Date</label>
+							<input type="text" class="form-control datepicker hasDatepicker" id="date" placeholder="yyyy-mm-dd" autocomplete="off">
+						</div>
+						<div class="form-group col-md-12">
+							<label for="__absent">Absent</label>
+							<input type="checkbox" id="__absent">
+						</div>
+					</div>
+					<div id="log-sections" class="row">
+						<div class="form-group col-md-6">
+							<label for="ftimein">Time In (AM)</label>
+							<input type="text" class="form-control timepicker ui-timepicker-input" id="ftimein" placeholder="0:00am" autocomplete="off">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="ftimeout">Time Out (AM)</label>
+							<input type="text" class="form-control timepicker ui-timepicker-input" id="ftimeout" placeholder="0:00am" autocomplete="off">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="stimein">Time In (PM)</label>
+							<input type="text" class="form-control timepicker ui-timepicker-input" id="stimein" placeholder="0:00pm" autocomplete="off">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="stimeout">Time Out (PM)</label>
+							<input type="text" class="form-control timepicker ui-timepicker-input" id="stimeout" placeholder="0:00pm" autocomplete="off">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="stimeout">OT In </label>
+							<input type="text" class="form-control timepicker ui-timepicker-input" id="OTin" placeholder="0:00" autocomplete="off">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="stimeout">OT Out</label>
+							<input type="text" class="form-control timepicker ui-timepicker-input" id="OTout" placeholder="0:00" autocomplete="off">
+						</div>
+					</div>
+					<div id="reason-section" class="d-none row">
+						<div class="form-group col-md-12">
+							<label for="__absent_reason">Reason</label>
+							<input type="text" class="form-control" id="__absent_reason" autocomplete="off">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer pm-blue">
+					<button type="button" class="btn btn-secondary _secondary" data-dismiss="modal">Close</button>
+					<input type="submit" class="btn btn-danger _danger" value="Add Log">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- Add new Date Log -->
+<div class="modal fade" id="addDateLogModal" tabindex="-1" role="dialog" aria-labelledby="addLog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<form id="scheduleLog-form">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-white" id="addLog">Add Schedule Log</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label class="sr-only" for="schedDateLog">Date</label>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Date</div>
+								</div>
+								<input type="text" class="form-control datepicker hasDatepicker" id="schedDateLog" required="required" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="sr-only" for="schedTimeLog">Time</label>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Time</div>
+								</div>
+								<input type="text" class="form-control timepicker ui-timepicker-input" id="schedTimeLog" required="required" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-md-12 mb-3">
+							<label>Notes</label>
+							<div class="input-group mb-2">
+								<textarea name="notes" id="schedComment" class="form-control" rows="4" required="required" autocomplete="off"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary _secondary" data-dismiss="modal">Close</button>
+					<input type="hidden" id="schedulelog" name="schedulelog" value="">
+					<input type="hidden" id="biometricID" name="biometricID" value="">
+					<input type="submit" class="btn btn-danger _danger" value="Add Schedule Log">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- update Time Log -->
+<div class="modal fade" id="updateLogModal" tabindex="-1" role="dialog" aria-labelledby="updateLog" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<form id="updatelog-form">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-white" id="updateLog">Update Log</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label class="sr-only" for="newDateLog">Date</label>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Date</div>
+								</div>
+								<input type="text" class="form-control datepicker hasDatepicker" id="newDateLog" required="required" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="sr-only" for="newTimeLog">Time</label>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Time</div>
+								</div>
+								<input type="text" class="form-control timepicker ui-timepicker-input" id="newTimeLog" required="required" autocomplete="off">
+							</div>
+						</div>
+						<div class="col-md-12 mb-3">
+							<label>Notes</label>
+							<div class="input-group mb-2">
+								<textarea name="notes" id="comment" class="form-control" rows="4" required="required" autocomplete="off"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary _secondary" data-dismiss="modal">Close</button>
+					<input type="hidden" id="logID" name="logID" value="">
+					<input type="hidden" id="checkinSched" name="checkinSched" value="">
+					<input type="submit" class="btn btn-danger _danger" value="Confirm">
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</div><!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>Copyright © payrollmaster.ph 2026. Version 4.3.5.</small>
+      </div>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="https://payroll-master.com/demo/attendance.php#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="https://payroll-master.com/demo/login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="./Attendance_files/jquery.min(1).js.download"></script>
+    <script src="./Attendance_files/bootstrap.bundle.min.js.download"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="./Attendance_files/jquery.easing.min.js.download"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="./Attendance_files/Chart.min.js.download"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <script src="./Attendance_files/jquery.dataTables.js.download"></script>
+  <script src="./Attendance_files/dataTables.bootstrap4.js.download"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="./Attendance_files/sb-admin.min.js.download"></script>
+  <!-- Custom scripts for this page-->
+  <script src="./Attendance_files/sb-admin-datatables.min.js.download"></script>
+  <!-- <script src="js/sb-admin-charts.min.js"></script> -->
+  <!-- Jquery Datepicker scripts -->
+  <script src="./Attendance_files/jquery-ui.js.download"></script>
+  <script src="./Attendance_files/jquery-select2.js.download"></script>
+  <script src="./Attendance_files/jquery.timepicker.js.download"></script>
+  <script src="./Attendance_files/datepair.min.js.download"></script>
+  <script src="./Attendance_files/fancyTable.js.download"></script>
+  <script src="./Attendance_files/scripts.js.download"></script>
+  <script src="./Attendance_files/settings-scripts.js.download"></script>
+  <script src="./Attendance_files/timecard-scripts.js.download"></script>
+  <script src="./Attendance_files/download.js.download"></script>
+        <script src="./Attendance_files/required-indicator.js.download"></script>
+
+
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"><div>2026-06-16</div></div></body></html>

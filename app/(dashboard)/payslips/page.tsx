@@ -42,32 +42,34 @@ export default function PayslipsPage() {
         <div className="space-y-3">
           {payslips?.map((slip: any) => (
             <Card key={slip.id} className="hover:shadow-sm transition-shadow">
-              <CardContent className="flex items-center justify-between py-4">
-                <div>
-                  <p className="font-semibold">{slip.period?.label}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {slip.period?.dateFrom} → {slip.period?.dateTo}
-                  </p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="text-right">
-                    <p className="text-sm text-muted-foreground">Net Pay</p>
-                    <p className="font-bold text-lg">{formatCurrency(parseFloat(slip.netPay))}</p>
+              <CardContent className="py-4">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="font-semibold truncate">{slip.period?.label}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {slip.period?.dateFrom} → {slip.period?.dateTo}
+                    </p>
                   </div>
-                  <Badge variant={slip.status === "paid" ? "outline" : "default"}>{slip.status}</Badge>
-                  <Dialog>
-                    <DialogTrigger onClick={() => setSelected(slip)}>
-                      <Button size="icon" variant="ghost" type="button">
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-md">
-                      <DialogHeader>
-                        <DialogTitle>Payslip — {selected?.period?.label}</DialogTitle>
-                      </DialogHeader>
-                      {selected && <PayslipDetail slip={selected} />}
-                    </DialogContent>
-                  </Dialog>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <Badge variant={slip.status === "paid" ? "outline" : "default"}>{slip.status}</Badge>
+                    <Dialog>
+                      <DialogTrigger onClick={() => setSelected(slip)}>
+                        <Button size="icon" variant="ghost" type="button">
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-md w-[calc(100vw-2rem)]">
+                        <DialogHeader>
+                          <DialogTitle>Payslip — {selected?.period?.label}</DialogTitle>
+                        </DialogHeader>
+                        {selected && <PayslipDetail slip={selected} />}
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <p className="text-xs text-muted-foreground">Net Pay</p>
+                  <p className="font-bold text-lg">{formatCurrency(parseFloat(slip.netPay))}</p>
                 </div>
               </CardContent>
             </Card>

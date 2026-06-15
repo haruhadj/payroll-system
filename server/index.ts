@@ -13,6 +13,16 @@ import { payrollRouter } from "./routes/payroll"
 import { payslipsRouter } from "./routes/payslips"
 import { feedbackRouter } from "./routes/feedback"
 import { dashboardRouter } from "./routes/dashboard"
+import { schedulesRouter } from "./routes/schedules"
+import { holidaysRouter } from "./routes/holidays"
+import { timeLogsRouter } from "./routes/timelogs"
+import { settingsRouter } from "./routes/settings"
+import { leavesRouter } from "./routes/leaves"
+import { loansRouter } from "./routes/loans"
+import { overtimeRouter } from "./routes/overtime"
+import { optionsRouter } from "./routes/options"
+import { profileRouter } from "./routes/profile"
+import { toolsRouter } from "./routes/tools"
 
 const usersRouter = new Hono<{ Variables: HonoVariables }>()
   .use(authMiddleware)
@@ -111,6 +121,16 @@ const app = new Hono()
   .route("/feedback", feedbackRouter)
   .route("/dashboard", dashboardRouter)
   .route("/users", usersRouter)
+  .route("/schedules", schedulesRouter)
+  .route("/holidays", holidaysRouter)
+  .route("/timelogs", timeLogsRouter)
+  .route("/settings", settingsRouter)
+  .route("/leaves", leavesRouter)
+  .route("/loans", loansRouter)
+  .route("/overtime", overtimeRouter)
+  .route("/options", optionsRouter)
+  .route("/profile", profileRouter)
+  .route("/tools", toolsRouter)
 
 export type AppType = typeof app
 export { app }

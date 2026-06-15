@@ -15,10 +15,15 @@ async function apiFetch(path: string, init?: RequestInit) {
   return res.json()
 }
 
-export function useEmployees(params?: { department?: string; position?: string }) {
+export function useEmployees(params?: {
+  department?: string
+  position?: string
+  active?: "true" | "false"
+}) {
   const query = new URLSearchParams()
   if (params?.department) query.set("department", params.department)
   if (params?.position) query.set("position", params.position)
+  if (params?.active) query.set("active", params.active)
   return useQuery({
     queryKey: ["employees", params],
     queryFn: () => apiFetch(`/employees?${query}`),

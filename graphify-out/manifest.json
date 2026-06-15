@@ -1,13 +1,13 @@
 {
   "/home/haruhadj/payroll/app/package.json": {
-    "mtime": 1781419743.7901034,
-    "ast_hash": "d0a14195f41c602ad70d2e2552d6c480",
-    "semantic_hash": "d0a14195f41c602ad70d2e2552d6c480"
+    "mtime": 1781431176.2199976,
+    "ast_hash": "d161d1cf8b98fbc6ee08a67a9001909e",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/.mcp.json": {
-    "mtime": 1781416192.9093838,
-    "ast_hash": "e65d68379fb3c46da99ebb6afd516dde",
-    "semantic_hash": "e65d68379fb3c46da99ebb6afd516dde"
+    "mtime": 1781433165.7163234,
+    "ast_hash": "c44c4dc0cc68dc52e7a8376d193dfe47",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/eslint.config.mjs": {
     "mtime": 1781345430.0024939,
@@ -50,9 +50,9 @@
     "semantic_hash": "33e4e08ddd01c13b4b9f90e72642d933"
   },
   "/home/haruhadj/payroll/app/server/index.ts": {
-    "mtime": 1781418218.93996,
-    "ast_hash": "928b72859524dd0207dfcd4d013b53e5",
-    "semantic_hash": "928b72859524dd0207dfcd4d013b53e5"
+    "mtime": 1781503624.377279,
+    "ast_hash": "fcdd327ab30bff93353680c01718634c",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/server/types.ts": {
     "mtime": 1781418129.8349085,
@@ -75,14 +75,14 @@
     "semantic_hash": "5d5d6ec1bc5d99e7203088d8244454e4"
   },
   "/home/haruhadj/payroll/app/server/routes/employees.ts": {
-    "mtime": 1781418308.4396098,
-    "ast_hash": "e9ac6ed45009c5d0a201169baa051732",
-    "semantic_hash": "e9ac6ed45009c5d0a201169baa051732"
+    "mtime": 1781452541.4272342,
+    "ast_hash": "5800bbe6fdef208ccb582f524b9e27e4",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/server/routes/payroll.ts": {
-    "mtime": 1781418325.608458,
-    "ast_hash": "7aa153798392a10aff36e808732fe3ef",
-    "semantic_hash": "7aa153798392a10aff36e808732fe3ef"
+    "mtime": 1781503267.649969,
+    "ast_hash": "9d66cdb51e7291c613ab3cb5624438dc",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/server/routes/feedback.ts": {
     "mtime": 1781418195.1324623,
@@ -90,9 +90,9 @@
     "semantic_hash": "41361af741b2b91a24e0d8d6b57878f4"
   },
   "/home/haruhadj/payroll/app/server/routes/payslips.ts": {
-    "mtime": 1781418345.192255,
-    "ast_hash": "73b5d945584ed8371b9fb55f5b7f3cba",
-    "semantic_hash": "73b5d945584ed8371b9fb55f5b7f3cba"
+    "mtime": 1781439137.1396377,
+    "ast_hash": "46bac03f8ca7b009d2aabad7cfc09ad7",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/lib/resend.ts": {
     "mtime": 1781417557.774362,
@@ -105,9 +105,9 @@
     "semantic_hash": "2f15809278a7a72c32652ecc9df15220"
   },
   "/home/haruhadj/payroll/app/lib/payroll-calc.ts": {
-    "mtime": 1781417570.8817804,
-    "ast_hash": "57c14d132716fee6f28be1bf5bcdcffb",
-    "semantic_hash": "57c14d132716fee6f28be1bf5bcdcffb"
+    "mtime": 1781502187.4817946,
+    "ast_hash": "0674bb009ee1b401f43103d8509b482e",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/lib/hooks/usePayslips.ts": {
     "mtime": 1781417884.2739892,
@@ -125,14 +125,14 @@
     "semantic_hash": "e6fb865eaff43b44c9e25cc3aad4249f"
   },
   "/home/haruhadj/payroll/app/lib/hooks/useEmployees.ts": {
-    "mtime": 1781417873.366972,
-    "ast_hash": "0d71e51faa5a15ac184f665f2ae7cffc",
-    "semantic_hash": "0d71e51faa5a15ac184f665f2ae7cffc"
+    "mtime": 1781453117.6056135,
+    "ast_hash": "2cb4492477f6bc013a8a1ac3be933c04",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/lib/auth/server.ts": {
-    "mtime": 1781418629.9749873,
-    "ast_hash": "8f8e669a8cde645129a9447bf9970209",
-    "semantic_hash": "8f8e669a8cde645129a9447bf9970209"
+    "mtime": 1781438857.8383021,
+    "ast_hash": "6764ce9b518f94f143d3474b4c5cf3ea",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/lib/auth/client.ts": {
     "mtime": 1781418352.9777505,
@@ -140,9 +140,9 @@
     "semantic_hash": "90033b0b8d4bdb7b21b5e9fea0a4b099"
   },
   "/home/haruhadj/payroll/app/lib/db/schema.ts": {
-    "mtime": 1781423172.0115376,
-    "ast_hash": "11d55344ee4ed89aadcb027f8202f45f",
-    "semantic_hash": "11d55344ee4ed89aadcb027f8202f45f"
+    "mtime": 1781502796.9449716,
+    "ast_hash": "9f88b0f79039720454b715194e335e80",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/lib/db/index.ts": {
     "mtime": 1781417468.6008313,
@@ -160,19 +160,14 @@
     "semantic_hash": "5e525294eee79e634e8fad7c5ab7f04d"
   },
   "/home/haruhadj/payroll/app/app/(auth)/layout.tsx": {
-    "mtime": 1781419802.962858,
-    "ast_hash": "4d2ab45ab12304ec9c271b9014d69538",
-    "semantic_hash": "4d2ab45ab12304ec9c271b9014d69538"
-  },
-  "/home/haruhadj/payroll/app/app/(auth)/sign-up/page.tsx": {
-    "mtime": 1781417765.1666546,
-    "ast_hash": "56a45c019524c8a14c872c458e6091c7",
-    "semantic_hash": "56a45c019524c8a14c872c458e6091c7"
+    "mtime": 1781514746.5170262,
+    "ast_hash": "e8c618623710913e342b9d5e62127728",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(auth)/sign-in/page.tsx": {
-    "mtime": 1781417762.3474917,
-    "ast_hash": "e06f0b47d09f85bde40392a7e7ba3467",
-    "semantic_hash": "e06f0b47d09f85bde40392a7e7ba3467"
+    "mtime": 1781438879.9448006,
+    "ast_hash": "028313b4bd8589e7c61c28567483b645",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(auth)/reset-password/page.tsx": {
     "mtime": 1781417779.096306,
@@ -185,9 +180,9 @@
     "semantic_hash": "a939fd89441e0563c651857550ec4840"
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/layout.tsx": {
-    "mtime": 1781417853.122809,
-    "ast_hash": "d87a6dfd946c77f3a2a27207c899e938",
-    "semantic_hash": "d87a6dfd946c77f3a2a27207c899e938"
+    "mtime": 1781514649.4487615,
+    "ast_hash": "701719f2c57cf9a8253ee4b6c329c39c",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/feedback/page.tsx": {
     "mtime": 1781418042.7625372,
@@ -195,54 +190,54 @@
     "semantic_hash": "dac094fb5ae3cf10bc546b7b26746504"
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/feedback/admin/page.tsx": {
-    "mtime": 1781418060.3118281,
-    "ast_hash": "a0dd34937d4dcfd583fd71b257ed1ac9",
-    "semantic_hash": "a0dd34937d4dcfd583fd71b257ed1ac9"
+    "mtime": 1781450236.173864,
+    "ast_hash": "56ef2fe05bfd4dbe22fc184730ec86bc",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/settings/page.tsx": {
-    "mtime": 1781418562.8789895,
-    "ast_hash": "dca169ae85e6ff01c890f6cfde855c36",
-    "semantic_hash": "dca169ae85e6ff01c890f6cfde855c36"
+    "mtime": 1781502584.2317076,
+    "ast_hash": "dabe238dd8af6a1775a8a16bf193805f",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/payroll/page.tsx": {
-    "mtime": 1781417978.8617296,
-    "ast_hash": "6452d17bf951382675777cbb70cec3bc",
-    "semantic_hash": "6452d17bf951382675777cbb70cec3bc"
+    "mtime": 1781450144.5576036,
+    "ast_hash": "4772a6baa2432abe91c07821c33e0ec6",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/payroll/new/page.tsx": {
-    "mtime": 1781417986.4601629,
-    "ast_hash": "81e4df412ec2bba8494e1510847e6ae2",
-    "semantic_hash": "81e4df412ec2bba8494e1510847e6ae2"
+    "mtime": 1781450272.4357648,
+    "ast_hash": "c76397a0f9f076c9fef03ffa1e34feab",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/payroll/[id]/page.tsx": {
-    "mtime": 1781418362.033061,
-    "ast_hash": "218e94c8b0a0b9e940cfc05fa694daee",
-    "semantic_hash": "218e94c8b0a0b9e940cfc05fa694daee"
+    "mtime": 1781501139.3574026,
+    "ast_hash": "58240eba7d52d4c80ddfe70cfbdb8e4b",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/employees/page.tsx": {
-    "mtime": 1781417925.4138446,
-    "ast_hash": "f4fe131b18552a2f5057ed25cdc73663",
-    "semantic_hash": "f4fe131b18552a2f5057ed25cdc73663"
+    "mtime": 1781453147.783615,
+    "ast_hash": "adc76a48d11a7013ee0b59d6cb9c95ff",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/employees/new/page.tsx": {
-    "mtime": 1781418552.7487733,
-    "ast_hash": "da2af4792e4f86bab27956acaa87433f",
-    "semantic_hash": "da2af4792e4f86bab27956acaa87433f"
+    "mtime": 1781501900.6218019,
+    "ast_hash": "9ae23ba5ac68369ec8e7f9e37ce44b0b",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/employees/[id]/page.tsx": {
-    "mtime": 1781418579.4261358,
-    "ast_hash": "37da3525ad94993ec2c297d299dfaab9",
-    "semantic_hash": "37da3525ad94993ec2c297d299dfaab9"
+    "mtime": 1781502012.8976905,
+    "ast_hash": "bd92d49efb689ff6f0f6a2136e4dea0e",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/payslips/page.tsx": {
-    "mtime": 1781418237.402361,
-    "ast_hash": "7b250d9bcc8678c2e88fe6fba570b913",
-    "semantic_hash": "7b250d9bcc8678c2e88fe6fba570b913"
+    "mtime": 1781450199.7262747,
+    "ast_hash": "1d537345d5d346896f208f8a0cfbc56a",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/(dashboard)/dashboard/page.tsx": {
-    "mtime": 1781417914.873017,
-    "ast_hash": "44896b44e09238011e5246147f890c25",
-    "semantic_hash": "44896b44e09238011e5246147f890c25"
+    "mtime": 1781514710.8196306,
+    "ast_hash": "6d79d4e59e668a87c52a130793cadaa2",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/app/api/auth/[...all]/route.ts": {
     "mtime": 1781417615.7291708,
@@ -265,9 +260,9 @@
     "semantic_hash": "8b5fdc25e8b15ade00a21aac76f79bc5"
   },
   "/home/haruhadj/payroll/app/components/sidebar.tsx": {
-    "mtime": 1781419781.6922262,
-    "ast_hash": "233e36a684b7f26ef4e5d5d6e7b145e7",
-    "semantic_hash": "233e36a684b7f26ef4e5d5d6e7b145e7"
+    "mtime": 1781514597.1447856,
+    "ast_hash": "08aaef7fe8387c9ee6ea5c203d81f9cf",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/components/ui/button.tsx": {
     "mtime": 1781417344.7152748,
@@ -285,9 +280,9 @@
     "semantic_hash": "0e6e825c43d858d98c9903f4da975382"
   },
   "/home/haruhadj/payroll/app/components/ui/card.tsx": {
-    "mtime": 1781417361.9133525,
-    "ast_hash": "bd5f88ad2d983dd6c4561d63824c80ba",
-    "semantic_hash": "bd5f88ad2d983dd6c4561d63824c80ba"
+    "mtime": 1781514560.7937999,
+    "ast_hash": "380e3bee0327f84a487beaf377458ef7",
+    "semantic_hash": ""
   },
   "/home/haruhadj/payroll/app/components/ui/sheet.tsx": {
     "mtime": 1781417362.3982086,
@@ -683,5 +678,395 @@
     "mtime": 1781345177.811869,
     "ast_hash": "3603684e33a760df6752ca66cb119546",
     "semantic_hash": "3603684e33a760df6752ca66cb119546"
+  },
+  "/home/haruhadj/payroll/app/server/routes/timelogs.ts": {
+    "mtime": 1781501257.6081934,
+    "ast_hash": "f45763af1bd5ffa1b578f71a76d01615",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/server/routes/holidays.ts": {
+    "mtime": 1781452383.602155,
+    "ast_hash": "34dc64300c59cf243eecef8d8529c549",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/server/routes/schedules.ts": {
+    "mtime": 1781452373.0359967,
+    "ast_hash": "96d14e9fcf29cee88ae1a42b75fca823",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/server/routes/settings.ts": {
+    "mtime": 1781502242.323971,
+    "ast_hash": "fc05eebb0292b9a579d7674592322bb3",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/useSchedules.ts": {
+    "mtime": 1781452611.7083366,
+    "ast_hash": "62bb52fb8fc9b8da690faa775f36cd5c",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/useHolidays.ts": {
+    "mtime": 1781452622.387259,
+    "ast_hash": "b3981b49236cf4be4f5c78cec021d190",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/useTimeLogs.ts": {
+    "mtime": 1781501264.2599006,
+    "ast_hash": "bb3667e14b7aea8adfadf2f6410a8849",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/usePayrollSettings.ts": {
+    "mtime": 1781502365.0651217,
+    "ast_hash": "68e4c60e423d30e7898e890bc673012a",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/holidays/page.tsx": {
+    "mtime": 1781452858.4525821,
+    "ast_hash": "8b4eef16d5e872d365780df1d25ba59f",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/schedules/page.tsx": {
+    "mtime": 1781452734.2518246,
+    "ast_hash": "906c491b33e6da4417b94de357059519",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/attendance/page.tsx": {
+    "mtime": 1781501122.5441537,
+    "ast_hash": "66a374450d92022ba65b173a9e6e8472",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/scripts/reset-db.ts": {
+    "mtime": 1781503878.106228,
+    "ast_hash": "f074ba63f7119dfe178eddd9ec9c5a31",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/scripts/seed.ts": {
+    "mtime": 1781502601.760654,
+    "ast_hash": "885ca0869c5d96b64c5419752f492f25",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/scripts/migrate.ts": {
+    "mtime": 1781439681.6260042,
+    "ast_hash": "4ca6c59bb8e7f134a6f04645eb374974",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/components/mobile-header.tsx": {
+    "mtime": 1781514634.6065788,
+    "ast_hash": "7d55bbfbe6cf4ef298eda60f75e02d13",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/components/ui/alert.tsx": {
+    "mtime": 1781426906.2456043,
+    "ast_hash": "70ae18afb445882d30bcc3dd9c22fc61",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/drizzle/0004_payslip_breakdown.sql": {
+    "mtime": 1781452202.5765545,
+    "ast_hash": "0c05aac582e7c4efcb38aff954f3439c",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/drizzle/0002_add_employee_allowance.sql": {
+    "mtime": 1781439059.5911965,
+    "ast_hash": "3af13c12ff7ee5e7f7f0065f97bd9c70",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/drizzle/0003_attendance_core.sql": {
+    "mtime": 1781452194.8972924,
+    "ast_hash": "8e7c345e808df7f0e3f284b874e513cf",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/PROJECT_SUMMARY.md": {
+    "mtime": 1781437626.0603166,
+    "ast_hash": "79e509d1659f502c3c2494a424a5718c",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/.claude/skills/hono-expert/SKILL.md": {
+    "mtime": 1781435897.5563366,
+    "ast_hash": "b0ecff995907c1c885971cef1ff363bb",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/server/routes/loans.ts": {
+    "mtime": 1781490934.1327503,
+    "ast_hash": "2b66f4beef8f9fc55ca1a3571fea7bea",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/server/routes/leaves.ts": {
+    "mtime": 1781490919.4688094,
+    "ast_hash": "05b8d46fd8da6896136eb7b0284dadef",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/useLeaves.ts": {
+    "mtime": 1781491024.3921916,
+    "ast_hash": "64d86d04c72ac59340e44921f67a7cec",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/useLoans.ts": {
+    "mtime": 1781491034.463635,
+    "ast_hash": "ae87b50ece051e6d6fa8d0ca9531f6c5",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/leaves/page.tsx": {
+    "mtime": 1781491107.9706008,
+    "ast_hash": "9ec7b20eb65d067fb40b23b03bdfc4f7",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/loans/page.tsx": {
+    "mtime": 1781491143.1689472,
+    "ast_hash": "e649caecc7f9b86cdcd3605dba6ff50b",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/drizzle/0005_leaves_loans.sql": {
+    "mtime": 1781490855.7413158,
+    "ast_hash": "08d8f5619f154df9685679466e9a2f07",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/server/routes/options.ts": {
+    "mtime": 1781502049.1356363,
+    "ast_hash": "3d801f6508e52caf036baa5da910a240",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/server/routes/overtime.ts": {
+    "mtime": 1781501476.847744,
+    "ast_hash": "38ee17cd53e50c1b083ec3acd6886ffe",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/server/routes/tools.ts": {
+    "mtime": 1781503554.4161007,
+    "ast_hash": "d92f46af609605ea446e9191b4db836c",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/server/routes/profile.ts": {
+    "mtime": 1781502914.743445,
+    "ast_hash": "f67a3d6fc3539a1604cda9adf06080f6",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/useOptions.ts": {
+    "mtime": 1781501793.52225,
+    "ast_hash": "1c5d048d8d68d33d2b1cef1712d02b8d",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/useProfile.ts": {
+    "mtime": 1781502944.8166277,
+    "ast_hash": "a1625fd2ab78c467ab36657086635f8f",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/useOvertime.ts": {
+    "mtime": 1781501508.662314,
+    "ast_hash": "7416b2126bbc9f296f92300b052b6578",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/lib/hooks/useThirteenthMonth.ts": {
+    "mtime": 1781503367.2689202,
+    "ast_hash": "467ae5cd9c89831c56119ba15119c1ed",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/settings/manage/page.tsx": {
+    "mtime": 1781501814.1245162,
+    "ast_hash": "9a91c3560867819a1b93b308ac1db632",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/attendance/timecard/page.tsx": {
+    "mtime": 1781501303.8713343,
+    "ast_hash": "fe477df8157a9ad1d9b609c3be9dbbd5",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/attendance/overtime/page.tsx": {
+    "mtime": 1781501586.148768,
+    "ast_hash": "9ef18ed4d5f7b6de96d76819b9ae5635",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/payroll/thirteenth-month/page.tsx": {
+    "mtime": 1781503393.351965,
+    "ast_hash": "b585af7d67cb93ef8acc9fb48b9689f1",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/tools/page.tsx": {
+    "mtime": 1781503673.0839577,
+    "ast_hash": "04f0ebc3d5d97e9a122b348f10b2ad4c",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/app/(dashboard)/profile/page.tsx": {
+    "mtime": 1781512064.8084843,
+    "ast_hash": "0e26e8942e12abed6d75edec45808f75",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/components/overtime-requests-card.tsx": {
+    "mtime": 1781501571.102777,
+    "ast_hash": "1d12a0b8d4e5fb03c1d58f6a5ce9988b",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/components/monthly-leaves-card.tsx": {
+    "mtime": 1781501613.2405019,
+    "ast_hash": "250730626f05c52d3ff8ef1cd8f078cf",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/components/time-card.tsx": {
+    "mtime": 1781501289.886907,
+    "ast_hash": "5ed478856e27bfadedc4e2b2e8e1df51",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/drizzle/0007_overtime_requests.sql": {
+    "mtime": 1781501454.9415975,
+    "ast_hash": "1edc16ed28feed1e03a9dcccac1d4d32",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/drizzle/0006_six_punch_timelogs.sql": {
+    "mtime": 1781500809.7403507,
+    "ast_hash": "0c8c1ba99062cc3dc5015874693e0290",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/drizzle/0008_manage_options.sql": {
+    "mtime": 1781501750.5099556,
+    "ast_hash": "85a29a7986b295e9acb5a2c865180a4b",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/drizzle/0010_user_profiles.sql": {
+    "mtime": 1781502894.3965874,
+    "ast_hash": "e7ff88717a742477338b45d1f4f007d4",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/drizzle/0009_settings_company.sql": {
+    "mtime": 1781502149.2640762,
+    "ast_hash": "6e8fe54ddc695279ef1b965ffbeafc60",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/schedules/Employee Schedules.html": {
+    "mtime": 1781496025.7812161,
+    "ast_hash": "d4e0e300bc8dfd330e026d58e0becc58",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/schedules/All Schedule.html": {
+    "mtime": 1781496005.9022746,
+    "ast_hash": "f44aeecbcb3ae2c2eb8c8a0a12934fc0",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/settings/Settings.html": {
+    "mtime": 1781496896.1599858,
+    "ast_hash": "6b2de15f12e20b40219b399eb37d10c8",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/settings/Manage Options.html": {
+    "mtime": 1781496908.9549782,
+    "ast_hash": "816aed1aba215a0268a1f2440d45bca4",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/attendance/Attendance.html": {
+    "mtime": 1781496575.555293,
+    "ast_hash": "f1955aa81dc1656a259c0d48a179ff7b",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/attendance/Employee Timecard.html": {
+    "mtime": 1781495923.9018836,
+    "ast_hash": "b2b2182db0b24a4ccbcc60921f2c4b8e",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/attendance/Overtime.html": {
+    "mtime": 1781496580.028215,
+    "ast_hash": "5ad1a5295d1ef9fe4bde690db8cab527",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/payroll/View Payrolls Report.html": {
+    "mtime": 1781496085.0735495,
+    "ast_hash": "0c5c974125b9aebe308dcb96d705edad",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/payroll/View 13th Month Report.html": {
+    "mtime": 1781496450.3137827,
+    "ast_hash": "5e2e946b330d8e1896e08fcb536d6e76",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/payroll/Generate 13th Month Report.html": {
+    "mtime": 1781496123.6757264,
+    "ast_hash": "9ed26c7ad547f1878128a7efe8ba050a",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/payroll/generate pay roll page you can guess whats the content of this particular page.txt": {
+    "mtime": 1781496473.262513,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/vacation/Holiday.html": {
+    "mtime": 1781496353.2189903,
+    "ast_hash": "eb26ed1206341b4e2cd7dda4244f2500",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/vacation/Vacations.html": {
+    "mtime": 1781496173.2751527,
+    "ast_hash": "cd04f57b88ad1691fe3264bc1b459013",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/tools/Import Timesheets.html": {
+    "mtime": 1781496968.2487693,
+    "ast_hash": "8f534120a8346d7a91a77310787b0484",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/tools/Import Time Record (A6).html": {
+    "mtime": 1781497223.1291113,
+    "ast_hash": "712b646f153afe3a91c1e6b1105c9074",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/tools/Import Employee.html": {
+    "mtime": 1781497234.2076824,
+    "ast_hash": "b68a0308050f8b3e65ead3610791d3ba",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/tools/export all employess.txt": {
+    "mtime": 1781497291.7780879,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/my profile/Qualifications.html": {
+    "mtime": 1781495644.529803,
+    "ast_hash": "ce1b59faef6b0f9374075867800d3d03",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/my profile/My Profile.html": {
+    "mtime": 1781495618.6350415,
+    "ast_hash": "f26b4b6d7bfad970bd18716bff2c873e",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/my profile/Salary Benefits Information.html": {
+    "mtime": 1781495707.3679376,
+    "ast_hash": "1cc8faa1d2637b46e3a989e5aa3217ad",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/my profile/Employment Contract.html": {
+    "mtime": 1781495726.7611866,
+    "ast_hash": "fb98e1f1d4ea2468abeb6a57f476815c",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/my profile/Personal Information.html": {
+    "mtime": 1781495633.5532784,
+    "ast_hash": "8ad5be45b54eb9a6ef8e418adc888ca9",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/my profile/Loans, Leave & Schedule.html": {
+    "mtime": 1781495755.830078,
+    "ast_hash": "9dda91263060c19730900d466c0fd36a",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/employees/Employees.html": {
+    "mtime": 1781496241.044081,
+    "ast_hash": "f2c2ffa5b80d2adbbbd4d63e6f01dc02",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/employees/Add New Employee.html": {
+    "mtime": 1781496270.5132911,
+    "ast_hash": "1515296ebc75857af592e2716063a3c8",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/public/features/employees/inactive Employees.html": {
+    "mtime": 1781496303.5601265,
+    "ast_hash": "ced5a00a8b9008b4556c19936cefe87c",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/scripts/verify-payroll.ts": {
+    "mtime": 1781512164.087718,
+    "ast_hash": "0d2dcabd5ce6b18efa4ade1fbe3acac6",
+    "semantic_hash": ""
+  },
+  "/home/haruhadj/payroll/app/components/mobile-bottom-nav.tsx": {
+    "mtime": 1781514623.5714464,
+    "ast_hash": "def310a9f77482bb4e5b1670d3d2b453",
+    "semantic_hash": ""
   }
 }
