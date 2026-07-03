@@ -1,92 +1,131 @@
-# Payroll System — Project Summary & Feature Gap Analysis
+# Payroll System — Project Summary & Feature Status
+
+> Reflects the current state of the system. Several features listed as "missing" in
+> earlier drafts are now implemented — this document has been updated to match the code.
 
 ## What's Built
 
 ### Auth & Access Control
 - Better Auth with email/password, email verification, forgot/reset password
 - Roles: `admin`, `hr`, `employee`
-- RBAC middleware enforced per route
+- Two-gate RBAC enforced per route: `authMiddleware` (401 if not signed in) +
+  `requireRole(...)` (403 if role not allowed)
+- Admin user management (create users, change roles, delete) — `server/index.ts`
 
 ### Employee Management
 - Create, read, update, delete employees
-- Fields: employee no, department, position, employment type (full-time / part-time / contractual), basic salary, hire date
+- Fields: employee no, department, position, employment type (full-time / part-time /
+  contractual), **basic salary, per-employee allowance**, hire date, assigned schedule,
+  per-employee deduction toggles (SSS/PhilHealth/Pag-IBIG/tax), late-per-minute override
 - Employees linked 1:1 to a user account
 - Filter by department / position with pagination
+- CSV **export** and **import** of employees (`server/routes/tools.ts`, Tools page)
 
-### Payroll Processing
-- Create payroll periods (label, date range)
-- Status lifecycle: `draft → processed → released`
-- Bulk auto-generate payslips on "process" (all employees, no per-employee overrides yet)
-- PH-specific deduction calculations (SSS, PhilHealth, Pag-IBIG, BIR TRAIN Law withholding tax)
+### Attendance (Time Logs)
+- Six-punch daily time logs: AM in/out, PM in/out, OT in/out (`timeLogs` table)
+- Time-card view per employee per period
+- Feeds directly into payroll (see engine below)
+
+### Schedules & Holidays
+- Work schedules: time in/out, break minutes, work days, night-shift flag
+- Holiday calendar with two types: `regular` and `special_non_working`
+
+### Leaves & Loans
+- Leave credits per type (vacation / sick / emergency) with balance tracking
+- Leave requests with approval workflow; approved paid leave earns a day's pay in payroll
+- Loans with per-cutoff amortization, balance tracking, and auto-`paid` when cleared
+
+### Overtime
+- Overtime requests with an approval workflow (`overtimeRequests` table)
+
+### Payroll Processing — attendance-driven engine
+- Create payroll periods (label, date range); lifecycle: `draft → processed → released`
+- Bulk auto-generate payslips on "process" for every **active** employee
+- Computation engine (`lib/payroll-calc.ts`) turns time logs + schedule + holidays +
+  approved leaves into hour buckets, then into pesos:
+  - Basic pay from **actual regular days worked** (not a fixed 22)
+  - Overtime pay (explicit OT punches × hourly × OT rate)
+  - Night-differential pay (hours in the 22:00–06:00 window)
+  - Holiday pay (regular 2×, special 1.3×; unworked regular holiday still paid)
+  - Late deduction (per-minute)
+  - Paid-leave days valued at the daily rate
+- PH statutory deductions on monthly basic salary: SSS (bracketed), PhilHealth (2.75%),
+  Pag-IBIG, BIR TRAIN-law withholding tax — each toggleable system-wide and per employee
+- Loan amortization deducted per cutoff; balances decrement only when a fresh payslip is
+  created (re-processing never double-charges)
+- Optional 13th-month accrual (1/12 of basic) per cutoff
+- Verification harness (`scripts/verify-payroll.ts`) runs the exact engine functions
+  against seeded data for manual correctness checking
 
 ### Payslips
-- Per-employee per-period payslip: basic pay, allowances, gross, deductions breakdown, net pay
-- Status: `pending → approved → paid`
-- Employee can view their own payslips only
+- Per-employee per-period payslip with full breakdown: basic, allowances, OT, night diff,
+  rest-day, holiday, gross, late deduction, SSS/PhilHealth/Pag-IBIG/tax, loan, 13th-month,
+  days worked, late minutes, OT hours, net pay
+- Status lifecycle: `pending → approved → paid`, with an approve/mark-paid route
+  (`PATCH /api/payslips/:id`, admin/HR only)
+- Employees can view **their own** payslips only (enforced server-side)
 
-### Dashboard (admin/hr only)
-- Total employee count, active payroll periods, pending payslips, average feedback rating
-- Latest payroll period, recent feedback feed
-- Payroll summary report (gross/net/deductions per period)
+### Configurable Payroll Settings
+- Singleton `payrollSettings`: all multipliers, thresholds, night-diff window, grace
+  period, statutory on/off switches, tax frequency, flat-amount vs. actual-rate toggles
+- Company profile (name, address, contact) — `companyProfile`
+- Manage Options: designations, groups, teams
+
+### Dashboard & Reports (admin/hr only)
+- Overview: employee count, active payroll periods, pending payslips, average feedback
+- Payroll-summary report (gross/net/deductions per period)
+
+### Employee Self-Service
+- Own payslips, own profile (`userProfiles`, `userDocuments`), leave requests, feedback
 
 ### Feedback
-- Employee submits rating (1–5) + comment per payroll period
-- One feedback per employee per period
-- Admin can view all feedback
+- Employee submits rating (1–5) + comment per payroll period (one per employee per period)
+- Admin can view all feedback; average rating surfaces on the dashboard
 
 ### Email
-- Resend client configured (lib/resend.ts) — not wired to any trigger yet
+- Resend client configured (`lib/resend.ts`) and wired to **password reset**; not yet
+  triggered on payslip release
 
 ---
 
-## Missing Features — Prioritized
+## Known Limitations / Future Work
 
-### MUST HAVE (Core Payroll Functionality)
-
-| Feature | Why it's missing / impact |
+### Higher priority
+| Item | Notes |
 |---|---|
-| **Overtime & late/absent deductions** | `daysWorked` exists in `calculatePayroll` but is never passed from the payslip flow — every employee gets 22/22 days regardless |
-| **Per-employee allowances on payslip generation** | Allowances default to 0; no UI or field to configure them per employee before processing |
-| **Leave management** | No leave table, no balance tracking — feeds directly into absent deductions |
-| **Payslip email delivery** | Resend is set up but sending is never triggered when a period is "released" |
-| **Payslip PDF export** | Employees need a downloadable payslip; no PDF generation exists |
-| **Approve/reject individual payslips** | `payslip.status` has `approved` but no route or UI to toggle it |
-| **Audit log / change history** | No record of who changed what — required for payroll compliance |
+| **Payslip PDF export** | Payslips render on-screen; no downloadable PDF yet. Data is already structured for it. |
+| **Payslip email/notification on release** | Resend is configured for auth email but not triggered when a period is released. |
+| **Audit log / change history** | No who-changed-what trail — important for production payroll compliance. |
+| **Duplicate/overlapping period guard** | No validation preventing two periods with the same or overlapping date range. |
 
-### SHOULD HAVE (Common in Production Payroll Systems)
-
-| Feature | Notes |
+### Medium priority
+| Item | Notes |
 |---|---|
-| **Attendance / timesheet integration** | Manual or import-based; feeds `daysWorked` into payslip calc |
-| **13th month pay computation** | PH-required annual benefit; no schema or calc logic |
-| **Multiple allowance types** | Transportation, meal, COLA, etc. — currently one flat `allowances` field |
-| **Loan / salary advance tracking** | Deduction per period, balance tracking |
-| **CSV / Excel payroll export** | For accounting and bank payroll upload (PESONet, InstaPay) |
-| **Employee self-service** | Employees can only read their payslip — no profile update, no leave request, no payslip dispute |
-| **Notifications** | No in-app or push notification when payslip is available |
-| **Search on employees list** | API supports `ilike` filter but no search input in UI |
+| **Multiple allowance types** | Single flat `allowance` field; no transportation/meal/COLA split. |
+| **Bank-format payroll export** | Employee CSV export exists; no payslip/payroll export in PESONet/InstaPay bank layout. |
+| **Tax period alignment** | TRAIN-law brackets are monthly figures applied per semi-monthly cutoff (documented simplifying assumption). |
+| **In-app notifications** | No push/in-app alert when a payslip becomes available. |
 
-### NICE TO HAVE (Competitive/Scaling Features)
-
-| Feature | Notes |
+### Nice to have / scaling
+| Item | Notes |
 |---|---|
-| **Department-level payroll summary** | Current report is only period-level |
-| **Year-to-date earnings / deductions view** | Needed for BIR Form 2316 |
-| **BIR Form 2316 / alphalist generation** | Annual tax reporting, PH-specific |
-| **Org chart / hierarchy** | Manager → subordinate relationship |
-| **Mobile-responsive payslip view** | Current UI uses Tailwind but no mobile-specific payslip layout |
-| **Multi-company / multi-branch** | Single-company for now |
-| **Background job queue for payroll processing** | Inngest/Trigger.dev mentioned in stack but not implemented — large headcounts will time out |
+| **Department-level payroll summary** | Current report is period-level only. |
+| **Year-to-date view & BIR Form 2316 / alphalist** | Annual PH tax reporting not generated. |
+| **Org chart / hierarchy** | No manager → subordinate relationship. |
+| **Multi-company / multi-branch** | Single-company for now. |
+| **Background job queue for processing** | Synchronous processing is fine for small/mid headcounts; large payrolls would benefit from a queue (Inngest/Trigger.dev). |
 
 ---
 
-## Critical Bugs / Risks to Fix Now
-
-1. **`daysWorked` is hardcoded to 22** in the payroll processing route — partial month employees always get full pay.
-2. **No per-employee allowance before processing** — allowances are always ₱0.
-3. **Payslip "released" does nothing** beyond a status change — no email, no notification.
-4. **No pagination in payslips list** — will break at scale.
-5. **Payroll delete is allowed only on draft** (good) but there is no guard preventing duplicate period date ranges.
+## Resolved (previously flagged as bugs)
+- **`daysWorked` hardcoded to 22** — resolved. Pay is now driven by actual attendance via
+  `aggregateAttendance` → `regularDaysWorked`.
+- **No per-employee allowance** — resolved. `allowance` is a per-employee field applied
+  during processing.
+- **No approve/reject for payslips** — resolved. `PATCH /api/payslips/:id` moves a payslip
+  to `approved`/`paid` (admin/HR).
+- **No attendance / leave** — resolved. Time logs, schedules, holidays, leaves, and loans
+  all feed the engine.
 
 ---
 
@@ -95,11 +134,15 @@
 | Category | Status |
 |---|---|
 | Auth & RBAC | Complete |
-| Employee CRUD | Complete |
+| Employee CRUD + CSV import/export | Complete |
+| Attendance / Schedules / Holidays | Complete |
+| Leaves & Loans | Complete |
 | PH Deduction Engine | Complete |
-| Payroll Period Lifecycle | ~70% (processing works, release is a no-op) |
-| Payslips | ~50% (generated, not approvable or deliverable) |
-| Attendance / Leave | Missing |
-| Reporting | Basic (period summary only) |
-| Notifications / Email | Wired but not triggered |
-| Compliance (BIR, 13th month) | Missing |
+| Attendance-driven Payroll Engine | Complete |
+| Payroll Period Lifecycle | Complete (draft → processed → released) |
+| Payslips (breakdown + approve/paid) | Complete; delivery (PDF/email) pending |
+| Reporting | Basic (period summary) |
+| Notifications / Email | Auth email wired; payslip delivery pending |
+| Compliance — 13th month | Implemented (per-cutoff accrual toggle) |
+| Compliance — BIR year-end forms | Future work |
+| Audit trail | Future work |
