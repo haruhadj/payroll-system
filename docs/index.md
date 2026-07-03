@@ -6,6 +6,7 @@ Documentation for setting up, testing, and demoing the payroll system.
 
 - **[Testing Guide](./testing-guide.md)** — Full step-by-step: environment setup, database seed, verifying payroll math, the demo/test script, and Q&A / defense prep.
 - **[Tester Handout](./tester-handout.md)** — One-page sheet to give each tester: accounts, the flow to follow, and where to leave feedback.
+- **[Final Defense Guide](./defense-guide.md)** — Understand the system deeply and prepare for the panel: architecture in plain language, how the computation engine works, a worked payslip example, a panelist question bank with model answers, and how to defend the system's limitations.
 
 ## Quick start (TL;DR)
 
