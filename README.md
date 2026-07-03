@@ -9,6 +9,9 @@ produce a payslip. Access is role-based for Admin, HR, and Employee.
 > **New here?** Read [`docs/plain-english-guide.md`](docs/plain-english-guide.md) for a
 > jargon-free overview, or [`docs/index.md`](docs/index.md) for the full documentation.
 
+📖 **Documentation website:** <https://haruhadj.github.io/payroll-system/> (built with
+VitePress; auto-deploys from `docs/` on every push to `main`).
+
 ## Features
 
 - **Authentication & roles** — email/password login with three roles (`admin`, `hr`,
