@@ -736,7 +736,7 @@ export const selectFeedbackSchema = createSelectSchema(feedback)
 export const insertFeedbackSchema = createInsertSchema(feedback, {
   rating: z.number().int().min(1).max(5),
   comment: z.string().max(1000).optional(),
-}).omit({ id: true, createdAt: true })
+}).omit({ id: true, createdAt: true, employeeId: true })
 
 const timeRegex = /^([01]\d|2[0-3]):[0-5]\d$/
 
