@@ -1,5 +1,6 @@
 "use client"
 
+import { useMemo, useState } from "react"
 import Link from "next/link"
 import { usePayrollPeriods, useUpdatePayrollStatus, useDeletePayrollPeriod } from "@/lib/hooks/usePayroll"
 import { Button } from "@/components/ui/button"
@@ -13,7 +14,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Plus, Eye, Trash2 } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Plus, Eye, Trash2, ChevronUp, ChevronDown, ChevronsUpDown } from "lucide-react"
 
 const statusVariant: Record<string, "secondary" | "default" | "outline"> = {
   draft: "secondary",
@@ -21,10 +23,83 @@ const statusVariant: Record<string, "secondary" | "default" | "outline"> = {
   released: "outline",
 }
 
+type PayrollPeriod = {
+  id: string
+  label: string
+  dateFrom: string
+  dateTo: string
+  status: string
+}
+
+// Columns the table can be sorted by. Values are compared as strings with
+// numeric-aware collation, so ISO dates sort chronologically and labels like
+// "1st Half" / "2nd Half" order naturally.
+type SortKey = "label" | "dateFrom" | "dateTo" | "status"
+type SortDir = "asc" | "desc"
+
+function SortHeader({
+  label,
+  columnKey,
+  className,
+  sortKey,
+  sortDir,
+  onToggle,
+}: {
+  label: string
+  columnKey: SortKey
+  className?: string
+  sortKey: SortKey
+  sortDir: SortDir
+  onToggle: (key: SortKey) => void
+}) {
+  const active = sortKey === columnKey
+  const Icon = active ? (sortDir === "asc" ? ChevronUp : ChevronDown) : ChevronsUpDown
+  return (
+    <TableHead className={className}>
+      <button
+        type="button"
+        onClick={() => onToggle(columnKey)}
+        aria-label={`Sort by ${label}`}
+        className="-mx-1 inline-flex items-center gap-1 rounded px-1 py-0.5 font-medium transition-colors hover:text-foreground"
+      >
+        {label}
+        <Icon
+          className={cn("h-3.5 w-3.5", active ? "text-foreground" : "text-muted-foreground/60")}
+        />
+      </button>
+    </TableHead>
+  )
+}
+
 export default function PayrollPage() {
   const { data: periods, isLoading } = usePayrollPeriods()
   const { mutate: updateStatus, isPending: updating } = useUpdatePayrollStatus()
   const { mutate: deletePeriod, isPending: deleting } = useDeletePayrollPeriod()
+
+  // Default to the most recent cutoff first.
+  const [sortKey, setSortKey] = useState<SortKey>("dateFrom")
+  const [sortDir, setSortDir] = useState<SortDir>("desc")
+
+  function toggleSort(key: SortKey) {
+    if (key === sortKey) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"))
+    } else {
+      setSortKey(key)
+      // Text columns read best ascending; dates default to newest first.
+      setSortDir(key === "label" || key === "status" ? "asc" : "desc")
+    }
+  }
+
+  const sortedPeriods = useMemo(() => {
+    const rows: PayrollPeriod[] = periods ?? []
+    return [...rows].sort((a, b) => {
+      const cmp = String(a[sortKey] ?? "").localeCompare(String(b[sortKey] ?? ""), undefined, {
+        numeric: true,
+        sensitivity: "base",
+      })
+      return sortDir === "asc" ? cmp : -cmp
+    })
+  }, [periods, sortKey, sortDir])
 
   return (
     <div className="space-y-6">
@@ -45,10 +120,10 @@ export default function PayrollPage() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Period</TableHead>
-              <TableHead className="hidden sm:table-cell">Date From</TableHead>
-              <TableHead className="hidden sm:table-cell">Date To</TableHead>
-              <TableHead>Status</TableHead>
+              <SortHeader label="Period" columnKey="label" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
+              <SortHeader label="Date From" columnKey="dateFrom" className="hidden sm:table-cell" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
+              <SortHeader label="Date To" columnKey="dateTo" className="hidden sm:table-cell" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
+              <SortHeader label="Status" columnKey="status" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -61,7 +136,7 @@ export default function PayrollPage() {
                     ))}
                   </TableRow>
                 ))
-              : periods?.map((p: any) => (
+              : sortedPeriods.map((p) => (
                   <TableRow key={p.id}>
                     <TableCell>
                       <p className="font-medium">{p.label}</p>
@@ -124,7 +199,7 @@ export default function PayrollPage() {
                     </TableCell>
                   </TableRow>
                 ))}
-            {!isLoading && periods?.length === 0 && (
+            {!isLoading && sortedPeriods.length === 0 && (
               <TableRow>
                 <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
                   No payroll periods.{" "}
