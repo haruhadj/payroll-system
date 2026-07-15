@@ -197,15 +197,6 @@ async function seed() {
       timeOut: "17:00",
       breakMinutes: 60,
       workDays: ["mon", "tue", "wed", "thu", "fri"],
-      isNightShift: false,
-    },
-    {
-      name: "Night Shift",
-      timeIn: "22:00",
-      timeOut: "06:00",
-      breakMinutes: 60,
-      workDays: ["mon", "tue", "wed", "thu", "fri"],
-      isNightShift: true,
     },
   ]
   const scheduleIds: Record<string, string> = {}
@@ -233,7 +224,7 @@ async function seed() {
   if (emp2)
     await db
       .update(employees)
-      .set({ scheduleId: scheduleIds["Night Shift"] })
+      .set({ scheduleId: scheduleIds["Day Shift"] })
       .where(eq(employees.id, emp2.id))
   console.log("✅ Assigned schedules to employees")
 

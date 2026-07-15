@@ -6,7 +6,6 @@ import {
   useCreateTimeLog,
   useUpdateTimeLog,
   useDeleteTimeLog,
-  useScanFingerprint,
   type TimeLogInput,
 } from "@/lib/hooks/useTimeLogs"
 import { useEmployees } from "@/lib/hooks/useEmployees"
@@ -15,7 +14,6 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Card, CardContent } from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -41,8 +39,7 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog"
-import { cn } from "@/lib/utils"
-import { Plus, Pencil, Trash2, Fingerprint } from "lucide-react"
+import { Plus, Pencil, Trash2 } from "lucide-react"
 
 function fmtTime(iso: string | null) {
   if (!iso) return "—"
@@ -74,63 +71,17 @@ export default function AttendancePage() {
   })
   const { mutate: remove, isPending: deleting } = useDeleteTimeLog()
 
-  const scan = useScanFingerprint()
-  const [scanning, setScanning] = useState(false)
-  const busy = scanning || scan.isPending
-
-  const handleScan = () => {
-    setScanning(true)
-    // Brief artificial delay so the "Scanning…" animation reads clearly on stage.
-    setTimeout(() => {
-      scan.mutate(undefined, { onSettled: () => setScanning(false) })
-    }, 1000)
-  }
-
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold">Attendance</h1>
           <p className="text-muted-foreground">
-            Time logs feed attendance, late, and night differential computation.
+            Time logs feed attendance and late computation.
           </p>
         </div>
         <TimeLogDialog mode="create" employees={employees} />
       </div>
-
-      {/* Biometric scanner mock */}
-      <Card className="border-dashed">
-        <CardContent className="flex flex-col items-center gap-4 py-8">
-          <button
-            type="button"
-            onClick={handleScan}
-            disabled={busy}
-            className={cn(
-              "flex h-28 w-28 items-center justify-center rounded-full border-2 transition-all",
-              busy
-                ? "border-primary bg-primary/10 animate-pulse"
-                : "border-muted-foreground/30 hover:border-primary hover:bg-primary/5",
-            )}
-          >
-            <Fingerprint
-              className={cn(
-                "h-14 w-14 transition-colors",
-                busy ? "text-primary" : "text-muted-foreground",
-              )}
-            />
-          </button>
-          <div className="text-center">
-            <p className="font-semibold">
-              {busy ? "Scanning…" : "Scan Fingerprint"}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              {busy
-                ? "Reading biometric data"
-                : "Simulates a biometric device clocking an employee in or out"}
-            </p>
-          </div>
-        </CardContent>
-      </Card>
 
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="flex-1 space-y-1">

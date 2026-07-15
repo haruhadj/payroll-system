@@ -179,7 +179,6 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
   const breakdown = [
     { label: "Basic Pay", value: payslip.basicPay },
     { label: "Allowances", value: payslip.allowances },
-    { label: "Night Diff.", value: payslip.nightDiffPay },
     { label: "Rest Day", value: payslip.restDayPay },
     { label: "Holiday Pay", value: payslip.holidayPay },
     { label: "Late Deduction", value: payslip.lateDeduction, negative: true },

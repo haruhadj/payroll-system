@@ -32,7 +32,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog"
 import { cn } from "@/lib/utils"
-import { Plus, Pencil, Trash2, Moon } from "lucide-react"
+import { Plus, Pencil, Trash2 } from "lucide-react"
 
 const DAYS = [
   { key: "mon", label: "Mon" },
@@ -85,16 +85,7 @@ export default function SchedulesPage() {
             ) : schedules?.length ? (
               schedules.map((s: any) => (
                 <TableRow key={s.id}>
-                  <TableCell className="font-medium">
-                    <span className="flex items-center gap-2">
-                      {s.name}
-                      {s.isNightShift && (
-                        <Badge variant="secondary" className="gap-1">
-                          <Moon className="h-3 w-3" /> Night
-                        </Badge>
-                      )}
-                    </span>
-                  </TableCell>
+                  <TableCell className="font-medium">{s.name}</TableCell>
                   <TableCell className="font-mono text-sm">
                     {s.timeIn} – {s.timeOut}
                   </TableCell>
@@ -156,7 +147,6 @@ function ScheduleDialog({
     timeOut: schedule?.timeOut ?? "17:00",
     breakMinutes: schedule?.breakMinutes ?? 60,
     workDays: schedule?.workDays ?? ["mon", "tue", "wed", "thu", "fri"],
-    isNightShift: schedule?.isNightShift ?? false,
   })
 
   const set = (k: keyof ScheduleInput, v: any) => setForm((f) => ({ ...f, [k]: v }))
@@ -259,15 +249,6 @@ function ScheduleDialog({
               ))}
             </div>
           </div>
-          <label className="flex items-center gap-2 text-sm">
-            <input
-              type="checkbox"
-              className="h-4 w-4"
-              checked={form.isNightShift}
-              onChange={(e) => set("isNightShift", e.target.checked)}
-            />
-            Night shift
-          </label>
           <DialogFooter>
             <DialogClose
               render={

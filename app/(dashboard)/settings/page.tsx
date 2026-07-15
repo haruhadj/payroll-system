@@ -305,13 +305,11 @@ function CompanyProfileCard() {
 
 const NUMERIC_FIELDS = [
   "restDayRate",
-  "nightDiffRate",
   "regularHolidayRate",
   "specialHolidayRate",
   "workHoursPerDay",
   "philhealthRate",
   "holidayAmount",
-  "nightDiffAmount",
   "leaveAmount",
   "lateAmountPerMinute",
 ] as const
@@ -326,7 +324,6 @@ const FLAG_FIELDS = [
 // Flat amount + "actual rate" toggle pairs.
 const FLAT_RULES: { amount: string; flag: string; label: string }[] = [
   { amount: "holidayAmount", flag: "holidayActualRate", label: "Holiday" },
-  { amount: "nightDiffAmount", flag: "nightDiffActualRate", label: "Night Differential" },
   { amount: "leaveAmount", flag: "leaveActualRate", label: "Leave" },
 ]
 
@@ -338,7 +335,6 @@ const TAX_FREQUENCIES = [
 ]
 
 const RATE_INPUTS: { key: string; label: string; hint: string }[] = [
-  { key: "nightDiffRate", label: "Night differential", hint: "0.10 = +10%" },
   { key: "restDayRate", label: "Rest day premium", hint: "1.30 = 130%" },
   { key: "regularHolidayRate", label: "Regular holiday", hint: "2.00 = 200%" },
   { key: "specialHolidayRate", label: "Special holiday", hint: "1.30 = 130%" },
@@ -370,8 +366,6 @@ function PayrollConfigCard() {
     for (const k of FLAG_FIELDS) payload[k] = !!form[k]
     for (const r of FLAT_RULES) payload[r.flag] = !!form[r.flag]
     payload.thirteenthMonthEveryCutoff = !!form.thirteenthMonthEveryCutoff
-    payload.nightDiffStart = form.nightDiffStart ?? "22:00"
-    payload.nightDiffEnd = form.nightDiffEnd ?? "06:00"
     payload.adminEmail = form.adminEmail || null
     payload.hrEmail = form.hrEmail || null
     payload.withholdingTaxFrequency = form.withholdingTaxFrequency ?? "semi_monthly"
@@ -460,24 +454,6 @@ function PayrollConfigCard() {
                 min="0"
                 value={form.philhealthRate ?? ""}
                 onChange={(e) => set("philhealthRate", e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-4 mt-4">
-            <div className="space-y-1">
-              <Label className="text-xs">Night differential start</Label>
-              <Input
-                type="time"
-                value={form.nightDiffStart ?? "22:00"}
-                onChange={(e) => set("nightDiffStart", e.target.value)}
-              />
-            </div>
-            <div className="space-y-1">
-              <Label className="text-xs">Night differential end</Label>
-              <Input
-                type="time"
-                value={form.nightDiffEnd ?? "06:00"}
-                onChange={(e) => set("nightDiffEnd", e.target.value)}
               />
             </div>
           </div>

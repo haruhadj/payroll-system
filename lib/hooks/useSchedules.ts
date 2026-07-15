@@ -21,7 +21,6 @@ export interface ScheduleInput {
   timeOut: string
   breakMinutes?: number
   workDays: string[]
-  isNightShift?: boolean
 }
 
 export function useSchedules() {

@@ -80,12 +80,6 @@ export function useDeleteTimeLog() {
   })
 }
 
-interface ScanResult {
-  action: string // e.g. "AM in", "PM out", or "done"
-  employeeName: string
-  employeeNo: string
-}
-
 export function useDailyTimeCard(date: string) {
   return useQuery({
     queryKey: ["timecard-daily", date],
@@ -98,21 +92,5 @@ export function useTimeCard(periodId: string, employeeId: string | null) {
     queryKey: ["timecard", periodId, employeeId],
     queryFn: () => apiFetch(`/payroll/${periodId}/timecard/${employeeId}`),
     enabled: !!periodId && !!employeeId,
-  })
-}
-
-export function useScanFingerprint() {
-  const qc = useQueryClient()
-  return useMutation<ScanResult>({
-    mutationFn: () => apiFetch("/timelogs/scan", { method: "POST" }),
-    onSuccess: (res) => {
-      qc.invalidateQueries({ queryKey: ["timelogs"] })
-      if (res.action === "done") {
-        toast.info(`${res.employeeName} already completed today's log`)
-      } else {
-        toast.success(`${res.employeeName} punched ${res.action}`)
-      }
-    },
-    onError: (e: Error) => toast.error(e.message),
   })
 }

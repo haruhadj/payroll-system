@@ -25,14 +25,11 @@ import {
 function toSettingsInput(s: any): PayrollSettingsInput {
   return {
     restDayRate: parseFloat(s.restDayRate),
-    nightDiffRate: parseFloat(s.nightDiffRate),
     regularHolidayRate: parseFloat(s.regularHolidayRate),
     specialHolidayRate: parseFloat(s.specialHolidayRate),
     workingDaysPerMonth: s.workingDaysPerMonth,
     workHoursPerDay: parseFloat(s.workHoursPerDay),
     lateGracePeriodMinutes: s.lateGracePeriodMinutes,
-    nightDiffStart: s.nightDiffStart,
-    nightDiffEnd: s.nightDiffEnd,
     thirteenthMonthEveryCutoff: s.thirteenthMonthEveryCutoff,
     sssEnabled: s.sssEnabled,
     philhealthEnabled: s.philhealthEnabled,
@@ -41,8 +38,6 @@ function toSettingsInput(s: any): PayrollSettingsInput {
     philhealthRate: parseFloat(s.philhealthRate),
     holidayAmount: parseFloat(s.holidayAmount),
     holidayActualRate: s.holidayActualRate,
-    nightDiffAmount: parseFloat(s.nightDiffAmount),
-    nightDiffActualRate: s.nightDiffActualRate,
     leaveAmount: parseFloat(s.leaveAmount),
     leaveActualRate: s.leaveActualRate,
     lateAmountPerMinute: parseFloat(s.lateAmountPerMinute),
@@ -146,7 +141,6 @@ async function main() {
             timeOut: sched.timeOut,
             breakMinutes: sched.breakMinutes,
             workDays: sched.workDays,
-            isNightShift: sched.isNightShift,
           }
         : null,
       holidays: periodHolidays.map((h) => ({ date: h.date, type: h.type })),
@@ -185,7 +179,6 @@ async function main() {
     console.log("  Earnings:")
     console.log(`    Basic pay (${aggregate.regularDaysWorked} days + ${aggregate.paidLeaveDays} paid leave) = ${peso(calc.basicPay)}`)
     console.log(`    Allowance                = ${peso(calc.allowances)}`)
-    console.log(`    Night diff (${aggregate.nightDiffHours}h)      = ${peso(calc.nightDiffPay)}`)
     console.log(`    Rest day (${aggregate.restDayHours}h)        = ${peso(calc.restDayPay)}`)
     console.log(`    Holiday (reg ${aggregate.regularHolidayHours}h/spec ${aggregate.specialHolidayHours}h) = ${peso(calc.holidayPay)}`)
     console.log(`    Late deduction (${aggregate.lateMinutes}m) = -${peso(calc.lateDeduction)}`)
@@ -205,7 +198,7 @@ async function main() {
     const withLeave = aggregateAttendance({
       dateFrom: period.dateFrom,
       dateTo: period.dateTo,
-      schedule: sched ? { timeIn: sched.timeIn, timeOut: sched.timeOut, breakMinutes: sched.breakMinutes, workDays: sched.workDays, isNightShift: sched.isNightShift } : null,
+      schedule: sched ? { timeIn: sched.timeIn, timeOut: sched.timeOut, breakMinutes: sched.breakMinutes, workDays: sched.workDays } : null,
       holidays: periodHolidays.map((h) => ({ date: h.date, type: h.type })),
       logs: empLogs,
       leaves: [{ date: "2026-06-15", paid: true }],

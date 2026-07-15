@@ -222,9 +222,6 @@ export const payslips = pgTable(
     allowances: numeric("allowances", { precision: 12, scale: 2 })
       .notNull()
       .default("0"),
-    nightDiffPay: numeric("night_diff_pay", { precision: 12, scale: 2 })
-      .notNull()
-      .default("0"),
     restDayPay: numeric("rest_day_pay", { precision: 12, scale: 2 })
       .notNull()
       .default("0"),
@@ -302,7 +299,6 @@ export const schedules = pgTable("schedule", {
     .array()
     .notNull()
     .default(["mon", "tue", "wed", "thu", "fri"]),
-  isNightShift: boolean("is_night_shift").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 })
 
@@ -347,9 +343,6 @@ export const payrollSettings = pgTable("payroll_settings", {
   restDayRate: numeric("rest_day_rate", { precision: 5, scale: 2 })
     .notNull()
     .default("1.30"),
-  nightDiffRate: numeric("night_diff_rate", { precision: 5, scale: 2 })
-    .notNull()
-    .default("0.10"),
   regularHolidayRate: numeric("regular_holiday_rate", { precision: 5, scale: 2 })
     .notNull()
     .default("2.00"),
@@ -363,8 +356,6 @@ export const payrollSettings = pgTable("payroll_settings", {
   lateGracePeriodMinutes: integer("late_grace_period_minutes")
     .notNull()
     .default(0),
-  nightDiffStart: text("night_diff_start").notNull().default("22:00"),
-  nightDiffEnd: text("night_diff_end").notNull().default("06:00"),
   thirteenthMonthEveryCutoff: boolean("thirteenth_month_every_cutoff")
     .notNull()
     .default(false),
@@ -388,10 +379,6 @@ export const payrollSettings = pgTable("payroll_settings", {
     .notNull()
     .default("0"),
   holidayActualRate: boolean("holiday_actual_rate").notNull().default(true),
-  nightDiffAmount: numeric("night_diff_amount", { precision: 10, scale: 2 })
-    .notNull()
-    .default("0"),
-  nightDiffActualRate: boolean("night_diff_actual_rate").notNull().default(true),
   leaveAmount: numeric("leave_amount", { precision: 10, scale: 2 })
     .notNull()
     .default("0"),

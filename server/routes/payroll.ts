@@ -50,14 +50,11 @@ type ScheduleRow = typeof schedules.$inferSelect
 function toSettingsInput(s: SettingsRow): PayrollSettingsInput {
   return {
     restDayRate: parseFloat(s.restDayRate),
-    nightDiffRate: parseFloat(s.nightDiffRate),
     regularHolidayRate: parseFloat(s.regularHolidayRate),
     specialHolidayRate: parseFloat(s.specialHolidayRate),
     workingDaysPerMonth: s.workingDaysPerMonth,
     workHoursPerDay: parseFloat(s.workHoursPerDay),
     lateGracePeriodMinutes: s.lateGracePeriodMinutes,
-    nightDiffStart: s.nightDiffStart,
-    nightDiffEnd: s.nightDiffEnd,
     thirteenthMonthEveryCutoff: s.thirteenthMonthEveryCutoff,
     sssEnabled: s.sssEnabled,
     philhealthEnabled: s.philhealthEnabled,
@@ -66,8 +63,6 @@ function toSettingsInput(s: SettingsRow): PayrollSettingsInput {
     philhealthRate: parseFloat(s.philhealthRate),
     holidayAmount: parseFloat(s.holidayAmount),
     holidayActualRate: s.holidayActualRate,
-    nightDiffAmount: parseFloat(s.nightDiffAmount),
-    nightDiffActualRate: s.nightDiffActualRate,
     leaveAmount: parseFloat(s.leaveAmount),
     leaveActualRate: s.leaveActualRate,
     lateAmountPerMinute: parseFloat(s.lateAmountPerMinute),
@@ -82,7 +77,6 @@ function toScheduleInput(s: ScheduleRow | null | undefined): ScheduleInput | nul
     timeOut: s.timeOut,
     breakMinutes: s.breakMinutes,
     workDays: s.workDays,
-    isNightShift: s.isNightShift,
   }
 }
 
@@ -394,7 +388,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
               periodId: id,
               basicPay: String(calc.basicPay),
               allowances: String(calc.allowances),
-              nightDiffPay: String(calc.nightDiffPay),
               restDayPay: String(calc.restDayPay),
               holidayPay: String(calc.holidayPay),
               grossPay: String(calc.grossPay),
