@@ -304,15 +304,12 @@ function CompanyProfileCard() {
 }
 
 const NUMERIC_FIELDS = [
-  "otRate",
   "restDayRate",
-  "restDayOtRate",
   "nightDiffRate",
   "regularHolidayRate",
   "specialHolidayRate",
   "workHoursPerDay",
   "philhealthRate",
-  "overtimeAmount",
   "holidayAmount",
   "nightDiffAmount",
   "leaveAmount",
@@ -328,7 +325,6 @@ const FLAG_FIELDS = [
 
 // Flat amount + "actual rate" toggle pairs.
 const FLAT_RULES: { amount: string; flag: string; label: string }[] = [
-  { amount: "overtimeAmount", flag: "overtimeActualRate", label: "Overtime" },
   { amount: "holidayAmount", flag: "holidayActualRate", label: "Holiday" },
   { amount: "nightDiffAmount", flag: "nightDiffActualRate", label: "Night Differential" },
   { amount: "leaveAmount", flag: "leaveActualRate", label: "Leave" },
@@ -342,10 +338,8 @@ const TAX_FREQUENCIES = [
 ]
 
 const RATE_INPUTS: { key: string; label: string; hint: string }[] = [
-  { key: "otRate", label: "Overtime multiplier", hint: "1.25 = 125%" },
   { key: "nightDiffRate", label: "Night differential", hint: "0.10 = +10%" },
   { key: "restDayRate", label: "Rest day premium", hint: "1.30 = 130%" },
-  { key: "restDayOtRate", label: "Rest day OT", hint: "1.69 = 169%" },
   { key: "regularHolidayRate", label: "Regular holiday", hint: "2.00 = 200%" },
   { key: "specialHolidayRate", label: "Special holiday", hint: "1.30 = 130%" },
 ]

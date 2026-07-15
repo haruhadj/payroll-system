@@ -61,7 +61,6 @@ const navItems: NavEntry[] = [
     roles: ALL,
     children: [
       { href: "/attendance", label: "All Logs", roles: STAFF },
-      { href: "/attendance/overtime", label: "Overtime", roles: ALL },
       { href: "/attendance/timecard", label: "Time Card", roles: STAFF },
     ],
   },

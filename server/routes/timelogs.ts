@@ -1,7 +1,7 @@
 import { Hono } from "hono"
 import { zValidator } from "@hono/zod-validator"
 import { db } from "@/lib/db"
-import { timeLogs, employees, schedules, payrollSettings } from "@/lib/db/schema"
+import { timeLogs, employees, schedules } from "@/lib/db/schema"
 import { insertTimeLogSchema, updateTimeLogSchema } from "@/lib/db/schema"
 import { authMiddleware } from "@/server/middleware/auth"
 import { requireRole } from "@/server/middleware/rbac"
@@ -77,7 +77,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
       a && b ? Math.max(0, (b.getTime() - a.getTime()) / 3_600_000) : 0
 
     let totWork = 0
-    let totOt = 0
     let totLate = 0
 
     const rows = emps.map((e) => {
@@ -93,7 +92,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
       if (workHours === 0 && firstIn && lastOut) {
         workHours = Math.max(0, seg(firstIn, lastOut) - (sched?.breakMinutes ?? 60) / 60)
       }
-      const otHours = seg(l?.otIn ?? null, l?.otOut ?? null)
 
       let lateMinutes = 0
       if (sched && amIn) {
@@ -107,7 +105,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
       }
 
       totWork += workHours
-      totOt += otHours
       totLate += lateMinutes
 
       return {
@@ -119,9 +116,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
         amOut: l?.amOut ?? null,
         pmIn: l?.pmIn ?? null,
         pmOut: l?.pmOut ?? null,
-        otIn: l?.otIn ?? null,
-        otOut: l?.otOut ?? null,
-        otHours: Math.round(otHours * 100) / 100,
         lateMinutes: Math.round(lateMinutes),
         workHours: Math.round(workHours * 100) / 100,
       }
@@ -132,7 +126,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
       rows,
       totals: {
         workHours: Math.round(totWork * 100) / 100,
-        otHours: Math.round(totOt * 100) / 100,
         lateMinutes: Math.round(totLate),
       },
     })

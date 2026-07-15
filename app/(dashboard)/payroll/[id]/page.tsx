@@ -179,7 +179,6 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
   const breakdown = [
     { label: "Basic Pay", value: payslip.basicPay },
     { label: "Allowances", value: payslip.allowances },
-    { label: "Overtime", value: payslip.otPay },
     { label: "Night Diff.", value: payslip.nightDiffPay },
     { label: "Rest Day", value: payslip.restDayPay },
     { label: "Holiday Pay", value: payslip.holidayPay },
@@ -212,10 +211,6 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
           <div className="rounded-md border px-3 py-2">
             <p className="text-muted-foreground text-xs">Days Worked</p>
             <p className="font-semibold">{payslip.daysWorked}</p>
-          </div>
-          <div className="rounded-md border px-3 py-2">
-            <p className="text-muted-foreground text-xs">OT Hours</p>
-            <p className="font-semibold">{payslip.otHours}</p>
           </div>
           <div className="rounded-md border px-3 py-2">
             <p className="text-muted-foreground text-xs">Late (mins)</p>
@@ -266,7 +261,6 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
                   <TableHead>In</TableHead>
                   <TableHead>Out</TableHead>
                   <TableHead className="text-right">Hours</TableHead>
-                  <TableHead className="text-right">OT</TableHead>
                   <TableHead className="text-right">Late</TableHead>
                   <TableHead>Status</TableHead>
                 </TableRow>
@@ -275,7 +269,7 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
                 {isLoading ? (
                   Array.from({ length: 4 }).map((_, i) => (
                     <TableRow key={i}>
-                      {Array.from({ length: 8 }).map((_, j) => (
+                      {Array.from({ length: 7 }).map((_, j) => (
                         <TableCell key={j}>
                           <Skeleton className="h-4 w-full" />
                         </TableCell>
@@ -290,7 +284,6 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
                       <TableCell className="font-mono text-xs">{d.amIn ?? d.pmIn ?? "—"}</TableCell>
                       <TableCell className="font-mono text-xs">{d.pmOut ?? d.amOut ?? "—"}</TableCell>
                       <TableCell className="text-right font-mono text-xs">{d.workedHours}</TableCell>
-                      <TableCell className="text-right font-mono text-xs">{d.otHours}</TableCell>
                       <TableCell className="text-right font-mono text-xs">{d.lateMinutes}</TableCell>
                       <TableCell>
                         <Badge variant={dayStatusVariant[d.status]} className="text-[10px]">

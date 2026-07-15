@@ -24,9 +24,7 @@ import {
 
 function toSettingsInput(s: any): PayrollSettingsInput {
   return {
-    otRate: parseFloat(s.otRate),
     restDayRate: parseFloat(s.restDayRate),
-    restDayOtRate: parseFloat(s.restDayOtRate),
     nightDiffRate: parseFloat(s.nightDiffRate),
     regularHolidayRate: parseFloat(s.regularHolidayRate),
     specialHolidayRate: parseFloat(s.specialHolidayRate),
@@ -41,8 +39,6 @@ function toSettingsInput(s: any): PayrollSettingsInput {
     pagibigEnabled: s.pagibigEnabled,
     taxEnabled: s.taxEnabled,
     philhealthRate: parseFloat(s.philhealthRate),
-    overtimeAmount: parseFloat(s.overtimeAmount),
-    overtimeActualRate: s.overtimeActualRate,
     holidayAmount: parseFloat(s.holidayAmount),
     holidayActualRate: s.holidayActualRate,
     nightDiffAmount: parseFloat(s.nightDiffAmount),
@@ -75,7 +71,7 @@ async function main() {
   if (!period) throw new Error("Seeded period not found")
   console.log(`\n=== Period: ${period.label} (${period.dateFrom} → ${period.dateTo}) ===`)
   console.log(
-    `Rates: OT×${settings.otRate} specHol×${settings.specialHolidayRate} regHol×${settings.regularHolidayRate} | ${settings.workingDaysPerMonth} days/mo, ${settings.workHoursPerDay} h/day\n`,
+    `Rates: specHol×${settings.specialHolidayRate} regHol×${settings.regularHolidayRate} | ${settings.workingDaysPerMonth} days/mo, ${settings.workHoursPerDay} h/day\n`,
   )
 
   const allSchedules = await db.select().from(schedules)
@@ -139,8 +135,6 @@ async function main() {
       amOut: l.amOut,
       pmIn: l.pmIn,
       pmOut: l.pmOut,
-      otIn: l.otIn,
-      otOut: l.otOut,
     }))
 
     const { aggregate } = aggregateAttendance({
@@ -191,7 +185,6 @@ async function main() {
     console.log("  Earnings:")
     console.log(`    Basic pay (${aggregate.regularDaysWorked} days + ${aggregate.paidLeaveDays} paid leave) = ${peso(calc.basicPay)}`)
     console.log(`    Allowance                = ${peso(calc.allowances)}`)
-    console.log(`    OT pay (${aggregate.otHours}h)            = ${peso(calc.otPay)}`)
     console.log(`    Night diff (${aggregate.nightDiffHours}h)      = ${peso(calc.nightDiffPay)}`)
     console.log(`    Rest day (${aggregate.restDayHours}h)        = ${peso(calc.restDayPay)}`)
     console.log(`    Holiday (reg ${aggregate.regularHolidayHours}h/spec ${aggregate.specialHolidayHours}h) = ${peso(calc.holidayPay)}`)
@@ -207,7 +200,7 @@ async function main() {
   if (emp1) {
     const sched = emp1.scheduleId ? scheduleMap.get(emp1.scheduleId) : null
     const empLogs = (logsByEmp.get(emp1.id) ?? []).map((l) => ({
-      logDate: l.logDate, amIn: l.amIn, amOut: l.amOut, pmIn: l.pmIn, pmOut: l.pmOut, otIn: l.otIn, otOut: l.otOut,
+      logDate: l.logDate, amIn: l.amIn, amOut: l.amOut, pmIn: l.pmIn, pmOut: l.pmOut,
     }))
     const withLeave = aggregateAttendance({
       dateFrom: period.dateFrom,

@@ -271,15 +271,13 @@ function DtrTab({ scheduleName }: { scheduleName: string }) {
                 <TableHead className="text-center">AM Out</TableHead>
                 <TableHead className="text-center">PM In</TableHead>
                 <TableHead className="text-center">PM Out</TableHead>
-                <TableHead className="text-center">OT In</TableHead>
-                <TableHead className="text-center">OT Out</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {isLoading ? (
                 Array.from({ length: 4 }).map((_, i) => (
                   <TableRow key={i}>
-                    {Array.from({ length: 8 }).map((_, j) => (
+                    {Array.from({ length: 6 }).map((_, j) => (
                       <TableCell key={j}>
                         <Skeleton className="h-5 w-full" />
                       </TableCell>
@@ -295,13 +293,11 @@ function DtrTab({ scheduleName }: { scheduleName: string }) {
                     <TableCell className="font-mono text-sm text-center">{fmtTime(l.amOut)}</TableCell>
                     <TableCell className="font-mono text-sm text-center">{fmtTime(l.pmIn)}</TableCell>
                     <TableCell className="font-mono text-sm text-center">{fmtTime(l.pmOut)}</TableCell>
-                    <TableCell className="font-mono text-sm text-center">{fmtTime(l.otIn)}</TableCell>
-                    <TableCell className="font-mono text-sm text-center">{fmtTime(l.otOut)}</TableCell>
                   </TableRow>
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={8} className="text-center text-muted-foreground py-8">
+                  <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                     No time records for this range.
                   </TableCell>
                 </TableRow>

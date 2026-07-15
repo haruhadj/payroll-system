@@ -30,7 +30,7 @@ interface Tab {
 
 const tabs: Tab[] = [
   { href: "/dashboard", label: "Home", icon: LayoutDashboard, roles: ALL },
-  { href: "/attendance/overtime", label: "Time", icon: Fingerprint, roles: ALL },
+  { href: "/profile", label: "Time", icon: Fingerprint, roles: ALL },
   { href: "/payroll", label: "Payroll", icon: CalendarRange, roles: STAFF },
   { href: "/payslips", label: "Payslips", icon: FileText, roles: ["employee"] },
   { href: "/profile", label: "Profile", icon: UserCircle, roles: ALL },

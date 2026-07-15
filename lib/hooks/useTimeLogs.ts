@@ -28,8 +28,6 @@ export interface TimeLogInput {
   amOut?: string | null
   pmIn?: string | null
   pmOut?: string | null
-  otIn?: string | null
-  otOut?: string | null
 }
 
 export function useTimeLogs(filters: TimeLogFilters = {}) {

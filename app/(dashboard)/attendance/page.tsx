@@ -63,11 +63,6 @@ function workHours(l: any) {
   return h > 0 ? `${h.toFixed(2)} h` : "—"
 }
 
-function otHours(l: any) {
-  const h = segHours(l.otIn, l.otOut)
-  return h > 0 ? `${h.toFixed(2)} h` : "—"
-}
-
 export default function AttendancePage() {
   const [employeeId, setEmployeeId] = useState<string>("")
   const [date, setDate] = useState<string>("")
@@ -97,7 +92,7 @@ export default function AttendancePage() {
         <div>
           <h1 className="text-2xl font-bold">Attendance</h1>
           <p className="text-muted-foreground">
-            Time logs feed overtime, late, and night differential computation.
+            Time logs feed attendance, late, and night differential computation.
           </p>
         </div>
         <TimeLogDialog mode="create" employees={employees} />
@@ -182,10 +177,7 @@ export default function AttendancePage() {
               <TableHead className="text-center">AM Out</TableHead>
               <TableHead className="text-center">PM In</TableHead>
               <TableHead className="text-center">PM Out</TableHead>
-              <TableHead className="hidden md:table-cell text-center">OT In</TableHead>
-              <TableHead className="hidden md:table-cell text-center">OT Out</TableHead>
               <TableHead className="hidden sm:table-cell text-center">Work Hrs</TableHead>
-              <TableHead className="hidden lg:table-cell text-center">OT Hrs</TableHead>
               <TableHead className="hidden lg:table-cell">Source</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
@@ -194,7 +186,7 @@ export default function AttendancePage() {
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => (
                 <TableRow key={i}>
-                  {Array.from({ length: 12 }).map((_, j) => (
+                  {Array.from({ length: 9 }).map((_, j) => (
                     <TableCell key={j}>
                       <Skeleton className="h-5 w-full" />
                     </TableCell>
@@ -213,13 +205,8 @@ export default function AttendancePage() {
                   <TableCell className="font-mono text-sm text-center">{fmtTime(l.amOut)}</TableCell>
                   <TableCell className="font-mono text-sm text-center">{fmtTime(l.pmIn)}</TableCell>
                   <TableCell className="font-mono text-sm text-center">{fmtTime(l.pmOut)}</TableCell>
-                  <TableCell className="hidden md:table-cell font-mono text-sm text-center">{fmtTime(l.otIn)}</TableCell>
-                  <TableCell className="hidden md:table-cell font-mono text-sm text-center">{fmtTime(l.otOut)}</TableCell>
                   <TableCell className="hidden sm:table-cell font-mono text-sm text-center">
                     {workHours(l)}
-                  </TableCell>
-                  <TableCell className="hidden lg:table-cell font-mono text-sm text-center">
-                    {otHours(l)}
                   </TableCell>
                   <TableCell className="hidden lg:table-cell">
                     <Badge variant={l.source === "biometric" ? "default" : "outline"}>
@@ -246,7 +233,7 @@ export default function AttendancePage() {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={12} className="text-center text-muted-foreground py-8">
+                <TableCell colSpan={9} className="text-center text-muted-foreground py-8">
                   No time logs found.
                 </TableCell>
               </TableRow>
@@ -287,8 +274,6 @@ function TimeLogDialog({
     amOut: isoToTime(log?.amOut ?? null),
     pmIn: isoToTime(log?.pmIn ?? null),
     pmOut: isoToTime(log?.pmOut ?? null),
-    otIn: isoToTime(log?.otIn ?? null),
-    otOut: isoToTime(log?.otOut ?? null),
   })
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }))
@@ -304,8 +289,6 @@ function TimeLogDialog({
       amOut: toIso(form.amOut),
       pmIn: toIso(form.pmIn),
       pmOut: toIso(form.pmOut),
-      otIn: toIso(form.otIn),
-      otOut: toIso(form.otOut),
     }
     const onSuccess = () => setOpen(false)
     if (mode === "create") create(payload, { onSuccess })
@@ -378,14 +361,6 @@ function TimeLogDialog({
             <div className="space-y-2">
               <Label>Log Out (PM)</Label>
               <Input type="time" value={form.pmOut} onChange={(e) => set("pmOut", e.target.value)} />
-            </div>
-            <div className="space-y-2">
-              <Label>OT In</Label>
-              <Input type="time" value={form.otIn} onChange={(e) => set("otIn", e.target.value)} />
-            </div>
-            <div className="space-y-2">
-              <Label>OT Out</Label>
-              <Input type="time" value={form.otOut} onChange={(e) => set("otOut", e.target.value)} />
             </div>
           </div>
           <DialogFooter>

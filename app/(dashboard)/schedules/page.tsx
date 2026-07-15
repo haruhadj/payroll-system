@@ -54,7 +54,7 @@ export default function SchedulesPage() {
         <div>
           <h1 className="text-2xl font-bold">Schedules</h1>
           <p className="text-muted-foreground">
-            Define work shifts used to compute overtime, late, and night differential.
+            Define work shifts used to compute attendance, late, and night differential.
           </p>
         </div>
         <ScheduleDialog mode="create" />

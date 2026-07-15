@@ -131,9 +131,7 @@ function round2(n: number): number {
 // ---------------------------------------------------------------------------
 
 export interface PayrollSettingsInput {
-  otRate: number
   restDayRate: number
-  restDayOtRate: number
   nightDiffRate: number
   regularHolidayRate: number
   specialHolidayRate: number
@@ -149,8 +147,6 @@ export interface PayrollSettingsInput {
   taxEnabled: boolean
   philhealthRate: number
   // Flat amounts + "actual rate" toggles (actual rate ⇒ use the multiplier).
-  overtimeAmount: number
-  overtimeActualRate: boolean
   holidayAmount: number
   holidayActualRate: boolean
   nightDiffAmount: number
@@ -179,7 +175,6 @@ const DEFAULT_SCHEDULE: ScheduleInput = {
 
 export interface AttendanceAggregate {
   regularDaysWorked: number
-  otHours: number
   nightDiffHours: number
   restDayHours: number
   regularHolidayHours: number
@@ -205,10 +200,7 @@ export interface DayBreakdown {
   amOut: string | null
   pmIn: string | null
   pmOut: string | null
-  otIn: string | null
-  otOut: string | null
   workedHours: number
-  otHours: number
   nightDiffHours: number
   lateMinutes: number
   status: DayStatus
@@ -307,8 +299,6 @@ export interface AggregateAttendanceParams {
     amOut: Date | null
     pmIn: Date | null
     pmOut: Date | null
-    otIn: Date | null
-    otOut: Date | null
   }[]
   settings: PayrollSettingsInput
   // Approved leave dates within the period, each flagged paid/unpaid.
@@ -330,7 +320,6 @@ export function aggregateAttendance(
 
   const agg: AttendanceAggregate = {
     regularDaysWorked: 0,
-    otHours: 0,
     nightDiffHours: 0,
     restDayHours: 0,
     regularHolidayHours: 0,
@@ -365,7 +354,6 @@ export function aggregateAttendance(
         : "rest_day"
 
     let workedHours = 0
-    let otHours = 0
     let ndHours = 0
     let lateMinutes = 0
 
@@ -379,14 +367,11 @@ export function aggregateAttendance(
       } else if (firstIn && lastOut) {
         workedHours = Math.max(0, segHours(firstIn, lastOut) - breakHours)
       }
-      // Overtime is explicit — driven by the OT punch pair, not by hours
-      // worked beyond the standard day.
-      otHours = segHours(log.otIn, log.otOut)
-      // Night differential across worked time (per-segment, or the single span
-      // fallback used by overnight shifts) plus any overtime.
+      // Night differential across worked time (per-segment, or the single-span
+      // fallback used by overnight shifts).
       const ns = settings.nightDiffStart
       const ne = settings.nightDiffEnd
-      ndHours = ndSeg(log.otIn, log.otOut, ns, ne)
+      ndHours = 0
       if (amHrs + pmHrs > 0) {
         ndHours +=
           ndSeg(log.amIn, log.amOut, ns, ne) + ndSeg(log.pmIn, log.pmOut, ns, ne)
@@ -408,7 +393,6 @@ export function aggregateAttendance(
     if (dayType === "regular_holiday") {
       if (present) {
         agg.regularHolidayHours += workedHours
-        agg.otHours += otHours
         agg.nightDiffHours += ndHours
         status = "present"
       } else {
@@ -419,7 +403,6 @@ export function aggregateAttendance(
     } else if (dayType === "special_holiday") {
       if (present) {
         agg.specialHolidayHours += workedHours
-        agg.otHours += otHours
         agg.nightDiffHours += ndHours
         status = "present"
       } else {
@@ -429,7 +412,6 @@ export function aggregateAttendance(
     } else if (dayType === "rest_day") {
       if (present) {
         agg.restDayHours += workedHours
-        agg.otHours += otHours
         agg.nightDiffHours += ndHours
         status = "present"
       } else if (settings.sundayHolidayPaid && cursor.getDay() === 0) {
@@ -442,10 +424,8 @@ export function aggregateAttendance(
     } else {
       // Regular scheduled workday. A present day earns a full day's basic pay;
       // lateness is captured solely by the late deduction (no double penalty).
-      // Overtime is taken from the explicit OT punch pair.
       if (present) {
         agg.regularDaysWorked += 1
-        agg.otHours += otHours
         agg.nightDiffHours += ndHours
         agg.lateMinutes += lateMinutes
         status = "present"
@@ -467,10 +447,7 @@ export function aggregateAttendance(
       amOut: fmtTime(log?.amOut ?? null),
       pmIn: fmtTime(log?.pmIn ?? null),
       pmOut: fmtTime(log?.pmOut ?? null),
-      otIn: fmtTime(log?.otIn ?? null),
-      otOut: fmtTime(log?.otOut ?? null),
       workedHours: round2(workedHours),
-      otHours: round2(otHours),
       nightDiffHours: round2(ndHours),
       lateMinutes: Math.round(lateMinutes),
       status,
@@ -478,7 +455,6 @@ export function aggregateAttendance(
   }
 
   agg.regularDaysWorked = round2(agg.regularDaysWorked)
-  agg.otHours = round2(agg.otHours)
   agg.nightDiffHours = round2(agg.nightDiffHours)
   agg.restDayHours = round2(agg.restDayHours)
   agg.regularHolidayHours = round2(agg.regularHolidayHours)
@@ -507,7 +483,6 @@ export interface AttendancePayrollInput {
 export interface AttendancePayrollOutput {
   basicPay: number
   allowances: number
-  otPay: number
   nightDiffPay: number
   restDayPay: number
   holidayPay: number
@@ -522,7 +497,6 @@ export interface AttendancePayrollOutput {
   netPay: number
   daysWorked: number
   lateMinutes: number
-  otHours: number
 }
 
 export function calculatePayrollFromAttendance(
@@ -546,9 +520,6 @@ export function calculatePayrollFromAttendance(
   const basicPay = round2(
     dailyRate * a.regularDaysWorked + leavePerDay * a.paidLeaveDays,
   )
-  const otPay = settings.overtimeActualRate
-    ? round2(a.otHours * hourlyRate * settings.otRate)
-    : round2(a.otHours * settings.overtimeAmount)
   const nightDiffPay = settings.nightDiffActualRate
     ? round2(a.nightDiffHours * hourlyRate * settings.nightDiffRate)
     : round2(a.nightDiffHours * settings.nightDiffAmount)
@@ -567,7 +538,7 @@ export function calculatePayrollFromAttendance(
   const lateDeduction = round2(a.lateMinutes * perMinuteLate)
 
   const grossPay = round2(
-    basicPay + allowance + otPay + nightDiffPay + restDayPay + holidayPay - lateDeduction,
+    basicPay + allowance + nightDiffPay + restDayPay + holidayPay - lateDeduction,
   )
 
   // Statutory contributions are based on monthly basic salary (PH practice),
@@ -601,7 +572,6 @@ export function calculatePayrollFromAttendance(
   return {
     basicPay,
     allowances: round2(allowance),
-    otPay,
     nightDiffPay,
     restDayPay,
     holidayPay,
@@ -616,6 +586,5 @@ export function calculatePayrollFromAttendance(
     netPay,
     daysWorked: round2(a.regularDaysWorked + a.paidLeaveDays),
     lateMinutes: a.lateMinutes,
-    otHours: a.otHours,
   }
 }

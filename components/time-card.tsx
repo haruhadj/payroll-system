@@ -75,9 +75,6 @@ export function TimeCard({ showDatePicker = true }: { showDatePicker?: boolean }
               <TableHead className="text-center">Log Out (AM)</TableHead>
               <TableHead className="text-center">Log In (PM)</TableHead>
               <TableHead className="text-center">Log Out (PM)</TableHead>
-              <TableHead className="hidden md:table-cell text-center">OT In</TableHead>
-              <TableHead className="hidden md:table-cell text-center">OT Out</TableHead>
-              <TableHead className="text-right">OT Hours</TableHead>
               <TableHead className="text-right">Late Hours</TableHead>
               <TableHead className="text-right">Work Hours</TableHead>
             </TableRow>
@@ -86,7 +83,7 @@ export function TimeCard({ showDatePicker = true }: { showDatePicker?: boolean }
             {isLoading ? (
               Array.from({ length: 4 }).map((_, i) => (
                 <TableRow key={i}>
-                  {Array.from({ length: 11 }).map((_, j) => (
+                  {Array.from({ length: 8 }).map((_, j) => (
                     <TableCell key={j}>
                       <Skeleton className="h-5 w-full" />
                     </TableCell>
@@ -107,16 +104,13 @@ export function TimeCard({ showDatePicker = true }: { showDatePicker?: boolean }
                   <TableCell className="font-mono text-sm text-center">{fmtTime(r.amOut)}</TableCell>
                   <TableCell className="font-mono text-sm text-center">{fmtTime(r.pmIn)}</TableCell>
                   <TableCell className="font-mono text-sm text-center">{fmtTime(r.pmOut)}</TableCell>
-                  <TableCell className="hidden md:table-cell font-mono text-sm text-center">{fmtTime(r.otIn)}</TableCell>
-                  <TableCell className="hidden md:table-cell font-mono text-sm text-center">{fmtTime(r.otOut)}</TableCell>
-                  <TableCell className="text-right font-mono text-xs">{fmtHours(r.otHours)}</TableCell>
                   <TableCell className="text-right font-mono text-xs">{fmtMinutes(r.lateMinutes)}</TableCell>
                   <TableCell className="text-right font-mono text-xs">{fmtHours(r.workHours)}</TableCell>
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={11} className="text-center text-muted-foreground py-8">
+                <TableCell colSpan={8} className="text-center text-muted-foreground py-8">
                   No active employees.
                 </TableCell>
               </TableRow>
@@ -125,11 +119,8 @@ export function TimeCard({ showDatePicker = true }: { showDatePicker?: boolean }
           {data?.totals && (
             <TableFooter>
               <TableRow>
-                <TableCell colSpan={8} className="font-semibold">
+                <TableCell colSpan={6} className="font-semibold">
                   Accumulated Records
-                </TableCell>
-                <TableCell className="text-right font-mono text-xs font-semibold">
-                  {fmtHours(data.totals.otHours)}
                 </TableCell>
                 <TableCell className="text-right font-mono text-xs font-semibold">
                   {fmtMinutes(data.totals.lateMinutes)}

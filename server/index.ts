@@ -19,7 +19,6 @@ import { timeLogsRouter } from "./routes/timelogs"
 import { settingsRouter } from "./routes/settings"
 import { leavesRouter } from "./routes/leaves"
 import { loansRouter } from "./routes/loans"
-import { overtimeRouter } from "./routes/overtime"
 import { optionsRouter } from "./routes/options"
 import { profileRouter } from "./routes/profile"
 import { toolsRouter } from "./routes/tools"
@@ -127,7 +126,6 @@ const app = new Hono()
   .route("/settings", settingsRouter)
   .route("/leaves", leavesRouter)
   .route("/loans", loansRouter)
-  .route("/overtime", overtimeRouter)
   .route("/options", optionsRouter)
   .route("/profile", profileRouter)
   .route("/tools", toolsRouter)

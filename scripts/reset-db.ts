@@ -9,7 +9,6 @@ const TABLES = [
   "team",
   '"group"',
   "designation",
-  "overtime_request",
   "loan",
   "leave_request",
   "leave_credit",

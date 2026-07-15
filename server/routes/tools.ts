@@ -144,8 +144,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
             amOut: z.string().optional(),
             pmIn: z.string().optional(),
             pmOut: z.string().optional(),
-            otIn: z.string().optional(),
-            otOut: z.string().optional(),
           }),
         ),
       }),
@@ -176,8 +174,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
             amOut: toDate(r.date, r.amOut),
             pmIn: toDate(r.date, r.pmIn),
             pmOut: toDate(r.date, r.pmOut),
-            otIn: toDate(r.date, r.otIn),
-            otOut: toDate(r.date, r.otOut),
             source: "manual" as const,
           }
           const existing = await db.query.timeLogs.findFirst({

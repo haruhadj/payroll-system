@@ -43,7 +43,7 @@ const EMPLOYEE_TEMPLATE =
   "Juan Cruz,juan@company.com,Passw0rd!,EMP-100,Accounting,Rider,Regular,full_time,18000,1000,2026-01-15"
 
 const TIMELOG_TEMPLATE =
-  "employeeNo,date,amIn,amOut,pmIn,pmOut,otIn,otOut\n" +
+  "employeeNo,date,amIn,amOut,pmIn,pmOut\n" +
   "EMP-001,2026-06-16,08:00,12:00,13:00,17:00,18:00,20:00"
 
 export default function ToolsPage() {

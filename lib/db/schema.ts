@@ -222,7 +222,6 @@ export const payslips = pgTable(
     allowances: numeric("allowances", { precision: 12, scale: 2 })
       .notNull()
       .default("0"),
-    otPay: numeric("ot_pay", { precision: 12, scale: 2 }).notNull().default("0"),
     nightDiffPay: numeric("night_diff_pay", { precision: 12, scale: 2 })
       .notNull()
       .default("0"),
@@ -256,9 +255,6 @@ export const payslips = pgTable(
       .notNull()
       .default("0"),
     lateMinutes: integer("late_minutes").notNull().default(0),
-    otHours: numeric("ot_hours", { precision: 6, scale: 2 })
-      .notNull()
-      .default("0"),
     netPay: numeric("net_pay", { precision: 12, scale: 2 }).notNull(),
     status: payslipStatusEnum("status").notNull().default("pending"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -318,13 +314,11 @@ export const timeLogs = pgTable(
       .notNull()
       .references(() => employees.id, { onDelete: "cascade" }),
     logDate: date("log_date").notNull(),
-    // Six-punch model: morning, afternoon, and overtime segments.
+    // Four-punch model: morning and afternoon segments.
     amIn: timestamp("am_in"),
     amOut: timestamp("am_out"),
     pmIn: timestamp("pm_in"),
     pmOut: timestamp("pm_out"),
-    otIn: timestamp("ot_in"),
-    otOut: timestamp("ot_out"),
     source: timeLogSourceEnum("source").notNull().default("manual"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
   },
@@ -350,13 +344,9 @@ export const holidays = pgTable(
 // Singleton configuration row (id is always "default").
 export const payrollSettings = pgTable("payroll_settings", {
   id: text("id").primaryKey().default("default"),
-  otRate: numeric("ot_rate", { precision: 5, scale: 2 }).notNull().default("1.25"),
   restDayRate: numeric("rest_day_rate", { precision: 5, scale: 2 })
     .notNull()
     .default("1.30"),
-  restDayOtRate: numeric("rest_day_ot_rate", { precision: 5, scale: 2 })
-    .notNull()
-    .default("1.69"),
   nightDiffRate: numeric("night_diff_rate", { precision: 5, scale: 2 })
     .notNull()
     .default("0.10"),
@@ -394,10 +384,6 @@ export const payrollSettings = pgTable("payroll_settings", {
     .default("semi_monthly"),
   // Flat amounts (used when the matching "actual rate" toggle is OFF). When a
   // toggle is ON, the corresponding multiplier above is used instead.
-  overtimeAmount: numeric("overtime_amount", { precision: 10, scale: 2 })
-    .notNull()
-    .default("0"),
-  overtimeActualRate: boolean("overtime_actual_rate").notNull().default(true),
   holidayAmount: numeric("holiday_amount", { precision: 10, scale: 2 })
     .notNull()
     .default("0"),
@@ -498,33 +484,6 @@ export const loans = pgTable(
   (t) => [
     index("idx_loan_employee_id").on(t.employeeId),
     index("idx_loan_status").on(t.status),
-  ],
-)
-
-// Overtime requests: filed by employees, approved by admin/HR. Reuses the
-// leave status workflow (pending → approved/rejected).
-export const overtimeRequests = pgTable(
-  "overtime_request",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    employeeId: uuid("employee_id")
-      .notNull()
-      .references(() => employees.id, { onDelete: "cascade" }),
-    date: date("date").notNull(),
-    timeFrom: text("time_from").notNull(), // "HH:MM"
-    timeTo: text("time_to").notNull(), // "HH:MM"
-    hours: numeric("hours", { precision: 5, scale: 2 }).notNull(),
-    status: leaveStatusEnum("status").notNull().default("pending"),
-    note: text("note"),
-    approvedBy: text("approved_by").references(() => users.id, {
-      onDelete: "set null",
-    }),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-  },
-  (t) => [
-    index("idx_overtime_request_employee_id").on(t.employeeId),
-    index("idx_overtime_request_status").on(t.status),
-    index("idx_overtime_request_date").on(t.date),
   ],
 )
 
@@ -629,7 +588,6 @@ export const employeesRelations = relations(employees, ({ one, many }) => ({
   leaveCredits: many(leaveCredits),
   leaveRequests: many(leaveRequests),
   loans: many(loans),
-  overtimeRequests: many(overtimeRequests),
 }))
 
 export const schedulesRelations = relations(schedules, ({ many }) => ({
@@ -650,17 +608,6 @@ export const leaveRequestsRelations = relations(leaveRequests, ({ one }) => ({
   }),
   approver: one(users, {
     fields: [leaveRequests.approvedBy],
-    references: [users.id],
-  }),
-}))
-
-export const overtimeRequestsRelations = relations(overtimeRequests, ({ one }) => ({
-  employee: one(employees, {
-    fields: [overtimeRequests.employeeId],
-    references: [employees.id],
-  }),
-  approver: one(users, {
-    fields: [overtimeRequests.approvedBy],
     references: [users.id],
   }),
 }))
@@ -756,8 +703,6 @@ export const insertTimeLogSchema = createInsertSchema(timeLogs, {
   amOut: z.coerce.date().optional().nullable(),
   pmIn: z.coerce.date().optional().nullable(),
   pmOut: z.coerce.date().optional().nullable(),
-  otIn: z.coerce.date().optional().nullable(),
-  otOut: z.coerce.date().optional().nullable(),
 }).omit({ id: true, createdAt: true, source: true })
 export const updateTimeLogSchema = insertTimeLogSchema.partial()
 
@@ -814,18 +759,6 @@ export const insertLoanSchema = createInsertSchema(loans, {
   balance: z.string().optional(),
 }).omit({ id: true, createdAt: true })
 export const updateLoanSchema = insertLoanSchema.partial()
-
-export const selectOvertimeRequestSchema = createSelectSchema(overtimeRequests)
-export const insertOvertimeRequestSchema = createInsertSchema(overtimeRequests, {
-  hours: z
-    .string()
-    .refine((v) => parseFloat(v) > 0, { message: "Hours must be positive" }),
-  note: z.string().max(1000).optional().nullable(),
-}).omit({ id: true, createdAt: true, status: true, approvedBy: true })
-// employeeId is filled from the session for self-service requests.
-export const createOvertimeRequestSchema = insertOvertimeRequestSchema
-  .omit({ employeeId: true })
-  .extend({ employeeId: z.string().uuid().optional() })
 
 // Manage Options: all three lists share the same { name } shape.
 export const optionSchema = z.object({

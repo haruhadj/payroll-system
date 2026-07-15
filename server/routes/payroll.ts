@@ -49,9 +49,7 @@ type ScheduleRow = typeof schedules.$inferSelect
 // Maps the DB settings row (numeric columns are strings) to engine input.
 function toSettingsInput(s: SettingsRow): PayrollSettingsInput {
   return {
-    otRate: parseFloat(s.otRate),
     restDayRate: parseFloat(s.restDayRate),
-    restDayOtRate: parseFloat(s.restDayOtRate),
     nightDiffRate: parseFloat(s.nightDiffRate),
     regularHolidayRate: parseFloat(s.regularHolidayRate),
     specialHolidayRate: parseFloat(s.specialHolidayRate),
@@ -66,8 +64,6 @@ function toSettingsInput(s: SettingsRow): PayrollSettingsInput {
     pagibigEnabled: s.pagibigEnabled,
     taxEnabled: s.taxEnabled,
     philhealthRate: parseFloat(s.philhealthRate),
-    overtimeAmount: parseFloat(s.overtimeAmount),
-    overtimeActualRate: s.overtimeActualRate,
     holidayAmount: parseFloat(s.holidayAmount),
     holidayActualRate: s.holidayActualRate,
     nightDiffAmount: parseFloat(s.nightDiffAmount),
@@ -97,8 +93,6 @@ function toLogInput(l: {
   amOut: Date | null
   pmIn: Date | null
   pmOut: Date | null
-  otIn: Date | null
-  otOut: Date | null
 }) {
   return {
     logDate: l.logDate,
@@ -106,8 +100,6 @@ function toLogInput(l: {
     amOut: l.amOut,
     pmIn: l.pmIn,
     pmOut: l.pmOut,
-    otIn: l.otIn,
-    otOut: l.otOut,
   }
 }
 
@@ -402,7 +394,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
               periodId: id,
               basicPay: String(calc.basicPay),
               allowances: String(calc.allowances),
-              otPay: String(calc.otPay),
               nightDiffPay: String(calc.nightDiffPay),
               restDayPay: String(calc.restDayPay),
               holidayPay: String(calc.holidayPay),
@@ -416,7 +407,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
               thirteenthMonthPay: String(calc.thirteenthMonthPay),
               daysWorked: String(calc.daysWorked),
               lateMinutes: calc.lateMinutes,
-              otHours: String(calc.otHours),
               netPay: String(calc.netPay),
               status: "pending",
             })

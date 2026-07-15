@@ -10,7 +10,6 @@ import {
   leaveCredits,
   leaveRequests,
   loans,
-  overtimeRequests,
   designations,
   groups,
   teams,
@@ -256,11 +255,11 @@ async function seed() {
   const at = (day: number, h: number, m: number, nextDay = false) =>
     new Date(YEAR, MONTH, day + (nextDay ? 1 : 0), h, m)
 
-  // Day-shift punch builder: AM 08:00–12:00, PM 13:00–17:00, optional OT.
+  // Day-shift punch builder: AM 08:00–12:00, PM 13:00–17:00.
   async function addDayShiftLog(
     employeeId: string,
     day: number,
-    opts: { amInMin?: number; ot?: [number, number] } = {},
+    opts: { amInMin?: number } = {},
   ) {
     const logDate = `${YEAR}-${pad(MONTH + 1)}-${pad(day)}`
     await db
@@ -272,8 +271,6 @@ async function seed() {
         amOut: at(day, 12, 0),
         pmIn: at(day, 13, 0),
         pmOut: at(day, 17, 0),
-        otIn: opts.ot ? at(day, opts.ot[0], 0) : null,
-        otOut: opts.ot ? at(day, opts.ot[1], 0) : null,
         source: "manual",
       })
       .onConflictDoNothing()
@@ -299,11 +296,10 @@ async function seed() {
     if (dow === 0 || dow === 6) continue // weekend
 
     // Day-shift employee — works incl. the special holiday (Jun 5),
-    // off on the regular holiday (Jun 12, still paid), with one late + one OT day.
+    // off on the regular holiday (Jun 12, still paid), with one late day.
     if (emp1 && d !== 12) {
       await addDayShiftLog(emp1.id, d, {
         amInMin: d === 3 ? 45 : 0, // late on the 3rd
-        ot: d === 9 ? [18, 20] : undefined, // 2h overtime on the 9th
       })
     }
 
@@ -386,25 +382,6 @@ async function seed() {
         startDate: "2026-06-01",
       })
       console.log("✅ Created sample loan (EMP-001 SSS, ₱1,000/cutoff)")
-    }
-  }
-
-  // A sample pending overtime request for the dashboard month view.
-  if (emp1) {
-    const existingOt = await db
-      .select()
-      .from(overtimeRequests)
-      .where(eq(overtimeRequests.employeeId, emp1.id))
-    if (!existingOt.length) {
-      await db.insert(overtimeRequests).values({
-        employeeId: emp1.id,
-        date: "2026-06-09",
-        timeFrom: "18:00",
-        timeTo: "20:00",
-        hours: "2",
-        note: "Month-end reports",
-      })
-      console.log("✅ Created sample overtime request (EMP-001)")
     }
   }
 

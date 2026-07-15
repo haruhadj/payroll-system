@@ -12,7 +12,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { formatCurrency, cn } from "@/lib/utils"
 import { TimeCard } from "@/components/time-card"
 import { MonthlyLeavesCard } from "@/components/monthly-leaves-card"
-import { OvertimeRequestsCard } from "@/components/overtime-requests-card"
 import { Users, FileText, Star, CalendarRange, MessageSquare } from "lucide-react"
 
 export default function DashboardPage() {
@@ -97,9 +96,8 @@ function AdminDashboard() {
         </CardContent>
       </Card>
 
-      {/* Monthly leaves & overtime */}
+      {/* Monthly leaves */}
       <MonthlyLeavesCard />
-      <OvertimeRequestsCard month />
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* Latest period */}
@@ -226,10 +224,9 @@ function EmployeeDashboard() {
         </CardContent>
       </Card>
 
-      {/* Today's attendance + apply leave / overtime */}
+      {/* Today's attendance + leave */}
       <EmployeeTodayCard />
       <MonthlyLeavesCard />
-      <OvertimeRequestsCard month />
 
       <div className="flex gap-3">
         <Link href="/payslips">
@@ -279,8 +276,6 @@ function EmployeeTodayCard() {
     { label: "Log Out (AM)", value: punchTime(log?.amOut ?? null) },
     { label: "Log In (PM)", value: punchTime(log?.pmIn ?? null) },
     { label: "Log Out (PM)", value: punchTime(log?.pmOut ?? null) },
-    { label: "OT In", value: punchTime(log?.otIn ?? null) },
-    { label: "OT Out", value: punchTime(log?.otOut ?? null) },
   ]
 
   return (
