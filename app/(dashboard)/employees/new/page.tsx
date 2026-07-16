@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useCreateEmployee, useUnlinkedUsers } from "@/lib/hooks/useEmployees"
-import { useSchedules } from "@/lib/hooks/useSchedules"
 import { useOptions } from "@/lib/hooks/useOptions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -23,7 +22,6 @@ export default function NewEmployeePage() {
   const router = useRouter()
   const { mutate: create, isPending } = useCreateEmployee()
   const { data: users } = useUnlinkedUsers()
-  const { data: schedules } = useSchedules()
   const { data: options } = useOptions()
 
   const [form, setForm] = useState({
@@ -36,7 +34,6 @@ export default function NewEmployeePage() {
     basicSalary: "",
     allowance: "",
     hiredAt: "",
-    scheduleId: "none",
   })
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }))
@@ -47,7 +44,6 @@ export default function NewEmployeePage() {
       ...form,
       allowance: form.allowance || "0",
       groupName: form.groupName || null,
-      scheduleId: form.scheduleId === "none" ? null : form.scheduleId,
     }
     create(payload, { onSuccess: () => router.push("/employees") })
   }
@@ -191,26 +187,6 @@ export default function NewEmployeePage() {
                   Transportation, meal, and other non-taxable allowances.
                 </p>
               </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label>Work Schedule</Label>
-              <Select
-                value={form.scheduleId}
-                onValueChange={(v) => set("scheduleId", v ?? "none")}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="No schedule" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="none">No schedule</SelectItem>
-                  {schedules?.map((s: any) => (
-                    <SelectItem key={s.id} value={s.id}>
-                      {s.name} ({s.timeIn}–{s.timeOut})
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
             </div>
 
             <div className="flex gap-3 pt-2">

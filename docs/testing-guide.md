@@ -4,10 +4,10 @@ A clear, step-by-step guide to get the payroll system running for testing, plus
 preparation for tester questions, feedback, and thesis-defense Q&A.
 
 > **Good news:** the seed script builds a complete demo scenario for you — 4 users,
-> 2 employees on day/night shifts, holidays, time logs with a late day + overtime +
-> night differential, a draft *June 2026 (1st Half)* period ready to process, leave
-> credits, a pending leave request, and a sample loan. Most of your test data already
-> exists; you just need to boot it correctly.
+> 2 employees, a logged unauthorized absence, a draft *June 2026 (1st Half)* period
+> ready to process, leave credits, a pending leave request (with a matching logged
+> absence so approving it has a visible payroll effect), and a sample loan. Most of
+> your test data already exists; you just need to boot it correctly.
 
 ## Reality check: dev environment vs. where testers connect
 
@@ -82,11 +82,10 @@ bun run tsx --env-file=.env scripts/verify-payroll.ts
 ```
 
 It runs the **same** engine functions the live route uses
-(`aggregateAttendance` + `calculatePayrollFromAttendance`) against the seeded data and
-prints every line item (basic pay, OT, night diff, holiday pay, late deduction, loan
-amortization, SSS/PhilHealth/Pag-IBIG/tax, net). If these look right, your
-defense-critical calculations are sound. **Do this first** — a wrong net-pay number in
-front of a panel is the worst-case failure.
+(`aggregateAbsences` + `calculatePayrollFromAbsences`) against the seeded data and
+prints every line item (basic pay, loan amortization, SSS/PhilHealth/Pag-IBIG/tax, net).
+If these look right, your defense-critical calculations are sound. **Do this first** — a
+wrong net-pay number in front of a panel is the worst-case failure.
 
 ---
 
@@ -98,8 +97,8 @@ Created by the seed script (`scripts/seed.ts`):
 |---|---|---|---|
 | Admin | `admin@payroll.com` | `Admin@123456` | Everything |
 | HR | `hr@payroll.com` | `Hr@123456` | Employees, payroll, payslips |
-| Employee | `juan.delacruz@payroll.com` | `Employee@123` | Own payslips + feedback (EMP-001: day shift, a loan, a late day, OT, pending leave) |
-| Employee | `maria.santos@payroll.com` | `Employee@123` | Own payslips + feedback (EMP-002: night shift → night differential) |
+| Employee | `juan.delacruz@payroll.com` | `Employee@123` | Own payslips + feedback (EMP-001: a loan, a logged absence pending leave approval) |
+| Employee | `maria.santos@payroll.com` | `Employee@123` | Own payslips + feedback (EMP-002: an unauthorized absence) |
 
 ---
 
@@ -110,11 +109,11 @@ Run this yourself as a smoke test, then hand it to testers (see the
 
 1. **Sign in as admin** → Dashboard loads with counts.
 2. **Payroll → "June 2026 (1st Half)"** (status `draft`) → **Process**. Auto-generates
-   payslips from the seeded time logs. Juan shows a late deduction + 2h OT + loan
-   deduction; Maria shows night differential.
+   payslips from the seeded absences. Juan shows an unpaid absence (Jun 15, pending
+   leave) + loan deduction; Maria shows an unpaid unauthorized absence (Jun 10).
 3. **Leaves** → approve Juan's **pending vacation (Jun 15)** → re-process the period →
-   his payslip now shows **paid leave** for that day. (This is the scripted
-   before/after moment — it demonstrates the attendance → payroll pipeline live.)
+   his payslip now shows **paid leave** for that day instead of an absence. (This is the
+   scripted before/after moment — it demonstrates the absence → payroll pipeline live.)
 4. **Payslips** → review breakdowns; **release** the period.
 5. **Sign out → sign in as Juan** → he sees his own payslip only (RBAC check: `403` on
    admin routes).
@@ -136,8 +135,7 @@ for UX/bug notes that don't fit the 1–5 model.
 ### Anticipated tester questions — have answers ready
 
 - *"Why is everything dated June 2026?"* — The seed data is dated June 2026 on purpose
-  so attendance, holidays (Jun 5 special, Jun 12 regular), and the cutoff line up. Not
-  a bug.
+  so the absences, leave request, and the cutoff period line up. Not a bug.
 - *"I can't reset my password."* — Reset emails need a live Resend key; use the seeded
   accounts for testing.
 - *"An employee can't see the dashboard / other people's payslips."* — Correct; that's
@@ -162,10 +160,10 @@ Being upfront about scope shows you know your system:
   `verify-payroll.ts` output).
 - How is authorization enforced? → Better Auth session + `requireRole()` RBAC
   middleware on every protected Hono route.
-- How does attendance become pay? → time logs → `aggregateAttendance` →
-  `calculatePayrollFromAttendance`.
-- What happens on a holiday / night shift / late arrival? → the seeded scenarios show
-  each; know the multipliers.
+- How does attendance become pay? → logged absences + approved leave →
+  `aggregateAbsences` → `calculatePayrollFromAbsences`.
+- Why no holiday/overtime/late pay? → monthly-paid staff already have those folded into
+  the basic salary under PH labor practice; know the reasoning cold.
 
 ---
 

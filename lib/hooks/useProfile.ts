@@ -20,7 +20,6 @@ export interface ProfileInput {
   contactNo1?: string | null
   contactNo2?: string | null
   address?: string | null
-  biometricId?: string | null
   iceName?: string | null
   iceContact?: string | null
   iceEmail?: string | null

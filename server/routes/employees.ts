@@ -40,7 +40,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
       where: conditions.length ? and(...conditions) : undefined,
       with: {
         user: { columns: { name: true, email: true } },
-        schedule: { columns: { id: true, name: true } },
       },
       limit: parseInt(limit),
       offset: parseInt(offset),
@@ -55,7 +54,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
       where: eq(employees.id, id),
       with: {
         user: { columns: { name: true, email: true, role: true } },
-        schedule: { columns: { id: true, name: true } },
       },
     })
     if (!emp) return c.json({ error: "Not found" }, 404)

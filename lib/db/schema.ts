@@ -35,14 +35,6 @@ export const payslipStatusEnum = pgEnum("payslip_status", [
   "approved",
   "paid",
 ])
-export const timeLogSourceEnum = pgEnum("time_log_source", [
-  "manual",
-  "biometric",
-])
-export const holidayTypeEnum = pgEnum("holiday_type", [
-  "regular",
-  "special_non_working",
-])
 export const leaveTypeEnum = pgEnum("leave_type", [
   "vacation",
   "sick",
@@ -167,24 +159,16 @@ export const employees = pgTable(
       .notNull()
       .default("0"),
     hiredAt: date("hired_at").notNull(),
-    scheduleId: uuid("schedule_id").references(() => schedules.id, {
-      onDelete: "set null",
-    }),
     isActive: boolean("is_active").notNull().default(true),
     deductSss: boolean("deduct_sss").notNull().default(true),
     deductPhilhealth: boolean("deduct_philhealth").notNull().default(true),
     deductPagibig: boolean("deduct_pagibig").notNull().default(true),
     deductTax: boolean("deduct_tax").notNull().default(true),
-    latePerMinuteOverride: numeric("late_per_minute_override", {
-      precision: 10,
-      scale: 4,
-    }),
     createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (t) => [
     index("idx_employee_user_id").on(t.userId),
     index("idx_employee_no").on(t.employeeNo),
-    index("idx_employee_schedule_id").on(t.scheduleId),
     index("idx_employee_active").on(t.isActive),
   ],
 )
@@ -222,16 +206,7 @@ export const payslips = pgTable(
     allowances: numeric("allowances", { precision: 12, scale: 2 })
       .notNull()
       .default("0"),
-    restDayPay: numeric("rest_day_pay", { precision: 12, scale: 2 })
-      .notNull()
-      .default("0"),
-    holidayPay: numeric("holiday_pay", { precision: 12, scale: 2 })
-      .notNull()
-      .default("0"),
     grossPay: numeric("gross_pay", { precision: 12, scale: 2 }).notNull(),
-    lateDeduction: numeric("late_deduction", { precision: 12, scale: 2 })
-      .notNull()
-      .default("0"),
     sss: numeric("sss", { precision: 10, scale: 2 }).notNull(),
     philhealth: numeric("philhealth", { precision: 10, scale: 2 }).notNull(),
     pagibig: numeric("pagibig", { precision: 10, scale: 2 }).notNull(),
@@ -251,7 +226,6 @@ export const payslips = pgTable(
     daysWorked: numeric("days_worked", { precision: 6, scale: 2 })
       .notNull()
       .default("0"),
-    lateMinutes: integer("late_minutes").notNull().default(0),
     netPay: numeric("net_pay", { precision: 12, scale: 2 }).notNull(),
     status: payslipStatusEnum("status").notNull().default("pending"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -286,76 +260,44 @@ export const feedback = pgTable(
 )
 
 // ---------------------------------------------------------------------------
-// Attendance domain tables
+// Attendance domain: exception-based absence log
 // ---------------------------------------------------------------------------
+//
+// Teaching/school staff are monthly-paid, so payroll assumes every scheduled
+// school day is worked unless HR logs an exception here. There is no punch
+// clock: an employee is "present" by default, "absent" only if a row exists
+// for that date (and not covered by an approved leave request).
 
-export const schedules = pgTable("schedule", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  name: text("name").notNull(),
-  timeIn: text("time_in").notNull(), // "HH:MM"
-  timeOut: text("time_out").notNull(), // "HH:MM"
-  breakMinutes: integer("break_minutes").notNull().default(60),
-  workDays: text("work_days")
-    .array()
-    .notNull()
-    .default(["mon", "tue", "wed", "thu", "fri"]),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-})
-
-export const timeLogs = pgTable(
-  "time_log",
+export const absences = pgTable(
+  "absence",
   {
     id: uuid("id").primaryKey().defaultRandom(),
     employeeId: uuid("employee_id")
       .notNull()
       .references(() => employees.id, { onDelete: "cascade" }),
-    logDate: date("log_date").notNull(),
-    // Four-punch model: morning and afternoon segments.
-    amIn: timestamp("am_in"),
-    amOut: timestamp("am_out"),
-    pmIn: timestamp("pm_in"),
-    pmOut: timestamp("pm_out"),
-    source: timeLogSourceEnum("source").notNull().default("manual"),
+    date: date("date").notNull(),
+    reason: text("reason"),
+    createdBy: text("created_by").references(() => users.id, {
+      onDelete: "set null",
+    }),
     createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (t) => [
-    uniqueIndex("idx_time_log_unique").on(t.employeeId, t.logDate),
-    index("idx_time_log_employee_id").on(t.employeeId),
-    index("idx_time_log_date").on(t.logDate),
+    uniqueIndex("idx_absence_unique").on(t.employeeId, t.date),
+    index("idx_absence_employee_id").on(t.employeeId),
+    index("idx_absence_date").on(t.date),
   ],
-)
-
-export const holidays = pgTable(
-  "holiday",
-  {
-    id: uuid("id").primaryKey().defaultRandom(),
-    name: text("name").notNull(),
-    date: date("date").notNull().unique(),
-    type: holidayTypeEnum("type").notNull().default("regular"),
-    createdAt: timestamp("created_at").notNull().defaultNow(),
-  },
-  (t) => [index("idx_holiday_date").on(t.date)],
 )
 
 // Singleton configuration row (id is always "default").
 export const payrollSettings = pgTable("payroll_settings", {
   id: text("id").primaryKey().default("default"),
-  restDayRate: numeric("rest_day_rate", { precision: 5, scale: 2 })
-    .notNull()
-    .default("1.30"),
-  regularHolidayRate: numeric("regular_holiday_rate", { precision: 5, scale: 2 })
-    .notNull()
-    .default("2.00"),
-  specialHolidayRate: numeric("special_holiday_rate", { precision: 5, scale: 2 })
-    .notNull()
-    .default("1.30"),
   workingDaysPerMonth: integer("working_days_per_month").notNull().default(22),
-  workHoursPerDay: numeric("work_hours_per_day", { precision: 4, scale: 2 })
+  // School week: weekday keys counted as scheduled working days.
+  workDays: text("work_days")
+    .array()
     .notNull()
-    .default("8"),
-  lateGracePeriodMinutes: integer("late_grace_period_minutes")
-    .notNull()
-    .default(0),
+    .default(["mon", "tue", "wed", "thu", "fri"]),
   thirteenthMonthEveryCutoff: boolean("thirteenth_month_every_cutoff")
     .notNull()
     .default(false),
@@ -373,24 +315,12 @@ export const payrollSettings = pgTable("payroll_settings", {
   withholdingTaxFrequency: taxFrequencyEnum("withholding_tax_frequency")
     .notNull()
     .default("semi_monthly"),
-  // Flat amounts (used when the matching "actual rate" toggle is OFF). When a
-  // toggle is ON, the corresponding multiplier above is used instead.
-  holidayAmount: numeric("holiday_amount", { precision: 10, scale: 2 })
-    .notNull()
-    .default("0"),
-  holidayActualRate: boolean("holiday_actual_rate").notNull().default(true),
+  // Paid-leave day valuation: flat amount (used when actual-rate is OFF), or
+  // the employee's daily rate (when actual-rate is ON).
   leaveAmount: numeric("leave_amount", { precision: 10, scale: 2 })
     .notNull()
     .default("0"),
   leaveActualRate: boolean("leave_actual_rate").notNull().default(true),
-  // Lateness penalty per minute (0 = derive from hourly rate ÷ 60).
-  lateAmountPerMinute: numeric("late_amount_per_minute", { precision: 10, scale: 4 })
-    .notNull()
-    .default("0"),
-  // Pay employees for unworked Sundays (regular holiday, no work with pay).
-  sundayHolidayPaid: boolean("sunday_holiday_paid").notNull().default(false),
-  // Toggles employee self-service clock in/out.
-  enableClockInOut: boolean("enable_clock_in_out").notNull().default(true),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
 
@@ -512,7 +442,6 @@ export const userProfiles = pgTable("user_profile", {
   contactNo1: text("contact_no1"),
   contactNo2: text("contact_no2"),
   address: text("address"),
-  biometricId: text("biometric_id"),
   // In Case of Emergency (ICE).
   iceName: text("ice_name"),
   iceContact: text("ice_contact"),
@@ -565,20 +494,12 @@ export const userDocumentsRelations = relations(userDocuments, ({ one }) => ({
 
 export const employeesRelations = relations(employees, ({ one, many }) => ({
   user: one(users, { fields: [employees.userId], references: [users.id] }),
-  schedule: one(schedules, {
-    fields: [employees.scheduleId],
-    references: [schedules.id],
-  }),
   payslips: many(payslips),
   feedback: many(feedback),
-  timeLogs: many(timeLogs),
+  absences: many(absences),
   leaveCredits: many(leaveCredits),
   leaveRequests: many(leaveRequests),
   loans: many(loans),
-}))
-
-export const schedulesRelations = relations(schedules, ({ many }) => ({
-  employees: many(employees),
 }))
 
 export const leaveCreditsRelations = relations(leaveCredits, ({ one }) => ({
@@ -606,10 +527,14 @@ export const loansRelations = relations(loans, ({ one }) => ({
   }),
 }))
 
-export const timeLogsRelations = relations(timeLogs, ({ one }) => ({
+export const absencesRelations = relations(absences, ({ one }) => ({
   employee: one(employees, {
-    fields: [timeLogs.employeeId],
+    fields: [absences.employeeId],
     references: [employees.id],
+  }),
+  recordedBy: one(users, {
+    fields: [absences.createdBy],
+    references: [users.id],
   }),
 }))
 
@@ -672,37 +597,16 @@ export const insertFeedbackSchema = createInsertSchema(feedback, {
   comment: z.string().max(1000).optional(),
 }).omit({ id: true, createdAt: true, employeeId: true })
 
-const timeRegex = /^([01]\d|2[0-3]):[0-5]\d$/
-
-export const selectScheduleSchema = createSelectSchema(schedules)
-export const insertScheduleSchema = createInsertSchema(schedules, {
-  name: z.string().min(1, "Name is required"),
-  timeIn: z.string().regex(timeRegex, "Use HH:MM (24h) format"),
-  timeOut: z.string().regex(timeRegex, "Use HH:MM (24h) format"),
-  breakMinutes: z.number().int().min(0).max(480).optional(),
-  workDays: z.array(z.string()).min(1, "Pick at least one work day"),
-}).omit({ id: true, createdAt: true })
-export const updateScheduleSchema = insertScheduleSchema.partial()
-
-export const selectTimeLogSchema = createSelectSchema(timeLogs)
-export const insertTimeLogSchema = createInsertSchema(timeLogs, {
-  amIn: z.coerce.date().optional().nullable(),
-  amOut: z.coerce.date().optional().nullable(),
-  pmIn: z.coerce.date().optional().nullable(),
-  pmOut: z.coerce.date().optional().nullable(),
-}).omit({ id: true, createdAt: true, source: true })
-export const updateTimeLogSchema = insertTimeLogSchema.partial()
-
-export const selectHolidaySchema = createSelectSchema(holidays)
-export const insertHolidaySchema = createInsertSchema(holidays, {
-  name: z.string().min(1, "Name is required"),
-}).omit({ id: true, createdAt: true })
-export const updateHolidaySchema = insertHolidaySchema.partial()
+export const selectAbsenceSchema = createSelectSchema(absences)
+export const insertAbsenceSchema = createInsertSchema(absences, {
+  reason: z.string().max(1000).optional().nullable(),
+}).omit({ id: true, createdAt: true, createdBy: true })
 
 export const selectPayrollSettingsSchema = createSelectSchema(payrollSettings)
 export const updatePayrollSettingsSchema = createInsertSchema(payrollSettings, {
   adminEmail: z.string().email().or(z.literal("")).optional().nullable(),
   hrEmail: z.string().email().or(z.literal("")).optional().nullable(),
+  workDays: z.array(z.string()).min(1, "Pick at least one work day").optional(),
 })
   .omit({ id: true, updatedAt: true })
   .partial()

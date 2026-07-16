@@ -1,12 +1,12 @@
 import { Hono } from "hono"
 import { zValidator } from "@hono/zod-validator"
 import { db } from "@/lib/db"
-import { employees, users, timeLogs } from "@/lib/db/schema"
+import { employees, users } from "@/lib/db/schema"
 import { auth } from "@/lib/auth/server"
 import { authMiddleware } from "@/server/middleware/auth"
 import { requireRole } from "@/server/middleware/rbac"
 import type { HonoVariables } from "@/server/types"
-import { eq, and } from "drizzle-orm"
+import { eq } from "drizzle-orm"
 import { z } from "zod"
 
 function csvCell(v: unknown): string {
@@ -126,71 +126,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
       }
 
       return c.json({ created, errors })
-    },
-  )
-
-  // ----- Import time records -------------------------------------------------
-  .post(
-    "/import/timelogs",
-    requireRole("admin", "hr"),
-    zValidator(
-      "json",
-      z.object({
-        rows: z.array(
-          z.object({
-            employeeNo: z.string().min(1),
-            date: z.string(),
-            amIn: z.string().optional(),
-            amOut: z.string().optional(),
-            pmIn: z.string().optional(),
-            pmOut: z.string().optional(),
-          }),
-        ),
-      }),
-    ),
-    async (c) => {
-      const { rows } = c.req.valid("json")
-      const empRows = await db.select().from(employees)
-      const byNo = new Map(empRows.map((e) => [e.employeeNo, e.id]))
-
-      const toDate = (date: string, t?: string) =>
-        t ? new Date(`${date}T${t.length === 5 ? `${t}:00` : t}`) : null
-
-      let imported = 0
-      const errors: { row: number; error: string }[] = []
-
-      for (let i = 0; i < rows.length; i++) {
-        const r = rows[i]
-        const empId = byNo.get(r.employeeNo)
-        if (!empId) {
-          errors.push({ row: i + 1, error: `Unknown employee ${r.employeeNo}` })
-          continue
-        }
-        try {
-          const values = {
-            employeeId: empId,
-            logDate: r.date,
-            amIn: toDate(r.date, r.amIn),
-            amOut: toDate(r.date, r.amOut),
-            pmIn: toDate(r.date, r.pmIn),
-            pmOut: toDate(r.date, r.pmOut),
-            source: "manual" as const,
-          }
-          const existing = await db.query.timeLogs.findFirst({
-            where: and(eq(timeLogs.employeeId, empId), eq(timeLogs.logDate, r.date)),
-          })
-          if (existing) {
-            await db.update(timeLogs).set(values).where(eq(timeLogs.id, existing.id))
-          } else {
-            await db.insert(timeLogs).values(values)
-          }
-          imported++
-        } catch (e: any) {
-          errors.push({ row: i + 1, error: e?.message ?? "Failed" })
-        }
-      }
-
-      return c.json({ imported, errors })
     },
   )
 

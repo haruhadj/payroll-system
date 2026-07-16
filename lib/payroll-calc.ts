@@ -127,88 +127,46 @@ function round2(n: number): number {
 }
 
 // ---------------------------------------------------------------------------
-// Attendance-driven payroll engine
+// Absence-driven payroll engine
 // ---------------------------------------------------------------------------
+//
+// Teaching/school staff are monthly-paid: every scheduled school day is
+// assumed worked unless HR logs an explicit absence or an approved leave
+// request covers it. There is no punch clock, so there's no late/rest-day/
+// holiday premium math here — monthly-paid employees already have those
+// folded into their basic salary under PH labor practice.
 
 export interface PayrollSettingsInput {
-  restDayRate: number
-  regularHolidayRate: number
-  specialHolidayRate: number
   workingDaysPerMonth: number
-  workHoursPerDay: number
-  lateGracePeriodMinutes: number
+  workDays: string[] // school week, e.g. ["mon", ..., "fri"]
   thirteenthMonthEveryCutoff: boolean
   sssEnabled: boolean
   philhealthEnabled: boolean
   pagibigEnabled: boolean
   taxEnabled: boolean
   philhealthRate: number
-  // Flat amounts + "actual rate" toggles (actual rate ⇒ use the multiplier).
-  holidayAmount: number
-  holidayActualRate: boolean
+  // Paid-leave day valuation: flat amount, or the daily rate ("actual rate").
   leaveAmount: number
   leaveActualRate: boolean
-  lateAmountPerMinute: number
-  sundayHolidayPaid: boolean
 }
 
-export interface ScheduleInput {
-  timeIn: string // "HH:MM"
-  timeOut: string // "HH:MM"
-  breakMinutes: number
-  workDays: string[] // ["mon", ..., "sun"]
-}
-
-const DEFAULT_SCHEDULE: ScheduleInput = {
-  timeIn: "08:00",
-  timeOut: "17:00",
-  breakMinutes: 60,
-  workDays: ["mon", "tue", "wed", "thu", "fri"],
-}
-
-export interface AttendanceAggregate {
-  regularDaysWorked: number
-  restDayHours: number
-  regularHolidayHours: number
-  specialHolidayHours: number
-  lateMinutes: number
-  daysAbsent: number
+export interface AbsenceAggregate {
+  scheduledDays: number
+  daysPresent: number
+  unpaidAbsenceDays: number
   paidLeaveDays: number
+  unpaidLeaveDays: number
 }
 
-export type DayType =
-  | "regular"
-  | "rest_day"
-  | "regular_holiday"
-  | "special_holiday"
-
-export type DayStatus = "present" | "absent" | "rest" | "holiday" | "leave"
+export type DayStatus = "present" | "absent" | "leave" | "off"
 
 export interface DayBreakdown {
   date: string
-  dayType: DayType
   scheduled: boolean
-  amIn: string | null
-  amOut: string | null
-  pmIn: string | null
-  pmOut: string | null
-  workedHours: number
-  lateMinutes: number
   status: DayStatus
 }
 
 const DOW_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
-
-function hhmmToMinutes(hhmm: string): number {
-  const [h, m] = hhmm.split(":").map(Number)
-  return h * 60 + m
-}
-
-function overlapHours(aStart: Date, aEnd: Date, bStart: Date, bEnd: Date): number {
-  const s = Math.max(aStart.getTime(), bStart.getTime())
-  const e = Math.min(aEnd.getTime(), bEnd.getTime())
-  return e > s ? (e - s) / 3_600_000 : 0
-}
 
 function dateKey(d: Date): string {
   const y = d.getFullYear()
@@ -222,20 +180,6 @@ function parseDateKey(key: string): Date {
   return new Date(y, m - 1, d)
 }
 
-function fmtTime(d: Date | null): string | null {
-  if (!d) return null
-  return `${String(d.getHours()).padStart(2, "0")}:${String(
-    d.getMinutes(),
-  ).padStart(2, "0")}`
-}
-
-// Duration of a single punch pair in hours (0 if either side is missing).
-function segHours(a: Date | null, b: Date | null): number {
-  if (!a || !b) return 0
-  return Math.max(0, (b.getTime() - a.getTime()) / 3_600_000)
-}
-
-
 // Leave types that are paid (count toward basic pay) vs. unpaid leave, which
 // excuses the absence without paying for the day.
 export const PAID_LEAVE_TYPES = new Set(["vacation", "sick", "emergency"])
@@ -244,44 +188,32 @@ export function isLeavePaid(type: string): boolean {
   return PAID_LEAVE_TYPES.has(type)
 }
 
-export interface AggregateAttendanceParams {
+export interface AggregateAbsencesParams {
   dateFrom: string
   dateTo: string
-  schedule: ScheduleInput | null
-  holidays: { date: string; type: "regular" | "special_non_working" }[]
-  logs: {
-    logDate: string
-    amIn: Date | null
-    amOut: Date | null
-    pmIn: Date | null
-    pmOut: Date | null
-  }[]
-  settings: PayrollSettingsInput
+  workDays: string[]
+  // Dates HR has logged as an unauthorized/unplanned absence.
+  absenceDates: string[]
   // Approved leave dates within the period, each flagged paid/unpaid.
   leaves?: { date: string; paid: boolean }[]
 }
 
-// Turns raw time logs + schedule + holiday calendar into hour buckets and a
-// per-day breakdown used both by the payroll engine and the time-card view.
-export function aggregateAttendance(
-  params: AggregateAttendanceParams,
-): { aggregate: AttendanceAggregate; days: DayBreakdown[] } {
-  const { dateFrom, dateTo, settings } = params
-  const schedule = params.schedule ?? DEFAULT_SCHEDULE
-  const breakHours = schedule.breakMinutes / 60
+// Walks a payroll period's calendar against the school week, logged absences,
+// and approved leave to produce day totals for the payroll engine and a
+// per-day breakdown for the attendance summary view.
+export function aggregateAbsences(
+  params: AggregateAbsencesParams,
+): { aggregate: AbsenceAggregate; days: DayBreakdown[] } {
+  const { dateFrom, dateTo, workDays, absenceDates, leaves = [] } = params
+  const absenceSet = new Set(absenceDates)
+  const leaveByDate = new Map(leaves.map((l) => [l.date, l.paid]))
 
-  const holidayByDate = new Map(params.holidays.map((h) => [h.date, h.type]))
-  const logByDate = new Map(params.logs.map((l) => [l.logDate, l]))
-  const leaveByDate = new Map((params.leaves ?? []).map((l) => [l.date, l.paid]))
-
-  const agg: AttendanceAggregate = {
-    regularDaysWorked: 0,
-    restDayHours: 0,
-    regularHolidayHours: 0,
-    specialHolidayHours: 0,
-    lateMinutes: 0,
-    daysAbsent: 0,
+  const agg: AbsenceAggregate = {
+    scheduledDays: 0,
+    daysPresent: 0,
+    unpaidAbsenceDays: 0,
     paidLeaveDays: 0,
+    unpaidLeaveDays: 0,
   }
   const days: DayBreakdown[] = []
 
@@ -293,137 +225,55 @@ export function aggregateAttendance(
   ) {
     const key = dateKey(cursor)
     const dow = DOW_KEYS[cursor.getDay()]
-    const scheduled = schedule.workDays.includes(dow)
-    const holidayType = holidayByDate.get(key)
-    const log = logByDate.get(key)
-    const firstIn = log?.amIn ?? log?.pmIn ?? null
-    const lastOut = log?.pmOut ?? log?.amOut ?? null
-    const present = !!(log && firstIn && lastOut)
+    const scheduled = workDays.includes(dow)
 
-    const dayType: DayType = holidayType
-      ? holidayType === "regular"
-        ? "regular_holiday"
-        : "special_holiday"
-      : scheduled
-        ? "regular"
-        : "rest_day"
+    let status: DayStatus = "off"
 
-    let workedHours = 0
-    let lateMinutes = 0
-
-    if (log) {
-      // Regular hours come from the morning + afternoon segments. If only a
-      // single span was punched, fall back to first-in/last-out minus break.
-      const amHrs = segHours(log.amIn, log.amOut)
-      const pmHrs = segHours(log.pmIn, log.pmOut)
-      if (amHrs + pmHrs > 0) {
-        workedHours = amHrs + pmHrs
-      } else if (firstIn && lastOut) {
-        workedHours = Math.max(0, segHours(firstIn, lastOut) - breakHours)
-      }
-      // Lateness only matters on scheduled days, measured from the first punch.
-      if (scheduled && firstIn) {
-        const schedStart = new Date(cursor)
-        const sm = hhmmToMinutes(schedule.timeIn)
-        schedStart.setHours(Math.floor(sm / 60), sm % 60, 0, 0)
-        const rawLate = Math.max(0, (firstIn.getTime() - schedStart.getTime()) / 60_000)
-        lateMinutes = Math.max(0, rawLate - settings.lateGracePeriodMinutes)
-      }
-    }
-
-    let status: DayStatus = "rest"
-
-    if (dayType === "regular_holiday") {
-      if (present) {
-        agg.regularHolidayHours += workedHours
-        status = "present"
-      } else {
-        // Regular holidays are paid even when unworked.
-        agg.regularDaysWorked += 1
-        status = "holiday"
-      }
-    } else if (dayType === "special_holiday") {
-      if (present) {
-        agg.specialHolidayHours += workedHours
-        status = "present"
-      } else {
-        // "No work, no pay" for special non-working days.
-        status = "holiday"
-      }
-    } else if (dayType === "rest_day") {
-      if (present) {
-        agg.restDayHours += workedHours
-        status = "present"
-      } else if (settings.sundayHolidayPaid && cursor.getDay() === 0) {
-        // Optional: pay employees for unworked Sundays.
-        agg.regularDaysWorked += 1
-        status = "holiday"
-      } else {
-        status = "rest"
-      }
-    } else {
-      // Regular scheduled workday. A present day earns a full day's basic pay;
-      // lateness is captured solely by the late deduction (no double penalty).
-      if (present) {
-        agg.regularDaysWorked += 1
-        agg.lateMinutes += lateMinutes
-        status = "present"
-      } else if (scheduled && leaveByDate.has(key)) {
-        // Approved leave excuses the absence; paid leave also earns a day's pay.
-        if (leaveByDate.get(key)) agg.paidLeaveDays += 1
+    if (scheduled) {
+      agg.scheduledDays += 1
+      if (leaveByDate.has(key)) {
+        if (leaveByDate.get(key)) {
+          agg.paidLeaveDays += 1
+        } else {
+          agg.unpaidLeaveDays += 1
+        }
         status = "leave"
-      } else {
-        agg.daysAbsent += 1
+      } else if (absenceSet.has(key)) {
+        agg.unpaidAbsenceDays += 1
         status = "absent"
+      } else {
+        agg.daysPresent += 1
+        status = "present"
       }
     }
 
-    days.push({
-      date: key,
-      dayType,
-      scheduled,
-      amIn: fmtTime(log?.amIn ?? null),
-      amOut: fmtTime(log?.amOut ?? null),
-      pmIn: fmtTime(log?.pmIn ?? null),
-      pmOut: fmtTime(log?.pmOut ?? null),
-      workedHours: round2(workedHours),
-      lateMinutes: Math.round(lateMinutes),
-      status,
-    })
+    days.push({ date: key, scheduled, status })
   }
 
-  agg.regularDaysWorked = round2(agg.regularDaysWorked)
-  agg.restDayHours = round2(agg.restDayHours)
-  agg.regularHolidayHours = round2(agg.regularHolidayHours)
-  agg.specialHolidayHours = round2(agg.specialHolidayHours)
-  agg.lateMinutes = Math.round(agg.lateMinutes)
+  agg.daysPresent = round2(agg.daysPresent)
   agg.paidLeaveDays = round2(agg.paidLeaveDays)
 
   return { aggregate: agg, days }
 }
 
-export interface AttendancePayrollInput {
+export interface AbsencePayrollInput {
   basicSalary: number
   allowance?: number
   settings: PayrollSettingsInput
-  attendance: AttendanceAggregate
+  absence: AbsenceAggregate
   deductToggles?: {
     sss?: boolean
     philhealth?: boolean
     pagibig?: boolean
     tax?: boolean
   }
-  latePerMinuteOverride?: number | null
   loanDeduction?: number
 }
 
-export interface AttendancePayrollOutput {
+export interface AbsencePayrollOutput {
   basicPay: number
   allowances: number
-  restDayPay: number
-  holidayPay: number
   grossPay: number
-  lateDeduction: number
   sss: number
   philhealth: number
   pagibig: number
@@ -432,47 +282,28 @@ export interface AttendancePayrollOutput {
   thirteenthMonthPay: number
   netPay: number
   daysWorked: number
-  lateMinutes: number
 }
 
-export function calculatePayrollFromAttendance(
-  input: AttendancePayrollInput,
-): AttendancePayrollOutput {
+export function calculatePayrollFromAbsences(
+  input: AbsencePayrollInput,
+): AbsencePayrollOutput {
   const {
     basicSalary,
     allowance = 0,
     settings,
-    attendance: a,
+    absence: a,
     deductToggles = {},
-    latePerMinuteOverride = null,
     loanDeduction = 0,
   } = input
 
   const dailyRate = basicSalary / settings.workingDaysPerMonth
-  const hourlyRate = dailyRate / settings.workHoursPerDay
 
   // Paid leave is valued at the daily rate (actual) or a flat per-day amount.
   const leavePerDay = settings.leaveActualRate ? dailyRate : settings.leaveAmount
   const basicPay = round2(
-    dailyRate * a.regularDaysWorked + leavePerDay * a.paidLeaveDays,
+    dailyRate * a.daysPresent + leavePerDay * a.paidLeaveDays,
   )
-  const restDayPay = round2(a.restDayHours * hourlyRate * settings.restDayRate)
-  const holidayHours = a.regularHolidayHours + a.specialHolidayHours
-  const holidayPay = settings.holidayActualRate
-    ? round2(
-        a.regularHolidayHours * hourlyRate * settings.regularHolidayRate +
-          a.specialHolidayHours * hourlyRate * settings.specialHolidayRate,
-      )
-    : round2(holidayHours * settings.holidayAmount)
-
-  const perMinuteLate =
-    latePerMinuteOverride ??
-    (settings.lateAmountPerMinute > 0 ? settings.lateAmountPerMinute : hourlyRate / 60)
-  const lateDeduction = round2(a.lateMinutes * perMinuteLate)
-
-  const grossPay = round2(
-    basicPay + allowance + restDayPay + holidayPay - lateDeduction,
-  )
+  const grossPay = round2(basicPay + allowance)
 
   // Statutory contributions are based on monthly basic salary (PH practice),
   // gated by both the per-employee toggle and the system-wide setting.
@@ -505,10 +336,7 @@ export function calculatePayrollFromAttendance(
   return {
     basicPay,
     allowances: round2(allowance),
-    restDayPay,
-    holidayPay,
     grossPay,
-    lateDeduction,
     sss,
     philhealth,
     pagibig,
@@ -516,7 +344,6 @@ export function calculatePayrollFromAttendance(
     loanDeduction: round2(loanDeduction),
     thirteenthMonthPay,
     netPay,
-    daysWorked: round2(a.regularDaysWorked + a.paidLeaveDays),
-    lateMinutes: a.lateMinutes,
+    daysWorked: round2(a.daysPresent + a.paidLeaveDays),
   }
 }
