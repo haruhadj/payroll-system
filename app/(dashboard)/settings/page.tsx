@@ -303,27 +303,12 @@ function CompanyProfileCard() {
   )
 }
 
-const NUMERIC_FIELDS = [
-  "restDayRate",
-  "regularHolidayRate",
-  "specialHolidayRate",
-  "workHoursPerDay",
-  "philhealthRate",
-  "holidayAmount",
-  "leaveAmount",
-  "lateAmountPerMinute",
-] as const
+const NUMERIC_FIELDS = ["philhealthRate", "leaveAmount"] as const
 
-const INT_FIELDS = ["workingDaysPerMonth", "lateGracePeriodMinutes"] as const
-
-const FLAG_FIELDS = [
-  "sundayHolidayPaid",
-  "enableClockInOut",
-] as const
+const INT_FIELDS = ["workingDaysPerMonth"] as const
 
 // Flat amount + "actual rate" toggle pairs.
 const FLAT_RULES: { amount: string; flag: string; label: string }[] = [
-  { amount: "holidayAmount", flag: "holidayActualRate", label: "Holiday" },
   { amount: "leaveAmount", flag: "leaveActualRate", label: "Leave" },
 ]
 
@@ -334,10 +319,14 @@ const TAX_FREQUENCIES = [
   { value: "monthly", label: "Monthly" },
 ]
 
-const RATE_INPUTS: { key: string; label: string; hint: string }[] = [
-  { key: "restDayRate", label: "Rest day premium", hint: "1.30 = 130%" },
-  { key: "regularHolidayRate", label: "Regular holiday", hint: "2.00 = 200%" },
-  { key: "specialHolidayRate", label: "Special holiday", hint: "1.30 = 130%" },
+const WORK_DAYS: { key: string; label: string }[] = [
+  { key: "mon", label: "Mon" },
+  { key: "tue", label: "Tue" },
+  { key: "wed", label: "Wed" },
+  { key: "thu", label: "Thu" },
+  { key: "fri", label: "Fri" },
+  { key: "sat", label: "Sat" },
+  { key: "sun", label: "Sun" },
 ]
 
 const TOGGLES: { key: string; label: string }[] = [
@@ -358,17 +347,26 @@ function PayrollConfigCard() {
 
   const set = (k: string, v: any) => setForm((f) => ({ ...f, [k]: v }))
 
+  const toggleWorkDay = (day: string) =>
+    setForm((f) => {
+      const days: string[] = f.workDays ?? []
+      return {
+        ...f,
+        workDays: days.includes(day) ? days.filter((d) => d !== day) : [...days, day],
+      }
+    })
+
   const handleSave = () => {
     const payload: Record<string, any> = {}
     for (const k of NUMERIC_FIELDS) payload[k] = String(form[k] ?? "0")
     for (const k of INT_FIELDS) payload[k] = parseInt(form[k] ?? "0") || 0
     for (const t of TOGGLES) payload[t.key] = !!form[t.key]
-    for (const k of FLAG_FIELDS) payload[k] = !!form[k]
     for (const r of FLAT_RULES) payload[r.flag] = !!form[r.flag]
     payload.thirteenthMonthEveryCutoff = !!form.thirteenthMonthEveryCutoff
     payload.adminEmail = form.adminEmail || null
     payload.hrEmail = form.hrEmail || null
     payload.withholdingTaxFrequency = form.withholdingTaxFrequency ?? "semi_monthly"
+    payload.workDays = form.workDays?.length ? form.workDays : ["mon", "tue", "wed", "thu", "fri"]
     save(payload)
   }
 
@@ -395,21 +393,29 @@ function PayrollConfigCard() {
       </CardHeader>
       <CardContent className="space-y-6">
         <div>
-          <h3 className="text-sm font-semibold mb-3">Pay Multipliers</h3>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {RATE_INPUTS.map((r) => (
-              <div key={r.key} className="space-y-1">
-                <Label className="text-xs">{r.label}</Label>
-                <Input
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  value={form[r.key] ?? ""}
-                  onChange={(e) => set(r.key, e.target.value)}
-                />
-                <p className="text-[11px] text-muted-foreground">{r.hint}</p>
-              </div>
-            ))}
+          <h3 className="text-sm font-semibold mb-3">School Week</h3>
+          <p className="text-[11px] text-muted-foreground mb-3">
+            Days counted as scheduled working days. Staff are paid for every one of these
+            days unless an absence is logged or unpaid leave is approved.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {WORK_DAYS.map((d) => {
+              const active = (form.workDays ?? []).includes(d.key)
+              return (
+                <button
+                  key={d.key}
+                  type="button"
+                  onClick={() => toggleWorkDay(d.key)}
+                  className={`rounded-md border px-3 py-1.5 text-sm font-medium transition-colors ${
+                    active
+                      ? "bg-primary text-primary-foreground border-primary"
+                      : "text-muted-foreground hover:bg-muted"
+                  }`}
+                >
+                  {d.label}
+                </button>
+              )
+            })}
           </div>
         </div>
 
@@ -426,25 +432,7 @@ function PayrollConfigCard() {
                 value={form.workingDaysPerMonth ?? ""}
                 onChange={(e) => set("workingDaysPerMonth", e.target.value)}
               />
-            </div>
-            <div className="space-y-1">
-              <Label className="text-xs">Work hours / day</Label>
-              <Input
-                type="number"
-                step="0.5"
-                min="1"
-                value={form.workHoursPerDay ?? ""}
-                onChange={(e) => set("workHoursPerDay", e.target.value)}
-              />
-            </div>
-            <div className="space-y-1">
-              <Label className="text-xs">Late grace (mins)</Label>
-              <Input
-                type="number"
-                min="0"
-                value={form.lateGracePeriodMinutes ?? ""}
-                onChange={(e) => set("lateGracePeriodMinutes", e.target.value)}
-              />
+              <p className="text-[11px] text-muted-foreground">Used to derive the daily rate.</p>
             </div>
             <div className="space-y-1">
               <Label className="text-xs">PhilHealth rate</Label>
@@ -502,10 +490,10 @@ function PayrollConfigCard() {
         <Separator />
 
         <div>
-          <h3 className="text-sm font-semibold mb-3">Compensation Rules</h3>
+          <h3 className="text-sm font-semibold mb-3">Paid Leave Valuation</h3>
           <p className="text-[11px] text-muted-foreground mb-3">
-            Set a flat amount per hour/day, or tick “Actual Rate” to use the multiplier
-            (based on the employee’s own rate) instead.
+            Set a flat amount per day, or tick “Actual Rate” to pay approved leave at the
+            employee’s own daily rate instead.
           </p>
           <div className="grid sm:grid-cols-2 gap-4">
             {FLAT_RULES.map((r) => (
@@ -526,23 +514,10 @@ function PayrollConfigCard() {
                     checked={!!form[r.flag]}
                     onChange={(e) => set(r.flag, e.target.checked)}
                   />
-                  Actual Rate (use multiplier)
+                  Actual Rate (use daily rate)
                 </label>
               </div>
             ))}
-          </div>
-          <div className="grid sm:grid-cols-2 gap-4 mt-4">
-            <div className="space-y-1">
-              <Label className="text-xs">Late amount (per minute)</Label>
-              <Input
-                type="number"
-                step="0.0001"
-                min="0"
-                placeholder="0 = auto (hourly ÷ 60)"
-                value={form.lateAmountPerMinute ?? ""}
-                onChange={(e) => set("lateAmountPerMinute", e.target.value)}
-              />
-            </div>
           </div>
         </div>
 
@@ -571,24 +546,6 @@ function PayrollConfigCard() {
               onChange={(e) => set("thirteenthMonthEveryCutoff", e.target.checked)}
             />
             Accrue 13th-month pay every cut-off
-          </label>
-          <label className="flex items-center gap-2 text-sm mt-3">
-            <input
-              type="checkbox"
-              className="h-4 w-4"
-              checked={!!form.sundayHolidayPaid}
-              onChange={(e) => set("sundayHolidayPaid", e.target.checked)}
-            />
-            Enable Regular Holiday (Sunday) — no work with pay
-          </label>
-          <label className="flex items-center gap-2 text-sm mt-3">
-            <input
-              type="checkbox"
-              className="h-4 w-4"
-              checked={!!form.enableClockInOut}
-              onChange={(e) => set("enableClockInOut", e.target.checked)}
-            />
-            Enable Clock In/Out for employees
           </label>
         </div>
 

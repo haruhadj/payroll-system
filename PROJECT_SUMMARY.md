@@ -15,40 +15,32 @@
 ### Employee Management
 - Create, read, update, delete employees
 - Fields: employee no, department, position, employment type (full-time / part-time /
-  contractual), **basic salary, per-employee allowance**, hire date, assigned schedule,
-  per-employee deduction toggles (SSS/PhilHealth/Pag-IBIG/tax), late-per-minute override
+  contractual), **basic salary, per-employee allowance**, hire date, per-employee
+  deduction toggles (SSS/PhilHealth/Pag-IBIG/tax)
 - Employees linked 1:1 to a user account
 - Filter by department / position with pagination
 - CSV **export** and **import** of employees (`server/routes/tools.ts`, Tools page)
 
-### Attendance (Time Logs)
-- Six-punch daily time logs: AM in/out, PM in/out, OT in/out (`timeLogs` table)
-- Time-card view per employee per period
+### Absences (exception-based attendance)
+- Staff are monthly-paid, so every scheduled school day (company-wide `workDays` setting)
+  is assumed worked; HR only logs the exceptions (`absences` table: employee, date, reason)
+- No punch clock, no per-employee schedule — matches how school payroll actually runs
 - Feeds directly into payroll (see engine below)
-
-### Schedules & Holidays
-- Work schedules: time in/out, break minutes, work days, night-shift flag
-- Holiday calendar with two types: `regular` and `special_non_working`
 
 ### Leaves & Loans
 - Leave credits per type (vacation / sick / emergency) with balance tracking
 - Leave requests with approval workflow; approved paid leave earns a day's pay in payroll
 - Loans with per-cutoff amortization, balance tracking, and auto-`paid` when cleared
 
-### Overtime
-- Overtime requests with an approval workflow (`overtimeRequests` table)
-
-### Payroll Processing — attendance-driven engine
+### Payroll Processing — absence-driven engine
 - Create payroll periods (label, date range); lifecycle: `draft → processed → released`
 - Bulk auto-generate payslips on "process" for every **active** employee
-- Computation engine (`lib/payroll-calc.ts`) turns time logs + schedule + holidays +
-  approved leaves into hour buckets, then into pesos:
-  - Basic pay from **actual regular days worked** (not a fixed 22)
-  - Overtime pay (explicit OT punches × hourly × OT rate)
-  - Night-differential pay (hours in the 22:00–06:00 window)
-  - Holiday pay (regular 2×, special 1.3×; unworked regular holiday still paid)
-  - Late deduction (per-minute)
-  - Paid-leave days valued at the daily rate
+- Computation engine (`lib/payroll-calc.ts`) turns the school-week calendar + logged
+  absences + approved leaves into day buckets, then into pesos:
+  - Basic pay = daily rate × days present + paid-leave days at the daily rate (or a flat
+    amount)
+  - No late/rest-day/holiday premium math — monthly-paid employees already have those
+    folded into their basic salary under PH labor practice
 - PH statutory deductions on monthly basic salary: SSS (bracketed), PhilHealth (2.75%),
   Pag-IBIG, BIR TRAIN-law withholding tax — each toggleable system-wide and per employee
 - Loan amortization deducted per cutoff; balances decrement only when a fresh payslip is
@@ -58,16 +50,15 @@
   against seeded data for manual correctness checking
 
 ### Payslips
-- Per-employee per-period payslip with full breakdown: basic, allowances, OT, night diff,
-  rest-day, holiday, gross, late deduction, SSS/PhilHealth/Pag-IBIG/tax, loan, 13th-month,
-  days worked, late minutes, OT hours, net pay
+- Per-employee per-period payslip with full breakdown: basic, allowances, gross,
+  SSS/PhilHealth/Pag-IBIG/tax, loan, 13th-month, days worked, net pay
 - Status lifecycle: `pending → approved → paid`, with an approve/mark-paid route
   (`PATCH /api/payslips/:id`, admin/HR only)
 - Employees can view **their own** payslips only (enforced server-side)
 
 ### Configurable Payroll Settings
-- Singleton `payrollSettings`: all multipliers, thresholds, night-diff window, grace
-  period, statutory on/off switches, tax frequency, flat-amount vs. actual-rate toggles
+- Singleton `payrollSettings`: working days/month, school `workDays`, statutory on/off
+  switches, tax frequency, paid-leave flat-amount vs. actual-rate toggle
 - Company profile (name, address, contact) — `companyProfile`
 - Manage Options: designations, groups, teams
 
@@ -119,13 +110,12 @@
 
 ## Resolved (previously flagged as bugs)
 - **`daysWorked` hardcoded to 22** — resolved. Pay is now driven by actual attendance via
-  `aggregateAttendance` → `regularDaysWorked`.
+  `aggregateAbsences` → `daysPresent`.
 - **No per-employee allowance** — resolved. `allowance` is a per-employee field applied
   during processing.
 - **No approve/reject for payslips** — resolved. `PATCH /api/payslips/:id` moves a payslip
   to `approved`/`paid` (admin/HR).
-- **No attendance / leave** — resolved. Time logs, schedules, holidays, leaves, and loans
-  all feed the engine.
+- **No attendance / leave** — resolved. Absences, leaves, and loans all feed the engine.
 
 ---
 
@@ -135,10 +125,10 @@
 |---|---|
 | Auth & RBAC | Complete |
 | Employee CRUD + CSV import/export | Complete |
-| Attendance / Schedules / Holidays | Complete |
+| Absences (exception-based attendance) | Complete |
 | Leaves & Loans | Complete |
 | PH Deduction Engine | Complete |
-| Attendance-driven Payroll Engine | Complete |
+| Absence-driven Payroll Engine | Complete |
 | Payroll Period Lifecycle | Complete (draft → processed → released) |
 | Payslips (breakdown + approve/paid) | Complete; delivery (PDF/email) pending |
 | Reporting | Basic (period summary) |

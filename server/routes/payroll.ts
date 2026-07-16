@@ -5,9 +5,7 @@ import {
   employees,
   payrollPeriods,
   payslips,
-  timeLogs,
-  holidays,
-  schedules,
+  absences,
   leaveRequests,
   loans,
 } from "@/lib/db/schema"
@@ -16,11 +14,10 @@ import { authMiddleware } from "@/server/middleware/auth"
 import { requireRole } from "@/server/middleware/rbac"
 import { getPayrollSettings } from "@/server/routes/settings"
 import {
-  aggregateAttendance,
-  calculatePayrollFromAttendance,
+  aggregateAbsences,
+  calculatePayrollFromAbsences,
   isLeavePaid,
   type PayrollSettingsInput,
-  type ScheduleInput,
 } from "@/lib/payroll-calc"
 import type { HonoVariables } from "@/server/types"
 import { eq, and, gte, lte } from "drizzle-orm"
@@ -44,56 +41,20 @@ function eachDate(from: string, to: string): string[] {
 }
 
 type SettingsRow = Awaited<ReturnType<typeof getPayrollSettings>>
-type ScheduleRow = typeof schedules.$inferSelect
 
 // Maps the DB settings row (numeric columns are strings) to engine input.
 function toSettingsInput(s: SettingsRow): PayrollSettingsInput {
   return {
-    restDayRate: parseFloat(s.restDayRate),
-    regularHolidayRate: parseFloat(s.regularHolidayRate),
-    specialHolidayRate: parseFloat(s.specialHolidayRate),
     workingDaysPerMonth: s.workingDaysPerMonth,
-    workHoursPerDay: parseFloat(s.workHoursPerDay),
-    lateGracePeriodMinutes: s.lateGracePeriodMinutes,
+    workDays: s.workDays,
     thirteenthMonthEveryCutoff: s.thirteenthMonthEveryCutoff,
     sssEnabled: s.sssEnabled,
     philhealthEnabled: s.philhealthEnabled,
     pagibigEnabled: s.pagibigEnabled,
     taxEnabled: s.taxEnabled,
     philhealthRate: parseFloat(s.philhealthRate),
-    holidayAmount: parseFloat(s.holidayAmount),
-    holidayActualRate: s.holidayActualRate,
     leaveAmount: parseFloat(s.leaveAmount),
     leaveActualRate: s.leaveActualRate,
-    lateAmountPerMinute: parseFloat(s.lateAmountPerMinute),
-    sundayHolidayPaid: s.sundayHolidayPaid,
-  }
-}
-
-function toScheduleInput(s: ScheduleRow | null | undefined): ScheduleInput | null {
-  if (!s) return null
-  return {
-    timeIn: s.timeIn,
-    timeOut: s.timeOut,
-    breakMinutes: s.breakMinutes,
-    workDays: s.workDays,
-  }
-}
-
-// Map a raw time-log row to the six-punch shape the attendance engine expects.
-function toLogInput(l: {
-  logDate: string
-  amIn: Date | null
-  amOut: Date | null
-  pmIn: Date | null
-  pmOut: Date | null
-}) {
-  return {
-    logDate: l.logDate,
-    amIn: l.amIn,
-    amOut: l.amOut,
-    pmIn: l.pmIn,
-    pmOut: l.pmOut,
   }
 }
 
@@ -168,8 +129,9 @@ const router = new Hono<{ Variables: HonoVariables }>()
     return c.json(period)
   })
 
-  // Aggregated daily attendance for one employee in a period (time card view).
-  .get("/:id/timecard/:employeeId", async (c) => {
+  // Attendance summary for one employee in a period: which scheduled days
+  // were present, absent, or covered by leave.
+  .get("/:id/attendance/:employeeId", async (c) => {
     const user = c.get("user")
     const periodId = c.req.param("id")!
     const employeeId = c.req.param("employeeId")!
@@ -189,21 +151,14 @@ const router = new Hono<{ Variables: HonoVariables }>()
     }
 
     const settings = toSettingsInput(await getPayrollSettings())
-    const sched = emp.scheduleId
-      ? await db.query.schedules.findFirst({ where: eq(schedules.id, emp.scheduleId) })
-      : null
-    const periodHolidays = await db
+    const empAbsences = await db
       .select()
-      .from(holidays)
-      .where(and(gte(holidays.date, period.dateFrom), lte(holidays.date, period.dateTo)))
-    const logs = await db
-      .select()
-      .from(timeLogs)
+      .from(absences)
       .where(
         and(
-          eq(timeLogs.employeeId, employeeId),
-          gte(timeLogs.logDate, period.dateFrom),
-          lte(timeLogs.logDate, period.dateTo),
+          eq(absences.employeeId, employeeId),
+          gte(absences.date, period.dateFrom),
+          lte(absences.date, period.dateTo),
         ),
       )
     const empLeaves = await db
@@ -218,18 +173,16 @@ const router = new Hono<{ Variables: HonoVariables }>()
         ),
       )
 
-    const { aggregate, days } = aggregateAttendance({
+    const { aggregate, days } = aggregateAbsences({
       dateFrom: period.dateFrom,
       dateTo: period.dateTo,
-      schedule: toScheduleInput(sched),
-      holidays: periodHolidays.map((h) => ({ date: h.date, type: h.type })),
-      logs: logs.map(toLogInput),
+      workDays: settings.workDays,
+      absenceDates: empAbsences.map((a) => a.date),
       leaves: empLeaves.flatMap((lr) =>
         eachDate(lr.dateFrom, lr.dateTo)
           .filter((d) => d >= period.dateFrom && d <= period.dateTo)
           .map((d) => ({ date: d, paid: isLeavePaid(lr.type) })),
       ),
-      settings,
     })
 
     return c.json({
@@ -271,31 +224,22 @@ const router = new Hono<{ Variables: HonoVariables }>()
       if (status === "processed" && period.status === "draft") {
         const settings = toSettingsInput(await getPayrollSettings())
         const allEmployees = await db.query.employees.findMany()
-        const allSchedules = await db.select().from(schedules)
-        const scheduleMap = new Map(allSchedules.map((s) => [s.id, s]))
 
-        const periodHolidays = await db
+        // Absences logged within the period, grouped by employee.
+        const periodAbsences = await db
           .select()
-          .from(holidays)
-          .where(
-            and(gte(holidays.date, period.dateFrom), lte(holidays.date, period.dateTo)),
-          )
-        const holidayInput = periodHolidays.map((h) => ({ date: h.date, type: h.type }))
-
-        const periodLogs = await db
-          .select()
-          .from(timeLogs)
+          .from(absences)
           .where(
             and(
-              gte(timeLogs.logDate, period.dateFrom),
-              lte(timeLogs.logDate, period.dateTo),
+              gte(absences.date, period.dateFrom),
+              lte(absences.date, period.dateTo),
             ),
           )
-        const logsByEmp = new Map<string, typeof periodLogs>()
-        for (const l of periodLogs) {
-          const arr = logsByEmp.get(l.employeeId) ?? []
-          arr.push(l)
-          logsByEmp.set(l.employeeId, arr)
+        const absencesByEmp = new Map<string, string[]>()
+        for (const a of periodAbsences) {
+          const arr = absencesByEmp.get(a.employeeId) ?? []
+          arr.push(a.date)
+          absencesByEmp.set(a.employeeId, arr)
         }
 
         // Approved leaves overlapping the period, expanded to dated entries.
@@ -334,17 +278,12 @@ const router = new Hono<{ Variables: HonoVariables }>()
         for (const emp of allEmployees) {
           if (!emp.isActive) continue // inactive employees are excluded from payroll
 
-          const sched = emp.scheduleId ? scheduleMap.get(emp.scheduleId) : null
-          const empLogs = (logsByEmp.get(emp.id) ?? []).map(toLogInput)
-
-          const { aggregate } = aggregateAttendance({
+          const { aggregate } = aggregateAbsences({
             dateFrom: period.dateFrom,
             dateTo: period.dateTo,
-            schedule: toScheduleInput(sched),
-            holidays: holidayInput,
-            logs: empLogs,
+            workDays: settings.workDays,
+            absenceDates: absencesByEmp.get(emp.id) ?? [],
             leaves: leavesByEmp.get(emp.id) ?? [],
-            settings,
           })
 
           // Sum amortization across the employee's active loans, each capped at
@@ -364,20 +303,17 @@ const router = new Hono<{ Variables: HonoVariables }>()
             })
           }
 
-          const calc = calculatePayrollFromAttendance({
+          const calc = calculatePayrollFromAbsences({
             basicSalary: parseFloat(emp.basicSalary as string),
             allowance: parseFloat((emp.allowance as string) ?? "0"),
             settings,
-            attendance: aggregate,
+            absence: aggregate,
             deductToggles: {
               sss: emp.deductSss,
               philhealth: emp.deductPhilhealth,
               pagibig: emp.deductPagibig,
               tax: emp.deductTax,
             },
-            latePerMinuteOverride: emp.latePerMinuteOverride
-              ? parseFloat(emp.latePerMinuteOverride as string)
-              : null,
             loanDeduction: totalLoanDeduction,
           })
 
@@ -388,10 +324,7 @@ const router = new Hono<{ Variables: HonoVariables }>()
               periodId: id,
               basicPay: String(calc.basicPay),
               allowances: String(calc.allowances),
-              restDayPay: String(calc.restDayPay),
-              holidayPay: String(calc.holidayPay),
               grossPay: String(calc.grossPay),
-              lateDeduction: String(calc.lateDeduction),
               sss: String(calc.sss),
               philhealth: String(calc.philhealth),
               pagibig: String(calc.pagibig),
@@ -399,7 +332,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
               loanDeduction: String(calc.loanDeduction),
               thirteenthMonthPay: String(calc.thirteenthMonthPay),
               daysWorked: String(calc.daysWorked),
-              lateMinutes: calc.lateMinutes,
               netPay: String(calc.netPay),
               status: "pending",
             })

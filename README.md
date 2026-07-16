@@ -1,10 +1,12 @@
 # Payroll System
 
-A web-based payroll management system for a Philippine company. It records employee
-attendance, automatically computes each employee's pay per cutoff period — including
-overtime, night differential, holiday pay, and late deductions — then applies the
-mandatory government contributions (SSS, PhilHealth, Pag-IBIG) and BIR withholding tax to
-produce a payslip. Access is role-based for Admin, HR, and Employee.
+A web-based payroll management system for a Philippine school's staff (teachers,
+faculty, and administrative employees). Staff are monthly-paid, so every scheduled
+school day is assumed worked unless HR logs an absence or an approved leave request
+covers it; the system computes each employee's pay per cutoff period from that
+exception-based attendance log, then applies the mandatory government contributions
+(SSS, PhilHealth, Pag-IBIG) and BIR withholding tax to produce a payslip. Access is
+role-based for Admin, HR, and Employee.
 
 > **New here?** Read [`docs/plain-english-guide.md`](docs/plain-english-guide.md) for a
 > jargon-free overview, or [`docs/index.md`](docs/index.md) for the full documentation.
@@ -16,16 +18,14 @@ VitePress; auto-deploys from `docs/` on every push to `main`).
 
 - **Authentication & roles** — email/password login with three roles (`admin`, `hr`,
   `employee`); access is enforced on every request.
-- **Employee management** — records, per-employee salary/allowance, schedule assignment,
-  and CSV import/export.
-- **Attendance** — six-punch daily time logs (AM/PM/OT) and a per-employee time card.
-- **Schedules & holidays** — work schedules (incl. night shift) and a holiday calendar
-  (regular / special non-working).
+- **Employee management** — records, per-employee salary/allowance, and CSV
+  import/export.
+- **Absences** — exception-based absence log; every scheduled school day is paid unless
+  an absence is logged for that employee/date.
 - **Leaves & loans** — leave credits and approval workflow; loans with per-cutoff
   amortization and balance tracking.
-- **Overtime** — overtime requests with approval.
 - **Payroll processing** — period lifecycle (`draft → processed → released`) with an
-  attendance-driven computation engine that bulk-generates payslips.
+  absence-driven computation engine that bulk-generates payslips.
 - **Payslips** — full earnings/deductions breakdown with an `approve → paid` workflow;
   employees view only their own.
 - **Dashboard & reports** — key metrics and a per-period payroll summary.

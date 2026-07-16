@@ -4,7 +4,7 @@ import { use, useState } from "react"
 import Link from "next/link"
 import { usePayrollPeriod } from "@/lib/hooks/usePayroll"
 import { usePayslips, usePayslipSummary, useUpdatePayslipStatus } from "@/lib/hooks/usePayslips"
-import { useTimeCard } from "@/lib/hooks/useTimeLogs"
+import { useAttendanceSummary } from "@/lib/hooks/useAbsences"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -25,7 +25,7 @@ import {
   DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { ArrowLeft, CalendarClock } from "lucide-react"
+import { ArrowLeft, CalendarCheck2 } from "lucide-react"
 import { formatCurrency } from "@/lib/utils"
 
 const slipStatusVariant: Record<string, "secondary" | "default" | "outline"> = {
@@ -125,7 +125,7 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
                     </TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2">
-                        <TimeCardDialog periodId={id} payslip={s} />
+                        <AttendanceDialog periodId={id} payslip={s} />
                         {s.status === "pending" && (
                           <Button
                             size="sm"
@@ -157,31 +157,23 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
   )
 }
 
-const dayTypeLabel: Record<string, string> = {
-  regular: "Regular",
-  rest_day: "Rest Day",
-  regular_holiday: "Reg. Holiday",
-  special_holiday: "Spec. Holiday",
-}
-
 const dayStatusVariant: Record<string, "default" | "secondary" | "outline"> = {
   present: "default",
   absent: "secondary",
-  rest: "outline",
-  holiday: "secondary",
   leave: "outline",
+  off: "outline",
 }
 
-function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any }) {
+function AttendanceDialog({ periodId, payslip }: { periodId: string; payslip: any }) {
   const [open, setOpen] = useState(false)
-  const { data, isLoading } = useTimeCard(open ? periodId : "", open ? payslip.employeeId : null)
+  const { data, isLoading } = useAttendanceSummary(
+    open ? periodId : "",
+    open ? payslip.employeeId : null,
+  )
 
   const breakdown = [
     { label: "Basic Pay", value: payslip.basicPay },
     { label: "Allowances", value: payslip.allowances },
-    { label: "Rest Day", value: payslip.restDayPay },
-    { label: "Holiday Pay", value: payslip.holidayPay },
-    { label: "Late Deduction", value: payslip.lateDeduction, negative: true },
   ]
   const deductions = [
     { label: "SSS", value: payslip.sss },
@@ -195,14 +187,14 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
       <DialogTrigger
         render={
           <Button size="sm" variant="ghost">
-            <CalendarClock className="h-4 w-4 sm:mr-2" />
-            <span className="hidden sm:inline">Time Card</span>
+            <CalendarCheck2 className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">Attendance</span>
           </Button>
         }
       />
       <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] max-h-[85vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{payslip.employee?.user?.name ?? "Employee"} — Time Card</DialogTitle>
+          <DialogTitle>{payslip.employee?.user?.name ?? "Employee"} — Attendance</DialogTitle>
           <DialogDescription>{payslip.employee?.employeeNo}</DialogDescription>
         </DialogHeader>
 
@@ -210,10 +202,6 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
           <div className="rounded-md border px-3 py-2">
             <p className="text-muted-foreground text-xs">Days Worked</p>
             <p className="font-semibold">{payslip.daysWorked}</p>
-          </div>
-          <div className="rounded-md border px-3 py-2">
-            <p className="text-muted-foreground text-xs">Late (mins)</p>
-            <p className="font-semibold">{payslip.lateMinutes}</p>
           </div>
         </div>
 
@@ -224,7 +212,6 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
               <div key={b.label} className="flex justify-between text-sm">
                 <span className="text-muted-foreground">{b.label}</span>
                 <span className="font-mono">
-                  {b.negative ? "-" : ""}
                   {formatCurrency(parseFloat(b.value ?? "0"))}
                 </span>
               </div>
@@ -256,11 +243,7 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
               <TableHeader>
                 <TableRow>
                   <TableHead>Date</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>In</TableHead>
-                  <TableHead>Out</TableHead>
-                  <TableHead className="text-right">Hours</TableHead>
-                  <TableHead className="text-right">Late</TableHead>
+                  <TableHead>Scheduled</TableHead>
                   <TableHead>Status</TableHead>
                 </TableRow>
               </TableHeader>
@@ -268,7 +251,7 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
                 {isLoading ? (
                   Array.from({ length: 4 }).map((_, i) => (
                     <TableRow key={i}>
-                      {Array.from({ length: 7 }).map((_, j) => (
+                      {Array.from({ length: 3 }).map((_, j) => (
                         <TableCell key={j}>
                           <Skeleton className="h-4 w-full" />
                         </TableCell>
@@ -279,13 +262,9 @@ function TimeCardDialog({ periodId, payslip }: { periodId: string; payslip: any 
                   data?.days?.map((d: any) => (
                     <TableRow key={d.date}>
                       <TableCell className="font-mono text-xs">{d.date}</TableCell>
-                      <TableCell className="text-xs">{dayTypeLabel[d.dayType]}</TableCell>
-                      <TableCell className="font-mono text-xs">{d.amIn ?? d.pmIn ?? "—"}</TableCell>
-                      <TableCell className="font-mono text-xs">{d.pmOut ?? d.amOut ?? "—"}</TableCell>
-                      <TableCell className="text-right font-mono text-xs">{d.workedHours}</TableCell>
-                      <TableCell className="text-right font-mono text-xs">{d.lateMinutes}</TableCell>
+                      <TableCell className="text-xs">{d.scheduled ? "Yes" : "—"}</TableCell>
                       <TableCell>
-                        <Badge variant={dayStatusVariant[d.status]} className="text-[10px]">
+                        <Badge variant={dayStatusVariant[d.status]} className="text-[10px] capitalize">
                           {d.status}
                         </Badge>
                       </TableCell>

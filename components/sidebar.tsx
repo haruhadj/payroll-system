@@ -15,9 +15,7 @@ import {
   Settings,
   LogOut,
   Building2,
-  CalendarClock,
-  Fingerprint,
-  CalendarDays,
+  UserX,
   CalendarOff,
   HandCoins,
   UserCircle,
@@ -55,16 +53,7 @@ const STAFF: Role[] = ["admin", "hr"]
 const navItems: NavEntry[] = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, roles: ALL },
   { href: "/profile", label: "My Profile", icon: UserCircle, roles: ALL },
-  {
-    label: "Attendance",
-    icon: Fingerprint,
-    roles: ALL,
-    children: [
-      { href: "/attendance", label: "All Logs", roles: STAFF },
-      { href: "/attendance/timecard", label: "Time Card", roles: STAFF },
-    ],
-  },
-  { href: "/schedules", label: "Schedules", icon: CalendarClock, roles: STAFF },
+  { href: "/absences", label: "Absences", icon: UserX, roles: STAFF },
   {
     label: "Payroll",
     icon: CalendarRange,
@@ -74,15 +63,7 @@ const navItems: NavEntry[] = [
       { href: "/payroll/thirteenth-month", label: "13th Month", roles: STAFF },
     ],
   },
-  {
-    label: "Vacation",
-    icon: CalendarOff,
-    roles: ALL,
-    children: [
-      { href: "/leaves", label: "Leaves", roles: ALL },
-      { href: "/holidays", label: "Holiday Calendar", roles: STAFF },
-    ],
-  },
+  { href: "/leaves", label: "Leaves", icon: CalendarOff, roles: ALL },
   { href: "/loans", label: "Loans", icon: HandCoins, roles: ALL },
   { href: "/employees", label: "Employees", icon: Users, roles: STAFF },
   { href: "/tools", label: "Tools", icon: Wrench, roles: STAFF },

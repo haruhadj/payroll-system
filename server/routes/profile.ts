@@ -34,7 +34,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
 
     const employee = await db.query.employees.findFirst({
       where: eq(employees.userId, sessionUser.id),
-      with: { schedule: true },
     })
 
     const profile = await db.query.userProfiles.findFirst({

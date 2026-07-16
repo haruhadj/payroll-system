@@ -11,7 +11,6 @@ import {
   type ProfileInput,
   type DocumentInput,
 } from "@/lib/hooks/useProfile"
-import { useTimeLogs } from "@/lib/hooks/useTimeLogs"
 import { useLeaveCredits, useLeaveRequests } from "@/lib/hooks/useLeaves"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -46,27 +45,8 @@ import {
 } from "@/components/ui/dialog"
 import { Plus, Trash2, ExternalLink } from "lucide-react"
 
-const TABS = ["About", "DTR", "Leaves", "Login Info", "Files"] as const
+const TABS = ["About", "Leaves", "Login Info", "Files"] as const
 type Tab = (typeof TABS)[number]
-
-function fmtTime(iso: string | null) {
-  if (!iso) return "—"
-  return new Date(iso).toLocaleTimeString("en-PH", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  })
-}
-
-function monthRange() {
-  const d = new Date()
-  const pad = (n: number) => String(n).padStart(2, "0")
-  const last = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate()
-  return {
-    from: `${d.getFullYear()}-${pad(d.getMonth() + 1)}-01`,
-    to: `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(last)}`,
-  }
-}
 
 export default function ProfilePage() {
   const [tab, setTab] = useState<Tab>("About")
@@ -77,7 +57,7 @@ export default function ProfilePage() {
       <div>
         <h1 className="text-2xl font-bold">My Profile</h1>
         <p className="text-muted-foreground">
-          Your personal details, attendance, and documents.
+          Your personal details, leaves, and documents.
         </p>
       </div>
 
@@ -103,7 +83,6 @@ export default function ProfilePage() {
       ) : (
         <>
           {tab === "About" && <AboutTab data={data} />}
-          {tab === "DTR" && <DtrTab scheduleName={data?.employee?.schedule?.name ?? "Open Schedule"} />}
           {tab === "Leaves" && <LeavesTab />}
           {tab === "Login Info" && <LoginInfoTab username={data?.profile?.username} />}
           {tab === "Files" && <FilesTab documents={data?.documents ?? []} />}
@@ -121,7 +100,6 @@ const ABOUT_FIELDS: { key: keyof ProfileInput; label: string }[] = [
   { key: "username", label: "Username" },
   { key: "contactNo1", label: "Contact number 1" },
   { key: "contactNo2", label: "Contact number 2" },
-  { key: "biometricId", label: "Biometric ID" },
   { key: "address", label: "Address" },
 ]
 
@@ -230,83 +208,6 @@ function Meta({ label, value }: { label: string; value?: string | null }) {
       <span className="text-muted-foreground">{label}</span>
       <span className="font-medium text-right capitalize">{value ?? "—"}</span>
     </div>
-  )
-}
-
-// ---------------------------------------------------------------------------
-// DTR (Daily Time Record)
-// ---------------------------------------------------------------------------
-
-function DtrTab({ scheduleName }: { scheduleName: string }) {
-  const init = monthRange()
-  const [from, setFrom] = useState(init.from)
-  const [to, setTo] = useState(init.to)
-  const { data: logs, isLoading } = useTimeLogs({ from, to })
-
-  return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Daily Time Record</CardTitle>
-        <CardDescription>Your attendance punches for the selected range.</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex flex-wrap gap-3">
-          <div className="space-y-1">
-            <Label className="text-xs">From</Label>
-            <Input type="date" value={from} onChange={(e) => setFrom(e.target.value)} />
-          </div>
-          <div className="space-y-1">
-            <Label className="text-xs">To</Label>
-            <Input type="date" value={to} onChange={(e) => setTo(e.target.value)} />
-          </div>
-        </div>
-
-        <div className="rounded-md border overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Date</TableHead>
-                <TableHead>Schedule</TableHead>
-                <TableHead className="text-center">AM In</TableHead>
-                <TableHead className="text-center">AM Out</TableHead>
-                <TableHead className="text-center">PM In</TableHead>
-                <TableHead className="text-center">PM Out</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {isLoading ? (
-                Array.from({ length: 4 }).map((_, i) => (
-                  <TableRow key={i}>
-                    {Array.from({ length: 6 }).map((_, j) => (
-                      <TableCell key={j}>
-                        <Skeleton className="h-5 w-full" />
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              ) : logs?.length ? (
-                logs.map((l: any) => (
-                  <TableRow key={l.id}>
-                    <TableCell className="font-mono text-sm">{l.logDate}</TableCell>
-                    <TableCell className="text-sm text-muted-foreground">{scheduleName}</TableCell>
-                    <TableCell className="font-mono text-sm text-center">{fmtTime(l.amIn)}</TableCell>
-                    <TableCell className="font-mono text-sm text-center">{fmtTime(l.amOut)}</TableCell>
-                    <TableCell className="font-mono text-sm text-center">{fmtTime(l.pmIn)}</TableCell>
-                    <TableCell className="font-mono text-sm text-center">{fmtTime(l.pmOut)}</TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
-                    No time records for this range.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-      </CardContent>
-    </Card>
   )
 }
 

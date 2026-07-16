@@ -42,10 +42,6 @@ const EMPLOYEE_TEMPLATE =
   "name,email,password,employeeNo,department,position,group,employmentType,basicSalary,allowance,hiredAt\n" +
   "Juan Cruz,juan@company.com,Passw0rd!,EMP-100,Accounting,Rider,Regular,full_time,18000,1000,2026-01-15"
 
-const TIMELOG_TEMPLATE =
-  "employeeNo,date,amIn,amOut,pmIn,pmOut\n" +
-  "EMP-001,2026-06-16,08:00,12:00,13:00,17:00,18:00,20:00"
-
 export default function ToolsPage() {
   return (
     <div className="space-y-6">
@@ -75,15 +71,6 @@ export default function ToolsPage() {
         templateName="employees-template.csv"
         endpoint="/api/tools/import/employees"
         resultKey="created"
-      />
-
-      <ImportCard
-        title="Import Time Records"
-        description="Upserts six-punch time logs, matched by employee number + date."
-        template={TIMELOG_TEMPLATE}
-        templateName="timerecords-template.csv"
-        endpoint="/api/tools/import/timelogs"
-        resultKey="imported"
       />
     </div>
   )

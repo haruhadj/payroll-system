@@ -4,13 +4,11 @@ import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
 import { useSession } from "@/lib/auth/client"
 import { usePayslips } from "@/lib/hooks/usePayslips"
-import { useTimeLogs } from "@/lib/hooks/useTimeLogs"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { formatCurrency, cn } from "@/lib/utils"
-import { TimeCard } from "@/components/time-card"
 import { MonthlyLeavesCard } from "@/components/monthly-leaves-card"
 import { Users, FileText, Star, CalendarRange, MessageSquare } from "lucide-react"
 
@@ -85,16 +83,6 @@ function AdminDashboard() {
           tone="emerald"
         />
       </div>
-
-      {/* Daily time card */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Time Card</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <TimeCard />
-        </CardContent>
-      </Card>
 
       {/* Monthly leaves */}
       <MonthlyLeavesCard />
@@ -224,8 +212,6 @@ function EmployeeDashboard() {
         </CardContent>
       </Card>
 
-      {/* Today's attendance + leave */}
-      <EmployeeTodayCard />
       <MonthlyLeavesCard />
 
       <div className="flex gap-3">
@@ -243,66 +229,6 @@ function EmployeeDashboard() {
         </Link>
       </div>
     </div>
-  )
-}
-
-function todayStr() {
-  const d = new Date()
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(
-    d.getDate(),
-  ).padStart(2, "0")}`
-}
-
-function punchTime(iso: string | null) {
-  if (!iso) return "—"
-  return new Date(iso).toLocaleTimeString("en-PH", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  })
-}
-
-function EmployeeTodayCard() {
-  const today = todayStr()
-  const { data: logs, isLoading } = useTimeLogs({ from: today, to: today })
-  const log = logs?.[0]
-
-  const seg = (a: string | null, b: string | null) =>
-    a && b ? Math.max(0, (new Date(b).getTime() - new Date(a).getTime()) / 3_600_000) : 0
-  const workHours = log ? seg(log.amIn, log.amOut) + seg(log.pmIn, log.pmOut) : 0
-
-  const cells: { label: string; value: string }[] = [
-    { label: "Log In (AM)", value: punchTime(log?.amIn ?? null) },
-    { label: "Log Out (AM)", value: punchTime(log?.amOut ?? null) },
-    { label: "Log In (PM)", value: punchTime(log?.pmIn ?? null) },
-    { label: "Log Out (PM)", value: punchTime(log?.pmOut ?? null) },
-  ]
-
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between gap-3">
-        <CardTitle className="text-base">My Time Card — {today}</CardTitle>
-        {!isLoading && (
-          <span className="text-sm text-muted-foreground">
-            Work hours: <span className="font-mono font-medium">{workHours.toFixed(2)}</span>
-          </span>
-        )}
-      </CardHeader>
-      <CardContent>
-        {isLoading ? (
-          <Skeleton className="h-16 w-full" />
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {cells.map((c) => (
-              <div key={c.label} className="rounded-md border p-2 text-center">
-                <p className="text-[11px] text-muted-foreground">{c.label}</p>
-                <p className="font-mono text-sm">{c.value}</p>
-              </div>
-            ))}
-          </div>
-        )}
-      </CardContent>
-    </Card>
   )
 }
 

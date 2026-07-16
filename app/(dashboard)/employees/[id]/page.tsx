@@ -3,7 +3,6 @@
 import { useState, useEffect, use } from "react"
 import { useRouter } from "next/navigation"
 import { useEmployee, useUpdateEmployee } from "@/lib/hooks/useEmployees"
-import { useSchedules } from "@/lib/hooks/useSchedules"
 import { useOptions } from "@/lib/hooks/useOptions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -32,7 +31,6 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
   const router = useRouter()
   const { data: emp, isLoading } = useEmployee(id)
   const { mutate: update, isPending } = useUpdateEmployee(id)
-  const { data: schedules } = useSchedules()
   const { data: options } = useOptions()
 
   const [form, setForm] = useState({
@@ -43,13 +41,11 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
     basicSalary: "",
     allowance: "",
     hiredAt: "",
-    scheduleId: "none",
     isActive: true,
     deductSss: true,
     deductPhilhealth: true,
     deductPagibig: true,
     deductTax: true,
-    latePerMinuteOverride: "",
   })
 
   useEffect(() => {
@@ -62,13 +58,11 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
         basicSalary: emp.basicSalary,
         allowance: emp.allowance ?? "0",
         hiredAt: emp.hiredAt,
-        scheduleId: emp.scheduleId ?? "none",
         isActive: emp.isActive ?? true,
         deductSss: emp.deductSss ?? true,
         deductPhilhealth: emp.deductPhilhealth ?? true,
         deductPagibig: emp.deductPagibig ?? true,
         deductTax: emp.deductTax ?? true,
-        latePerMinuteOverride: emp.latePerMinuteOverride ?? "",
       })
     }
   }, [emp])
@@ -81,8 +75,6 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
       ...form,
       allowance: form.allowance || "0",
       groupName: form.groupName || null,
-      scheduleId: form.scheduleId === "none" ? null : form.scheduleId,
-      latePerMinuteOverride: form.latePerMinuteOverride || null,
     }
     update(payload, { onSuccess: () => router.push("/employees") })
   }
@@ -190,34 +182,6 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
               <div className="space-y-2">
                 <Label>Hired Date</Label>
                 <Input type="date" value={form.hiredAt} onChange={(e) => set("hiredAt", e.target.value)} required />
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Schedule</Label>
-                <Select value={form.scheduleId} onValueChange={(v) => set("scheduleId", v ?? "none")}>
-                  <SelectTrigger><SelectValue placeholder="No schedule" /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="none">No schedule</SelectItem>
-                    {schedules?.map((s: any) => (
-                      <SelectItem key={s.id} value={s.id}>
-                        {s.name} ({s.timeIn}–{s.timeOut})
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label>Late Deduction Override (PHP/min)</Label>
-                <Input
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  placeholder="Auto (hourly rate ÷ 60)"
-                  value={form.latePerMinuteOverride}
-                  onChange={(e) => set("latePerMinuteOverride", e.target.value)}
-                />
               </div>
             </div>
 

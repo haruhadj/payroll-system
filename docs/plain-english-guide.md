@@ -7,9 +7,10 @@ no technical background needed. If you can read a payslip, you can understand th
 
 ## What is it, in one sentence?
 
-It's a website that a company uses to pay its employees correctly and automatically —
-it keeps track of who worked, for how long, figures out how much each person should be
-paid, subtracts the required government deductions, and produces each person's payslip.
+It's a website that a school uses to pay its staff correctly and automatically — it
+assumes every teacher/staff member worked their scheduled days unless told otherwise,
+figures out how much each person should be paid, subtracts the required government
+deductions, and produces each person's payslip.
 
 Think of it as replacing a messy pile of spreadsheets and a calculator with one tidy,
 automatic system that everyone logs into.
@@ -18,10 +19,9 @@ automatic system that everyone logs into.
 
 ## What problem does it solve?
 
-Paying employees by hand is slow and easy to get wrong. Someone has to:
+Paying staff by hand is slow and easy to get wrong. Someone has to:
 
-- count how many days each person worked,
-- add overtime, night-shift pay, and holiday pay,
+- track absences and approved leave for every staff member,
 - subtract the government contributions (SSS, PhilHealth, Pag-IBIG) and tax,
 - and do this for every single employee, every payday.
 
@@ -36,7 +36,7 @@ There are three kinds of users. Think of them as three different keys that open
 different doors:
 
 - **Admin** — the owner of the system. Can do everything, including adding new users.
-- **HR** — the payroll staff. Manages employees, attendance, and runs the payroll.
+- **HR** — the payroll staff. Manages employees, logs absences, and runs the payroll.
 - **Employee** — a regular worker. Can only see *their own* payslips and leave feedback.
   They cannot see anyone else's salary or the admin areas — the system blocks that.
 
@@ -48,23 +48,22 @@ Everyone has their own private login (email and password), just like online bank
 
 Here is the whole journey, from "someone came to work" to "here's your payslip":
 
-1. **The company sets things up once.** It enters each employee's basic monthly salary,
-   their allowance, and their work schedule (for example, 8 AM to 5 PM, Monday to
-   Friday). It also enters the holidays for the year.
+1. **The school sets things up once.** It enters each staff member's basic monthly
+   salary and allowance, and the school week (for example, Monday to Friday).
 
-2. **Attendance gets recorded.** Each day, an employee's time in and time out are logged
-   — morning in, morning out, afternoon in, afternoon out, and any overtime. This is the
-   raw record of who actually worked and when.
+2. **Attendance is assumed, not punched in.** Staff are monthly-paid, so every
+   scheduled school day is assumed worked by default. HR only creates a record when
+   something is different — an absence, or an approved leave request. No time clock,
+   no daily punching in and out.
 
 3. **HR starts a payroll for a pay period.** For example, "June 1–15." At this point it's
    just a draft — nothing has been paid yet.
 
-4. **The system does the math — automatically.** For every employee, it looks at the
-   attendance records and works out:
-   - how many days they actually worked (so someone who was absent isn't paid for that
-     day),
-   - extra pay for overtime, night shifts, and holidays,
-   - a deduction if they came in late,
+4. **The system does the math — automatically.** For every employee, it looks at logged
+   absences and approved leave and works out:
+   - how many scheduled days they were actually present for (so someone who was
+     absent without leave isn't paid for that day),
+   - paid-leave days (approved vacation/sick/emergency leave still earns a day's pay),
    - the government contributions and tax,
    - any loan payment due that period.
 
@@ -83,26 +82,27 @@ Here is the whole journey, from "someone came to work" to "here's your payslip":
 Let's follow one employee — Juan — for the June 1–15 pay period. His monthly salary is
 ₱30,000, and he gets a ₱2,000 allowance.
 
-**First, the system figures out his "rates":**
+**First, the system figures out his "rate":**
 - His pay for one day of work is his monthly salary divided across the working days:
   about **₱1,363 per day**.
 
 **Then it adds up what he earned:**
-- He worked 9 days → about **₱12,273** in basic pay.
-- He did 2 hours of overtime → an extra **₱426**.
-- He worked on a holiday → an extra **₱1,773**.
+- The school week is Monday–Friday, so June 1–15 has 11 scheduled days.
+- He was present for 10 of them (he's out on Jun 15, pending a leave request) → about
+  **₱13,636** in basic pay.
 - Plus his ₱2,000 allowance.
-- He came in late once → a small **₱128** deduction.
-- **This gives a total ("gross pay") of about ₱16,344.**
+- **This gives a total ("gross pay") of about ₱15,636.**
 
 **Then it subtracts what's required by law and his loan:**
 - SSS: ₱519 · PhilHealth: ₱825 · Pag-IBIG: ₱200 · Tax: ₱0 for this period · Loan
   payment: ₱1,000.
 
-**What's left is his take-home pay: about ₱13,800.**
+**What's left is his take-home pay: about ₱13,092.**
 
-The nice part: if HR later approves a day of paid leave Juan requested, the system
-instantly recalculates and his pay goes up by one day's worth — no manual recomputing.
+The nice part: if HR later approves Juan's paid leave for Jun 15, the system instantly
+recalculates — that day flips from an unpaid absence to a paid leave day — and his pay
+goes up by one day's worth (about ₱1,364) to roughly **₱14,456**. No manual
+recomputing.
 
 > Note for the defense: these are example figures. Before you present, the team should
 > run the built-in check to confirm the exact centavo amounts and use those.
@@ -125,12 +125,18 @@ Yes, and here's the simple version of why:
 ## Questions a non-technical person might ask (with simple answers)
 
 - **"So it's basically an automatic payroll calculator?"**
-  Yes — but a complete one. It also stores employee records, tracks attendance, handles
+  Yes — but a complete one. It also stores employee records, logs absences, handles
   leaves and loans, and gives each employee their own payslip.
 
-- **"What if someone was absent or came in late?"**
-  The system knows from the attendance records. An absent day isn't paid, and lateness is
-  deducted automatically.
+- **"What if someone was absent?"**
+  HR logs the date as an absence, and that day isn't paid. If it's later covered by an
+  approved leave request, the system automatically switches it to paid leave instead.
+
+- **"Why isn't there a time clock / biometric log?"**
+  Teachers and school staff are paid a fixed monthly salary and follow a class schedule,
+  not a shift punch clock. The system assumes every scheduled day is worked and only
+  needs HR to record the exceptions — which is both simpler and closer to how school
+  payroll actually works.
 
 - **"Where do the deduction amounts come from — did you just make them up?"**
   No. They follow the official Philippine government rules for SSS, PhilHealth, Pag-IBIG,
@@ -144,9 +150,10 @@ Yes, and here's the simple version of why:
   No. Employees can only view their own payslips and update their own profile. Everything
   else is locked to Admin and HR.
 
-- **"What happens on holidays or night shifts?"**
-  The system pays the correct extra amount automatically — more for holiday work, and a
-  night-shift bonus for late-night hours — following the standard rules.
+- **"What about holidays or overtime?"**
+  There's no separate holiday or overtime pay. Under Philippine labor rules, employees
+  paid a fixed monthly salary are already considered paid for every day of the month,
+  including holidays and rest days — so the system doesn't compute it a second time.
 
 ---
 
@@ -167,7 +174,7 @@ what's finished and what's next is a sign the project is well understood.
 
 ## The bottom line
 
-The company sets up employees and records attendance. The system does all the payroll
-math automatically and accurately, following Philippine rules. Employees securely view
-their own payslips and give feedback. It's faster, more accurate, and safer than doing
-payroll by hand.
+The school sets up its staff and logs absences and leave as they happen. The system does
+all the payroll math automatically and accurately, following Philippine rules. Employees
+securely view their own payslips and give feedback. It's faster, more accurate, and
+safer than doing payroll by hand.

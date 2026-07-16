@@ -2,9 +2,7 @@ import { db } from "@/lib/db"
 import {
   users,
   employees,
-  schedules,
-  holidays,
-  timeLogs,
+  absences,
   payrollSettings,
   payrollPeriods,
   leaveCredits,
@@ -146,10 +144,10 @@ async function seed() {
   }
 
   // -------------------------------------------------------------------------
-  // Attendance domain: settings, schedules, holidays, time logs, draft period
+  // Payroll settings, manage options, sample absence, draft period
   // -------------------------------------------------------------------------
 
-  // Default payroll configuration (singleton).
+  // Default payroll configuration (singleton). Mon–Fri school week.
   await db
     .insert(payrollSettings)
     .values({
@@ -189,117 +187,42 @@ async function seed() {
   }
   console.log("✅ Seeded manage options (designations, groups, teams)")
 
-  // Work schedules.
-  const scheduleDefs = [
-    {
-      name: "Day Shift",
-      timeIn: "08:00",
-      timeOut: "17:00",
-      breakMinutes: 60,
-      workDays: ["mon", "tue", "wed", "thu", "fri"],
-    },
-  ]
-  const scheduleIds: Record<string, string> = {}
-  for (const s of scheduleDefs) {
-    const existing = await db.select().from(schedules).where(eq(schedules.name, s.name))
-    if (existing.length) {
-      scheduleIds[s.name] = existing[0].id
-    } else {
-      const [created] = await db.insert(schedules).values(s).returning()
-      scheduleIds[s.name] = created.id
-      console.log(`✅ Created schedule: ${s.name}`)
-    }
-  }
-
-  // Assign schedules to seeded employees.
   const empRows = await db.select().from(employees)
   const byNo = new Map(empRows.map((e) => [e.employeeNo, e]))
   const emp1 = byNo.get("EMP-001")
   const emp2 = byNo.get("EMP-002")
-  if (emp1)
+
+  // A sample unauthorized absence within the demo cut-off (Jun 1–15), so
+  // processing payroll demonstrates the daily-rate deduction.
+  const [adminUser] = await db.select().from(users).where(eq(users.email, "admin@payroll.com"))
+  if (emp2 && adminUser) {
     await db
-      .update(employees)
-      .set({ scheduleId: scheduleIds["Day Shift"] })
-      .where(eq(employees.id, emp1.id))
-  if (emp2)
-    await db
-      .update(employees)
-      .set({ scheduleId: scheduleIds["Day Shift"] })
-      .where(eq(employees.id, emp2.id))
-  console.log("✅ Assigned schedules to employees")
-
-  // Holidays around the demo period (June 2026).
-  const holidayDefs = [
-    { name: "Company Foundation Day", date: "2026-06-05", type: "special_non_working" as const },
-    { name: "Independence Day", date: "2026-06-12", type: "regular" as const },
-  ]
-  for (const h of holidayDefs) {
-    await db.insert(holidays).values(h).onConflictDoNothing()
-  }
-  console.log("✅ Seeded holidays")
-
-  // Sample time logs for the 1st-half-of-June 2026 cut-off.
-  const pad = (n: number) => String(n).padStart(2, "0")
-  const YEAR = 2026
-  const MONTH = 5 // June (0-indexed)
-
-  const at = (day: number, h: number, m: number, nextDay = false) =>
-    new Date(YEAR, MONTH, day + (nextDay ? 1 : 0), h, m)
-
-  // Day-shift punch builder: AM 08:00–12:00, PM 13:00–17:00.
-  async function addDayShiftLog(
-    employeeId: string,
-    day: number,
-    opts: { amInMin?: number } = {},
-  ) {
-    const logDate = `${YEAR}-${pad(MONTH + 1)}-${pad(day)}`
-    await db
-      .insert(timeLogs)
+      .insert(absences)
       .values({
-        employeeId,
-        logDate,
-        amIn: at(day, 8, opts.amInMin ?? 0),
-        amOut: at(day, 12, 0),
-        pmIn: at(day, 13, 0),
-        pmOut: at(day, 17, 0),
-        source: "manual",
+        employeeId: emp2.id,
+        date: "2026-06-10",
+        reason: "No call, no show",
+        createdBy: adminUser.id,
       })
       .onConflictDoNothing()
+    console.log("✅ Seeded sample absence (EMP-002, Jun 10)")
   }
 
-  // Night-shift punch builder: single span 22:00 → 06:00 (next day).
-  async function addNightShiftLog(employeeId: string, day: number) {
-    const logDate = `${YEAR}-${pad(MONTH + 1)}-${pad(day)}`
+  // EMP-001 is out on Jun 15 pending vacation approval below — logged as an
+  // absence for now so the day is unpaid until the leave request is approved,
+  // demonstrating the absence → paid-leave flip when HR approves it.
+  if (emp1 && adminUser) {
     await db
-      .insert(timeLogs)
+      .insert(absences)
       .values({
-        employeeId,
-        logDate,
-        amIn: at(day, 22, 0),
-        pmOut: at(day, 6, 0, true),
-        source: "manual",
+        employeeId: emp1.id,
+        date: "2026-06-15",
+        reason: "Pending vacation leave approval",
+        createdBy: adminUser.id,
       })
       .onConflictDoNothing()
+    console.log("✅ Seeded sample absence (EMP-001, Jun 15, pending leave)")
   }
-
-  for (let d = 1; d <= 12; d++) {
-    const dow = new Date(YEAR, MONTH, d).getDay()
-    if (dow === 0 || dow === 6) continue // weekend
-
-    // Day-shift employee — works incl. the special holiday (Jun 5),
-    // off on the regular holiday (Jun 12, still paid), with one late day.
-    if (emp1 && d !== 12) {
-      await addDayShiftLog(emp1.id, d, {
-        amInMin: d === 3 ? 45 : 0, // late on the 3rd
-      })
-    }
-
-    // Night-shift employee — 10pm to 6am, generating night differential.
-    if (emp2 && d !== 5 && d !== 12) {
-      await addNightShiftLog(emp2.id, d)
-    }
-  }
-  console.log("✅ Seeded sample time logs")
 
   // A draft payroll period ready to process for the demo.
   const existingPeriod = await db
@@ -337,8 +260,8 @@ async function seed() {
   }
   console.log("✅ Seeded leave credits")
 
-  // A pending vacation request on Mon Jun 15 (a scheduled day with no time log):
-  // approving it live then re-processing payroll demonstrates paid-leave pay.
+  // A pending vacation request on Mon Jun 15: approving it live then
+  // re-processing payroll demonstrates paid-leave pay.
   if (emp1) {
     const existingLeave = await db
       .select()

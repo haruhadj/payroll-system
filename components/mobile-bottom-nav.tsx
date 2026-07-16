@@ -9,7 +9,7 @@ import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { SidebarNav } from "./sidebar"
 import {
   LayoutDashboard,
-  Fingerprint,
+  CalendarOff,
   CalendarRange,
   FileText,
   UserCircle,
@@ -30,7 +30,7 @@ interface Tab {
 
 const tabs: Tab[] = [
   { href: "/dashboard", label: "Home", icon: LayoutDashboard, roles: ALL },
-  { href: "/profile", label: "Time", icon: Fingerprint, roles: ALL },
+  { href: "/leaves", label: "Leaves", icon: CalendarOff, roles: ALL },
   { href: "/payroll", label: "Payroll", icon: CalendarRange, roles: STAFF },
   { href: "/payslips", label: "Payslips", icon: FileText, roles: ["employee"] },
   { href: "/profile", label: "Profile", icon: UserCircle, roles: ALL },
