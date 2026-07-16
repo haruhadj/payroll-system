@@ -112,6 +112,10 @@ const usersRouter = new Hono<{ Variables: HonoVariables }>()
 
 const app = new Hono()
   .basePath("/api")
+  .onError((err, c) => {
+    console.error(err)
+    return c.json({ error: "Internal server error" }, 500)
+  })
   .route("/employees", employeesRouter)
   .route("/payroll", payrollRouter)
   .route("/payslips", payslipsRouter)

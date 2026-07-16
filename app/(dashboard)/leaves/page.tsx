@@ -215,7 +215,12 @@ function SetCreditsDialog() {
             <Label>Employee</Label>
             <Select value={form.employeeId} onValueChange={(v) => set("employeeId", v)}>
               <SelectTrigger>
-                <SelectValue placeholder="Select employee" />
+                <SelectValue placeholder="Select employee">
+                  {(value: string) => {
+                    const emp = employees?.find((e: any) => e.id === value)
+                    return emp ? `${emp.user?.name ?? emp.employeeNo} (${emp.employeeNo})` : "Select employee"
+                  }}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 {employees?.map((e: any) => (
@@ -455,7 +460,12 @@ function LeaveRequestDialog({ isManager }: { isManager: boolean }) {
               <Label>Employee</Label>
               <Select value={form.employeeId} onValueChange={(v) => set("employeeId", v)}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select employee" />
+                  <SelectValue placeholder="Select employee">
+                    {(value: string) => {
+                      const emp = employees?.find((e: any) => e.id === value)
+                      return emp ? `${emp.user?.name ?? emp.employeeNo} (${emp.employeeNo})` : "Select employee"
+                    }}
+                  </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   {employees?.map((e: any) => (

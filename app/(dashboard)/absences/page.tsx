@@ -62,11 +62,21 @@ export default function AbsencesPage() {
 
       <div className="max-w-xs space-y-1">
         <Label className="text-xs">Filter by Employee</Label>
-        <Select value={employeeId} onValueChange={(v) => setEmployeeId(v ?? "")}>
+        <Select
+          value={employeeId || "all"}
+          onValueChange={(v) => setEmployeeId(!v || v === "all" ? "" : v)}
+        >
           <SelectTrigger>
-            <SelectValue placeholder="All employees" />
+            <SelectValue placeholder="All employees">
+              {(value: string) => {
+                if (!value || value === "all") return "All employees"
+                const emp = employees?.find((e: any) => e.id === value)
+                return emp ? `${emp.user?.name} (${emp.employeeNo})` : "All employees"
+              }}
+            </SelectValue>
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="all">All employees</SelectItem>
             {employees?.map((e: any) => (
               <SelectItem key={e.id} value={e.id}>
                 {e.user?.name} ({e.employeeNo})
@@ -187,7 +197,12 @@ function AbsenceDialog() {
             <Label>Employee</Label>
             <Select value={form.employeeId} onValueChange={(v) => set("employeeId", v)}>
               <SelectTrigger>
-                <SelectValue placeholder="Select employee" />
+                <SelectValue placeholder="Select employee">
+                  {(value: string) => {
+                    const emp = employees?.find((e: any) => e.id === value)
+                    return emp ? `${emp.user?.name ?? emp.employeeNo} (${emp.employeeNo})` : "Select employee"
+                  }}
+                </SelectValue>
               </SelectTrigger>
               <SelectContent>
                 {employees?.map((e: any) => (
