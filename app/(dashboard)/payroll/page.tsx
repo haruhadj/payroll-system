@@ -29,13 +29,22 @@ type PayrollPeriod = {
   dateFrom: string
   dateTo: string
   status: string
+  createdAt: string
 }
 
 // Columns the table can be sorted by. Values are compared as strings with
-// numeric-aware collation, so ISO dates sort chronologically and labels like
-// "1st Half" / "2nd Half" order naturally.
-type SortKey = "label" | "dateFrom" | "dateTo" | "status"
+// numeric-aware collation, so ISO dates/timestamps sort chronologically and
+// labels like "1st Half" / "2nd Half" order naturally.
+type SortKey = "label" | "dateFrom" | "dateTo" | "createdAt" | "status"
 type SortDir = "asc" | "desc"
+
+function formatCreatedAt(iso: string) {
+  return new Date(iso).toLocaleDateString("en-PH", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  })
+}
 
 function SortHeader({
   label,
@@ -123,6 +132,7 @@ export default function PayrollPage() {
               <SortHeader label="Period" columnKey="label" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
               <SortHeader label="Date From" columnKey="dateFrom" className="hidden sm:table-cell" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
               <SortHeader label="Date To" columnKey="dateTo" className="hidden sm:table-cell" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
+              <SortHeader label="Created" columnKey="createdAt" className="hidden md:table-cell" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
               <SortHeader label="Status" columnKey="status" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
@@ -131,7 +141,7 @@ export default function PayrollPage() {
             {isLoading
               ? Array.from({ length: 4 }).map((_, i) => (
                   <TableRow key={i}>
-                    {Array.from({ length: 5 }).map((_, j) => (
+                    {Array.from({ length: 6 }).map((_, j) => (
                       <TableCell key={j}><Skeleton className="h-5 w-full" /></TableCell>
                     ))}
                   </TableRow>
@@ -146,6 +156,9 @@ export default function PayrollPage() {
                     </TableCell>
                     <TableCell className="text-muted-foreground hidden sm:table-cell">{p.dateFrom}</TableCell>
                     <TableCell className="text-muted-foreground hidden sm:table-cell">{p.dateTo}</TableCell>
+                    <TableCell className="text-muted-foreground hidden md:table-cell">
+                      {formatCreatedAt(p.createdAt)}
+                    </TableCell>
                     <TableCell>
                       <Badge variant={statusVariant[p.status]}>{p.status}</Badge>
                     </TableCell>
@@ -201,7 +214,7 @@ export default function PayrollPage() {
                 ))}
             {!isLoading && sortedPeriods.length === 0 && (
               <TableRow>
-                <TableCell colSpan={5} className="text-center text-muted-foreground py-8">
+                <TableCell colSpan={6} className="text-center text-muted-foreground py-8">
                   No payroll periods.{" "}
                   <Link href="/payroll/new" className="text-primary hover:underline">Create one</Link>
                 </TableCell>
