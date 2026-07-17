@@ -367,6 +367,11 @@ function PayrollConfigCard() {
     payload.hrEmail = form.hrEmail || null
     payload.withholdingTaxFrequency = form.withholdingTaxFrequency ?? "semi_monthly"
     payload.workDays = form.workDays?.length ? form.workDays : ["mon", "tue", "wed", "thu", "fri"]
+    payload.enableClockInOut = !!form.enableClockInOut
+    payload.lateDeductionEnabled = !!form.lateDeductionEnabled
+    payload.standardTimeIn = form.standardTimeIn || "08:00"
+    payload.standardTimeOut = form.standardTimeOut || "17:00"
+    payload.lateGracePeriodMinutes = parseInt(form.lateGracePeriodMinutes ?? "0") || 0
     save(payload)
   }
 
@@ -445,6 +450,62 @@ function PayrollConfigCard() {
               />
             </div>
           </div>
+        </div>
+
+        <Separator />
+
+        <div>
+          <h3 className="text-sm font-semibold mb-3">Daily Time Record (DTR)</h3>
+          <p className="text-[11px] text-muted-foreground mb-3">
+            Staff clock in/out from their dashboard, or HR records entries manually. When
+            lateness deduction is on, minutes past the standard time-in (plus grace period)
+            are deducted from basic pay when payroll is processed.
+          </p>
+          <label className="flex items-center gap-2 text-sm mb-3">
+            <input
+              type="checkbox"
+              className="h-4 w-4"
+              checked={!!form.enableClockInOut}
+              onChange={(e) => set("enableClockInOut", e.target.checked)}
+            />
+            Enable self-service clock in/out
+          </label>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="space-y-1">
+              <Label className="text-xs">Standard Time In</Label>
+              <Input
+                type="time"
+                value={form.standardTimeIn ?? "08:00"}
+                onChange={(e) => set("standardTimeIn", e.target.value)}
+              />
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs">Standard Time Out</Label>
+              <Input
+                type="time"
+                value={form.standardTimeOut ?? "17:00"}
+                onChange={(e) => set("standardTimeOut", e.target.value)}
+              />
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs">Grace Period (minutes)</Label>
+              <Input
+                type="number"
+                min="0"
+                value={form.lateGracePeriodMinutes ?? "0"}
+                onChange={(e) => set("lateGracePeriodMinutes", e.target.value)}
+              />
+            </div>
+          </div>
+          <label className="flex items-center gap-2 text-sm mt-3">
+            <input
+              type="checkbox"
+              className="h-4 w-4"
+              checked={!!form.lateDeductionEnabled}
+              onChange={(e) => set("lateDeductionEnabled", e.target.checked)}
+            />
+            Deduct lateness from pay when processing payroll
+          </label>
         </div>
 
         <Separator />

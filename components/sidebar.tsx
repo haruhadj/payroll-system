@@ -21,6 +21,7 @@ import {
   UserCircle,
   Wrench,
   ChevronDown,
+  Clock,
 } from "lucide-react"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -53,6 +54,7 @@ const STAFF: Role[] = ["admin", "hr"]
 const navItems: NavEntry[] = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, roles: ALL },
   { href: "/profile", label: "My Profile", icon: UserCircle, roles: ALL },
+  { href: "/timelogs", label: "Time Logs", icon: Clock, roles: ALL },
   { href: "/absences", label: "Absences", icon: UserX, roles: STAFF },
   {
     label: "Payroll",

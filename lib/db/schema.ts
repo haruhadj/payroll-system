@@ -63,6 +63,7 @@ export const taxFrequencyEnum = pgEnum("tax_frequency", [
   "semi_monthly",
   "monthly",
 ])
+export const timeLogSourceEnum = pgEnum("time_log_source", ["manual", "self"])
 
 // ---------------------------------------------------------------------------
 // Better Auth tables
@@ -226,6 +227,10 @@ export const payslips = pgTable(
     daysWorked: numeric("days_worked", { precision: 6, scale: 2 })
       .notNull()
       .default("0"),
+    lateMinutes: integer("late_minutes").notNull().default(0),
+    lateDeduction: numeric("late_deduction", { precision: 12, scale: 2 })
+      .notNull()
+      .default("0"),
     netPay: numeric("net_pay", { precision: 12, scale: 2 }).notNull(),
     status: payslipStatusEnum("status").notNull().default("pending"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -289,6 +294,37 @@ export const absences = pgTable(
   ],
 )
 
+// ---------------------------------------------------------------------------
+// Attendance domain: Daily Time Record (DTR)
+// ---------------------------------------------------------------------------
+//
+// Self-service or admin-recorded time in/out per employee per day. Distinct
+// from `absences`: absences mark a whole day missed, timeLogs record actual
+// clock times used to compute lateness against the school's standard shift.
+
+export const timeLogs = pgTable(
+  "time_log",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    employeeId: uuid("employee_id")
+      .notNull()
+      .references(() => employees.id, { onDelete: "cascade" }),
+    date: date("date").notNull(),
+    timeIn: timestamp("time_in"),
+    timeOut: timestamp("time_out"),
+    source: timeLogSourceEnum("source").notNull().default("manual"),
+    createdBy: text("created_by").references(() => users.id, {
+      onDelete: "set null",
+    }),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("idx_time_log_unique").on(t.employeeId, t.date),
+    index("idx_time_log_employee_id").on(t.employeeId),
+    index("idx_time_log_date").on(t.date),
+  ],
+)
+
 // Singleton configuration row (id is always "default").
 export const payrollSettings = pgTable("payroll_settings", {
   id: text("id").primaryKey().default("default"),
@@ -321,6 +357,16 @@ export const payrollSettings = pgTable("payroll_settings", {
     .notNull()
     .default("0"),
   leaveActualRate: boolean("leave_actual_rate").notNull().default(true),
+  // Daily Time Record (DTR) / clock-in configuration.
+  enableClockInOut: boolean("enable_clock_in_out").notNull().default(false),
+  standardTimeIn: text("standard_time_in").notNull().default("08:00"),
+  standardTimeOut: text("standard_time_out").notNull().default("17:00"),
+  lateGracePeriodMinutes: integer("late_grace_period_minutes")
+    .notNull()
+    .default(0),
+  lateDeductionEnabled: boolean("late_deduction_enabled")
+    .notNull()
+    .default(false),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
 
@@ -497,6 +543,7 @@ export const employeesRelations = relations(employees, ({ one, many }) => ({
   payslips: many(payslips),
   feedback: many(feedback),
   absences: many(absences),
+  timeLogs: many(timeLogs),
   leaveCredits: many(leaveCredits),
   leaveRequests: many(leaveRequests),
   loans: many(loans),
@@ -534,6 +581,17 @@ export const absencesRelations = relations(absences, ({ one }) => ({
   }),
   recordedBy: one(users, {
     fields: [absences.createdBy],
+    references: [users.id],
+  }),
+}))
+
+export const timeLogsRelations = relations(timeLogs, ({ one }) => ({
+  employee: one(employees, {
+    fields: [timeLogs.employeeId],
+    references: [employees.id],
+  }),
+  recordedBy: one(users, {
+    fields: [timeLogs.createdBy],
     references: [users.id],
   }),
 }))
@@ -602,11 +660,20 @@ export const insertAbsenceSchema = createInsertSchema(absences, {
   reason: z.string().max(1000).optional().nullable(),
 }).omit({ id: true, createdAt: true, createdBy: true })
 
+export const selectTimeLogSchema = createSelectSchema(timeLogs)
+export const insertTimeLogSchema = createInsertSchema(timeLogs, {
+  timeIn: z.coerce.date().optional().nullable(),
+  timeOut: z.coerce.date().optional().nullable(),
+}).omit({ id: true, createdAt: true, createdBy: true, source: true })
+export const updateTimeLogSchema = insertTimeLogSchema.partial()
+
 export const selectPayrollSettingsSchema = createSelectSchema(payrollSettings)
 export const updatePayrollSettingsSchema = createInsertSchema(payrollSettings, {
   adminEmail: z.string().email().or(z.literal("")).optional().nullable(),
   hrEmail: z.string().email().or(z.literal("")).optional().nullable(),
   workDays: z.array(z.string()).min(1, "Pick at least one work day").optional(),
+  standardTimeIn: z.string().regex(/^\d{2}:\d{2}$/).optional(),
+  standardTimeOut: z.string().regex(/^\d{2}:\d{2}$/).optional(),
 })
   .omit({ id: true, updatedAt: true })
   .partial()

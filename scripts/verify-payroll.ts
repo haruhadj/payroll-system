@@ -26,6 +26,10 @@ function toSettingsInput(s: any): PayrollSettingsInput {
     philhealthRate: parseFloat(s.philhealthRate),
     leaveAmount: parseFloat(s.leaveAmount),
     leaveActualRate: s.leaveActualRate,
+    standardTimeIn: s.standardTimeIn,
+    standardTimeOut: s.standardTimeOut,
+    lateGracePeriodMinutes: s.lateGracePeriodMinutes,
+    lateDeductionEnabled: s.lateDeductionEnabled,
   }
 }
 

@@ -8,6 +8,7 @@ import {
   absences,
   leaveRequests,
   loans,
+  timeLogs,
 } from "@/lib/db/schema"
 import { insertPayrollPeriodSchema } from "@/lib/db/schema"
 import { authMiddleware } from "@/server/middleware/auth"
@@ -15,6 +16,7 @@ import { requireRole } from "@/server/middleware/rbac"
 import { getPayrollSettings } from "@/server/routes/settings"
 import {
   aggregateAbsences,
+  aggregateLateMinutes,
   calculatePayrollFromAbsences,
   isLeavePaid,
   type PayrollSettingsInput,
@@ -55,6 +57,10 @@ function toSettingsInput(s: SettingsRow): PayrollSettingsInput {
     philhealthRate: parseFloat(s.philhealthRate),
     leaveAmount: parseFloat(s.leaveAmount),
     leaveActualRate: s.leaveActualRate,
+    standardTimeIn: s.standardTimeIn,
+    standardTimeOut: s.standardTimeOut,
+    lateGracePeriodMinutes: s.lateGracePeriodMinutes,
+    lateDeductionEnabled: s.lateDeductionEnabled,
   }
 }
 
@@ -185,11 +191,29 @@ const router = new Hono<{ Variables: HonoVariables }>()
       ),
     })
 
+    const empTimeLogs = await db
+      .select()
+      .from(timeLogs)
+      .where(
+        and(
+          eq(timeLogs.employeeId, employeeId),
+          gte(timeLogs.date, period.dateFrom),
+          lte(timeLogs.date, period.dateTo),
+        ),
+      )
+    const lateMinutes = aggregateLateMinutes({
+      timeLogs: empTimeLogs,
+      standardTimeIn: settings.standardTimeIn,
+      gracePeriodMinutes: settings.lateGracePeriodMinutes,
+    })
+
     return c.json({
       employee: { id: emp.id, employeeNo: emp.employeeNo, name: emp.user?.name },
       period: { id: period.id, label: period.label, dateFrom: period.dateFrom, dateTo: period.dateTo },
       aggregate,
       days,
+      timeLogs: empTimeLogs,
+      lateMinutes,
     })
   })
 
@@ -263,6 +287,24 @@ const router = new Hono<{ Variables: HonoVariables }>()
           leavesByEmp.set(lr.employeeId, arr)
         }
 
+        // Time logs within the period, grouped by employee, for the lateness
+        // deduction.
+        const periodTimeLogs = await db
+          .select()
+          .from(timeLogs)
+          .where(
+            and(
+              gte(timeLogs.date, period.dateFrom),
+              lte(timeLogs.date, period.dateTo),
+            ),
+          )
+        const timeLogsByEmp = new Map<string, typeof periodTimeLogs>()
+        for (const tl of periodTimeLogs) {
+          const arr = timeLogsByEmp.get(tl.employeeId) ?? []
+          arr.push(tl)
+          timeLogsByEmp.set(tl.employeeId, arr)
+        }
+
         // Active loans drive a per-cutoff amortization deduction.
         const activeLoans = await db
           .select()
@@ -303,11 +345,18 @@ const router = new Hono<{ Variables: HonoVariables }>()
             })
           }
 
+          const lateMinutes = aggregateLateMinutes({
+            timeLogs: timeLogsByEmp.get(emp.id) ?? [],
+            standardTimeIn: settings.standardTimeIn,
+            gracePeriodMinutes: settings.lateGracePeriodMinutes,
+          })
+
           const calc = calculatePayrollFromAbsences({
             basicSalary: parseFloat(emp.basicSalary as string),
             allowance: parseFloat((emp.allowance as string) ?? "0"),
             settings,
             absence: aggregate,
+            lateMinutes,
             deductToggles: {
               sss: emp.deductSss,
               philhealth: emp.deductPhilhealth,
@@ -332,6 +381,8 @@ const router = new Hono<{ Variables: HonoVariables }>()
               loanDeduction: String(calc.loanDeduction),
               thirteenthMonthPay: String(calc.thirteenthMonthPay),
               daysWorked: String(calc.daysWorked),
+              lateMinutes: calc.lateMinutes,
+              lateDeduction: String(calc.lateDeduction),
               netPay: String(calc.netPay),
               status: "pending",
             })

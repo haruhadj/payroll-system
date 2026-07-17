@@ -148,6 +148,11 @@ export interface PayrollSettingsInput {
   // Paid-leave day valuation: flat amount, or the daily rate ("actual rate").
   leaveAmount: number
   leaveActualRate: boolean
+  // Daily Time Record (DTR) / lateness deduction configuration.
+  standardTimeIn: string // "HH:MM"
+  standardTimeOut: string // "HH:MM"
+  lateGracePeriodMinutes: number
+  lateDeductionEnabled: boolean
 }
 
 export interface AbsenceAggregate {
@@ -256,11 +261,46 @@ export function aggregateAbsences(
   return { aggregate: agg, days }
 }
 
+function parseHHMM(hhmm: string): number {
+  const [h, m] = hhmm.split(":").map(Number)
+  return h * 60 + m
+}
+
+// A DTR (Daily Time Record) time-in row, as read from `timeLogs`.
+export interface TimeLogRow {
+  date: string
+  timeIn: string | Date | null
+}
+
+// Sums minutes late (time-in minus standard shift start, minus a grace
+// period) across a period's time logs. Missing time-in on a scheduled day is
+// not counted here — that's covered by the absence/leave aggregate instead.
+export function aggregateLateMinutes(params: {
+  timeLogs: TimeLogRow[]
+  standardTimeIn: string
+  gracePeriodMinutes: number
+}): number {
+  const { timeLogs, standardTimeIn, gracePeriodMinutes } = params
+  const cutoff = parseHHMM(standardTimeIn) + gracePeriodMinutes
+
+  let total = 0
+  for (const log of timeLogs) {
+    if (!log.timeIn) continue
+    const d = typeof log.timeIn === "string" ? new Date(log.timeIn) : log.timeIn
+    const minutesOfDay = d.getHours() * 60 + d.getMinutes()
+    if (minutesOfDay > cutoff) {
+      total += minutesOfDay - cutoff
+    }
+  }
+  return total
+}
+
 export interface AbsencePayrollInput {
   basicSalary: number
   allowance?: number
   settings: PayrollSettingsInput
   absence: AbsenceAggregate
+  lateMinutes?: number
   deductToggles?: {
     sss?: boolean
     philhealth?: boolean
@@ -280,6 +320,8 @@ export interface AbsencePayrollOutput {
   withholdingTax: number
   loanDeduction: number
   thirteenthMonthPay: number
+  lateMinutes: number
+  lateDeduction: number
   netPay: number
   daysWorked: number
 }
@@ -292,11 +334,24 @@ export function calculatePayrollFromAbsences(
     allowance = 0,
     settings,
     absence: a,
+    lateMinutes = 0,
     deductToggles = {},
     loanDeduction = 0,
   } = input
 
   const dailyRate = basicSalary / settings.workingDaysPerMonth
+
+  // Per-minute rate derived from the standard shift length; used only for
+  // the lateness deduction, not for OT/rest-day/holiday premiums (out of
+  // scope — those are folded into basic salary under PH labor practice).
+  const shiftMinutes = Math.max(
+    parseHHMM(settings.standardTimeOut) - parseHHMM(settings.standardTimeIn),
+    1,
+  )
+  const perMinuteRate = dailyRate / shiftMinutes
+  const lateDeduction = settings.lateDeductionEnabled
+    ? round2(lateMinutes * perMinuteRate)
+    : 0
 
   // Paid leave is valued at the daily rate (actual) or a flat per-day amount.
   const leavePerDay = settings.leaveActualRate ? dailyRate : settings.leaveAmount
@@ -329,7 +384,7 @@ export function calculatePayrollFromAbsences(
 
   const netPay = round2(
     grossPay -
-      (sss + philhealth + pagibig + withholdingTax + loanDeduction) +
+      (sss + philhealth + pagibig + withholdingTax + loanDeduction + lateDeduction) +
       thirteenthMonthPay,
   )
 
@@ -343,6 +398,8 @@ export function calculatePayrollFromAbsences(
     withholdingTax,
     loanDeduction: round2(loanDeduction),
     thirteenthMonthPay,
+    lateMinutes,
+    lateDeduction,
     netPay,
     daysWorked: round2(a.daysPresent + a.paidLeaveDays),
   }

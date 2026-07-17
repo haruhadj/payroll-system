@@ -14,6 +14,7 @@ import { payslipsRouter } from "./routes/payslips"
 import { feedbackRouter } from "./routes/feedback"
 import { dashboardRouter } from "./routes/dashboard"
 import { absencesRouter } from "./routes/absences"
+import { timeLogsRouter } from "./routes/timelogs"
 import { settingsRouter } from "./routes/settings"
 import { leavesRouter } from "./routes/leaves"
 import { loansRouter } from "./routes/loans"
@@ -123,6 +124,7 @@ const app = new Hono()
   .route("/dashboard", dashboardRouter)
   .route("/users", usersRouter)
   .route("/absences", absencesRouter)
+  .route("/timelogs", timeLogsRouter)
   .route("/settings", settingsRouter)
   .route("/leaves", leavesRouter)
   .route("/loans", loansRouter)
