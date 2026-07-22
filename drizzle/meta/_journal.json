@@ -15,6 +15,104 @@
       "when": 1781423178508,
       "tag": "0001_add_password_field",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781500000000,
+      "tag": "0002_add_employee_allowance",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1781600000000,
+      "tag": "0003_attendance_core",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1781700000000,
+      "tag": "0004_payslip_breakdown",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1781800000000,
+      "tag": "0005_leaves_loans",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1781900000000,
+      "tag": "0006_six_punch_timelogs",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1782000000000,
+      "tag": "0007_overtime_requests",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1782100000000,
+      "tag": "0008_manage_options",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1782200000000,
+      "tag": "0009_settings_company",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1782300000000,
+      "tag": "0010_remove_overtime_feature",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1782400000000,
+      "tag": "0010_user_profiles",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1782500000000,
+      "tag": "0011_remove_night_diff_and_biometric",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1782600000000,
+      "tag": "0012_replace_attendance_with_absences",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1782700000000,
+      "tag": "0013_add_time_logs",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1784683568341,
+      "tag": "0014_user_ban_fields",
+      "breakpoints": true
     }
   ]
 }

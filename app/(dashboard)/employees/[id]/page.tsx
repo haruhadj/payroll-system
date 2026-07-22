@@ -4,6 +4,7 @@ import { useState, useEffect, use } from "react"
 import { useRouter } from "next/navigation"
 import { useEmployee, useUpdateEmployee } from "@/lib/hooks/useEmployees"
 import { useOptions } from "@/lib/hooks/useOptions"
+import { authClient, useSession } from "@/lib/auth/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -16,8 +17,84 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { ArrowLeft } from "lucide-react"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { ArrowLeft, KeyRound, Copy, Check } from "lucide-react"
 import Link from "next/link"
+
+function generateTempPassword() {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%"
+  return Array.from(crypto.getRandomValues(new Uint32Array(14)))
+    .map((n) => chars[n % chars.length])
+    .join("")
+}
+
+function ResetPasswordButton({ userId }: { userId: string }) {
+  const [open, setOpen] = useState(false)
+  const [tempPassword, setTempPassword] = useState("")
+  const [pending, setPending] = useState(false)
+  const [copied, setCopied] = useState(false)
+  const [error, setError] = useState("")
+
+  const handleReset = async () => {
+    if (!confirm("Generate a new temporary password for this user? Their current password will stop working immediately.")) {
+      return
+    }
+    setPending(true)
+    setError("")
+    const newPassword = generateTempPassword()
+    const { error: err } = await authClient.admin.setUserPassword({ userId, newPassword })
+    setPending(false)
+    if (err) {
+      setError(err.message ?? "Failed to reset password.")
+      return
+    }
+    setTempPassword(newPassword)
+    setCopied(false)
+    setOpen(true)
+  }
+
+  const copy = () => {
+    navigator.clipboard.writeText(tempPassword)
+    setCopied(true)
+  }
+
+  return (
+    <>
+      <Button type="button" variant="outline" onClick={handleReset} disabled={pending}>
+        <KeyRound className="h-4 w-4 mr-2" />
+        {pending ? "Resetting…" : "Reset Password"}
+      </Button>
+      {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Temporary Password Generated</DialogTitle>
+            <DialogDescription>
+              Share this with the employee securely. It won&apos;t be shown again — they should sign in and change it immediately.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex items-center gap-2">
+            <Input readOnly value={tempPassword} className="font-mono" />
+            <Button type="button" size="icon" variant="outline" onClick={copy}>
+              {copied ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
+            </Button>
+          </div>
+          <DialogFooter>
+            <Button type="button" onClick={() => setOpen(false)}>Done</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
+  )
+}
 
 const DEDUCTION_TOGGLES = [
   { key: "deductSss", label: "SSS" },
@@ -32,6 +109,8 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
   const { data: emp, isLoading } = useEmployee(id)
   const { mutate: update, isPending } = useUpdateEmployee(id)
   const { data: options } = useOptions()
+  const { data: session } = useSession()
+  const isAdmin = (session?.user as any)?.role === "admin"
 
   const [form, setForm] = useState({
     department: "",
@@ -94,10 +173,11 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
         <Link href="/employees">
           <Button variant="ghost" size="icon"><ArrowLeft className="h-4 w-4" /></Button>
         </Link>
-        <div>
+        <div className="flex-1">
           <h1 className="text-2xl font-bold">Edit Employee</h1>
           <p className="text-muted-foreground">{emp?.employeeNo} — {emp?.user?.name}</p>
         </div>
+        {isAdmin && emp?.userId && <ResetPasswordButton userId={emp.userId} />}
       </div>
 
       <Card>
