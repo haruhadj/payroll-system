@@ -645,6 +645,16 @@ export const insertEmployeeSchema = createInsertSchema(employees, {
 }).omit({ id: true, createdAt: true })
 export const updateEmployeeSchema = insertEmployeeSchema.partial()
 
+// Combined "create user + employee" schema used by the Add Employee form,
+// which provisions the login account and the employee record together.
+export const createEmployeeWithUserSchema = insertEmployeeSchema
+  .omit({ userId: true })
+  .extend({
+    name: z.string().min(1, "Name is required"),
+    email: z.string().email("Valid email is required"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
+  })
+
 export const selectPayrollPeriodSchema = createSelectSchema(payrollPeriods)
 export const insertPayrollPeriodSchema = createInsertSchema(payrollPeriods).omit(
   { id: true, createdAt: true, status: true },

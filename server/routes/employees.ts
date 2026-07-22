@@ -2,24 +2,16 @@ import { Hono } from "hono"
 import { zValidator } from "@hono/zod-validator"
 import { db } from "@/lib/db"
 import { employees, users } from "@/lib/db/schema"
-import { insertEmployeeSchema, updateEmployeeSchema } from "@/lib/db/schema"
+import { createEmployeeWithUserSchema, updateEmployeeSchema } from "@/lib/db/schema"
 import { authMiddleware } from "@/server/middleware/auth"
 import { requireRole } from "@/server/middleware/rbac"
 import type { HonoVariables } from "@/server/types"
+import { auth } from "@/lib/auth/server"
 import { eq, ilike, and } from "drizzle-orm"
 import type { SQL } from "drizzle-orm"
 
 const router = new Hono<{ Variables: HonoVariables }>()
   .use(authMiddleware)
-
-  .get("/users/unlinked", requireRole("admin", "hr"), async (c) => {
-    const linked = await db.select({ userId: employees.userId }).from(employees)
-    const linkedIds = new Set(linked.map((r) => r.userId))
-    const allUsers = await db
-      .select({ id: users.id, name: users.name, email: users.email, role: users.role })
-      .from(users)
-    return c.json(allUsers.filter((u) => !linkedIds.has(u.id)))
-  })
 
   .get("/", async (c) => {
     const user = c.get("user")
@@ -66,15 +58,44 @@ const router = new Hono<{ Variables: HonoVariables }>()
   .post(
     "/",
     requireRole("admin", "hr"),
-    zValidator("json", insertEmployeeSchema),
+    zValidator("json", createEmployeeWithUserSchema),
     async (c) => {
-      const data = c.req.valid("json")
-      const existing = await db.select().from(employees).where(eq(employees.userId, data.userId))
+      const { name, email, password, ...employeeData } = c.req.valid("json")
+
+      const existing = await db.select().from(users).where(eq(users.email, email))
       if (existing.length) {
-        return c.json({ error: "Employee record already exists for this user" }, 400)
+        return c.json({ error: "A user with this email already exists" }, 400)
       }
-      const [created] = await db.insert(employees).values(data).returning()
-      return c.json(created, 201)
+
+      let newUserId: string
+      try {
+        const result = await auth.api.signUpEmail({ body: { name, email, password } })
+        if (!result?.user?.id) {
+          return c.json({ error: "Failed to create user account" }, 400)
+        }
+        newUserId = result.user.id
+      } catch (e: any) {
+        return c.json(
+          { error: e?.body?.message ?? e?.message ?? "Failed to create user account" },
+          400,
+        )
+      }
+
+      await db
+        .update(users)
+        .set({ role: "employee", emailVerified: true, updatedAt: new Date() })
+        .where(eq(users.id, newUserId))
+
+      try {
+        const [created] = await db
+          .insert(employees)
+          .values({ ...employeeData, userId: newUserId })
+          .returning()
+        return c.json(created, 201)
+      } catch (e: any) {
+        await db.delete(users).where(eq(users.id, newUserId))
+        return c.json({ error: e?.message ?? "Failed to create employee record" }, 400)
+      }
     },
   )
 

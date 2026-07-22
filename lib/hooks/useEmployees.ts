@@ -38,13 +38,6 @@ export function useEmployee(id: string) {
   })
 }
 
-export function useUnlinkedUsers() {
-  return useQuery({
-    queryKey: ["employees", "unlinked-users"],
-    queryFn: () => apiFetch("/employees/users/unlinked"),
-  })
-}
-
 export function useCreateEmployee() {
   const qc = useQueryClient()
   return useMutation({

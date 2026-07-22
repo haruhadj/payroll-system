@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useCreateEmployee, useUnlinkedUsers } from "@/lib/hooks/useEmployees"
+import { useCreateEmployee } from "@/lib/hooks/useEmployees"
 import { useOptions } from "@/lib/hooks/useOptions"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -17,15 +17,17 @@ import {
 } from "@/components/ui/select"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { toast } from "sonner"
 
 export default function NewEmployeePage() {
   const router = useRouter()
   const { mutate: create, isPending } = useCreateEmployee()
-  const { data: users } = useUnlinkedUsers()
   const { data: options } = useOptions()
 
   const [form, setForm] = useState({
-    userId: "",
+    name: "",
+    email: "",
+    password: "",
     employeeNo: "",
     department: "",
     position: "",
@@ -40,6 +42,10 @@ export default function NewEmployeePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (form.password.length < 8) {
+      toast.error("Password must be at least 8 characters")
+      return
+    }
     const payload = {
       ...form,
       allowance: form.allowance || "0",
@@ -56,28 +62,51 @@ export default function NewEmployeePage() {
         </Link>
         <div>
           <h1 className="text-2xl font-bold">Add Employee</h1>
-          <p className="text-muted-foreground">Create a new employee record</p>
+          <p className="text-muted-foreground">Creates a login account and employee record together</p>
         </div>
       </div>
 
       <Card>
-        <CardHeader><CardTitle>Employee Details</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Account &amp; Employee Details</CardTitle>
+        </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Full Name</Label>
+                <Input
+                  placeholder="Juan dela Cruz"
+                  value={form.name}
+                  onChange={(e) => set("name", e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Email</Label>
+                <Input
+                  type="email"
+                  placeholder="juan@company.com"
+                  value={form.email}
+                  onChange={(e) => set("email", e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
             <div className="space-y-2">
-              <Label>Linked User Account</Label>
-              <Select value={form.userId} onValueChange={(v) => set("userId", v ?? "")}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a user…" />
-                </SelectTrigger>
-                <SelectContent>
-                  {users?.map((u: any) => (
-                    <SelectItem key={u.id} value={u.id}>
-                      {u.name} ({u.email})
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Label>Temporary Password</Label>
+              <Input
+                type="text"
+                placeholder="Min. 8 characters"
+                value={form.password}
+                onChange={(e) => set("password", e.target.value)}
+                minLength={8}
+                required
+              />
+              <p className="text-xs text-muted-foreground">
+                Share this with the employee so they can log in and change it.
+              </p>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-4">

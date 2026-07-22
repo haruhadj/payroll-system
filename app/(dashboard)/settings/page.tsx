@@ -658,7 +658,8 @@ function CreateUserDialog() {
         <DialogHeader>
           <DialogTitle>Create User Account</DialogTitle>
           <DialogDescription>
-            Provision a new account. Share the password with the user securely.
+            Provision an admin or HR account. For employees, use Add Employee instead —
+            it creates the login and employee record together.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
