@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Plus, Trash2, SlidersHorizontal } from "lucide-react"
+import { Trash2, SlidersHorizontal } from "lucide-react"
 import Link from "next/link"
 import {
   usePayrollSettings,
@@ -105,19 +105,17 @@ export default function SettingsPage() {
           <h1 className="text-2xl font-bold">Settings</h1>
           <p className="text-muted-foreground">Manage user accounts and roles</p>
         </div>
-        <Link href="/employees/new">
-          <Button className="w-full sm:w-auto">
-            <Plus className="h-4 w-4 mr-2" />
-            Add Employee
-          </Button>
-        </Link>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>User Accounts</CardTitle>
           <CardDescription>
-            Set roles or remove access. New accounts are provisioned from Add Employee.
+            Set roles or remove access. New accounts are provisioned from{" "}
+            <Link href="/employees/new" className="text-primary hover:underline">
+              Add Employee
+            </Link>
+            .
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
