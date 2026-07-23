@@ -60,7 +60,12 @@ const router = new Hono<{ Variables: HonoVariables }>()
     requireRole("admin", "hr"),
     zValidator("json", createEmployeeWithUserSchema),
     async (c) => {
-      const { name, email, password, ...employeeData } = c.req.valid("json")
+      const { name, email, password, role, ...employeeData } = c.req.valid("json")
+
+      const requester = c.get("user")
+      if (role !== "employee" && requester.role !== "admin") {
+        return c.json({ error: "Only admins can create admin or HR accounts" }, 403)
+      }
 
       const existing = await db.select().from(users).where(eq(users.email, email))
       if (existing.length) {
@@ -83,7 +88,7 @@ const router = new Hono<{ Variables: HonoVariables }>()
 
       await db
         .update(users)
-        .set({ role: "employee", emailVerified: true, updatedAt: new Date() })
+        .set({ role, emailVerified: true, updatedAt: new Date() })
         .where(eq(users.id, newUserId))
 
       try {

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { useCreateEmployee } from "@/lib/hooks/useEmployees"
 import { useOptions } from "@/lib/hooks/useOptions"
+import { useSession } from "@/lib/auth/client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -23,11 +24,14 @@ export default function NewEmployeePage() {
   const router = useRouter()
   const { mutate: create, isPending } = useCreateEmployee()
   const { data: options } = useOptions()
+  const { data: session } = useSession()
+  const isAdmin = session?.user?.role === "admin"
 
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
+    role: "employee",
     employeeNo: "",
     department: "",
     position: "",
@@ -108,6 +112,25 @@ export default function NewEmployeePage() {
                 Share this with the employee so they can log in and change it.
               </p>
             </div>
+
+            {isAdmin && (
+              <div className="space-y-2">
+                <Label>Account Role</Label>
+                <Select value={form.role} onValueChange={(v) => set("role", v ?? "employee")}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="employee">Employee</SelectItem>
+                    <SelectItem value="hr">HR</SelectItem>
+                    <SelectItem value="admin">Admin</SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground">
+                  HR and Admin accounts still get an employee record for payroll purposes.
+                </p>
+              </div>
+            )}
 
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">

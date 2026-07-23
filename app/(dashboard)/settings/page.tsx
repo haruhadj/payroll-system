@@ -18,16 +18,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-  DialogClose,
-} from "@/components/ui/dialog"
 import { Plus, Trash2, SlidersHorizontal } from "lucide-react"
 import Link from "next/link"
 import {
@@ -67,30 +57,6 @@ function useUpdateRole() {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["users"] })
       toast.success("Role updated")
-    },
-    onError: (e: Error) => toast.error(e.message),
-  })
-}
-
-function useCreateUser() {
-  const qc = useQueryClient()
-  return useMutation({
-    mutationFn: async (data: { name: string; email: string; password: string; role: string }) => {
-      const res = await fetch("/api/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      })
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}))
-        throw new Error(err.error ?? "Failed to create user")
-      }
-      return res.json()
-    },
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["users"] })
-      qc.invalidateQueries({ queryKey: ["employees", "unlinked-users"] })
-      toast.success("User created")
     },
     onError: (e: Error) => toast.error(e.message),
   })
@@ -139,14 +105,19 @@ export default function SettingsPage() {
           <h1 className="text-2xl font-bold">Settings</h1>
           <p className="text-muted-foreground">Manage user accounts and roles</p>
         </div>
-        <CreateUserDialog />
+        <Link href="/employees/new">
+          <Button className="w-full sm:w-auto">
+            <Plus className="h-4 w-4 mr-2" />
+            Add Employee
+          </Button>
+        </Link>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>User Accounts</CardTitle>
           <CardDescription>
-            Provision accounts for staff and employees, set their roles, or remove access.
+            Set roles or remove access. New accounts are provisioned from Add Employee.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
@@ -618,108 +589,3 @@ function PayrollConfigCard() {
   )
 }
 
-function CreateUserDialog() {
-  const { mutate: createUser, isPending } = useCreateUser()
-  const [open, setOpen] = useState(false)
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    role: "employee",
-  })
-
-  const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }))
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (form.password.length < 8) {
-      toast.error("Password must be at least 8 characters")
-      return
-    }
-    createUser(form, {
-      onSuccess: () => {
-        setOpen(false)
-        setForm({ name: "", email: "", password: "", role: "employee" })
-      },
-    })
-  }
-
-  return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger
-        render={
-          <Button className="w-full sm:w-auto">
-            <Plus className="h-4 w-4 mr-2" />
-            New User
-          </Button>
-        }
-      />
-      <DialogContent className="max-w-md w-[calc(100vw-2rem)]">
-        <DialogHeader>
-          <DialogTitle>Create User Account</DialogTitle>
-          <DialogDescription>
-            Provision an admin or HR account. For employees, use Add Employee instead —
-            it creates the login and employee record together.
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label>Full Name</Label>
-            <Input
-              placeholder="Juan dela Cruz"
-              value={form.name}
-              onChange={(e) => set("name", e.target.value)}
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label>Email</Label>
-            <Input
-              type="email"
-              placeholder="juan@company.com"
-              value={form.email}
-              onChange={(e) => set("email", e.target.value)}
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label>Temporary Password</Label>
-            <Input
-              type="text"
-              placeholder="Min. 8 characters"
-              value={form.password}
-              onChange={(e) => set("password", e.target.value)}
-              minLength={8}
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label>Role</Label>
-            <Select value={form.role} onValueChange={(v) => set("role", v ?? "employee")}>
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="employee">Employee</SelectItem>
-                <SelectItem value="hr">HR</SelectItem>
-                <SelectItem value="admin">Admin</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <DialogFooter>
-            <DialogClose
-              render={
-                <Button type="button" variant="outline">
-                  Cancel
-                </Button>
-              }
-            />
-            <Button type="submit" disabled={isPending}>
-              {isPending ? "Creating…" : "Create User"}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
-  )
-}
