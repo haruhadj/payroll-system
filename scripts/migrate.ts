@@ -35,9 +35,21 @@ async function runMigrations() {
           code === "42710" || // type already exists
           code === "42P06" || // schema already exists
           code === "42701" || // column already exists
-          code === "42P16" // duplicate object
+          code === "42P16" || // duplicate object
+          // A later migration in this file references a column an earlier
+          // migration defined, but a database provisioned via `drizzle-kit
+          // push` (rather than a full replay from empty) can already be at a
+          // newer schema shape where that column was renamed/dropped before
+          // this statement ever ran against it — e.g. `time_log.log_date`
+          // (0003) vs. `time_log.date` (0013, after the table was dropped
+          // and recreated). Since this script has no migration-tracking
+          // table and always replays every file, that drift is expected and
+          // safe to skip past. NOTE: this also silently no-ops a genuine
+          // typo'd column reference in a future migration — if a migration
+          // mysteriously has no effect, check here first.
+          code === "42703" // undefined column
         ) {
-          // Already exists is OK
+          // Already applied / superseded — OK to continue.
         } else {
           throw error
         }
