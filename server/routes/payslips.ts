@@ -4,6 +4,7 @@ import { db } from "@/lib/db"
 import { employees, payslips } from "@/lib/db/schema"
 import { authMiddleware } from "@/server/middleware/auth"
 import { requireRole } from "@/server/middleware/rbac"
+import { computeLeakage } from "@/lib/payroll-calc"
 import type { HonoVariables } from "@/server/types"
 import { eq, and } from "drizzle-orm"
 import { z } from "zod"
@@ -108,13 +109,31 @@ const router = new Hono<{ Variables: HonoVariables }>()
   .patch(
     "/:id",
     requireRole("admin", "hr"),
-    zValidator("json", z.object({ status: z.enum(["approved", "paid"]) })),
+    zValidator(
+      "json",
+      z
+        .object({
+          status: z.enum(["approved", "paid"]),
+          // Amount actually released to the employee, reported by the
+          // releasing staff. Required when marking a payslip "paid" so
+          // leakage can be reconciled against the computed netPay.
+          actualNetPay: z.number().positive().optional(),
+        })
+        .refine((v) => v.status !== "paid" || v.actualNetPay !== undefined, {
+          message: "actualNetPay is required when marking a payslip as paid",
+          path: ["actualNetPay"],
+        }),
+    ),
     async (c) => {
       const id = c.req.param("id")!
-      const { status } = c.req.valid("json")
+      const { status, actualNetPay } = c.req.valid("json")
       const [updated] = await db
         .update(payslips)
-        .set({ status })
+        .set(
+          status === "paid"
+            ? { status, actualNetPay: String(actualNetPay), paidAt: new Date() }
+            : { status },
+        )
         .where(eq(payslips.id, id))
         .returning()
       if (!updated) return c.json({ error: "Not found" }, 404)
@@ -122,4 +141,46 @@ const router = new Hono<{ Variables: HonoVariables }>()
     },
   )
 
+  // Payroll leakage report: expected (netPay) vs. actual (actualNetPay)
+  // released amount for every payslip in a period, with a computed status.
+  .get("/leakage/:periodId", requireRole("admin", "hr"), async (c) => {
+    const periodId = c.req.param("periodId")!
+    const rows = await db.query.payslips.findMany({
+      where: eq(payslips.periodId, periodId),
+      with: {
+        employee: { with: { user: { columns: { name: true, email: true } } } },
+      },
+    })
+
+    const results = rows.map((r) => {
+      const netPay = parseFloat(r.netPay as string)
+      const actualNetPay = r.actualNetPay === null ? null : parseFloat(r.actualNetPay as string)
+      const { leakage, status } = computeLeakage({ netPay, actualNetPay })
+      return {
+        payslipId: r.id,
+        employeeId: r.employeeId,
+        employeeNo: r.employee?.employeeNo,
+        name: r.employee?.user?.name,
+        netPay,
+        actualNetPay,
+        leakage,
+        leakageStatus: status,
+        paidAt: r.paidAt,
+      }
+    })
+
+    const totalOverpayment = round2(
+      results.filter((r) => r.leakageStatus === "overpayment").reduce((s, r) => s + (r.leakage ?? 0), 0),
+    )
+    const totalUnderpayment = round2(
+      results.filter((r) => r.leakageStatus === "underpayment").reduce((s, r) => s + (r.leakage ?? 0), 0),
+    )
+
+    return c.json({ periodId, rows: results, totalOverpayment, totalUnderpayment })
+  })
+
 export { router as payslipsRouter }
+
+function round2(n: number): number {
+  return Math.round(n * 100) / 100
+}

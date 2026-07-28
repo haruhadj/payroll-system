@@ -63,6 +63,7 @@ const navItems: NavEntry[] = [
     children: [
       { href: "/payroll", label: "Payroll Periods", roles: STAFF },
       { href: "/payroll/thirteenth-month", label: "13th Month", roles: STAFF },
+      { href: "/payroll/leakage", label: "Leakage Report", roles: STAFF },
     ],
   },
   { href: "/leaves", label: "Leaves", icon: CalendarOff, roles: ALL },

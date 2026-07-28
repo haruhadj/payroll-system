@@ -1,0 +1,17 @@
+// utils/payrollLeakage.js
+export function computePayrollLeakage(employeeRecords) {
+  return employeeRecords.map(emp => {
+    const expectedGross = emp.dailyRate * emp.daysWorked;
+    const expectedDeductions = emp.sss + emp.philhealth + emp.pagibig + emp.tax;
+    const expectedNet = expectedGross - expectedDeductions + (emp.allowances || 0);
+    const actualNet = emp.actualNetSalary;
+    const leakage = actualNet - expectedNet;
+
+    return {
+      ...emp,
+      expectedNet,
+      leakage,
+      status: leakage > 0 ? "Overpayment" : leakage < 0 ? "Underpayment" : "OK"
+    };
+  });
+}

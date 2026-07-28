@@ -404,3 +404,34 @@ export function calculatePayrollFromAbsences(
     daysWorked: round2(a.daysPresent + a.paidLeaveDays),
   }
 }
+
+// ---------------------------------------------------------------------------
+// Payroll leakage reconciliation
+// ---------------------------------------------------------------------------
+//
+// Compares the system-computed `netPay` against the amount the releasing
+// staff reports as actually handed out (`actualNetPay`, captured when a
+// payslip is marked "paid"). This is a reconciliation control, not a fraud
+// proof: the actual amount is self-reported by whoever releases the pay.
+
+export interface LeakageInput {
+  netPay: number
+  actualNetPay: number | null
+}
+
+export type LeakageStatus = "overpayment" | "underpayment" | "ok" | "unreleased"
+
+export interface LeakageResult {
+  leakage: number | null
+  status: LeakageStatus
+}
+
+export function computeLeakage(input: LeakageInput): LeakageResult {
+  const { netPay, actualNetPay } = input
+  if (actualNetPay === null) return { leakage: null, status: "unreleased" }
+
+  const leakage = round2(actualNetPay - netPay)
+  const status: LeakageStatus =
+    leakage > 0 ? "overpayment" : leakage < 0 ? "underpayment" : "ok"
+  return { leakage, status }
+}

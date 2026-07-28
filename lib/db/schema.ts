@@ -236,6 +236,12 @@ export const payslips = pgTable(
       .default("0"),
     netPay: numeric("net_pay", { precision: 12, scale: 2 }).notNull(),
     status: payslipStatusEnum("status").notNull().default("pending"),
+    // Payroll leakage reconciliation: the amount actually released to the
+    // employee, captured by the releasing staff when marking a payslip
+    // "paid". Compared against `netPay` (the system-computed amount) to
+    // flag over/underpayment. Null until released.
+    actualNetPay: numeric("actual_net_pay", { precision: 12, scale: 2 }),
+    paidAt: timestamp("paid_at"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (t) => [

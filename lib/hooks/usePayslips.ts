@@ -45,12 +45,31 @@ export function usePayslipSummary(periodId: string) {
 export function useUpdatePayslipStatus() {
   const qc = useQueryClient()
   return useMutation({
-    mutationFn: ({ id, status }: { id: string; status: "approved" | "paid" }) =>
-      apiFetch(`/payslips/${id}`, { method: "PATCH", body: JSON.stringify({ status }) }),
+    mutationFn: ({
+      id,
+      status,
+      actualNetPay,
+    }: {
+      id: string
+      status: "approved" | "paid"
+      actualNetPay?: number
+    }) =>
+      apiFetch(`/payslips/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ status, actualNetPay }),
+      }),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["payslips"] })
       toast.success("Payslip status updated")
     },
     onError: (e: Error) => toast.error(e.message),
+  })
+}
+
+export function usePayrollLeakage(periodId: string) {
+  return useQuery({
+    queryKey: ["payslips", "leakage", periodId],
+    queryFn: () => apiFetch(`/payslips/leakage/${periodId}`),
+    enabled: !!periodId,
   })
 }

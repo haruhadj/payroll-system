@@ -113,6 +113,13 @@
       "when": 1784683568341,
       "tag": "0014_user_ban_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1785263880000,
+      "tag": "0015_payslip_leakage_fields",
+      "breakpoints": true
     }
   ]
 }

@@ -5,8 +5,11 @@ import Link from "next/link"
 import { usePayrollPeriod } from "@/lib/hooks/usePayroll"
 import { usePayslips, usePayslipSummary, useUpdatePayslipStatus } from "@/lib/hooks/usePayslips"
 import { useAttendanceSummary } from "@/lib/hooks/useAbsences"
+import { computeLeakage, type LeakageStatus } from "@/lib/payroll-calc"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import {
@@ -24,6 +27,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogTrigger,
+  DialogFooter,
 } from "@/components/ui/dialog"
 import { ArrowLeft, CalendarCheck2 } from "lucide-react"
 import { formatCurrency } from "@/lib/utils"
@@ -32,6 +36,20 @@ const slipStatusVariant: Record<string, "secondary" | "default" | "outline"> = {
   pending: "secondary",
   approved: "default",
   paid: "outline",
+}
+
+const leakageStatusVariant: Record<LeakageStatus, "secondary" | "default" | "destructive" | "outline"> = {
+  ok: "secondary",
+  overpayment: "destructive",
+  underpayment: "destructive",
+  unreleased: "outline",
+}
+
+const leakageStatusLabel: Record<LeakageStatus, string> = {
+  ok: "OK",
+  overpayment: "Overpayment",
+  underpayment: "Underpayment",
+  unreleased: "—",
 }
 
 export default function PayrollDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -95,6 +113,8 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
               <TableHead className="text-right hidden lg:table-cell">Pag-IBIG</TableHead>
               <TableHead className="text-right hidden lg:table-cell">Tax</TableHead>
               <TableHead className="text-right">Net Pay</TableHead>
+              <TableHead className="text-right hidden md:table-cell">Actual Released</TableHead>
+              <TableHead className="hidden md:table-cell">Leakage</TableHead>
               <TableHead>Status</TableHead>
               <TableHead className="text-right">Action</TableHead>
             </TableRow>
@@ -103,12 +123,16 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
             {sLoading
               ? Array.from({ length: 5 }).map((_, i) => (
                   <TableRow key={i}>
-                    {Array.from({ length: 9 }).map((_, j) => (
+                    {Array.from({ length: 11 }).map((_, j) => (
                       <TableCell key={j}><Skeleton className="h-4 w-full" /></TableCell>
                     ))}
                   </TableRow>
                 ))
-              : payslips?.map((s: any) => (
+              : payslips?.map((s: any) => {
+                  const netPay = parseFloat(s.netPay)
+                  const actualNetPay = s.actualNetPay === null || s.actualNetPay === undefined ? null : parseFloat(s.actualNetPay)
+                  const { status: leakageStatus } = computeLeakage({ netPay, actualNetPay })
+                  return (
                   <TableRow key={s.id}>
                     <TableCell>
                       <p className="font-medium">{s.employee?.user?.name ?? "—"}</p>
@@ -119,7 +143,13 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
                     <TableCell className="text-right font-mono text-muted-foreground hidden lg:table-cell">{formatCurrency(parseFloat(s.philhealth))}</TableCell>
                     <TableCell className="text-right font-mono text-muted-foreground hidden lg:table-cell">{formatCurrency(parseFloat(s.pagibig))}</TableCell>
                     <TableCell className="text-right font-mono text-muted-foreground hidden lg:table-cell">{formatCurrency(parseFloat(s.withholdingTax))}</TableCell>
-                    <TableCell className="text-right font-mono font-semibold">{formatCurrency(parseFloat(s.netPay))}</TableCell>
+                    <TableCell className="text-right font-mono font-semibold">{formatCurrency(netPay)}</TableCell>
+                    <TableCell className="text-right font-mono hidden md:table-cell">
+                      {actualNetPay === null ? "—" : formatCurrency(actualNetPay)}
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      <Badge variant={leakageStatusVariant[leakageStatus]}>{leakageStatusLabel[leakageStatus]}</Badge>
+                    </TableCell>
                     <TableCell>
                       <Badge variant={slipStatusVariant[s.status]}>{s.status}</Badge>
                     </TableCell>
@@ -137,19 +167,17 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
                           </Button>
                         )}
                         {s.status === "approved" && (
-                          <Button
-                            size="sm"
-                            variant="default"
-                            disabled={updating}
-                            onClick={() => updateStatus({ id: s.id, status: "paid" })}
-                          >
-                            Mark Paid
-                          </Button>
+                          <MarkPaidDialog
+                            netPay={netPay}
+                            updating={updating}
+                            onConfirm={(amount) => updateStatus({ id: s.id, status: "paid", actualNetPay: amount })}
+                          />
                         )}
                       </div>
                     </TableCell>
                   </TableRow>
-                ))}
+                  )
+                })}
           </TableBody>
         </Table>
       </div>
@@ -275,6 +303,76 @@ function AttendanceDialog({ periodId, payslip }: { periodId: string; payslip: an
             </Table>
           </div>
         </div>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+// Prompts for the amount actually released before marking a payslip "paid",
+// pre-filled with the computed netPay but editable — this is the figure
+// leakage reconciliation is measured against.
+function MarkPaidDialog({
+  netPay,
+  updating,
+  onConfirm,
+}: {
+  netPay: number
+  updating: boolean
+  onConfirm: (actualNetPay: number) => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [amount, setAmount] = useState(String(netPay))
+
+  const parsed = parseFloat(amount)
+  const valid = !isNaN(parsed) && parsed > 0
+
+  return (
+    <Dialog
+      open={open}
+      onOpenChange={(next) => {
+        setOpen(next)
+        if (next) setAmount(String(netPay))
+      }}
+    >
+      <DialogTrigger render={<Button size="sm" variant="default">Mark Paid</Button>} />
+      <DialogContent className="max-w-sm w-[calc(100vw-2rem)]">
+        <DialogHeader>
+          <DialogTitle>Confirm Release</DialogTitle>
+          <DialogDescription>
+            Enter the amount actually released to the employee. This is compared
+            against the computed net pay to flag payroll leakage.
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="space-y-3">
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Computed Net Pay</span>
+            <span className="font-mono font-semibold">{formatCurrency(netPay)}</span>
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="actual-net-pay">Amount Released</Label>
+            <Input
+              id="actual-net-pay"
+              type="number"
+              step="0.01"
+              min="0"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <DialogFooter>
+          <Button
+            disabled={!valid || updating}
+            onClick={() => {
+              onConfirm(parsed)
+              setOpen(false)
+            }}
+          >
+            Confirm & Mark Paid
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )

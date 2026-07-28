@@ -46,6 +46,8 @@ deductions.
 3. Apply PH statutory contributions (SSS, PhilHealth, Pag-IBIG) and BIR withholding tax.
 4. Enforce role-based access (Admin / HR / Employee) with secure authentication.
 5. Let employees view their own payslips and submit feedback.
+6. Detect payroll leakage by reconciling the system-computed net pay against the amount
+   actually released to each employee.
 
 **Scope — what it does.** Employee management, absence logging, leave requests, loans,
 payroll period processing, payslip generation with a full earnings/deductions breakdown,
@@ -179,6 +181,41 @@ be toggled per employee and system-wide.
 
 Everything is rounded to 2 decimals (centavos).
 
+### Payroll leakage reconciliation
+
+This is the module that answers *"how do you know the computed payroll actually
+matches what got paid out?"* — a common panel question and, if it's in your paper, a
+stated objective (see Part 2, objective 6).
+
+**The idea.** The system already computes an authoritative expected `netPay` for every
+payslip. But the peso amount that physically leaves the school's hands (cash, check, or
+bank transfer) is a separate real-world event the system doesn't otherwise witness. So
+when HR/Admin marks a payslip **"Paid"**, the system prompts for the **amount actually
+released**, pre-filled with the computed `netPay` but editable. That figure is saved as
+`actualNetPay` on the payslip, alongside `paidAt`.
+
+**The comparison.** `computeLeakage()` in `lib/payroll-calc.ts` subtracts:
+
+> **Leakage = Actual Net Pay − Computed Net Pay**
+
+- **Leakage > 0 → Overpayment** (more was released than computed)
+- **Leakage < 0 → Underpayment** (less was released than computed)
+- **Leakage = 0 → OK** (matches exactly)
+- **`actualNetPay` still null → Unreleased** (not yet marked paid, nothing to reconcile)
+
+**Where it shows up.** A per-payslip badge on the payroll run screen and on the
+employee's own payslip view (once released), plus a dedicated **Payroll Leakage Report**
+(`/payroll/leakage`) that lists every payslip in a period side-by-side with its expected
+vs. actual amount and running totals of over/underpayment.
+
+**Be upfront about what this is (and isn't) if asked.** This is a **reconciliation
+control**, not a fraud-detection system: `actualNetPay` is self-reported by whoever
+releases the pay, so it catches honest clerical/counting errors (wrong bill count, a
+typo, a shortchanged envelope) far better than it catches deliberate falsification. For
+this thesis's target users — school administrative/finance staff doing manual or
+semi-manual release — that's the realistic threat model, and it's exactly the kind of
+discrepancy manual payroll is prone to and hard to audit after the fact.
+
 ---
 
 ## Part 6 — Security & access control (panelists love this topic)
@@ -301,7 +338,19 @@ demonstrates the absence → payroll pipeline reacting live to an HR action.
   unauthorized absence, a loan, and a pending leave request — so every pay component
   (present days, paid leave, unpaid absence, loan amortization) is exercised.
 
-### F. Scope, limitations, future work
+### F. Payroll leakage
+- **"How do you detect payroll leakage?"** → When a payslip is marked "Paid," the
+  releaser enters the amount actually released. The system subtracts the computed net
+  pay from that figure — a nonzero result flags Overpayment or Underpayment, surfaced as
+  a badge and on the dedicated Leakage Report (Part 5).
+- **"Isn't the actual amount just self-reported? Couldn't someone lie?"** → Yes — it's a
+  reconciliation control against clerical error, not a fraud-proof audit. It's scoped to
+  the realistic workflow of our target testers (school finance staff doing manual/
+  semi-manual release), where miscounts and typos are the dominant risk, not deliberate
+  falsification. A stronger control (e.g. requiring a second approver, or importing a
+  bank disbursement file) is a natural future enhancement.
+
+### G. Scope, limitations, future work
 - **"What can't it do yet?"** → Answer honestly (Part 9): no PDF/email payslip delivery,
   no full audit log, no BIR year-end forms, single-company. Then immediately frame them
   as **future enhancements**, which shows you understand the domain.
@@ -320,6 +369,7 @@ enhancement.** Never argue that a real gap isn't one.
 | "There's no audit trail." | "Agreed — a who-changed-what history is important for production payroll compliance and is in our recommendations for future work." |
 | "Tax looks low per cutoff." | "The withholding brackets are the TRAIN-law monthly table; applying them per semi-monthly cutoff is a deliberate simplifying assumption we document, and it can be switched to the semi-monthly table as an enhancement." |
 | "What about large companies?" | "The current design targets small-to-mid headcounts. For large payrolls we'd add pagination and move processing to a background job queue — noted in future work." |
+| "Leakage relies on a manually typed number — how is that reliable?" | "It's a reconciliation control, not a fraud-proof audit — it catches the honest clerical errors that manual payroll is actually prone to. A second-approver check or bank-file import is a documented future enhancement." |
 
 **Golden rule:** a thesis defense rewards *knowing your own boundaries*. A confident
 "that's a documented limitation and here's how we'd extend it" scores better than

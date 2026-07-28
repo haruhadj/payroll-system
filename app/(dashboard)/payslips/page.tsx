@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { usePayslips } from "@/lib/hooks/usePayslips"
+import { computeLeakage, type LeakageStatus } from "@/lib/payroll-calc"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -16,6 +17,20 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { formatCurrency } from "@/lib/utils"
 import { Eye } from "lucide-react"
+
+const leakageStatusVariant: Record<LeakageStatus, "secondary" | "default" | "destructive" | "outline"> = {
+  ok: "secondary",
+  overpayment: "destructive",
+  underpayment: "destructive",
+  unreleased: "outline",
+}
+
+const leakageStatusLabel: Record<LeakageStatus, string> = {
+  ok: "Matches Payslip",
+  overpayment: "Overpayment",
+  underpayment: "Underpayment",
+  unreleased: "Not yet released",
+}
 
 export default function PayslipsPage() {
   const { data: payslips, isLoading } = usePayslips()
@@ -117,6 +132,27 @@ function PayslipDetail({ slip }: { slip: any }) {
       <Separator />
 
       {row("Net Pay", parseFloat(slip.netPay), "total")}
+
+      {slip.actualNetPay !== null && slip.actualNetPay !== undefined && (
+        <>
+          <Separator />
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase text-muted-foreground tracking-wider">
+              Amount Released
+            </p>
+            {row("Actual Released", parseFloat(slip.actualNetPay))}
+            {(() => {
+              const { status } = computeLeakage({
+                netPay: parseFloat(slip.netPay),
+                actualNetPay: parseFloat(slip.actualNetPay),
+              })
+              return (
+                <Badge variant={leakageStatusVariant[status]}>{leakageStatusLabel[status]}</Badge>
+              )
+            })()}
+          </div>
+        </>
+      )}
     </div>
   )
 }
