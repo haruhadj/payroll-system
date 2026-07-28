@@ -18,7 +18,10 @@ Ask the facilitator which account to use, or use one of:
 
 1. **Sign in** with the account above.
 2. Go to **Payslips** and open your latest payslip. Check that the numbers make sense:
-   basic pay, allowances, deductions (SSS, PhilHealth, Pag-IBIG, tax), and net pay.
+   basic pay, allowances, deductions (SSS, PhilHealth, Pag-IBIG, tax), and net pay. If it
+   was already released, you may also see an "Amount Released" line and a status badge
+   (OK / Overpayment / Underpayment) — that's the amount actually paid to you compared
+   against the computed net pay.
 3. Try to open **Dashboard** or **Employees** — you should *not* be able to (that's by
    design; only admin/HR can).
 4. Go to **Feedback** and submit a **rating (1–5)** and a short **comment** about your

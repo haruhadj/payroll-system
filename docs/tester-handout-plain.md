@@ -25,6 +25,9 @@ email or social media account.
 - Find the **Payslips** section.
 - Open your latest payslip.
 - Have a look at the numbers: your pay, the deductions, and the final take-home amount.
+- If it's already been paid, you may also see the exact amount released to you, with a
+  little status label. That's the system double-checking that what was computed matches
+  what you actually received.
 - **Ask yourself:** Does this look clear? Is anything confusing or hard to read?
 
 ## 3. Try to open a staff-only area

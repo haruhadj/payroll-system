@@ -115,10 +115,20 @@ Run this yourself as a smoke test, then hand it to testers (see the
    his payslip now shows **paid leave** for that day instead of an absence. (This is the
    scripted before/after moment — it demonstrates the absence → payroll pipeline live.)
 4. **Payslips** → review breakdowns; **release** the period.
-5. **Sign out → sign in as Juan** → he sees his own payslip only (RBAC check: `403` on
-   admin routes).
-6. **Feedback** → Juan submits a 1–5 rating + comment for the period.
-7. **Back as admin → Feedback (admin)** → the rating appears; dashboard average rating
+5. **Approve one payslip, then Mark Paid** — click **Approve**, then **Mark Paid**. A
+   dialog asks for the **amount actually released**, pre-filled with the computed net
+   pay. Type in a *different* number (e.g. add ₱50) and confirm. A **leakage badge**
+   appears on that row (Overpayment/Underpayment) instead of "OK".
+6. **Payroll → Leakage Report** (sidebar, under Payroll) → pick the same period → the
+   payslip you just marked paid shows up with the expected vs. actual amounts and the
+   flagged status, plus running totals at the top. This is the payroll-leakage-detection
+   feature — see [Part 5 of the Defense Guide](./defense-guide.md#payroll-leakage-reconciliation)
+   for how to explain it.
+7. **Sign out → sign in as Juan** → he sees his own payslip only (RBAC check: `403` on
+   admin routes). If his payslip was the one marked paid, he'll also see the "Amount
+   Released" line and the same leakage badge on his own view.
+8. **Feedback** → Juan submits a 1–5 rating + comment for the period.
+9. **Back as admin → Feedback (admin)** → the rating appears; dashboard average rating
    updates.
 
 Each tester should: log in as an employee, view their payslip, submit feedback. That
@@ -142,6 +152,9 @@ for UX/bug notes that don't fit the 1–5 model.
   RBAC enforced server-side, not a bug.
 - *"Where do the deduction amounts come from?"* — PH statutory formulas: SSS brackets,
   PhilHealth 2.75%, Pag-IBIG, BIR TRAIN-law withholding. See `lib/payroll-calc.ts`.
+- *"What's the 'Amount Released' / leakage badge on my payslip?"* — When HR marks a
+  payslip paid, they record the amount actually handed out, which the system compares
+  against the computed net pay. A mismatch is flagged so it can be caught and corrected.
 
 ### Known gaps — answer honestly if raised
 

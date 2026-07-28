@@ -53,6 +53,12 @@ to **≈ ₱14,456.**
 - PhilHealth = **2.75%** of basic · Tax = TRAIN-law on (gross − SSS − PhilHealth − Pag-IBIG)
 - **Net = Gross − (SSS + PhilHealth + Pag-IBIG + Tax + Loans) + 13th-month**
 
+## Payroll leakage (one breath)
+When a payslip is marked **Paid**, HR enters the **amount actually released**. System
+subtracts computed net pay from that → **Overpayment / Underpayment / OK**, shown as a
+badge and on the **Leakage Report** (`/payroll/leakage`). It's a reconciliation control
+for manual release, not fraud-proof — say so if pressed.
+
 ## Security (one breath)
 Every protected route: **401** if not logged in, **403** if wrong role. Passwords hashed,
 sessions in Postgres, all input validated by **Zod**. Employees only ever get their own
