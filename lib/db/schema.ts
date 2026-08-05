@@ -65,6 +65,26 @@ export const taxFrequencyEnum = pgEnum("tax_frequency", [
 ])
 export const timeLogSourceEnum = pgEnum("time_log_source", ["manual", "self"])
 
+// How statutory contributions are valued: from the government bracket tables,
+// or as a fixed peso amount the company deducts regardless of salary.
+export const contributionModeEnum = pgEnum("contribution_mode", [
+  "statutory",
+  "flat",
+])
+// Which semi-monthly cutoff a contribution is withheld on.
+export const contributionCutoffEnum = pgEnum("contribution_cutoff", [
+  "first",
+  "second",
+  "every",
+])
+// How the daily rate used for absence/late deductions is derived.
+export const dailyRateBasisEnum = pgEnum("daily_rate_basis", [
+  // basicSalary / workingDaysPerMonth — a fixed divisor every cutoff.
+  "monthly",
+  // cutoff base pay / scheduled work days in *this* period (11 or 7, etc).
+  "period",
+])
+
 // ---------------------------------------------------------------------------
 // Better Auth tables
 // ---------------------------------------------------------------------------
@@ -369,13 +389,42 @@ export const payrollSettings = pgTable("payroll_settings", {
   // Daily Time Record (DTR) / clock-in configuration.
   enableClockInOut: boolean("enable_clock_in_out").notNull().default(false),
   standardTimeIn: text("standard_time_in").notNull().default("08:00"),
-  standardTimeOut: text("standard_time_out").notNull().default("17:00"),
+  // 08:00–16:00 is an 8-hour shift; the per-minute late rate divides the
+  // daily rate by this span, so it has to match the real shift length.
+  standardTimeOut: text("standard_time_out").notNull().default("16:00"),
   lateGracePeriodMinutes: integer("late_grace_period_minutes")
     .notNull()
     .default(0),
   lateDeductionEnabled: boolean("late_deduction_enabled")
     .notNull()
     .default(false),
+  // Absence/late deduction basis. "period" divides the cutoff's base pay by
+  // the work days actually scheduled in that cutoff, so a day missed in a
+  // short cutoff costs more than one missed in a long cutoff.
+  dailyRateBasis: dailyRateBasisEnum("daily_rate_basis")
+    .notNull()
+    .default("period"),
+  // Statutory contributions: flat company-set amounts, each withheld on a
+  // single cutoff, rather than bracket-derived amounts split every cutoff.
+  contributionMode: contributionModeEnum("contribution_mode")
+    .notNull()
+    .default("flat"),
+  sssAmount: numeric("sss_amount", { precision: 10, scale: 2 })
+    .notNull()
+    .default("350"),
+  philhealthAmount: numeric("philhealth_amount", { precision: 10, scale: 2 })
+    .notNull()
+    .default("250"),
+  pagibigAmount: numeric("pagibig_amount", { precision: 10, scale: 2 })
+    .notNull()
+    .default("200"),
+  sssCutoff: contributionCutoffEnum("sss_cutoff").notNull().default("first"),
+  philhealthCutoff: contributionCutoffEnum("philhealth_cutoff")
+    .notNull()
+    .default("second"),
+  pagibigCutoff: contributionCutoffEnum("pagibig_cutoff")
+    .notNull()
+    .default("second"),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
 
@@ -687,6 +736,12 @@ export const insertTimeLogSchema = createInsertSchema(timeLogs, {
 }).omit({ id: true, createdAt: true, createdBy: true, source: true })
 export const updateTimeLogSchema = insertTimeLogSchema.partial()
 
+// Flat contribution amounts are stored as numeric strings.
+const nonNegativeAmount = z
+  .string()
+  .refine((v) => parseFloat(v) >= 0, { message: "Amount cannot be negative" })
+  .optional()
+
 export const selectPayrollSettingsSchema = createSelectSchema(payrollSettings)
 export const updatePayrollSettingsSchema = createInsertSchema(payrollSettings, {
   adminEmail: z.string().email().or(z.literal("")).optional().nullable(),
@@ -694,6 +749,9 @@ export const updatePayrollSettingsSchema = createInsertSchema(payrollSettings, {
   workDays: z.array(z.string()).min(1, "Pick at least one work day").optional(),
   standardTimeIn: z.string().regex(/^\d{2}:\d{2}$/).optional(),
   standardTimeOut: z.string().regex(/^\d{2}:\d{2}$/).optional(),
+  sssAmount: nonNegativeAmount,
+  philhealthAmount: nonNegativeAmount,
+  pagibigAmount: nonNegativeAmount,
 })
   .omit({ id: true, updatedAt: true })
   .partial()

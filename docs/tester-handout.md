@@ -37,6 +37,9 @@ Ask the facilitator which account to use, or use one of:
 ## Notes
 
 - Everything is dated **June 2026** on purpose — that's the demo payroll period.
+- Not every contribution appears on every payslip, and that's correct: **SSS** is deducted
+  on the 15th, while **PhilHealth** and **Pag-IBIG** come out on the 30th. A ₱0 line just
+  means that one isn't due this cutoff.
 - "Forgot password" may not send email in this test build; if you get locked out, ask
   the facilitator.
 

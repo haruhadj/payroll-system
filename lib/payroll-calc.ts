@@ -136,6 +136,16 @@ function round2(n: number): number {
 // holiday premium math here — monthly-paid employees already have those
 // folded into their basic salary under PH labor practice.
 
+// Which half of the month a payroll period falls in. Statutory contributions
+// are withheld on one cutoff or the other, not split across both.
+export type Cutoff = "first" | "second"
+export type ContributionCutoff = Cutoff | "every"
+export type ContributionMode = "statutory" | "flat"
+export type DailyRateBasis = "monthly" | "period"
+
+// Semi-monthly payroll: the monthly basic salary is paid over two cutoffs.
+const CUTOFFS_PER_MONTH = 2
+
 export interface PayrollSettingsInput {
   workingDaysPerMonth: number
   workDays: string[] // school week, e.g. ["mon", ..., "fri"]
@@ -153,6 +163,16 @@ export interface PayrollSettingsInput {
   standardTimeOut: string // "HH:MM"
   lateGracePeriodMinutes: number
   lateDeductionEnabled: boolean
+  // Absence/late deduction basis — see `dailyRateBasisEnum` in the schema.
+  dailyRateBasis: DailyRateBasis
+  // Flat-amount contribution configuration (used when mode is "flat").
+  contributionMode: ContributionMode
+  sssAmount: number
+  philhealthAmount: number
+  pagibigAmount: number
+  sssCutoff: ContributionCutoff
+  philhealthCutoff: ContributionCutoff
+  pagibigCutoff: ContributionCutoff
 }
 
 export interface AbsenceAggregate {
@@ -295,11 +315,28 @@ export function aggregateLateMinutes(params: {
   return total
 }
 
+// Classifies a payroll period by its end date: periods ending on or before
+// the 15th are the first cutoff, the rest are the second.
+export function cutoffOf(dateTo: string): Cutoff {
+  const day = Number(dateTo.split("-")[2])
+  return day <= 15 ? "first" : "second"
+}
+
+function withheldThisCutoff(
+  schedule: ContributionCutoff,
+  cutoff: Cutoff,
+): boolean {
+  return schedule === "every" || schedule === cutoff
+}
+
 export interface AbsencePayrollInput {
   basicSalary: number
   allowance?: number
   settings: PayrollSettingsInput
   absence: AbsenceAggregate
+  // Which half of the month this period covers; drives which statutory
+  // contributions are withheld. Defaults to withholding all of them.
+  cutoff?: Cutoff
   lateMinutes?: number
   deductToggles?: {
     sss?: boolean
@@ -324,6 +361,8 @@ export interface AbsencePayrollOutput {
   lateDeduction: number
   netPay: number
   daysWorked: number
+  // Rate the absence/late deductions were derived from, for payslip display.
+  dailyRate: number
 }
 
 export function calculatePayrollFromAbsences(
@@ -334,12 +373,23 @@ export function calculatePayrollFromAbsences(
     allowance = 0,
     settings,
     absence: a,
+    cutoff,
     lateMinutes = 0,
     deductToggles = {},
     loanDeduction = 0,
   } = input
 
-  const dailyRate = basicSalary / settings.workingDaysPerMonth
+  // Base pay for this cutoff — the monthly salary split across the month's
+  // cutoffs. Under the "period" basis the daily rate divides that base by the
+  // days actually scheduled in this cutoff, so a short cutoff has a higher
+  // daily rate than a long one.
+  const cutoffBase = basicSalary / CUTOFFS_PER_MONTH
+  const dailyRate =
+    settings.dailyRateBasis === "period"
+      ? a.scheduledDays > 0
+        ? cutoffBase / a.scheduledDays
+        : 0
+      : basicSalary / settings.workingDaysPerMonth
 
   // Per-minute rate derived from the standard shift length; used only for
   // the lateness deduction, not for OT/rest-day/holiday premiums (out of
@@ -361,16 +411,33 @@ export function calculatePayrollFromAbsences(
   const grossPay = round2(basicPay + allowance)
 
   // Statutory contributions are based on monthly basic salary (PH practice),
-  // gated by both the per-employee toggle and the system-wide setting.
+  // gated by the per-employee toggle, the system-wide setting, and — in flat
+  // mode — the cutoff each contribution is scheduled to be withheld on.
+  const flat = settings.contributionMode === "flat"
+  const dueThisCutoff = (schedule: ContributionCutoff) =>
+    !flat || cutoff === undefined || withheldThisCutoff(schedule, cutoff)
+
   const sss =
-    settings.sssEnabled && deductToggles.sss !== false ? calculateSSS(basicSalary) : 0
+    settings.sssEnabled && deductToggles.sss !== false && dueThisCutoff(settings.sssCutoff)
+      ? flat
+        ? round2(settings.sssAmount)
+        : calculateSSS(basicSalary)
+      : 0
   const philhealth =
-    settings.philhealthEnabled && deductToggles.philhealth !== false
-      ? calculatePhilHealth(basicSalary, settings.philhealthRate)
+    settings.philhealthEnabled &&
+    deductToggles.philhealth !== false &&
+    dueThisCutoff(settings.philhealthCutoff)
+      ? flat
+        ? round2(settings.philhealthAmount)
+        : calculatePhilHealth(basicSalary, settings.philhealthRate)
       : 0
   const pagibig =
-    settings.pagibigEnabled && deductToggles.pagibig !== false
-      ? calculatePagIbig(basicSalary)
+    settings.pagibigEnabled &&
+    deductToggles.pagibig !== false &&
+    dueThisCutoff(settings.pagibigCutoff)
+      ? flat
+        ? round2(settings.pagibigAmount)
+        : calculatePagIbig(basicSalary)
       : 0
   const withholdingTax =
     settings.taxEnabled && deductToggles.tax !== false
@@ -402,6 +469,7 @@ export function calculatePayrollFromAbsences(
     lateDeduction,
     netPay,
     daysWorked: round2(a.daysPresent + a.paidLeaveDays),
+    dailyRate: round2(dailyRate),
   }
 }
 

@@ -129,9 +129,10 @@ This is the heart of the system. Learn this sequence cold.
 default — HR logs exceptions, not attendance. This mirrors how schools actually run
 payroll for teachers (fixed monthly salary, no biometric punch clock) and avoids
 building a corporate shift-based time-and-attendance system nobody in the school would
-use. There's deliberately no late/rest-day/holiday premium math: under PH labor
-practice, monthly-paid employees already have holiday and rest-day pay folded into their
-monthly rate, so computing it separately would double-count.
+use. There's deliberately no rest-day/holiday premium math: under PH labor practice,
+monthly-paid employees already have holiday and rest-day pay folded into their monthly
+rate, so computing it separately would double-count. Lateness *is* deducted, but only
+when the school enables it and records time-in on the Daily Time Record.
 
 ---
 
@@ -142,31 +143,68 @@ explain the *logic* in plain words.
 
 ### Rates come from two places
 - **Per employee:** `basicSalary` (monthly) and `allowance`.
-- **System settings (`payrollSettings`):** working days per month (**22**), the school
-  `workDays` (e.g. Mon–Fri), paid-leave valuation (flat amount or actual daily rate), and
-  on/off switches for each statutory deduction.
+- **System settings (`payrollSettings`):** the school `workDays` (e.g. Mon–Fri), the
+  daily-rate basis, the contribution mode and its flat amounts and cutoff schedule,
+  paid-leave valuation (flat amount or actual daily rate), the shift times used for
+  lateness, and on/off switches for each statutory deduction.
 
 ### The building-block rate
-- **Daily rate** = monthly `basicSalary` ÷ `workingDaysPerMonth` (22).
+The **daily rate** is what every absence and late deduction is derived from. It has two
+modes (`dailyRateBasis`):
+
+- **Per cutoff (`"period"`, what the school uses):** cutoff base ÷ the work days actually
+  scheduled in *that* cutoff. The cutoff base is the monthly `basicSalary` ÷ 2, since
+  payroll is semi-monthly. A cutoff with 11 school days and one with 7 therefore have
+  *different* daily rates — a day missed in a short cutoff costs more, which is correct:
+  the same half-month pay is spread over fewer days.
+- **Fixed (`"monthly"`):** monthly `basicSalary` ÷ `workingDaysPerMonth` (22), the same
+  rate every cutoff regardless of the calendar.
+
+*Example:* on ₱30,000/month the cutoff base is ₱15,000. Over an 11-day cutoff the daily
+rate is ₱1,363.64; over a 7-day cutoff it is ₱2,142.86.
+
+### Lateness
+When lateness deduction is enabled, the **per-minute rate** is the daily rate ÷ the
+shift length ÷ 60 — so for an 08:00–16:00 shift, `daily ÷ 8 ÷ 60`. Minutes are counted
+past the standard time-in plus the grace period, from the Daily Time Record.
 
 ### Earnings
 - **Basic pay** = daily rate × days present + paid-leave days valued at the daily rate
   (or a flat amount, per the "actual rate" toggle).
 - **Gross pay** = basic pay + allowance.
 
-There's no overtime, night-differential, rest-day, or holiday premium — school staff
-don't punch a time clock, and monthly-paid employees already have holiday/rest-day pay
-built into their basic salary under PH labor practice.
+There's no overtime, night-differential, rest-day, or holiday premium — monthly-paid
+employees already have holiday/rest-day pay built into their basic salary under PH labor
+practice.
 
 ### The Philippine statutory deductions (be ready to explain each)
-These are computed on the **monthly basic salary** (standard PH practice), and each can
-be toggled per employee and system-wide.
+Each can be toggled per employee and system-wide. There are two contribution modes
+(`contributionMode`).
+
+**Flat mode — what the school actually uses.** Fixed peso amounts, each withheld on one
+specific cutoff rather than split across both:
+
+| Contribution | Amount | Withheld on |
+|---|---|---|
+| SSS | ₱350 | 1st cutoff (the 15th) |
+| Pag-IBIG | ₱200 | 2nd cutoff (the 30th) |
+| PhilHealth | ₱250 | 2nd cutoff (the 30th) |
+
+So the 15th payslip carries ₱350 of contributions and the 30th carries ₱450 — a total of
+₱800/month. Both the amounts and the cutoff each one lands on are configurable in
+Settings. **Expect a panel question here:** the amounts are the school's own schedule,
+not the government tables, which is a legitimate employer arrangement and is why the
+system makes it configurable rather than hard-coded.
+
+**Statutory mode.** The published PH tables, computed on the **monthly basic salary**
+(standard PH practice) and applied every cutoff:
 - **SSS** — a bracketed contribution table; the employee share is roughly 1.37%–1.91% of
   salary depending on the bracket, floored/capped (≈₱185–₱1,725).
 - **PhilHealth** — **2.75%** of salary, floored/capped (₱250–₱2,750).
 - **Pag-IBIG** — 1% below ₱10k, else 2%, capped at ₱200.
-- **BIR withholding tax** — the **TRAIN-law** bracket table, applied to *taxable pay*
-  (gross minus the three contributions above).
+
+**BIR withholding tax** works the same in both modes — the **TRAIN-law** bracket table
+applied to *taxable pay* (gross minus whichever contributions were withheld this cutoff).
 
 ### Loans and 13th-month
 - **Loan amortization** — a fixed per-cutoff amount deducted from net pay, capped at the
@@ -176,8 +214,10 @@ be toggled per employee and system-wide.
   requires it annually; the toggle lets you spread it).
 
 ### Net pay (the bottom line)
-> **Net pay = Gross pay − (SSS + PhilHealth + Pag-IBIG + Withholding tax + Loans) +
-> 13th-month accrual**
+> **Net pay = Gross pay − (SSS + PhilHealth + Pag-IBIG + Withholding tax + Loans +
+> Late deduction) + 13th-month accrual**
+>
+> …where the contributions are only the ones scheduled for *this* cutoff.
 
 Everything is rounded to 2 decimals (centavos).
 
@@ -253,32 +293,37 @@ leave request.
 > but rounding order can shift a few centavos. Never quote a number to the panel you
 > haven't confirmed against the running system.
 
-**Step 1 — building block**
-- Daily rate = 30,000 ÷ 22 = **₱1,363.64**
-
-**Step 2 — attendance buckets**
+**Step 1 — attendance buckets**
 - Scheduled (Mon–Fri) days in Jun 1–15: **11**
 - Days present: **10** (every scheduled day except Jun 15)
 - Absent: **1 day** (Jun 15 — *before* the leave is approved)
+
+**Step 2 — building block**
+- Cutoff base = 30,000 ÷ 2 = **₱15,000**
+- Daily rate = 15,000 ÷ **11 scheduled days** = **₱1,363.64**
+
+*(This cutoff happens to have 11 school days, which is why the rate matches the old fixed
+30,000 ÷ 22. A 7-day cutoff would give ₱2,142.86 — that difference is the whole point of
+the per-cutoff basis, and a sharp panelist may ask about it.)*
 
 **Step 3 — earnings**
 - Basic pay = 1,363.64 × 10 ≈ **₱13,636.36**
 - **Gross** = 13,636.36 + 2,000 ≈ **₱15,636.36**
 
-**Step 4 — deductions** (on the ₱30,000 monthly basic)
-- SSS ≈ **₱519.00** · PhilHealth = 30,000 × 2.75% = **₱825.00** · Pag-IBIG (capped) =
-  **₱200.00**
-- Withholding tax: taxable = 15,636.36 − (519 + 825 + 200) = 14,092.36 → falls in the
-  0% bracket → **₱0.00**
+**Step 4 — deductions** (1st cutoff, so SSS only)
+- SSS = **₱350.00** (flat, scheduled on the 1st cutoff)
+- PhilHealth and Pag-IBIG = **₱0.00** — they land on the 2nd cutoff (₱250 + ₱200 = ₱450)
+- Withholding tax: taxable = 15,636.36 − 350 = 15,286.36 → falls in the 0% bracket →
+  **₱0.00**
 - Loan amortization = **₱1,000.00**
 
 **Step 5 — net pay**
-- Net = 15,636.36 − (519 + 825 + 200 + 0 + 1,000) ≈ **₱13,092.36**
+- Net = 15,636.36 − (350 + 0 + 1,000) ≈ **₱14,286.36**
 
 **The live "before/after" demo (your strongest moment):** approve Juan's pending **Jun 15
 vacation leave**, then re-process. Jun 15 flips from *unpaid absence* to *paid leave* —
 leave takes priority over the logged absence — adding one full daily rate (~₱1,363.64)
-to basic pay. Net rises to roughly **₱14,456.00**, exactly one daily rate higher. This
+to basic pay. Net rises to roughly **₱15,650.00**, exactly one daily rate higher. This
 demonstrates the absence → payroll pipeline reacting live to an HR action.
 
 ---
@@ -311,10 +356,18 @@ demonstrates the absence → payroll pipeline reacting live to an HR action.
   be rebuilt reproducibly on any machine.
 
 ### C. Philippine-compliance
-- **"Where did your SSS/PhilHealth/Pag-IBIG/tax rates come from?"** → From the published
-  government contribution tables and the BIR TRAIN-law withholding brackets; they're
-  defined as constants in `payroll-calc.ts` so they're easy to update when the government
-  revises them. (Know that PhilHealth is 2.75% and the tax table is TRAIN-law.)
+- **"Where did your SSS/PhilHealth/Pag-IBIG/tax rates come from?"** → Two answers, and
+  give both. The **tax** brackets are the BIR TRAIN-law table. The **contributions** as
+  configured are the school's own flat schedule — ₱350 SSS on the 15th, ₱250 PhilHealth
+  and ₱200 Pag-IBIG on the 30th — which is what the school deducts in practice and is why
+  the amounts and their cutoff are settings rather than hard-coded values. The published
+  government tables (SSS brackets, PhilHealth 2.75%, Pag-IBIG 1%/2%) are also implemented
+  and can be switched on in Settings; they live as constants in `payroll-calc.ts` so
+  they're easy to update when the government revises them.
+- **"Why deduct the contributions on different cutoffs?"** → That's the school's cash-flow
+  arrangement: the 15th carries ₱350, the 30th carries ₱450. Splitting them keeps each
+  payslip's deduction smaller than withholding all three at once, and the schedule is
+  configurable per contribution.
 - **"How do you handle holidays/rest days?"** → Deliberately no separate computation.
   Under PH labor practice, employees paid on a monthly basis are considered paid for all
   days of the month, including unworked rest days and holidays — that pay is already

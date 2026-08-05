@@ -10,6 +10,7 @@ import { getPayrollSettings } from "@/server/routes/settings"
 import {
   aggregateAbsences,
   calculatePayrollFromAbsences,
+  cutoffOf,
   isLeavePaid,
   type PayrollSettingsInput,
 } from "@/lib/payroll-calc"
@@ -30,6 +31,14 @@ function toSettingsInput(s: any): PayrollSettingsInput {
     standardTimeOut: s.standardTimeOut,
     lateGracePeriodMinutes: s.lateGracePeriodMinutes,
     lateDeductionEnabled: s.lateDeductionEnabled,
+    dailyRateBasis: s.dailyRateBasis,
+    contributionMode: s.contributionMode,
+    sssAmount: parseFloat(s.sssAmount),
+    philhealthAmount: parseFloat(s.philhealthAmount),
+    pagibigAmount: parseFloat(s.pagibigAmount),
+    sssCutoff: s.sssCutoff,
+    philhealthCutoff: s.philhealthCutoff,
+    pagibigCutoff: s.pagibigCutoff,
   }
 }
 
@@ -127,6 +136,7 @@ async function main() {
       allowance: parseFloat(emp.allowance ?? "0"),
       settings,
       absence: aggregate,
+      cutoff: cutoffOf(period.dateTo),
       deductToggles: {
         sss: emp.deductSss,
         philhealth: emp.deductPhilhealth,
@@ -136,9 +146,8 @@ async function main() {
       loanDeduction,
     })
 
-    const dailyRate = parseFloat(emp.basicSalary) / settings.workingDaysPerMonth
     console.log(`\n────────────────────────────────────────────────────────`)
-    console.log(`${emp.user?.name} (${emp.employeeNo}) — basic ${peso(parseFloat(emp.basicSalary))}/mo (daily ${peso(dailyRate)})`)
+    console.log(`${emp.user?.name} (${emp.employeeNo}) — basic ${peso(parseFloat(emp.basicSalary))}/mo (daily ${peso(calc.dailyRate)} over ${aggregate.scheduledDays} scheduled days)`)
     console.log("  Attendance buckets:", JSON.stringify(aggregate))
     console.log("  Earnings:")
     console.log(`    Basic pay (${aggregate.daysPresent} present + ${aggregate.paidLeaveDays} paid leave) = ${peso(calc.basicPay)}`)
@@ -164,6 +173,7 @@ async function main() {
       allowance: parseFloat(emp1.allowance ?? "0"),
       settings,
       absence: withLeave.aggregate,
+      cutoff: cutoffOf(period.dateTo),
       loanDeduction: 1000,
     })
     console.log(`\n=== Scenario: EMP-001 with Jun-15 vacation APPROVED ===`)

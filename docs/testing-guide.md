@@ -150,8 +150,15 @@ for UX/bug notes that don't fit the 1–5 model.
   accounts for testing.
 - *"An employee can't see the dashboard / other people's payslips."* — Correct; that's
   RBAC enforced server-side, not a bug.
-- *"Where do the deduction amounts come from?"* — PH statutory formulas: SSS brackets,
-  PhilHealth 2.75%, Pag-IBIG, BIR TRAIN-law withholding. See `lib/payroll-calc.ts`.
+- *"Where do the deduction amounts come from?"* — Flat school-set contributions (SSS ₱350,
+  PhilHealth ₱250, Pag-IBIG ₱200) configured in Settings, plus BIR TRAIN-law withholding
+  tax. The PH statutory formulas (SSS brackets, PhilHealth 2.75%, Pag-IBIG) are also
+  implemented and switchable on. See `lib/payroll-calc.ts`.
+- *"Why did SSS disappear on the second payslip?"* — Not a bug. SSS is deducted on the 1st
+  cutoff (the 15th) only; PhilHealth and Pag-IBIG on the 2nd cutoff (the 30th) only.
+- *"Two periods, same salary, different daily rate — bug?"* — Also not a bug. The daily
+  rate is half the monthly salary divided by the work days scheduled in *that* cutoff, so
+  a cutoff with fewer school days has a higher daily rate.
 - *"What's the 'Amount Released' / leakage badge on my payslip?"* — When HR marks a
   payslip paid, they record the amount actually handed out, which the system compares
   against the computed net pay. A mismatch is flagged so it can be caught and corrected.
@@ -175,8 +182,11 @@ Being upfront about scope shows you know your system:
   middleware on every protected Hono route.
 - How does attendance become pay? → logged absences + approved leave →
   `aggregateAbsences` → `calculatePayrollFromAbsences`.
-- Why no holiday/overtime/late pay? → monthly-paid staff already have those folded into
-  the basic salary under PH labor practice; know the reasoning cold.
+- Why no holiday/overtime pay? → monthly-paid staff already have those folded into
+  the basic salary under PH labor practice; know the reasoning cold. (Lateness *is*
+  deducted when enabled — minutes past the grace period × daily rate ÷ shift hours ÷ 60.)
+- Why do the two cutoffs deduct different contributions? → SSS on the 15th, PhilHealth +
+  Pag-IBIG on the 30th, per the school's schedule; configurable in Settings.
 
 ---
 

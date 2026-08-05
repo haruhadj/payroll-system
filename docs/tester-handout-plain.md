@@ -57,6 +57,9 @@ email or social media account.
 
 - Everything is dated **June 2026** on purpose — that's just our sample pay period for
   testing. Don't worry about the date.
+- You may notice some deductions showing **₱0**. That's normal — SSS is taken out on the
+  15th, while PhilHealth and Pag-IBIG are taken out on the 30th, so each payslip only
+  shows the ones due that payday.
 - If the "forgot password" option doesn't work, that's fine for this test — just ask the
   person guiding you if you get stuck.
 

@@ -18,6 +18,7 @@ import {
   aggregateAbsences,
   aggregateLateMinutes,
   calculatePayrollFromAbsences,
+  cutoffOf,
   isLeavePaid,
   type PayrollSettingsInput,
 } from "@/lib/payroll-calc"
@@ -61,6 +62,14 @@ function toSettingsInput(s: SettingsRow): PayrollSettingsInput {
     standardTimeOut: s.standardTimeOut,
     lateGracePeriodMinutes: s.lateGracePeriodMinutes,
     lateDeductionEnabled: s.lateDeductionEnabled,
+    dailyRateBasis: s.dailyRateBasis,
+    contributionMode: s.contributionMode,
+    sssAmount: parseFloat(s.sssAmount),
+    philhealthAmount: parseFloat(s.philhealthAmount),
+    pagibigAmount: parseFloat(s.pagibigAmount),
+    sssCutoff: s.sssCutoff,
+    philhealthCutoff: s.philhealthCutoff,
+    pagibigCutoff: s.pagibigCutoff,
   }
 }
 
@@ -356,6 +365,7 @@ const router = new Hono<{ Variables: HonoVariables }>()
             allowance: parseFloat((emp.allowance as string) ?? "0"),
             settings,
             absence: aggregate,
+            cutoff: cutoffOf(period.dateTo),
             lateMinutes,
             deductToggles: {
               sss: emp.deductSss,

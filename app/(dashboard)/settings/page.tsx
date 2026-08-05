@@ -305,6 +305,24 @@ const TOGGLES: { key: string; label: string }[] = [
   { key: "taxEnabled", label: "Withholding tax" },
 ]
 
+// Flat-mode contributions: fixed peso amount, withheld on one cutoff.
+const CONTRIBUTIONS: { amount: string; cutoff: string; label: string }[] = [
+  { amount: "sssAmount", cutoff: "sssCutoff", label: "SSS" },
+  { amount: "philhealthAmount", cutoff: "philhealthCutoff", label: "PhilHealth" },
+  { amount: "pagibigAmount", cutoff: "pagibigCutoff", label: "Pag-IBIG" },
+]
+
+const CONTRIBUTION_CUTOFFS = [
+  { value: "first", label: "1st cut-off (15th)" },
+  { value: "second", label: "2nd cut-off (30th)" },
+  { value: "every", label: "Every cut-off" },
+]
+
+const DAILY_RATE_BASES = [
+  { value: "period", label: "Work days in the cut-off" },
+  { value: "monthly", label: "Fixed working days / month" },
+]
+
 function PayrollConfigCard() {
   const { data: settings, isLoading } = usePayrollSettings()
   const { mutate: save, isPending } = useUpdatePayrollSettings()
@@ -339,8 +357,14 @@ function PayrollConfigCard() {
     payload.enableClockInOut = !!form.enableClockInOut
     payload.lateDeductionEnabled = !!form.lateDeductionEnabled
     payload.standardTimeIn = form.standardTimeIn || "08:00"
-    payload.standardTimeOut = form.standardTimeOut || "17:00"
+    payload.standardTimeOut = form.standardTimeOut || "16:00"
     payload.lateGracePeriodMinutes = parseInt(form.lateGracePeriodMinutes ?? "0") || 0
+    payload.dailyRateBasis = form.dailyRateBasis ?? "period"
+    payload.contributionMode = form.contributionMode ?? "flat"
+    for (const con of CONTRIBUTIONS) {
+      payload[con.amount] = String(form[con.amount] ?? "0")
+      payload[con.cutoff] = form[con.cutoff] ?? "every"
+    }
     save(payload)
   }
 
@@ -406,7 +430,27 @@ function PayrollConfigCard() {
                 value={form.workingDaysPerMonth ?? ""}
                 onChange={(e) => set("workingDaysPerMonth", e.target.value)}
               />
-              <p className="text-[11px] text-muted-foreground">Used to derive the daily rate.</p>
+              <p className="text-[11px] text-muted-foreground">
+                Used to derive the daily rate under the fixed basis.
+              </p>
+            </div>
+            <div className="space-y-1">
+              <Label className="text-xs">Daily rate basis</Label>
+              <Select
+                value={form.dailyRateBasis ?? "period"}
+                onValueChange={(v) => set("dailyRateBasis", v ?? "period")}
+              >
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  {DAILY_RATE_BASES.map((b) => (
+                    <SelectItem key={b.value} value={b.value}>{b.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <p className="text-[11px] text-muted-foreground">
+                Per cut-off: half the monthly salary ÷ the days actually scheduled in that
+                cut-off, so a day missed in a short cut-off costs more.
+              </p>
             </div>
             <div className="space-y-1">
               <Label className="text-xs">PhilHealth rate</Label>
@@ -452,7 +496,7 @@ function PayrollConfigCard() {
               <Label className="text-xs">Standard Time Out</Label>
               <Input
                 type="time"
-                value={form.standardTimeOut ?? "17:00"}
+                value={form.standardTimeOut ?? "16:00"}
                 onChange={(e) => set("standardTimeOut", e.target.value)}
               />
             </div>
@@ -577,6 +621,50 @@ function PayrollConfigCard() {
             />
             Accrue 13th-month pay every cut-off
           </label>
+
+          <div className="mt-4 space-y-3">
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                className="h-4 w-4"
+                checked={(form.contributionMode ?? "flat") === "flat"}
+                onChange={(e) =>
+                  set("contributionMode", e.target.checked ? "flat" : "statutory")
+                }
+              />
+              Use fixed amounts instead of the government bracket tables
+            </label>
+            {(form.contributionMode ?? "flat") === "flat" && (
+              <div className="grid sm:grid-cols-3 gap-4">
+                {CONTRIBUTIONS.map((con) => (
+                  <div key={con.amount} className="rounded-md border p-3 space-y-2">
+                    <Label className="text-xs">{con.label} amount</Label>
+                    <Input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      value={form[con.amount] ?? ""}
+                      onChange={(e) => set(con.amount, e.target.value)}
+                    />
+                    <Label className="text-xs">Deducted on</Label>
+                    <Select
+                      value={form[con.cutoff] ?? "every"}
+                      onValueChange={(v) => set(con.cutoff, v ?? "every")}
+                    >
+                      <SelectTrigger><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        {CONTRIBUTION_CUTOFFS.map((cut) => (
+                          <SelectItem key={cut.value} value={cut.value}>
+                            {cut.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         <Button onClick={handleSave} disabled={isPending}>

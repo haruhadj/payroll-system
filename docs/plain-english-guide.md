@@ -83,25 +83,29 @@ Let's follow one employee — Juan — for the June 1–15 pay period. His month
 ₱30,000, and he gets a ₱2,000 allowance.
 
 **First, the system figures out his "rate":**
-- His pay for one day of work is his monthly salary divided across the working days:
-  about **₱1,363 per day**.
+- He's paid twice a month, so half his monthly salary — **₱15,000** — covers this half.
+- The school week is Monday–Friday, so June 1–15 has **11 scheduled days**.
+- Splitting ₱15,000 across those 11 days gives about **₱1,363 per day**. (A shorter
+  half-month with only 7 school days would give a *higher* daily rate, because the same
+  ₱15,000 is spread over fewer days.)
 
 **Then it adds up what he earned:**
-- The school week is Monday–Friday, so June 1–15 has 11 scheduled days.
-- He was present for 10 of them (he's out on Jun 15, pending a leave request) → about
-  **₱13,636** in basic pay.
+- He was present for 10 of the 11 days (he's out on Jun 15, pending a leave request) →
+  about **₱13,636** in basic pay.
 - Plus his ₱2,000 allowance.
 - **This gives a total ("gross pay") of about ₱15,636.**
 
-**Then it subtracts what's required by law and his loan:**
-- SSS: ₱519 · PhilHealth: ₱825 · Pag-IBIG: ₱200 · Tax: ₱0 for this period · Loan
-  payment: ₱1,000.
+**Then it subtracts his contributions and his loan:**
+- SSS: **₱350** — this is a 15th-payday deduction.
+- PhilHealth and Pag-IBIG: **₱0 this time** — those two (₱250 and ₱200) come out of the
+  30th payday instead, so each payday carries a smaller bite.
+- Tax: ₱0 for this period · Loan payment: ₱1,000.
 
-**What's left is his take-home pay: about ₱13,092.**
+**What's left is his take-home pay: about ₱14,286.**
 
 The nice part: if HR later approves Juan's paid leave for Jun 15, the system instantly
 recalculates — that day flips from an unpaid absence to a paid leave day — and his pay
-goes up by one day's worth (about ₱1,364) to roughly **₱14,456**. No manual
+goes up by one day's worth (about ₱1,364) to roughly **₱15,650**. No manual
 recomputing.
 
 > Note for the defense: these are example figures. Before you present, the team should
@@ -139,8 +143,14 @@ Yes, and here's the simple version of why:
   payroll actually works.
 
 - **"Where do the deduction amounts come from — did you just make them up?"**
-  No. They follow the official Philippine government rules for SSS, PhilHealth, Pag-IBIG,
-  and the tax table. If the government changes the rates, they can be updated.
+  No. The tax follows the official Philippine tax table. The SSS, PhilHealth, and Pag-IBIG
+  amounts are the fixed figures the school itself deducts (₱350, ₱250, ₱200), entered in
+  the system's settings — so if the school changes them, nobody has to touch the code. The
+  official government contribution tables are built in too and can be switched on instead.
+
+- **"Why doesn't every payday deduct the same thing?"**
+  On purpose. SSS comes out on the 15th; PhilHealth and Pag-IBIG come out on the 30th.
+  Spreading them means neither payday takes the whole ₱800 at once.
 
 - **"How do you know the math is correct?"**
   There's a built-in checking tool that runs the same calculations on sample data so we

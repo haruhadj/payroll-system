@@ -37,12 +37,19 @@
 - Bulk auto-generate payslips on "process" for every **active** employee
 - Computation engine (`lib/payroll-calc.ts`) turns the school-week calendar + logged
   absences + approved leaves into day buckets, then into pesos:
+  - Daily rate = the cutoff's base pay ÷ the work days scheduled in *that* cutoff, so a
+    short cutoff has a higher daily rate (switchable to a fixed monthly divisor)
   - Basic pay = daily rate × days present + paid-leave days at the daily rate (or a flat
     amount)
-  - No late/rest-day/holiday premium math — monthly-paid employees already have those
-    folded into their basic salary under PH labor practice
-- PH statutory deductions on monthly basic salary: SSS (bracketed), PhilHealth (2.75%),
-  Pag-IBIG, BIR TRAIN-law withholding tax — each toggleable system-wide and per employee
+  - Late deduction = minutes past the grace period × daily rate ÷ shift hours ÷ 60
+  - No rest-day/holiday premium math — monthly-paid employees already have those folded
+    into their basic salary under PH labor practice
+- Contributions in either of two modes, each toggleable system-wide and per employee:
+  - **Flat** (default): fixed amounts on a scheduled cutoff — SSS ₱350 on the 1st cutoff,
+    PhilHealth ₱250 + Pag-IBIG ₱200 on the 2nd — all configurable in Settings
+  - **Statutory**: PH tables on monthly basic salary — SSS (bracketed), PhilHealth
+    (2.75%), Pag-IBIG
+- BIR TRAIN-law withholding tax on taxable pay, in both modes
 - Loan amortization deducted per cutoff; balances decrement only when a fresh payslip is
   created (re-processing never double-charges)
 - Optional 13th-month accrual (1/12 of basic) per cutoff
