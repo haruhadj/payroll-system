@@ -44,3 +44,6 @@ next-env.d.ts
 # vitepress
 docs/.vitepress/dist
 docs/.vitepress/cache
+
+# graphify (generated knowledge graph output)
+graphify-out/
