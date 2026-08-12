@@ -2,7 +2,7 @@
 
 import { useState, useEffect, use } from "react"
 import { useRouter } from "next/navigation"
-import { useEmployee, useUpdateEmployee } from "@/lib/hooks/useEmployees"
+import { useEmployee, useUpdateEmployee, useUpdateUserName } from "@/lib/hooks/useEmployees"
 import { useOptions } from "@/lib/hooks/useOptions"
 import { authClient, useSession } from "@/lib/auth/client"
 import { Button } from "@/components/ui/button"
@@ -96,6 +96,49 @@ function ResetPasswordButton({ userId }: { userId: string }) {
   )
 }
 
+function EditNameButton({ userId, currentName }: { userId: string; currentName: string }) {
+  const [open, setOpen] = useState(false)
+  const [name, setName] = useState(currentName)
+  const { mutate: updateName, isPending } = useUpdateUserName(userId)
+
+  const handleSave = () => {
+    updateName(name, { onSuccess: () => setOpen(false) })
+  }
+
+  return (
+    <>
+      <Button
+        type="button"
+        variant="outline"
+        onClick={() => {
+          setName(currentName)
+          setOpen(true)
+        }}
+      >
+        Edit Name
+      </Button>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Edit Full Name</DialogTitle>
+            <DialogDescription>
+              Correct the employee&apos;s legal name. This updates their account and will reflect on future payslips.
+            </DialogDescription>
+          </DialogHeader>
+          <Input value={name} onChange={(e) => setName(e.target.value)} />
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
+            <Button type="button" onClick={handleSave} disabled={isPending || !name.trim()}>
+              {isPending ? "Saving…" : "Save"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
+  )
+}
+
 const DEDUCTION_TOGGLES = [
   { key: "deductSss", label: "SSS" },
   { key: "deductPhilhealth", label: "PhilHealth" },
@@ -111,6 +154,8 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
   const { data: options } = useOptions()
   const { data: session } = useSession()
   const isAdmin = (session?.user as any)?.role === "admin"
+  const role = (session?.user as any)?.role
+  const canEditName = role === "admin" || role === "hr"
 
   const [form, setForm] = useState({
     department: "",
@@ -177,7 +222,12 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
           <h1 className="text-2xl font-bold">Edit Employee</h1>
           <p className="text-muted-foreground">{emp?.employeeNo} — {emp?.user?.name}</p>
         </div>
-        {isAdmin && emp?.userId && <ResetPasswordButton userId={emp.userId} />}
+        <div className="flex gap-2">
+          {canEditName && emp?.userId && (
+            <EditNameButton userId={emp.userId} currentName={emp?.user?.name ?? ""} />
+          )}
+          {isAdmin && emp?.userId && <ResetPasswordButton userId={emp.userId} />}
+        </div>
       </div>
 
       <Card>

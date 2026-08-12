@@ -64,6 +64,19 @@ export function useUpdateEmployee(id: string) {
   })
 }
 
+export function useUpdateUserName(userId: string) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: (name: string) =>
+      apiFetch(`/users/${userId}/name`, { method: "PATCH", body: JSON.stringify({ name }) }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["employees"] })
+      toast.success("Name updated")
+    },
+    onError: (e: Error) => toast.error(e.message),
+  })
+}
+
 export function useDeleteEmployee() {
   const qc = useQueryClient()
   return useMutation({

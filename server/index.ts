@@ -45,6 +45,22 @@ const usersRouter = new Hono<{ Variables: HonoVariables }>()
       return c.json(updated)
     },
   )
+  .patch(
+    "/:userId/name",
+    requireRole("admin", "hr"),
+    zValidator("json", z.object({ name: z.string().trim().min(1, "Name is required").max(150) })),
+    async (c) => {
+      const userId = c.req.param("userId")
+      const { name } = c.req.valid("json")
+      const [updated] = await db
+        .update(users)
+        .set({ name, updatedAt: new Date() })
+        .where(eq(users.id, userId))
+        .returning({ id: users.id, name: users.name })
+      if (!updated) return c.json({ error: "Not found" }, 404)
+      return c.json(updated)
+    },
+  )
   .delete("/:userId", requireRole("admin"), async (c) => {
     const userId = c.req.param("userId")!
     const current = c.get("user")
