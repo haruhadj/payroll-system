@@ -6,7 +6,7 @@ import { authMiddleware } from "@/server/middleware/auth"
 import { requireRole } from "@/server/middleware/rbac"
 import { computeLeakage } from "@/lib/payroll-calc"
 import type { HonoVariables } from "@/server/types"
-import { eq, and } from "drizzle-orm"
+import { eq, and, inArray } from "drizzle-orm"
 import { z } from "zod"
 
 const router = new Hono<{ Variables: HonoVariables }>()
@@ -138,6 +138,24 @@ const router = new Hono<{ Variables: HonoVariables }>()
         .returning()
       if (!updated) return c.json({ error: "Not found" }, 404)
       return c.json(updated)
+    },
+  )
+
+  // Bulk-approve pending payslips in one call, e.g. "Approve Selected" on the
+  // payroll period page. Only rows currently "pending" are touched, so
+  // already-approved/paid payslips passed in by mistake are silently skipped.
+  .patch(
+    "/bulk-approve",
+    requireRole("admin", "hr"),
+    zValidator("json", z.object({ ids: z.array(z.string().uuid()).min(1) })),
+    async (c) => {
+      const { ids } = c.req.valid("json")
+      const updated = await db
+        .update(payslips)
+        .set({ status: "approved" })
+        .where(and(inArray(payslips.id, ids), eq(payslips.status, "pending")))
+        .returning({ id: payslips.id })
+      return c.json({ approved: updated.map((u) => u.id) })
     },
   )
 

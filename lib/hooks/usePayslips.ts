@@ -66,6 +66,22 @@ export function useUpdatePayslipStatus() {
   })
 }
 
+export function useBulkApprovePayslips() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: ({ ids }: { ids: string[] }) =>
+      apiFetch(`/payslips/bulk-approve`, {
+        method: "PATCH",
+        body: JSON.stringify({ ids }),
+      }),
+    onSuccess: (data: { approved: string[] }) => {
+      qc.invalidateQueries({ queryKey: ["payslips"] })
+      toast.success(`Approved ${data.approved.length} payslip${data.approved.length === 1 ? "" : "s"}`)
+    },
+    onError: (e: Error) => toast.error(e.message),
+  })
+}
+
 export function usePayrollLeakage(periodId: string) {
   return useQuery({
     queryKey: ["payslips", "leakage", periodId],

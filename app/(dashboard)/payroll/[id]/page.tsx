@@ -3,7 +3,12 @@
 import { use, useState } from "react"
 import Link from "next/link"
 import { usePayrollPeriod } from "@/lib/hooks/usePayroll"
-import { usePayslips, usePayslipSummary, useUpdatePayslipStatus } from "@/lib/hooks/usePayslips"
+import {
+  usePayslips,
+  usePayslipSummary,
+  useUpdatePayslipStatus,
+  useBulkApprovePayslips,
+} from "@/lib/hooks/usePayslips"
 import { useAttendanceSummary } from "@/lib/hooks/useAbsences"
 import { computeLeakage, type LeakageStatus } from "@/lib/payroll-calc"
 import { Button } from "@/components/ui/button"
@@ -58,6 +63,33 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
   const { data: payslips, isLoading: sLoading } = usePayslips({ periodId: id })
   const { data: summary } = usePayslipSummary(id)
   const { mutate: updateStatus, isPending: updating } = useUpdatePayslipStatus()
+  const { mutate: bulkApprove, isPending: bulkApproving } = useBulkApprovePayslips()
+  const [selected, setSelected] = useState<Set<string>>(new Set())
+
+  const pendingSlips = payslips?.filter((s: any) => s.status === "pending") ?? []
+  const allPendingSelected = pendingSlips.length > 0 && pendingSlips.every((s: any) => selected.has(s.id))
+
+  function toggleOne(slipId: string) {
+    setSelected((prev) => {
+      const next = new Set(prev)
+      if (next.has(slipId)) next.delete(slipId)
+      else next.add(slipId)
+      return next
+    })
+  }
+
+  function toggleAllPending() {
+    setSelected((prev) => {
+      if (allPendingSelected) return new Set()
+      return new Set(pendingSlips.map((s: any) => s.id))
+    })
+  }
+
+  function handleBulkApprove() {
+    const ids = Array.from(selected)
+    if (ids.length === 0) return
+    bulkApprove({ ids }, { onSuccess: () => setSelected(new Set()) })
+  }
 
   return (
     <div className="space-y-6">
@@ -102,10 +134,36 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
         </div>
       )}
 
+      {pendingSlips.length > 0 && (
+        <div className="flex items-center justify-between rounded-md border bg-background px-4 py-2">
+          <span className="text-sm text-muted-foreground">
+            {selected.size > 0 ? `${selected.size} selected` : `${pendingSlips.length} pending payslip${pendingSlips.length === 1 ? "" : "s"}`}
+          </span>
+          <Button
+            size="sm"
+            disabled={selected.size === 0 || bulkApproving}
+            onClick={handleBulkApprove}
+          >
+            Approve Selected{selected.size > 0 ? ` (${selected.size})` : ""}
+          </Button>
+        </div>
+      )}
+
       <div className="rounded-md border bg-background overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead className="w-10">
+                {pendingSlips.length > 0 && (
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4"
+                    checked={allPendingSelected}
+                    onChange={toggleAllPending}
+                    aria-label="Select all pending payslips"
+                  />
+                )}
+              </TableHead>
               <TableHead>Employee</TableHead>
               <TableHead className="text-right hidden lg:table-cell">Gross Pay</TableHead>
               <TableHead className="text-right hidden lg:table-cell">SSS</TableHead>
@@ -123,7 +181,7 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
             {sLoading
               ? Array.from({ length: 5 }).map((_, i) => (
                   <TableRow key={i}>
-                    {Array.from({ length: 11 }).map((_, j) => (
+                    {Array.from({ length: 12 }).map((_, j) => (
                       <TableCell key={j}><Skeleton className="h-4 w-full" /></TableCell>
                     ))}
                   </TableRow>
@@ -134,6 +192,17 @@ export default function PayrollDetailPage({ params }: { params: Promise<{ id: st
                   const { status: leakageStatus } = computeLeakage({ netPay, actualNetPay })
                   return (
                   <TableRow key={s.id}>
+                    <TableCell>
+                      {s.status === "pending" && (
+                        <input
+                          type="checkbox"
+                          className="h-4 w-4"
+                          checked={selected.has(s.id)}
+                          onChange={() => toggleOne(s.id)}
+                          aria-label={`Select payslip for ${s.employee?.user?.name ?? "employee"}`}
+                        />
+                      )}
+                    </TableCell>
                     <TableCell>
                       <p className="font-medium">{s.employee?.user?.name ?? "—"}</p>
                       <p className="text-xs text-muted-foreground">{s.employee?.employeeNo}</p>
