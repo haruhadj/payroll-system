@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { usePayslips } from "@/lib/hooks/usePayslips"
+import { useAttendanceSummary } from "@/lib/hooks/useAbsences"
 import { computeLeakage, type LeakageStatus } from "@/lib/payroll-calc"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -13,10 +14,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { formatCurrency } from "@/lib/utils"
-import { Eye } from "lucide-react"
+import { Eye, CalendarCheck2, ChevronDown, ChevronUp } from "lucide-react"
 
 const leakageStatusVariant: Record<LeakageStatus, "secondary" | "default" | "destructive" | "outline"> = {
   ok: "secondary",
@@ -30,6 +39,13 @@ const leakageStatusLabel: Record<LeakageStatus, string> = {
   overpayment: "Overpayment",
   underpayment: "Underpayment",
   unreleased: "Not yet released",
+}
+
+const dayStatusVariant: Record<string, "default" | "secondary" | "outline"> = {
+  present: "default",
+  absent: "secondary",
+  leave: "outline",
+  off: "outline",
 }
 
 export default function PayslipsPage() {
@@ -96,6 +112,12 @@ export default function PayslipsPage() {
 }
 
 function PayslipDetail({ slip }: { slip: any }) {
+  const [showAttendance, setShowAttendance] = useState(false)
+  const { data: attendance, isLoading: attendanceLoading } = useAttendanceSummary(
+    showAttendance ? slip.period?.id : "",
+    showAttendance ? slip.employeeId : null,
+  )
+
   const row = (label: string, val: number, variant: "normal" | "deduct" | "total" = "normal") => (
     <div className={`flex justify-between text-sm ${variant === "deduct" ? "text-muted-foreground" : variant === "total" ? "font-bold text-base" : ""}`}>
       <span>{label}</span>
@@ -153,6 +175,55 @@ function PayslipDetail({ slip }: { slip: any }) {
           </div>
         </>
       )}
+
+      <Separator />
+
+      <div>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="w-full justify-between"
+          onClick={() => setShowAttendance((v) => !v)}
+        >
+          <span className="flex items-center gap-2">
+            <CalendarCheck2 className="h-4 w-4" />
+            Daily Attendance
+          </span>
+          {showAttendance ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+        </Button>
+
+        {showAttendance && (
+          <div className="mt-3 max-h-64 overflow-y-auto rounded-md border">
+            {attendanceLoading ? (
+              <div className="space-y-2 p-3">
+                {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-6 w-full" />)}
+              </div>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Date</TableHead>
+                    <TableHead>Scheduled</TableHead>
+                    <TableHead>Status</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {attendance?.days?.map((d: any) => (
+                    <TableRow key={d.date}>
+                      <TableCell className="text-sm">{d.date}</TableCell>
+                      <TableCell className="text-sm">{d.scheduled ? "Yes" : "No"}</TableCell>
+                      <TableCell>
+                        <Badge variant={dayStatusVariant[d.status]}>{d.status}</Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
