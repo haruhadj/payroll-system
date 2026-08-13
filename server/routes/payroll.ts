@@ -233,6 +233,20 @@ const router = new Hono<{ Variables: HonoVariables }>()
     async (c) => {
       const user = c.get("user")
       const data = c.req.valid("json")
+
+      const duplicate = await db.query.payrollPeriods.findFirst({
+        where: and(
+          eq(payrollPeriods.dateFrom, data.dateFrom),
+          eq(payrollPeriods.dateTo, data.dateTo),
+        ),
+      })
+      if (duplicate) {
+        return c.json(
+          { error: `A payroll period for ${data.dateFrom} to ${data.dateTo} already exists ("${duplicate.label}")` },
+          409,
+        )
+      }
+
       const [created] = await db
         .insert(payrollPeriods)
         .values({ ...data, createdBy: user.id })

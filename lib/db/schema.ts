@@ -212,7 +212,7 @@ export const payrollPeriods = pgTable(
   },
   (t) => [
     index("idx_payroll_period_status").on(t.status),
-    index("idx_payroll_period_dates").on(t.dateFrom, t.dateTo),
+    uniqueIndex("idx_payroll_period_dates").on(t.dateFrom, t.dateTo),
   ],
 )
 
