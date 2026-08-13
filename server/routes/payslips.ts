@@ -106,6 +106,25 @@ const router = new Hono<{ Variables: HonoVariables }>()
     return c.json(slip)
   })
 
+  // Bulk-approve pending payslips in one call, e.g. "Approve Selected" on the
+  // payroll period page. Only rows currently "pending" are touched, so
+  // already-approved/paid payslips passed in by mistake are silently skipped.
+  // Declared before "/:id" so the literal path isn't swallowed by the param route.
+  .patch(
+    "/bulk-approve",
+    requireRole("admin", "hr"),
+    zValidator("json", z.object({ ids: z.array(z.string().uuid()).min(1) })),
+    async (c) => {
+      const { ids } = c.req.valid("json")
+      const updated = await db
+        .update(payslips)
+        .set({ status: "approved" })
+        .where(and(inArray(payslips.id, ids), eq(payslips.status, "pending")))
+        .returning({ id: payslips.id })
+      return c.json({ approved: updated.map((u) => u.id) })
+    },
+  )
+
   .patch(
     "/:id",
     requireRole("admin", "hr"),
@@ -138,24 +157,6 @@ const router = new Hono<{ Variables: HonoVariables }>()
         .returning()
       if (!updated) return c.json({ error: "Not found" }, 404)
       return c.json(updated)
-    },
-  )
-
-  // Bulk-approve pending payslips in one call, e.g. "Approve Selected" on the
-  // payroll period page. Only rows currently "pending" are touched, so
-  // already-approved/paid payslips passed in by mistake are silently skipped.
-  .patch(
-    "/bulk-approve",
-    requireRole("admin", "hr"),
-    zValidator("json", z.object({ ids: z.array(z.string().uuid()).min(1) })),
-    async (c) => {
-      const { ids } = c.req.valid("json")
-      const updated = await db
-        .update(payslips)
-        .set({ status: "approved" })
-        .where(and(inArray(payslips.id, ids), eq(payslips.status, "pending")))
-        .returning({ id: payslips.id })
-      return c.json({ approved: updated.map((u) => u.id) })
     },
   )
 
