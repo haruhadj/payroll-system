@@ -125,14 +125,14 @@ export default function PayrollPage() {
         </Link>
       </div>
 
-      <div className="rounded-md border bg-background overflow-x-auto">
-        <Table>
+      <div className="rounded-md border bg-background overflow-x-auto [-webkit-overflow-scrolling:touch]">
+        <Table className="min-w-[640px]">
           <TableHeader>
             <TableRow>
               <SortHeader label="Period" columnKey="label" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
-              <SortHeader label="Date From" columnKey="dateFrom" className="hidden sm:table-cell" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
-              <SortHeader label="Date To" columnKey="dateTo" className="hidden sm:table-cell" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
-              <SortHeader label="Created" columnKey="createdAt" className="hidden md:table-cell" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
+              <SortHeader label="Date From" columnKey="dateFrom" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
+              <SortHeader label="Date To" columnKey="dateTo" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
+              <SortHeader label="Created" columnKey="createdAt" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
               <SortHeader label="Status" columnKey="status" sortKey={sortKey} sortDir={sortDir} onToggle={toggleSort} />
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
@@ -150,13 +150,10 @@ export default function PayrollPage() {
                   <TableRow key={p.id}>
                     <TableCell>
                       <p className="font-medium">{p.label}</p>
-                      <p className="text-xs text-muted-foreground sm:hidden">
-                        {p.dateFrom} → {p.dateTo}
-                      </p>
                     </TableCell>
-                    <TableCell className="text-muted-foreground hidden sm:table-cell">{p.dateFrom}</TableCell>
-                    <TableCell className="text-muted-foreground hidden sm:table-cell">{p.dateTo}</TableCell>
-                    <TableCell className="text-muted-foreground hidden md:table-cell">
+                    <TableCell className="text-muted-foreground">{p.dateFrom}</TableCell>
+                    <TableCell className="text-muted-foreground">{p.dateTo}</TableCell>
+                    <TableCell className="text-muted-foreground">
                       {formatCreatedAt(p.createdAt)}
                     </TableCell>
                     <TableCell>
