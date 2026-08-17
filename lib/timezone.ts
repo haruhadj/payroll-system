@@ -27,3 +27,13 @@ export function getOrgLocalHoursMinutes(date: Date): { hours: number; minutes: n
   const shifted = new Date(date.getTime() + ORG_TIMEZONE_OFFSET_MINUTES * 60_000)
   return { hours: shifted.getUTCHours(), minutes: shifted.getUTCMinutes() }
 }
+
+// Returns today's date as "YYYY-MM-DD" in Asia/Manila wall-clock time,
+// independent of the server process's ambient timezone.
+export function getOrgLocalDateKey(date: Date = new Date()): string {
+  const shifted = new Date(date.getTime() + ORG_TIMEZONE_OFFSET_MINUTES * 60_000)
+  const y = shifted.getUTCFullYear()
+  const m = String(shifted.getUTCMonth() + 1).padStart(2, "0")
+  const day = String(shifted.getUTCDate()).padStart(2, "0")
+  return `${y}-${m}-${day}`
+}

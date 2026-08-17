@@ -8,14 +8,7 @@ import { requireRole } from "@/server/middleware/rbac"
 import type { HonoVariables } from "@/server/types"
 import { and, eq, gte, lte, desc } from "drizzle-orm"
 import type { SQL } from "drizzle-orm"
-
-function todayKey(): string {
-  const d = new Date()
-  const y = d.getFullYear()
-  const m = String(d.getMonth() + 1).padStart(2, "0")
-  const day = String(d.getDate()).padStart(2, "0")
-  return `${y}-${m}-${day}`
-}
+import { getOrgLocalDateKey as todayKey } from "@/lib/timezone"
 
 const router = new Hono<{ Variables: HonoVariables }>()
   .use(authMiddleware)
