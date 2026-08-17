@@ -14,6 +14,7 @@ import {
 import { relations } from "drizzle-orm"
 import { createSelectSchema, createInsertSchema } from "drizzle-zod"
 import { z } from "zod"
+import { parseOrgLocalDateTime } from "@/lib/timezone"
 
 // ---------------------------------------------------------------------------
 // Enums
@@ -729,10 +730,18 @@ export const insertAbsenceSchema = createInsertSchema(absences, {
   reason: z.string().max(1000).optional().nullable(),
 }).omit({ id: true, createdAt: true, createdBy: true })
 
+// Naive "YYYY-MM-DDTHH:mm" strings (no timezone offset) are sent by the
+// time-log forms. They must be anchored to the org's timezone here instead
+// of relying on z.coerce.date(), which would interpret them using the
+// server process's ambient timezone.
+const orgLocalDateTime = z
+  .union([z.string(), z.date()])
+  .transform((v) => (typeof v === "string" ? parseOrgLocalDateTime(v) : v))
+
 export const selectTimeLogSchema = createSelectSchema(timeLogs)
 export const insertTimeLogSchema = createInsertSchema(timeLogs, {
-  timeIn: z.coerce.date().optional().nullable(),
-  timeOut: z.coerce.date().optional().nullable(),
+  timeIn: orgLocalDateTime.optional().nullable(),
+  timeOut: orgLocalDateTime.optional().nullable(),
 }).omit({ id: true, createdAt: true, createdBy: true, source: true })
 export const updateTimeLogSchema = insertTimeLogSchema.partial()
 

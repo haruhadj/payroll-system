@@ -1,3 +1,5 @@
+import { getOrgLocalHoursMinutes } from "@/lib/timezone"
+
 export interface PayrollInput {
   basicSalary: number
   allowances?: number
@@ -307,7 +309,8 @@ export function aggregateLateMinutes(params: {
   for (const log of timeLogs) {
     if (!log.timeIn) continue
     const d = typeof log.timeIn === "string" ? new Date(log.timeIn) : log.timeIn
-    const minutesOfDay = d.getHours() * 60 + d.getMinutes()
+    const { hours, minutes } = getOrgLocalHoursMinutes(d)
+    const minutesOfDay = hours * 60 + minutes
     if (minutesOfDay > cutoff) {
       total += minutesOfDay - cutoff
     }
