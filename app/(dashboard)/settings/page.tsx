@@ -357,7 +357,7 @@ function PayrollConfigCard() {
     payload.enableClockInOut = !!form.enableClockInOut
     payload.lateDeductionEnabled = !!form.lateDeductionEnabled
     payload.standardTimeIn = form.standardTimeIn || "08:00"
-    payload.standardTimeOut = form.standardTimeOut || "16:00"
+    payload.standardTimeOut = form.standardTimeOut || "15:00"
     payload.lateGracePeriodMinutes = parseInt(form.lateGracePeriodMinutes ?? "0") || 0
     payload.dailyRateBasis = form.dailyRateBasis ?? "period"
     payload.contributionMode = form.contributionMode ?? "flat"
@@ -449,7 +449,7 @@ function PayrollConfigCard() {
               </Select>
               <p className="text-[11px] text-muted-foreground">
                 Per cut-off: half the monthly salary ÷ the days actually scheduled in that
-                cut-off, so a day missed in a short cut-off costs more.
+                cut-off. For example, ₱5,720 ÷ 11 days = ₱520 per day.
               </p>
             </div>
             <div className="space-y-1">
@@ -471,8 +471,8 @@ function PayrollConfigCard() {
           <h3 className="text-sm font-semibold mb-3">Daily Time Record (DTR)</h3>
           <p className="text-[11px] text-muted-foreground mb-3">
             Staff clock in/out from their dashboard, or HR records entries manually. When
-            lateness deduction is on, minutes past the standard time-in (plus grace period)
-            are deducted from basic pay when payroll is processed.
+            lateness deduction is on, each late minute is deducted at daily rate ÷ shift
+            hours ÷ 60. The default 08:00–15:00 shift is seven paid hours.
           </p>
           <label className="flex items-center gap-2 text-sm mb-3">
             <input
@@ -496,7 +496,7 @@ function PayrollConfigCard() {
               <Label className="text-xs">Standard Time Out</Label>
               <Input
                 type="time"
-                value={form.standardTimeOut ?? "16:00"}
+                value={form.standardTimeOut ?? "15:00"}
                 onChange={(e) => set("standardTimeOut", e.target.value)}
               />
             </div>

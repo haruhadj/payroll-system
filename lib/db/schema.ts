@@ -390,9 +390,9 @@ export const payrollSettings = pgTable("payroll_settings", {
   // Daily Time Record (DTR) / clock-in configuration.
   enableClockInOut: boolean("enable_clock_in_out").notNull().default(false),
   standardTimeIn: text("standard_time_in").notNull().default("08:00"),
-  // 08:00–16:00 is an 8-hour shift; the per-minute late rate divides the
-  // daily rate by this span, so it has to match the real shift length.
-  standardTimeOut: text("standard_time_out").notNull().default("16:00"),
+  // The client rates lateness from a seven-hour paid day:
+  // daily rate / 7 hours / 60 minutes.
+  standardTimeOut: text("standard_time_out").notNull().default("15:00"),
   lateGracePeriodMinutes: integer("late_grace_period_minutes")
     .notNull()
     .default(0),
